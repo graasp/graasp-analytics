@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CustomValueContainer from '../../custom/CustomValueContainer';
 import customStyles from '../../../styles/react-select-styles';
+import { DataContext } from '../../context/DataProvider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UsersSelect = ({ view, allUsers, setUsersToFilter }) => {
+const UsersSelect = () => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const { selectedUsers, setSelectedUsers, allUsers } = useContext(DataContext);
 
   // custom option allowing us to select all users in the dropdown
   const allOption = {
@@ -31,15 +31,8 @@ const UsersSelect = ({ view, allUsers, setUsersToFilter }) => {
     value: '*',
   };
 
-  // resets the display in the Select component below when the selected view is changed
-  useEffect(() => {
-    setSelectedUsers([]);
-    setUsersToFilter(allUsers);
-  }, [view, setUsersToFilter, allUsers]);
-
   const handleChange = (selectedUser) => {
     setSelectedUsers(selectedUser);
-    setUsersToFilter(selectedUser);
   };
 
   return (
@@ -53,7 +46,7 @@ const UsersSelect = ({ view, allUsers, setUsersToFilter }) => {
         isMulti
         closeMenuOnSelect={false}
         hideSelectedOptions={false}
-        allowSelectAll
+        getOptionValue={(option) => option.name}
         getOptionLabel={(option) => option.name}
         value={selectedUsers}
         onChange={(selected) => {
@@ -79,12 +72,6 @@ const UsersSelect = ({ view, allUsers, setUsersToFilter }) => {
       />
     </div>
   );
-};
-
-UsersSelect.propTypes = {
-  view: PropTypes.string.isRequired,
-  allUsers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setUsersToFilter: PropTypes.func.isRequired,
 };
 
 export default UsersSelect;
