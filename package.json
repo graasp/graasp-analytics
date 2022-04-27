@@ -9,7 +9,7 @@
     "Kim Lan Phan Hoang"
   ],
   "dependencies": {
-    "@graasp/query-client": "github:graasp/graasp-query-client#150/actions",
+    "@graasp/query-client": "github:graasp/graasp-query-client",
     "@graasp/ui": "github:graasp/graasp-ui",
     "@graasp/utils": "github:graasp/graasp-utils",
     "@material-ui/core": "4.9.13",

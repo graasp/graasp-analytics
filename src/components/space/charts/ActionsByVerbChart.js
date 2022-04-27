@@ -19,13 +19,13 @@ const useStyles = makeStyles(() => ({
 const ActionsByVerbChart = () => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { actions, allUsers, selectedUsers } = useContext(DataContext);
+  const { actions, allMembers, selectedUsers } = useContext(DataContext);
 
   let actionsByVerb;
   if (
     selectedUsers === null ||
     selectedUsers.length === 0 ||
-    selectedUsers.length === allUsers.length
+    selectedUsers.length === allMembers.length
   ) {
     actionsByVerb = getActionsByVerb(actions);
   } else {

@@ -23,7 +23,12 @@ const useStyles = makeStyles((theme) => ({
 const UsersSelect = () => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { selectedUsers, setSelectedUsers, allUsers } = useContext(DataContext);
+  const { selectedUsers, setSelectedUsers, allMembers } =
+    useContext(DataContext);
+
+  if (!allMembers || !allMembers.length) {
+    return null;
+  }
 
   // custom option allowing us to select all users in the dropdown
   const allOption = {
@@ -42,7 +47,7 @@ const UsersSelect = () => {
       </Typography>
       <Select
         styles={customStyles}
-        options={[allOption, ...allUsers]}
+        options={[allOption, ...allMembers]}
         isMulti
         closeMenuOnSelect={false}
         hideSelectedOptions={false}
@@ -62,7 +67,7 @@ const UsersSelect = () => {
             selected.length > 0 &&
             selected[selected.length - 1].value === allOption.value
           ) {
-            return handleChange(allUsers);
+            return handleChange(allMembers);
           }
           return handleChange(selected);
         }}

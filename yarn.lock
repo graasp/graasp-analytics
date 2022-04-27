@@ -1899,9 +1899,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@github:graasp/graasp-query-client#150/actions":
+"@graasp/query-client@github:graasp/graasp-query-client":
   version: 0.1.0
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=d7f5b94821aaefb54da99716cf039823a8381067"
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=547b957e91128def3f378ec4babe69b365dcbb2a"
   dependencies:
     "@graasp/translations": "github:graasp/graasp-translations.git"
     axios: 0.26.1
@@ -1914,7 +1914,7 @@ __metadata:
     uuid: 8.3.2
   peerDependencies:
     react: ^17.0.0
-  checksum: c93848cdd4fc715c528321d9778253bc3da8808fe45f0f04b975f267df84e97ef0472917462a677f4f2c7a2b03b63bb13d197d09d8d081965c20aba17efb02a2
+  checksum: 462e46616aa809b36f08a56c077897e57f7b501d0af87e24794fabea68800d281dad75ccddc54f7b510fe692207729bc36f250b149f3c0c229a75deb136893c0
   languageName: node
   linkType: hard
 
@@ -1953,7 +1953,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/utils@github:graasp/graasp-utils, @graasp/utils@github:graasp/graasp-utils.git":
+"@graasp/utils@github:graasp/graasp-utils":
+  version: 0.1.0
+  resolution: "@graasp/utils@https://github.com/graasp/graasp-utils.git#commit=5c0a1538e34904f2532cff4fc496ad58ce6866bc"
+  checksum: 26080c0a693246c2094ea5fa5837a3de419fbda967cf71d61152310f6739978e1e5979d1464e4e3606dfd8e6e86a671a7d8856297fa88b3d0943fe75bb620a09
+  languageName: node
+  linkType: hard
+
+"@graasp/utils@github:graasp/graasp-utils.git":
   version: 0.1.0
   resolution: "@graasp/utils@https://github.com/graasp/graasp-utils.git#commit=9b230e768b7e073dfcda6946a54a69e799d84a7b"
   checksum: b8a9546e57c6603891cf221edc76b3373614735c96b688ab3a2fb8d72845a304f2aee15b292cdf99918fc0e191ec51977dbc2c48d6564190d03dc33bb5453085
@@ -7789,7 +7796,7 @@ __metadata:
     "@babel/eslint-plugin": 7.16.5
     "@commitlint/cli": 9.1.2
     "@commitlint/config-conventional": 9.1.2
-    "@graasp/query-client": "github:graasp/graasp-query-client#150/actions"
+    "@graasp/query-client": "github:graasp/graasp-query-client"
     "@graasp/ui": "github:graasp/graasp-ui"
     "@graasp/utils": "github:graasp/graasp-utils"
     "@material-ui/core": 4.9.13

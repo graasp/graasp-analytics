@@ -42,7 +42,7 @@ const ItemsByAccessedCount = () => {
   const {
     actions: allActions,
 
-    allUsers,
+    allMembers,
     selectedUsers,
   } = useContext(DataContext);
   const [selectedItemTypes, setSelectedItemTypes] = useState([]);
@@ -51,7 +51,7 @@ const ItemsByAccessedCount = () => {
   if (
     selectedUsers === null ||
     selectedUsers.length === 0 ||
-    selectedUsers.length === allUsers.length
+    selectedUsers.length === allMembers.length
   ) {
     filteredActions = allActions;
   } else {

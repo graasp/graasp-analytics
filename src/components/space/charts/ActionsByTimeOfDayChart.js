@@ -29,12 +29,12 @@ const useStyles = makeStyles(() => ({
 const ActionsByTimeOfDayChart = () => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { actions, allUsers, selectedUsers } = useContext(DataContext);
+  const { actions, allMembers, selectedUsers } = useContext(DataContext);
 
   // actionsByTimeOfDay is the object passed, after formatting, to the BarChart component below
   // if you remove all names in the react-select dropdown, selectedUsers becomes null
   // if no users are selected (i.e. selectedUsers.length === 0), show all actions
-  // if all users are selected (i.e. selectedUsers.length === allUsers.length), also show all actions
+  // if all users are selected (i.e. selectedUsers.length === allMembers.length), also show all actions
   // third condition above is necessary: some actions are made by users NOT in the users list (e.g. user account deleted)
   // e.g. we retrieve 100 total actions and 10 users, but these 10 users have only made 90 actions
   // therefore, to avoid confusion: when all users are selected, show all actions
@@ -42,7 +42,7 @@ const ActionsByTimeOfDayChart = () => {
   if (
     selectedUsers === null ||
     selectedUsers.length === 0 ||
-    selectedUsers.length === allUsers.length
+    selectedUsers.length === allMembers.length
   ) {
     actionsByTimeOfDay = getActionsByTimeOfDay(actions);
   } else {

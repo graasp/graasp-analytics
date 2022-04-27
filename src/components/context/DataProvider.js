@@ -19,7 +19,7 @@ const DataProvider = ({ children }) => {
   const [enabledArray, setEnabledArray] = useState({});
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [actions, setActions] = useState([]);
-  const [allUsers, setAllUsers] = useState([]);
+  const [allMembers, setAllMembers] = useState([]);
   const [error, setError] = useState(false);
   const { view } = useContext(ViewDataContext);
   const { itemId } = useParams();
@@ -61,7 +61,7 @@ const DataProvider = ({ children }) => {
       actions.length !== builderData?.get('actions').length
     ) {
       setActions(builderData?.get('actions'));
-      setAllUsers(builderData?.get('users'));
+      setAllMembers(builderData?.get('members'));
       setError(builderIsError);
     }
   }, [builderData, view, actions, builderIsError]);
@@ -73,7 +73,7 @@ const DataProvider = ({ children }) => {
       actions.length !== playerData?.get('actions').length
     ) {
       setActions(playerData?.get('actions'));
-      setAllUsers(playerData?.get('users'));
+      setAllMembers(playerData?.get('members'));
       setError(playerIsError);
     }
   }, [playerData, view, actions, playerIsError]);
@@ -85,7 +85,7 @@ const DataProvider = ({ children }) => {
       actions.length !== explorerData?.get('actions').length
     ) {
       setActions(explorerData?.get('actions'));
-      setAllUsers(explorerData?.get('users'));
+      setAllMembers(explorerData?.get('members'));
       setError(explorerIsError);
     }
   }, [explorerData, view, actions, explorerIsError]);
@@ -93,12 +93,12 @@ const DataProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       actions,
-      allUsers,
+      allMembers,
       selectedUsers,
       setSelectedUsers,
       error,
     }),
-    [actions, allUsers, error, selectedUsers],
+    [actions, allMembers, error, selectedUsers],
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
