@@ -1,16 +1,12 @@
 import React, { createContext, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Context } from '@graasp/utils';
-import { DEFAULT_REQUEST_SAMPLE_SIZE } from '../../config/constants';
 
 export const ViewDataContext = createContext();
 
 const ViewDataProvider = ({ children }) => {
   const [view, setView] = useState(Context.BUILDER);
-  const value = useMemo(
-    () => ({ view, setView, requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE }),
-    [view, setView],
-  );
+  const value = useMemo(() => ({ view, setView }), [view, setView]);
   return (
     <ViewDataContext.Provider value={value}>
       {children}

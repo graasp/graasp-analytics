@@ -7,6 +7,7 @@ import ChartsAlerts from './charts-layout/ChartsAlerts';
 import ChartsArea from './charts-layout/ChartsArea';
 import UsersSelect from './functionality/UsersSelect';
 import { ViewDataContext } from '../context/ViewDataProvider';
+import { DataContext } from '../context/DataProvider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +30,7 @@ const ChartsLayout = () => {
   const { t } = useTranslation();
   const classes = useStyles();
   const { view } = useContext(ViewDataContext);
-  const { error } = useContext(ViewDataContext);
+  const { error } = useContext(DataContext);
 
   return (
     <div>

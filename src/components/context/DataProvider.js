@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 import { Context } from '@graasp/utils';
 import { ViewDataContext } from './ViewDataProvider';
 import { hooks } from '../../config/queryClient';
+import { DEFAULT_REQUEST_SAMPLE_SIZE } from '../../config/constants';
 
 export const DataContext = createContext();
 
@@ -28,22 +29,25 @@ const DataProvider = ({ children }) => {
     {
       itemId,
       view: Context.BUILDER,
+      requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     },
-    { enabled: enabledArray[Context.BUILDER] },
+    { enabled: Boolean(enabledArray[Context.BUILDER]) },
   );
   const { data: playerData, isError: playerIsError } = hooks.useActions(
     {
       itemId,
       view: Context.PLAYER,
+      requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     },
-    { enabled: enabledArray[Context.PLAYER] },
+    { enabled: Boolean(enabledArray[Context.PLAYER]) },
   );
   const { data: explorerData, isError: explorerIsError } = hooks.useActions(
     {
       itemId,
       view: Context.EXPLORER,
+      requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     },
-    { enabled: enabledArray[Context.EXPLORER] },
+    { enabled: Boolean(enabledArray[Context.EXPLORER]) },
   );
 
   useEffect(() => {
