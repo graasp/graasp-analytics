@@ -55,7 +55,6 @@ const DataProvider = ({ children }) => {
     if (!enabledArray[view]) {
       setEnabledArray({ ...enabledArray, [view]: true });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view]);
 
   useEffect(() => {
