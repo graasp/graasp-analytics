@@ -96,7 +96,7 @@ const ActionsByUserChart = () => {
           <Tooltip />
           {actionTypes.map((actionType, index) => (
             <Bar
-              key=""
+              key="actionType"
               dataKey={actionType}
               stackId="1"
               fill={COLORS[index % COLORS.length]}
