@@ -9,9 +9,6 @@ import { DataContext } from '../../context/DataProvider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
-    marginBottom: theme.spacing(4),
     display: 'flex',
     alignItems: 'center',
   },
@@ -25,7 +22,6 @@ const UsersSelect = () => {
   const classes = useStyles();
   const { selectedUsers, setSelectedUsers, allMembers } =
     useContext(DataContext);
-
   if (!allMembers || !allMembers.length) {
     return null;
   }
@@ -43,7 +39,7 @@ const UsersSelect = () => {
   return (
     <div className={classes.root}>
       <Typography className={classes.typography}>
-        {t('Filter by User')}
+        {t('Select Users')}
       </Typography>
       <Select
         styles={customStyles}

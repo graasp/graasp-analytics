@@ -18,6 +18,7 @@ export const DataContext = createContext();
 const DataProvider = ({ children }) => {
   const [enabledArray, setEnabledArray] = useState({});
   const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedActions, setSelectedActions] = useState([]);
   const [actions, setActions] = useState([]);
   const [allMembers, setAllMembers] = useState([]);
   const [error, setError] = useState(false);
@@ -98,9 +99,11 @@ const DataProvider = ({ children }) => {
       allMembers,
       selectedUsers,
       setSelectedUsers,
+      selectedActions,
+      setSelectedActions,
       error,
     }),
-    [actions, allMembers, error, selectedUsers],
+    [actions, allMembers, error, selectedUsers, selectedActions],
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
