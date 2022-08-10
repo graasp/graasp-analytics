@@ -8,6 +8,7 @@ import UsersSelect from '../functionality/UsersSelect';
 import ViewSelect from '../functionality/ViewSelect';
 import { DataContext } from '../../context/DataProvider';
 import ExportData from '../functionality/ExportData';
+import ReportData from '../functionality/ReportData';
 
 const useStyles = makeStyles((theme) => ({
   itemName: {
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tmp: {
     paddingTop: theme.spacing(10),
-  }
+  },
 }));
 
 const ChartsHeader = () => {
@@ -63,11 +64,14 @@ const ChartsHeader = () => {
   if (match) {
     return (
       <div className={classes.rootAlt}>
-        <Grid item xs={6}>
+        <Grid item xs={8}>
           <ExportData />
           <ViewSelect />
           <UsersSelect />
           <ActionsSelect />
+        </Grid>
+        <Grid item xs={4}>
+          <ReportData />
         </Grid>
       </div>
     );
