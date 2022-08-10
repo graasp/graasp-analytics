@@ -3,6 +3,8 @@ import { useLocation, useMatch } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import ActionsSelect from '../functionality/ActionsSelect';
+import UsersSelect from '../functionality/UsersSelect';
 import ViewSelect from '../functionality/ViewSelect';
 import { DataContext } from '../../context/DataProvider';
 import ExportData from '../functionality/ExportData';
@@ -26,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     paddingTop: theme.spacing(2),
     paddingRight: theme.spacing(2),
-    paddingLeft: theme.spacing(2),
+    paddingLeft: theme.spacing(4),
     paddingBottom: theme.spacing(1),
   },
   rootAlt: {
@@ -36,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     paddingTop: theme.spacing(1),
     paddingRight: theme.spacing(2),
-    paddingLeft: theme.spacing(2),
+    paddingLeft: theme.spacing(4),
     paddingBottom: theme.spacing(2),
   },
   alert: {
@@ -44,13 +46,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     marginTop: theme.spacing(1),
   },
+  tmp: {
+    paddingTop: theme.spacing(10),
+  }
 }));
 
 const ChartsHeader = () => {
   const classes = useStyles();
   const { itemName } = useContext(DataContext);
   const { pathname } = useLocation();
-
   const match = useMatch(pathname, {
     path: '/embedded/',
     exact: false,
@@ -59,8 +63,12 @@ const ChartsHeader = () => {
   if (match) {
     return (
       <div className={classes.rootAlt}>
-        <ExportData />
-        <ViewSelect />
+        <Grid item xs={6}>
+          <ExportData />
+          <ViewSelect />
+          <UsersSelect />
+          <ActionsSelect />
+        </Grid>
       </div>
     );
   }
@@ -76,6 +84,8 @@ const ChartsHeader = () => {
         </Grid>
         <Grid item xs={6} className={classes.rightCell}>
           <ViewSelect />
+          <UsersSelect />
+          <ActionsSelect />
         </Grid>
       </Grid>
     </div>
