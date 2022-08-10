@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tmp: {
     paddingTop: theme.spacing(10),
-  }
+  },
 }));
 
 const ChartsHeader = () => {
