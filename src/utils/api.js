@@ -127,7 +127,7 @@ export const getActionsByVerb = (actions) => {
 // Takes array of action objects and returns an object with {key: value} pairs of {verb: #-of-actions}
 export const getActionNumByVerb = (actions) => {
   const actionsByVerb = _.countBy(actions, 'actionType');
-  actionsByVerb.total =  actions.length;
+  actionsByVerb.total = actions.length;
   return actionsByVerb;
 };
 
