@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
+import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { DataContext } from '../../context/DataProvider';
@@ -11,9 +12,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-  },
-  typography: {
-    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -22,6 +21,9 @@ const ActionsSelect = () => {
   const classes = useStyles();
   const { actions, selectedActions, setSelectedActions } =
     useContext(DataContext);
+  if (!actions || !actions.length) {
+    return null;
+  }
   const groupBy = (key, arr) =>
     arr.reduce(
       (acc, cur) => ({
@@ -36,8 +38,6 @@ const ActionsSelect = () => {
       value: action,
     }),
   );
-  console.log(allActions);
-  // custom option allowing us to select all actions in the dropdown
   const allOption = {
     name: t('Select All'),
     value: '*',
@@ -48,34 +48,36 @@ const ActionsSelect = () => {
   };
 
   return (
-    <div className={classes.root}>
-      <Typography className={classes.typography}>
-        {t('Select Actions')}
-      </Typography>
-      <Select
-        styles={customStyles}
-        options={[allOption, ...allActions]}
-        isMulti
-        closeMenuOnSelect={false}
-        hideSelectedOptions={false}
-        getOptionValue={(option) => option.name}
-        getOptionLabel={(option) => option.name}
-        value={selectedActions}
-        onChange={(selected) => {
-          if (
-            selected !== null &&
-            selected.length > 0 &&
-            selected[selected.length - 1].value === allOption.value
-          ) {
-            return handleChange(allActions);
-          }
-          return handleChange(selected);
-        }}
-        components={{
-          ValueContainer: CustomValueContainer,
-        }}
-      />
-    </div>
+    <Grid container className={classes.root}>
+      <Grid item xs={2}>
+        <Typography>{t('Select Action(s)')}</Typography>
+      </Grid>
+      <Grid item xs={2}>
+        <Select
+          styles={customStyles}
+          options={[allOption, ...allActions]}
+          isMulti
+          closeMenuOnSelect={false}
+          hideSelectedOptions={false}
+          getOptionValue={(option) => option.name}
+          getOptionLabel={(option) => option.name}
+          value={selectedActions}
+          onChange={(selected) => {
+            if (
+              selected !== null &&
+              selected.length > 0 &&
+              selected[selected.length - 1].value === allOption.value
+            ) {
+              return handleChange(allActions);
+            }
+            return handleChange(selected);
+          }}
+          components={{
+            ValueContainer: CustomValueContainer,
+          }}
+        />
+      </Grid>
+    </Grid>
   );
 };
 
