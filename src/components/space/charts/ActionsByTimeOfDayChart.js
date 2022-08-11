@@ -17,6 +17,7 @@ import {
   getActionsByTimeOfDay,
   formatActionsByTimeOfDay,
   filterActionsByUser,
+  filterActionsByAction,
   findYAxisMax,
 } from '../../../utils/api';
 import { CONTAINER_HEIGHT } from '../../../config/constants';
@@ -29,7 +30,8 @@ const useStyles = makeStyles(() => ({
 const ActionsByTimeOfDayChart = () => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { actions, allMembers, selectedUsers } = useContext(DataContext);
+  const { actions, allMembers, selectedUsers, selectedActions } =
+    useContext(DataContext);
 
   // actionsByTimeOfDay is the object passed, after formatting, to the BarChart component below
   // if you remove all names in the react-select dropdown, selectedUsers becomes null
@@ -38,16 +40,38 @@ const ActionsByTimeOfDayChart = () => {
   // third condition above is necessary: some actions are made by users NOT in the users list (e.g. user account deleted)
   // e.g. we retrieve 100 total actions and 10 users, but these 10 users have only made 90 actions
   // therefore, to avoid confusion: when all users are selected, show all actions
-  let actionsByTimeOfDay;
-  if (
+  const groupBy = (key, arr) =>
+    arr.reduce(
+      (acc, cur) => ({
+        ...acc,
+        [cur[key]]: cur[key] in acc ? acc[cur[key]].concat(cur) : [cur],
+      }),
+      {},
+    );
+  const actionTypes = Object.keys(groupBy('actionType', actions));
+  const noUsers =
     selectedUsers === null ||
     selectedUsers.length === 0 ||
-    selectedUsers.length === allMembers.length
-  ) {
+    selectedUsers.length === allMembers.length;
+  const noActions =
+    selectedActions === null ||
+    selectedActions.length === 0 ||
+    selectedActions.length === actionTypes.length;
+  let actionsByTimeOfDay;
+  if (noUsers && noActions) {
     actionsByTimeOfDay = getActionsByTimeOfDay(actions);
-  } else {
+  } else if (!noUsers && noActions) {
     actionsByTimeOfDay = getActionsByTimeOfDay(
       filterActionsByUser(actions, selectedUsers),
+    );
+  } else if (noUsers && !noActions) {
+    actionsByTimeOfDay = getActionsByTimeOfDay(
+      filterActionsByAction(actions, selectedActions),
+    );
+  } else {
+    const filteredByUser = filterActionsByUser(actions, selectedUsers);
+    actionsByTimeOfDay = getActionsByTimeOfDay(
+      filterActionsByAction(filteredByUser, selectedActions),
     );
   }
 
