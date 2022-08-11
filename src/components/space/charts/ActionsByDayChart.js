@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import {
-  BarChart,
+  LineChart,
   CartesianGrid,
   XAxis,
   YAxis,
   Tooltip,
-  Bar,
+  Line,
   ResponsiveContainer,
 } from 'recharts';
 import EmptyChart from './EmptyChart';
@@ -16,6 +16,7 @@ import {
   getActionsByDay,
   formatActionsByDay,
   filterActionsByUser,
+  filterActionsByAction,
   findYAxisMax,
 } from '../../../utils/api';
 import { CONTAINER_HEIGHT } from '../../../config/constants';
@@ -27,10 +28,10 @@ const useStyles = makeStyles(() => ({
 
 const ActionsByDayChart = () => {
   const { t } = useTranslation();
-  const theme = useTheme();
+  // const theme = useTheme();
   const classes = useStyles();
-  const { actions, selectedUsers, allMembers } = useContext(DataContext);
-
+  const { actions, selectedUsers, selectedActions, allMembers } =
+    useContext(DataContext);
   // actionsByDay is the object passed, after formatting, to the BarChart component below
   // if you remove all names in the react-select dropdown, selectedUsers becomes null
   // if no users are selected (i.e. selectedUsers.length === 0), show all actions
@@ -38,15 +39,38 @@ const ActionsByDayChart = () => {
   // third condition above is necessary: some actions are made by users NOT in the users list (e.g. user account deleted)
   // e.g. we retrieve 100 total actions and 10 users, but these 10 users have only made 90 actions
   // therefore, to avoid confusion: when all users are selected, show all actions
-  let actionsByDay;
-  if (
+  const groupBy = (key, arr) =>
+    arr.reduce(
+      (acc, cur) => ({
+        ...acc,
+        [cur[key]]: cur[key] in acc ? acc[cur[key]].concat(cur) : [cur],
+      }),
+      {},
+    );
+  const actionTypes = Object.keys(groupBy('actionType', actions));
+  const noUsers =
     selectedUsers === null ||
     selectedUsers.length === 0 ||
-    selectedUsers.length === allMembers.length
-  ) {
+    selectedUsers.length === allMembers.length;
+  const noActions =
+    selectedActions === null ||
+    selectedActions.length === 0 ||
+    selectedActions.length === actionTypes.length;
+  let actionsByDay;
+  if (noUsers && noActions) {
     actionsByDay = getActionsByDay(actions);
-  } else {
+    console.log(actionsByDay);
+  } else if (!noUsers && noActions) {
     actionsByDay = getActionsByDay(filterActionsByUser(actions, selectedUsers));
+  } else if (noUsers && !noActions) {
+    actionsByDay = getActionsByDay(
+      filterActionsByAction(actions, selectedActions),
+    );
+  } else {
+    const filteredByUser = filterActionsByUser(actions, selectedUsers);
+    actionsByDay = getActionsByDay(
+      filterActionsByAction(filteredByUser, selectedActions),
+    );
   }
 
   const yAxisMax = findYAxisMax(actionsByDay);
@@ -68,7 +92,7 @@ const ActionsByDayChart = () => {
         {t('Actions by Day')}
       </Typography>
       <ResponsiveContainer width="95%" height={CONTAINER_HEIGHT}>
-        <BarChart
+        <LineChart
           data={formattedActionsByDay}
           margin={{ top: 30, bottom: 20, left: 20, right: 20 }}
         >
@@ -76,12 +100,13 @@ const ActionsByDayChart = () => {
           <XAxis dataKey="date" tick={{ fontSize: 14 }} />
           <YAxis tick={{ fontSize: 14 }} domain={[0, yAxisMax]} />
           <Tooltip />
-          <Bar
+          <Line
             dataKey="count"
             name={t('Count')}
-            fill={theme.palette.primary.main}
+            stroke="#8884d8"
+            activeDot={{ r: 6 }}
           />
-        </BarChart>
+        </LineChart>
       </ResponsiveContainer>
     </>
   );
