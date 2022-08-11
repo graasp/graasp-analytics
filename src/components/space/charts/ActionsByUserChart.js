@@ -38,7 +38,10 @@ const useStyles = makeStyles(() => ({
 const ActionsByUserChart = () => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { actions, selectedUsers, allMembers } = useContext(DataContext);
+  const { actions, selectedUsers, selectedActions, allMembers } =
+    useContext(DataContext);
+  const users = selectedUsers.length ? selectedUsers : allMembers;
+  const allActions = selectedActions.length ? selectedActions : actions;
   const groupBy = (key, arr) =>
     arr.reduce(
       (acc, cur) => ({
@@ -47,8 +50,7 @@ const ActionsByUserChart = () => {
       }),
       {},
     );
-  const actionTypes = Object.keys(groupBy('actionType', actions));
-  const users = selectedUsers.length ? selectedUsers : allMembers;
+  const actionTypes = Object.keys(groupBy('value', allActions));
   const yAxisMax = findYAxisMax(users);
   let formattedActions = [];
 
