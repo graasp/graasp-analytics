@@ -173,6 +173,13 @@ export const filterActionsByUser = (actions, usersArray) => {
   );
 };
 
+export const filterActionsByAction = (actions, actionsArray) => {
+  const actionKey = 'actionType';
+  return actions.filter((action) =>
+    actionsArray.some((act) => act.value === action[actionKey]),
+  );
+};
+
 // given an actionsByDay object, findYAxisMax finds max value to set on the yAxis in the graph in ActionsByDayChart.js
 export const findYAxisMax = (actionsByDay) => {
   const arrayOfActionsCount = Object.values(actionsByDay);
