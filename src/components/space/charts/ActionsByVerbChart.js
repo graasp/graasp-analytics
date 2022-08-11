@@ -8,6 +8,7 @@ import {
   getActionsByVerb,
   formatActionsByVerb,
   filterActionsByUser,
+  filterActionsByAction,
 } from '../../../utils/api';
 import { COLORS, CONTAINER_HEIGHT } from '../../../config/constants';
 import { DataContext } from '../../context/DataProvider';
@@ -19,18 +20,42 @@ const useStyles = makeStyles(() => ({
 const ActionsByVerbChart = () => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { actions, allMembers, selectedUsers } = useContext(DataContext);
+  const { actions, allMembers, selectedUsers, selectedActions } =
+    useContext(DataContext);
 
-  let actionsByVerb;
-  if (
+  const groupBy = (key, arr) =>
+    arr.reduce(
+      (acc, cur) => ({
+        ...acc,
+        [cur[key]]: cur[key] in acc ? acc[cur[key]].concat(cur) : [cur],
+      }),
+      {},
+    );
+  const actionTypes = Object.keys(groupBy('actionType', actions));
+  const noUsers =
     selectedUsers === null ||
     selectedUsers.length === 0 ||
-    selectedUsers.length === allMembers.length
-  ) {
+    selectedUsers.length === allMembers.length;
+  const noActions =
+    selectedActions === null ||
+    selectedActions.length === 0 ||
+    selectedActions.length === actionTypes.length;
+  let actionsByVerb;
+  if (noUsers && noActions) {
     actionsByVerb = getActionsByVerb(actions);
-  } else {
+    console.log(actionsByVerb);
+  } else if (!noUsers && noActions) {
     actionsByVerb = getActionsByVerb(
       filterActionsByUser(actions, selectedUsers),
+    );
+  } else if (noUsers && !noActions) {
+    actionsByVerb = getActionsByVerb(
+      filterActionsByAction(actions, selectedActions),
+    );
+  } else {
+    const filteredByUser = filterActionsByUser(actions, selectedUsers);
+    actionsByVerb = getActionsByVerb(
+      filterActionsByAction(filteredByUser, selectedActions),
     );
   }
   const formattedActionsByVerb = formatActionsByVerb(actionsByVerb);
