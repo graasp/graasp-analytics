@@ -59,7 +59,6 @@ const ActionsByDayChart = () => {
   let actionsByDay;
   if (noUsers && noActions) {
     actionsByDay = getActionsByDay(actions);
-    console.log(actionsByDay);
   } else if (!noUsers && noActions) {
     actionsByDay = getActionsByDay(filterActionsByUser(actions, selectedUsers));
   } else if (noUsers && !noActions) {
