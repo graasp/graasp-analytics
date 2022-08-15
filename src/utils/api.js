@@ -173,7 +173,7 @@ export const filterActionsByUser = (actions, usersArray) => {
   );
 };
 
-export const filterActionsByAction = (actions, actionsArray) => {
+export const filterActionsByActionTypes = (actions, actionsArray) => {
   const actionKey = 'actionType';
   return actions.filter((action) =>
     actionsArray.some((act) => act.value === action[actionKey]),
