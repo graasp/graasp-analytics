@@ -16,7 +16,7 @@ import {
   getActionsByDay,
   formatActionsByDay,
   filterActionsByUser,
-  filterActionsByAction,
+  filterActionsByActionTypes,
   findYAxisMax,
 } from '../../../utils/api';
 import { CONTAINER_HEIGHT } from '../../../config/constants';
@@ -62,12 +62,12 @@ const ActionsByDayChart = () => {
     actionsByDay = getActionsByDay(filterActionsByUser(actions, selectedUsers));
   } else if (noUsers && !noActions) {
     actionsByDay = getActionsByDay(
-      filterActionsByAction(actions, selectedActions),
+      filterActionsByActionTypes(actions, selectedActions),
     );
   } else {
     const filteredByUser = filterActionsByUser(actions, selectedUsers);
     actionsByDay = getActionsByDay(
-      filterActionsByAction(filteredByUser, selectedActions),
+      filterActionsByActionTypes(filteredByUser, selectedActions),
     );
   }
 
