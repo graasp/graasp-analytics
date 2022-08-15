@@ -28,7 +28,6 @@ const useStyles = makeStyles(() => ({
 
 const ActionsByDayChart = () => {
   const { t } = useTranslation();
-  // const theme = useTheme();
   const classes = useStyles();
   const { actions, selectedUsers, selectedActions, allMembers } =
     useContext(DataContext);
