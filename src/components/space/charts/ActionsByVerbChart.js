@@ -8,7 +8,7 @@ import {
   getActionsByVerb,
   formatActionsByVerb,
   filterActionsByUser,
-  filterActionsByAction,
+  filterActionsByActionTypes,
 } from '../../../utils/api';
 import { COLORS, CONTAINER_HEIGHT } from '../../../config/constants';
 import { DataContext } from '../../context/DataProvider';
@@ -50,12 +50,12 @@ const ActionsByVerbChart = () => {
     );
   } else if (noUsers && !noActions) {
     actionsByVerb = getActionsByVerb(
-      filterActionsByAction(actions, selectedActions),
+      filterActionsByActionTypes(actions, selectedActions),
     );
   } else {
     const filteredByUser = filterActionsByUser(actions, selectedUsers);
     actionsByVerb = getActionsByVerb(
-      filterActionsByAction(filteredByUser, selectedActions),
+      filterActionsByActionTypes(filteredByUser, selectedActions),
     );
   }
   const formattedActionsByVerb = formatActionsByVerb(actionsByVerb);
