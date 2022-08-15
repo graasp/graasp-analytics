@@ -47,9 +47,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     marginTop: theme.spacing(1),
   },
-  tmp: {
-    paddingTop: theme.spacing(10),
-  },
 }));
 
 const ChartsHeader = () => {
