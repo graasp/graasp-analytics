@@ -47,9 +47,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     marginTop: theme.spacing(1),
   },
-  tmp: {
-    paddingTop: theme.spacing(10),
-  },
 }));
 
 const ChartsHeader = () => {
@@ -63,7 +60,7 @@ const ChartsHeader = () => {
 
   if (match) {
     return (
-      <div className={classes.rootAlt}>
+      <Grid container className={classes.rootAlt}>
         <Grid item xs={8}>
           <ExportData />
           <ViewSelect />
@@ -73,7 +70,7 @@ const ChartsHeader = () => {
         <Grid item xs={4}>
           <ReportData />
         </Grid>
-      </div>
+      </Grid>
     );
   }
 
