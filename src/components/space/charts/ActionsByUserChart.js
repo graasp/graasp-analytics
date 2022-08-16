@@ -18,6 +18,7 @@ import {
   filterActionsByUser,
   findYAxisMax,
 } from '../../../utils/api';
+import { groupBy } from '../../../utils/array';
 import { DataContext } from '../../context/DataProvider';
 import {
   COLORS,
@@ -42,18 +43,10 @@ const ActionsByUserChart = () => {
     useContext(DataContext);
   const users = selectedUsers.length ? selectedUsers : allMembers;
   const allActions = selectedActions.length ? selectedActions : actions;
-  const groupBy = (key, arr) =>
-    arr.reduce(
-      (acc, cur) => ({
-        ...acc,
-        [cur[key]]: cur[key] in acc ? acc[cur[key]].concat(cur) : [cur],
-      }),
-      {},
-    );
   const actionTypes = Object.keys(groupBy('value', allActions));
   const yAxisMax = findYAxisMax(users);
-  let formattedActions = [];
 
+  let formattedActions = [];
   users.forEach((user) => {
     const actionsByVerb = getActionNumByVerb(
       filterActionsByUser(actions, [{ id: user.id }]),
