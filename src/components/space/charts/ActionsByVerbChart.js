@@ -4,12 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from 'recharts';
 import EmptyChart from './EmptyChart';
-import {
-  getActionsByVerb,
-  formatActionsByVerb,
-  filterActionsByUser,
-  filterActionsByActionTypes,
-} from '../../../utils/api';
+import { getActionsByVerb, formatActionsByVerb } from '../../../utils/api';
+import { filterActions } from '../../../utils/array';
 import { COLORS, CONTAINER_HEIGHT } from '../../../config/constants';
 import { DataContext } from '../../context/DataProvider';
 
@@ -23,40 +19,15 @@ const ActionsByVerbChart = () => {
   const { actions, allMembers, selectedUsers, selectedActions } =
     useContext(DataContext);
 
-  const groupBy = (key, arr) =>
-    arr.reduce(
-      (acc, cur) => ({
-        ...acc,
-        [cur[key]]: cur[key] in acc ? acc[cur[key]].concat(cur) : [cur],
-      }),
-      {},
-    );
-  const actionTypes = Object.keys(groupBy('actionType', actions));
-  const noUsers =
-    selectedUsers === null ||
-    selectedUsers.length === 0 ||
-    selectedUsers.length === allMembers.length;
-  const noActions =
-    selectedActions === null ||
-    selectedActions.length === 0 ||
-    selectedActions.length === actionTypes.length;
-  let actionsByVerb;
-  if (noUsers && noActions) {
-    actionsByVerb = getActionsByVerb(actions);
-    console.log(actionsByVerb);
-  } else if (!noUsers && noActions) {
-    actionsByVerb = getActionsByVerb(
-      filterActionsByUser(actions, selectedUsers),
-    );
-  } else if (noUsers && !noActions) {
-    actionsByVerb = getActionsByVerb(
-      filterActionsByActionTypes(actions, selectedActions),
-    );
-  } else {
-    const filteredByUser = filterActionsByUser(actions, selectedUsers);
-    actionsByVerb = getActionsByVerb(
-      filterActionsByActionTypes(filteredByUser, selectedActions),
-    );
+  let actionsByVerb = [];
+  if (actions?.length) {
+    actionsByVerb = filterActions({
+      selectedUsers,
+      selectedActions,
+      actions,
+      allMembersLength: allMembers.length,
+      chartFunction: getActionsByVerb,
+    });
   }
   const formattedActionsByVerb = formatActionsByVerb(actionsByVerb);
 
