@@ -15,10 +15,9 @@ import EmptyChart from './EmptyChart';
 import {
   getActionsByDay,
   formatActionsByDay,
-  filterActionsByUser,
-  filterActionsByActionTypes,
   findYAxisMax,
 } from '../../../utils/api';
+import { filterActions } from '../../../utils/array';
 import { CONTAINER_HEIGHT } from '../../../config/constants';
 import { DataContext } from '../../context/DataProvider';
 
@@ -38,37 +37,16 @@ const ActionsByDayChart = () => {
   // third condition above is necessary: some actions are made by users NOT in the users list (e.g. user account deleted)
   // e.g. we retrieve 100 total actions and 10 users, but these 10 users have only made 90 actions
   // therefore, to avoid confusion: when all users are selected, show all actions
-  const groupBy = (key, arr) =>
-    arr.reduce(
-      (acc, cur) => ({
-        ...acc,
-        [cur[key]]: cur[key] in acc ? acc[cur[key]].concat(cur) : [cur],
-      }),
-      {},
-    );
-  const actionTypes = Object.keys(groupBy('actionType', actions));
-  const noUsers =
-    selectedUsers === null ||
-    selectedUsers.length === 0 ||
-    selectedUsers.length === allMembers.length;
-  const noActions =
-    selectedActions === null ||
-    selectedActions.length === 0 ||
-    selectedActions.length === actionTypes.length;
-  let actionsByDay;
-  if (noUsers && noActions) {
-    actionsByDay = getActionsByDay(actions);
-  } else if (!noUsers && noActions) {
-    actionsByDay = getActionsByDay(filterActionsByUser(actions, selectedUsers));
-  } else if (noUsers && !noActions) {
-    actionsByDay = getActionsByDay(
-      filterActionsByActionTypes(actions, selectedActions),
-    );
-  } else {
-    const filteredByUser = filterActionsByUser(actions, selectedUsers);
-    actionsByDay = getActionsByDay(
-      filterActionsByActionTypes(filteredByUser, selectedActions),
-    );
+
+  let actionsByDay = [];
+  if (actions?.length) {
+    actionsByDay = filterActions({
+      selectedUsers,
+      selectedActions,
+      actions,
+      allMembersLength: allMembers.length,
+      chartFunction: getActionsByDay,
+    });
   }
 
   const yAxisMax = findYAxisMax(actionsByDay);
