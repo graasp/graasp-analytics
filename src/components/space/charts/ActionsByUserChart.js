@@ -43,7 +43,7 @@ const ActionsByUserChart = () => {
     useContext(DataContext);
   const users = selectedUsers.length ? selectedUsers : allMembers;
   const allActions = selectedActions.length ? selectedActions : actions;
-  const actionTypes = Object.keys(groupBy('value', allActions));
+  const actionTypes = Object.keys(groupBy('actionType', allActions));
   const yAxisMax = findYAxisMax(users);
 
   let formattedActions = [];
