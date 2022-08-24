@@ -1,6 +1,7 @@
 // Default latitude and longitude for centering map. Zurich coordinates used below.
 export const DEFAULT_LATITUDE = 47.3769;
 export const DEFAULT_LONGITUDE = 8.5417;
+export const ACTIONS_BY_USER_MAX_DISPLAYED_USERS = 10;
 
 // Default Zoom for map
 export const DEFAULT_ZOOM = 3;
