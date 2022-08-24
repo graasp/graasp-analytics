@@ -174,9 +174,8 @@ export const filterActionsByUser = (actions, usersArray) => {
 };
 
 export const filterActionsByActionTypes = (actions, actionsArray) => {
-  const actionKey = 'actionType';
-  return actions.filter((action) =>
-    actionsArray.some((act) => act.value === action[actionKey]),
+  actions.filter((action) =>
+    actionsArray.some((act) => act.value === action.actionType),
   );
 };
 
