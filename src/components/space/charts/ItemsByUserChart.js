@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ItemByUserChart = () => {
+const ItemsByUserChart = () => {
   const { t } = useTranslation();
   const classes = useStyles();
   const { actions, selectedUsers, selectedActions, allMembers } =
@@ -90,4 +90,4 @@ const ItemByUserChart = () => {
   );
 };
 
-export default ItemByUserChart;
+export default ItemsByUserChart;
