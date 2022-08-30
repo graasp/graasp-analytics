@@ -66,4 +66,5 @@ export const Context = {
   PLAYER: 'player',
   EXPLORER: 'explorer',
   ANALYZER: 'analyzer',
+  UNKNOWN: 'unknown',
 };
