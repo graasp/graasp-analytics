@@ -7,8 +7,8 @@ import ActionsByTimeOfDayChart from '../charts/ActionsByTimeOfDayChart';
 import ActionsByUserChart from '../charts/ActionsByUserChart';
 import ActionsByVerbChart from '../charts/ActionsByVerbChart';
 import ActionsByTypeChart from '../charts/ActionsByTypeChart';
-import ItemByActionChart from '../charts/ItemByActionChart';
-import ItemByUserChart from '../charts/ItemByUserChart';
+import ItemsByActionChart from '../charts/ItemsByActionChart';
+import ItemsByUserChart from '../charts/ItemsByUserChart';
 
 const ChartsArea = () => (
   <Grid container>
@@ -31,10 +31,10 @@ const ChartsArea = () => (
       <ActionsByUserChart />
     </Grid>
     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-      <ItemByActionChart />
+      <ItemsByActionChart />
     </Grid>
     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-      <ItemByUserChart />
+      <ItemsByUserChart />
     </Grid>
     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
       <ActionsByTypeChart />
