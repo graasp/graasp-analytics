@@ -4,10 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from 'recharts';
 import EmptyChart from './EmptyChart';
-import { getActionsByVerb, formatActionsByVerb } from '../../../utils/api';
 import { filterActions } from '../../../utils/array';
 import { COLORS, CONTAINER_HEIGHT } from '../../../config/constants';
 import { DataContext } from '../../context/DataProvider';
+import { formatActionsByVerb, getActionsByVerb } from '../../../utils/api';
 
 const useStyles = makeStyles(() => ({
   typography: { textAlign: 'center' },

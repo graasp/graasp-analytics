@@ -1,6 +1,6 @@
 // Functions in this file manipulate data retrieved from the api to make it usable by the app's charts/components
-const _ = require('lodash');
-const {
+import _ from 'lodash';
+import {
   LEARNING_ANALYTICS_USER_ID,
   MIN_PERCENTAGE_TO_SHOW_VERB,
   OTHER_VERB,
@@ -12,7 +12,7 @@ const {
   NIGHT,
   ACCESSED_STRING,
   TOP_NUMBER_OF_ITEMS_TO_DISPLAY,
-} = require('../config/constants');
+} from '../config/constants';
 
 // Takes array of action objects and returns an object with {key: value} pairs of {date: #-of-actions}
 export const getActionsByDay = (actions) => {

@@ -13,14 +13,15 @@ import {
 } from 'recharts';
 import EmptyChart from './EmptyChart';
 import ActionsByTimeOfDayCustomTooltip from '../../custom/ActionsByTimeOfDayCustomTooltip';
-import {
-  getActionsByTimeOfDay,
-  formatActionsByTimeOfDay,
-  findYAxisMax,
-} from '../../../utils/api';
+
 import { filterActions } from '../../../utils/array';
 import { CONTAINER_HEIGHT } from '../../../config/constants';
 import { DataContext } from '../../context/DataProvider';
+import {
+  findYAxisMax,
+  formatActionsByTimeOfDay,
+  getActionsByTimeOfDay,
+} from '../../../utils/api';
 
 const useStyles = makeStyles(() => ({
   typography: { textAlign: 'center' },
