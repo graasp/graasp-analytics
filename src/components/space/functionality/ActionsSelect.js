@@ -21,7 +21,7 @@ const ActionsSelect = () => {
   const classes = useStyles();
   const { actions, selectedActions, setSelectedActions } =
     useContext(DataContext);
-  if (!actions || !actions.length) {
+  if (!actions || !actions.size) {
     return null;
   }
   const groupBy = (key, arr) =>
@@ -65,8 +65,8 @@ const ActionsSelect = () => {
           onChange={(selected) => {
             if (
               selected !== null &&
-              selected.length > 0 &&
-              selected[selected.length - 1].value === allOption.value
+              selected.size > 0 &&
+              selected[selected.size - 1].value === allOption.value
             ) {
               return handleChange(allActions);
             }
