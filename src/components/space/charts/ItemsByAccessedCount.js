@@ -50,8 +50,8 @@ const ItemsByAccessedCount = () => {
   let filteredActions;
   if (
     selectedUsers === null ||
-    selectedUsers.length === 0 ||
-    selectedUsers.length === allMembers.length
+    selectedUsers.size === 0 ||
+    selectedUsers.size === allMembers.size
   ) {
     filteredActions = allActions;
   } else {

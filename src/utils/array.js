@@ -19,12 +19,12 @@ export const filterActions = ({
   const actionTypes = Object.keys(groupBy('actionType', actions));
   const noUsers =
     selectedUsers === null ||
-    selectedUsers.length === 0 ||
-    selectedUsers.length === allMembersLength;
+    selectedUsers.size === 0 ||
+    selectedUsers.size === allMembersLength;
   const noActions =
     selectedActions === null ||
-    selectedActions.length === 0 ||
-    selectedActions.length === actionTypes.length;
+    selectedActions.size === 0 ||
+    selectedActions.size === actionTypes.size;
   let actionsByTimeOfDay;
   if (noUsers && noActions) {
     actionsByTimeOfDay = chartFunction(actions);

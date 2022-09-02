@@ -20,12 +20,12 @@ const ActionsByVerbChart = () => {
     useContext(DataContext);
 
   let actionsByVerb = [];
-  if (actions?.length) {
+  if (actions?.size) {
     actionsByVerb = filterActions({
       selectedUsers,
       selectedActions,
       actions,
-      allMembersLength: allMembers.length,
+      allMembersLength: allMembers.size,
       chartFunction: getActionsByVerb,
     });
   }

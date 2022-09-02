@@ -33,17 +33,16 @@ const ActionsByTypeChart = () => {
   const classes = useStyles();
   const { actions, selectedUsers, selectedActions, allMembers } =
     useContext(DataContext);
-  const users = selectedUsers.length ? selectedUsers : allMembers;
-  const allActions = selectedActions.length ? selectedActions : actions;
+  const users = selectedUsers.size ? selectedUsers : allMembers;
+  const allActions = selectedActions.size ? selectedActions : actions;
   const userIds = Object.keys(groupBy('id', users));
   const yAxisMax = findYAxisMax(users);
 
-  // group all actions by action type
   const groupedActions = groupBy('actionType', allActions);
   const formattedData = [];
   // for each action type, further group by member id, and then sum the number of actions
   Object.entries(groupedActions).forEach((key) => {
-    const grouped = groupBy('memberId', key[1]);
+    const grouped = groupBy('memberId', key);
     const userActions = {
       name: key[0],
       total: key[1].length,

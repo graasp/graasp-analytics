@@ -35,7 +35,7 @@ const ReportData = () => {
               <Typography align="center">
                 {t('Total participants')}:
                 <Typography variant="h5" component="div" align="center">
-                  {allMembers.length}
+                  {allMembers.size}
                 </Typography>
               </Typography>
             </Grid>
@@ -52,7 +52,7 @@ const ReportData = () => {
               <Typography align="center">
                 {t('Total actions')}:
                 <Typography variant="h5" component="div" align="center">
-                  {actions.length}
+                  {actions.size}
                 </Typography>
               </Typography>
             </Grid>

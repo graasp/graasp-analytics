@@ -33,8 +33,8 @@ const ItemsByActionChart = () => {
   const classes = useStyles();
   const { actions, selectedUsers, selectedActions, allMembers } =
     useContext(DataContext);
-  const users = selectedUsers.length ? selectedUsers : allMembers;
-  const allActions = selectedActions.length ? selectedActions : actions;
+  const users = selectedUsers.size ? selectedUsers : allMembers;
+  const allActions = selectedActions.size ? selectedActions : actions;
   const actionTypes = Object.keys(groupBy('actionType', allActions));
   const yAxisMax = findYAxisMax(users);
 
@@ -53,7 +53,8 @@ const ItemsByActionChart = () => {
   });
   formattedData.sort((a, b) => b.total - a.total);
   console.log(formattedData);
-  const title = 'Item by Action';
+
+  const title = 'Items by Action';
   if (formattedData.length === 0) {
     return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }
