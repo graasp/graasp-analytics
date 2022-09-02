@@ -51,21 +51,15 @@ const ActionsByDayChart = () => {
 
   const yAxisMax = findYAxisMax(actionsByDay);
   const formattedActionsByDay = formatActionsByDay(actionsByDay);
-
-  // if selected user(s) have no actions, render component with message that there are no actions
-  if (formattedActionsByDay.length === 0) {
-    return (
-      <EmptyChart
-        selectedUsers={selectedUsers}
-        chartTitle={t('Actions by Day')}
-      />
-    );
+  const title = 'Actions by Day';
+  if (!formattedActionsByDay.length) {
+    return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }
 
   return (
     <>
       <Typography variant="h6" className={classes.typography}>
-        {t('Actions by Day')}
+        {t(title)}
       </Typography>
       <ResponsiveContainer width="95%" height={CONTAINER_HEIGHT}>
         <LineChart

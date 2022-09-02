@@ -30,13 +30,13 @@ const ActionsByVerbChart = () => {
     });
   }
   const formattedActionsByVerb = formatActionsByVerb(actionsByVerb);
-
+  const title = 'Actions by Verb';
   // if selected user(s) have no actions, render component with message that there are no actions
-  if (formattedActionsByVerb.length === 0) {
+  if (!formattedActionsByVerb.length) {
     return (
       <EmptyChart
         selectedUsers={selectedUsers}
-        chartTitle={t('Actions by Verb')}
+        chartTitle={t(title)}
       />
     );
   }

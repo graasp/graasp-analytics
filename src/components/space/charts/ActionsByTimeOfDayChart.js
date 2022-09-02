@@ -54,6 +54,7 @@ const ActionsByTimeOfDayChart = () => {
   const formattedActionsByTimeOfDay =
     formatActionsByTimeOfDay(actionsByTimeOfDay);
 
+  const title = 'Actions by Time of Day';
   // if selected user(s) have no actions, render component with message that there are no actions
   if (
     formattedActionsByTimeOfDay.every((timePeriod) => timePeriod.count === 0)
@@ -61,7 +62,7 @@ const ActionsByTimeOfDayChart = () => {
     return (
       <EmptyChart
         selectedUsers={selectedUsers}
-        chartTitle={t('Actions by Time of Day')}
+        chartTitle={t(title)}
       />
     );
   }

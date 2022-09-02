@@ -39,7 +39,7 @@ const ItemsByActionChart = () => {
   const yAxisMax = findYAxisMax(users);
 
   const groupedItems = groupBy('itemPath', allActions);
-  const formattedData = [];
+  const formattedItemsByAction = [];
   Object.entries(groupedItems).forEach((key) => {
     const grouped = groupBy('actionType', key[1]);
     const userActions = {
@@ -49,13 +49,13 @@ const ItemsByActionChart = () => {
     Object.entries(grouped).forEach((k) => {
       userActions[k[0]] = k[1].length;
     });
-    formattedData.push(userActions);
+    formattedItemsByAction.push(userActions);
   });
-  formattedData.sort((a, b) => b.total - a.total);
-  console.log(formattedData);
+  formattedItemsByAction.sort((a, b) => b.total - a.total);
+  console.log(formattedItemsByAction);
 
   const title = 'Items by Action';
-  if (formattedData.length === 0) {
+  if (formattedItemsByAction.length === 0) {
     return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }
 
@@ -65,7 +65,7 @@ const ItemsByActionChart = () => {
         {t(title)}
       </Typography>
       <ResponsiveContainer width="95%" height={CONTAINER_HEIGHT}>
-        <ComposedChart data={formattedData} className={classes.composedChart}>
+        <ComposedChart data={formattedItemsByAction} className={classes.composedChart}>
           <CartesianGrid strokeDasharray="2" />
           <XAxis dataKey="name" tick={{ fontSize: 14 }} />
           <YAxis tick={{ fontSize: 14 }} domain={[0, yAxisMax]} />

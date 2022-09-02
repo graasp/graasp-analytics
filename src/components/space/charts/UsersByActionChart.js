@@ -42,7 +42,7 @@ const UsersByActionByChart = () => {
   const actionTypes = Object.keys(groupBy('actionType', allActions));
   const yAxisMax = findYAxisMax(users);
 
-  let formattedActions = [];
+  let formattedUsersByAction = [];
   users.forEach((user) => {
     const filteredActions = filterActionsByUser(actions, [{ id: user.id }]);
     const groupedActions = groupBy('actionType', filteredActions);
@@ -55,18 +55,18 @@ const UsersByActionByChart = () => {
       userActions[action[0]] = action[1].length;
       userActions.total += action[1].length;
     });
-    formattedActions.push(userActions);
+    formattedUsersByAction.push(userActions);
   });
   const maxUsers = ACTIONS_BY_USER_MAX_DISPLAYED_USERS;
   const title = 'The Most Active Users by Actions';
 
   // sort by total actions in descending order
-  formattedActions.sort((a, b) => b.total - a.total);
+  formattedUsersByAction.sort((a, b) => b.total - a.total);
   // get top 10 users
-  formattedActions = formattedActions.slice(0, maxUsers);
+  formattedUsersByAction = formattedUsersByAction.slice(0, maxUsers);
   // filter out users with no actions
   // formattedActions = formattedActions.filter((user) => user.total);
-  if (formattedActions.length === 0) {
+  if (formattedUsersByAction.length === 0) {
     return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }
 
@@ -77,7 +77,7 @@ const UsersByActionByChart = () => {
       </Typography>
       <ResponsiveContainer width="95%" height={CONTAINER_HEIGHT}>
         <ComposedChart
-          data={formattedActions}
+          data={formattedUsersByAction}
           className={classes.composedChart}
         >
           <CartesianGrid strokeDasharray="2" />
