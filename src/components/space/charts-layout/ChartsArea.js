@@ -2,10 +2,10 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import ActionsByDayChart from '../charts/ActionsByDayChart';
 import ActionsByDayChartZoom from '../charts/ActionsByDayChartZoom';
-import ActionsMap from '../charts/ActionsMap';
-import ActionsByTimeOfDayChart from '../charts/ActionsByTimeOfDayChart';
+import ActionsByUserChart from '../charts/ActionsByUserChart';
 import ActionsByVerbChart from '../charts/ActionsByVerbChart';
-import ActionsByTypeChart from '../charts/ActionsByTypeChart';
+import ActionsByTimeOfDayChart from '../charts/ActionsByTimeOfDayChart';
+import ActionsMap from '../charts/ActionsMap';
 import ItemsByActionChart from '../charts/ItemsByActionChart';
 import ItemsByUserChart from '../charts/ItemsByUserChart';
 import UsersByActionChart from '../charts/UsersByActionChart';
@@ -25,10 +25,10 @@ const ChartsArea = () => (
       <ActionsByTimeOfDayChart />
     </Grid>
     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-      <ActionsByVerbChart />
+      <ActionsByUserChart />
     </Grid>
     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-      <UsersByActionChart />
+      <ActionsByVerbChart />
     </Grid>
     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
       <ItemsByActionChart />
@@ -37,7 +37,7 @@ const ChartsArea = () => (
       <ItemsByUserChart />
     </Grid>
     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-      <ActionsByTypeChart />
+      <UsersByActionChart />
     </Grid>
   </Grid>
 );

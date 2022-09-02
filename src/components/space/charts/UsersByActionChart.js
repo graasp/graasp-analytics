@@ -13,10 +13,7 @@ import {
   ComposedChart,
 } from 'recharts';
 import EmptyChart from './EmptyChart';
-import {
-  filterActionsByUser,
-  findYAxisMax,
-} from '../../../utils/api';
+import { filterActionsByUser, findYAxisMax } from '../../../utils/api';
 import { groupBy } from '../../../utils/array';
 import { DataContext } from '../../context/DataProvider';
 import {
@@ -55,14 +52,14 @@ const UsersByActionByChart = () => {
       total: 0,
     };
     Object.entries(groupedActions).forEach((action) => {
-        userActions[action[0]] = action[1].length;
-        userActions.total += action[1].length;
+      userActions[action[0]] = action[1].length;
+      userActions.total += action[1].length;
     });
     formattedActions.push(userActions);
   });
   const maxUsers = ACTIONS_BY_USER_MAX_DISPLAYED_USERS;
   const title = 'The Most Active Users by Actions';
-  
+
   // sort by total actions in descending order
   formattedActions.sort((a, b) => b.total - a.total);
   // get top 10 users

@@ -28,34 +28,39 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ActionsByTypeChart = () => {
+const ActionsByUserChart = () => {
   const { t } = useTranslation();
   const classes = useStyles();
   const { actions, selectedUsers, selectedActions, allMembers } =
     useContext(DataContext);
   const users = selectedUsers.size ? selectedUsers : allMembers;
   const allActions = selectedActions.size ? selectedActions : actions;
-  const userIds = Object.keys(groupBy('id', users));
+  const userNames = Object.keys(groupBy('name', users));
   const yAxisMax = findYAxisMax(users);
 
+  console.log(users);
   const groupedActions = groupBy('actionType', allActions);
   const formattedData = [];
   // for each action type, further group by member id, and then sum the number of actions
-  Object.entries(groupedActions).forEach((key) => {
-    const grouped = groupBy('memberId', key);
+  Object.entries(groupedActions).forEach((action) => {
+    const groupedUsers = groupBy('memberId', action[1]);
     const userActions = {
-      name: key[0],
-      total: key[1].length,
+      actionType: action[0],
+      total: action[1].length,
     };
-    Object.entries(grouped).forEach((k) => {
-      userActions[k[0]] = k[1].length;
+    Object.entries(groupedUsers).forEach((groupedUser) => {
+      users.forEach((user) => {
+        if (user.id === groupedUser[0]) {
+          userActions[user.name] = groupedUser[1].length;
+        }
+      });
     });
     formattedData.push(userActions);
   });
   formattedData.sort((a, b) => b.total - a.total);
-
+  console.log(formattedData);
   const title = 'Actions by Action Types';
-  if (formattedData.length === 0) {
+  if (!formattedData.length) {
     return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }
 
@@ -67,13 +72,13 @@ const ActionsByTypeChart = () => {
       <ResponsiveContainer width="95%" height={CONTAINER_HEIGHT}>
         <ComposedChart data={formattedData} className={classes.composedChart}>
           <CartesianGrid strokeDasharray="2" />
-          <XAxis dataKey="name" tick={{ fontSize: 14 }} />
+          <XAxis dataKey="actionType" tick={{ fontSize: 14 }} />
           <YAxis tick={{ fontSize: 14 }} domain={[0, yAxisMax]} />
           <Tooltip />
-          {userIds.map((id, index) => (
+          {userNames.map((name, index) => (
             <Bar
               key=""
-              dataKey={id}
+              dataKey={name}
               stackId="1"
               fill={COLORS[index % COLORS.length]}
             />
@@ -91,4 +96,4 @@ const ActionsByTypeChart = () => {
   );
 };
 
-export default ActionsByTypeChart;
+export default ActionsByUserChart;
