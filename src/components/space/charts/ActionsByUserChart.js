@@ -38,7 +38,6 @@ const ActionsByUserChart = () => {
   const userNames = Object.keys(groupBy('name', users));
   const yAxisMax = findYAxisMax(users);
 
-  console.log(users);
   const groupedActions = groupBy('actionType', allActions);
   const formattedData = [];
   // for each action type, further group by member id, and then sum the number of actions
@@ -58,8 +57,7 @@ const ActionsByUserChart = () => {
     formattedData.push(userActions);
   });
   formattedData.sort((a, b) => b.total - a.total);
-  console.log(formattedData);
-  const title = 'Actions by Action Types';
+  const title = 'Actions by User';
   if (!formattedData.length) {
     return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }

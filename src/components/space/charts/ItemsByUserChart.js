@@ -33,28 +33,32 @@ const ItemsByUserChart = () => {
   const classes = useStyles();
   const { actions, selectedUsers, selectedActions, allMembers } =
     useContext(DataContext);
-  const users = selectedUsers.length ? selectedUsers : allMembers;
-  const allActions = selectedActions.length ? selectedActions : actions;
-  const userIds = Object.keys(groupBy('id', users));
+  const users = selectedUsers.size ? selectedUsers : allMembers;
+  const allActions = selectedActions.size ? selectedActions : actions;
+  const userNames = Object.keys(groupBy('name', users));
   const yAxisMax = findYAxisMax(users);
 
-  const groupedItems = groupBy('itemPath', allActions);
-  const formattedData = [];
-  Object.entries(groupedItems).forEach((key) => {
-    const grouped = groupBy('memberId', key[1]);
+  const groupedActions = groupBy('itemPath', allActions);
+  const formattedItemsByUser = [];
+  Object.entries(groupedActions).forEach((action) => {
+    const groupedUsers = groupBy('memberId', action[1]);
     const userActions = {
-      name: key[0],
-      total: key[1].length,
+      name: action[0],
+      total: action[1].length,
     };
-    Object.entries(grouped).forEach((k) => {
-      userActions[k[0]] = k[1].length;
+    Object.entries(groupedUsers).forEach((groupedUser) => {
+      users.forEach((user) => {
+        if (user.id === groupedUser[0]) {
+          userActions[user.name] = groupedUser[1].length;
+        }
+      });
     });
-    formattedData.push(userActions);
+    formattedItemsByUser.push(userActions);
   });
-  formattedData.sort((a, b) => b.total - a.total);
-  console.log(formattedData);
-  const title = 'Item by User';
-  if (formattedData.length === 0) {
+  formattedItemsByUser.sort((a, b) => b.total - a.total);
+
+  const title = 'Items by User';
+  if (!formattedItemsByUser.length) {
     return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }
 
@@ -64,15 +68,18 @@ const ItemsByUserChart = () => {
         {t(title)}
       </Typography>
       <ResponsiveContainer width="95%" height={CONTAINER_HEIGHT}>
-        <ComposedChart data={formattedData} className={classes.composedChart}>
+        <ComposedChart
+          data={formattedItemsByUser}
+          className={classes.composedChart}
+        >
           <CartesianGrid strokeDasharray="2" />
           <XAxis dataKey="name" tick={{ fontSize: 14 }} />
           <YAxis tick={{ fontSize: 14 }} domain={[0, yAxisMax]} />
           <Tooltip />
-          {userIds.map((id, index) => (
+          {userNames.map((name, index) => (
             <Bar
               key=""
-              dataKey={id}
+              dataKey={name}
               stackId="1"
               fill={COLORS[index % COLORS.length]}
             />

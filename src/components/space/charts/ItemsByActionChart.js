@@ -52,7 +52,6 @@ const ItemsByActionChart = () => {
     formattedItemsByAction.push(userActions);
   });
   formattedItemsByAction.sort((a, b) => b.total - a.total);
-  console.log(formattedItemsByAction);
 
   const title = 'Items by Action';
   if (!formattedItemsByAction.length) {
