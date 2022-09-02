@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { DataContext } from '../../context/DataProvider';
 import customStyles from '../../../styles/react-select-styles';
 import CustomValueContainer from '../../custom/CustomValueContainer';
+import { groupBy } from '../../../utils/array';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,14 +25,6 @@ const ActionsSelect = () => {
   if (!actions || !actions.size) {
     return null;
   }
-  const groupBy = (key, arr) =>
-    arr.reduce(
-      (acc, cur) => ({
-        ...acc,
-        [cur[key]]: cur[key] in acc ? acc[cur[key]].concat(cur) : [cur],
-      }),
-      {},
-    );
   const allActions = Object.keys(groupBy('actionType', actions)).map(
     (action) => ({
       name: action,

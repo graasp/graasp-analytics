@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
 const ItemsByActionChart = () => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { actions, selectedUsers, selectedActions, allMembers } =
+  const { actions, allMembers, selectedUsers, selectedActions } =
     useContext(DataContext);
   const users = selectedUsers.size ? selectedUsers : allMembers;
   const allActions = selectedActions.size ? selectedActions : actions;
@@ -55,7 +55,7 @@ const ItemsByActionChart = () => {
   console.log(formattedItemsByAction);
 
   const title = 'Items by Action';
-  if (formattedItemsByAction.length === 0) {
+  if (!formattedItemsByAction.length) {
     return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }
 
@@ -65,7 +65,10 @@ const ItemsByActionChart = () => {
         {t(title)}
       </Typography>
       <ResponsiveContainer width="95%" height={CONTAINER_HEIGHT}>
-        <ComposedChart data={formattedItemsByAction} className={classes.composedChart}>
+        <ComposedChart
+          data={formattedItemsByAction}
+          className={classes.composedChart}
+        >
           <CartesianGrid strokeDasharray="2" />
           <XAxis dataKey="name" tick={{ fontSize: 14 }} />
           <YAxis tick={{ fontSize: 14 }} domain={[0, yAxisMax]} />

@@ -59,12 +59,7 @@ const ActionsByTimeOfDayChart = () => {
   if (
     formattedActionsByTimeOfDay.every((timePeriod) => timePeriod.count === 0)
   ) {
-    return (
-      <EmptyChart
-        selectedUsers={selectedUsers}
-        chartTitle={t(title)}
-      />
-    );
+    return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }
 
   return (

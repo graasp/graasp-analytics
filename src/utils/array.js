@@ -19,11 +19,11 @@ export const filterActions = ({
   const actionTypes = Object.keys(groupBy('actionType', actions));
   const noUsers =
     selectedUsers === null ||
-    selectedUsers.size === 0 ||
+    !selectedUsers.size ||
     selectedUsers.size === allMembersLength;
   const noActions =
     selectedActions === null ||
-    selectedActions.size === 0 ||
+    !selectedActions.size ||
     selectedActions.size === actionTypes.size;
   let actionsByTimeOfDay;
   if (noUsers && noActions) {

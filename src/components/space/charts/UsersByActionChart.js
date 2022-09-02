@@ -65,8 +65,8 @@ const UsersByActionByChart = () => {
   // get top 10 users
   formattedUsersByAction = formattedUsersByAction.slice(0, maxUsers);
   // filter out users with no actions
-  // formattedActions = formattedActions.filter((user) => user.total);
-  if (formattedUsersByAction.length === 0) {
+  formattedUsersByAction = formattedUsersByAction.filter((user) => user.total);
+  if (!formattedUsersByAction.length) {
     return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }
 
