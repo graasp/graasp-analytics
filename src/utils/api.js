@@ -110,7 +110,7 @@ export const formatActionsByTimeOfDay = (actionsByTimeOfDayObject) => {
 
 // Takes array of action objects and returns an object with {key: value} pairs of {verb: %-of-actions}
 export const getActionsByVerb = (actions) => {
-  const totalActions = actions.length;
+  const totalActions = actions.size;
   const actionsByVerb = {};
   actions.forEach((action) => {
     if (!actionsByVerb[action.actionType]) {
@@ -121,13 +121,6 @@ export const getActionsByVerb = (actions) => {
       actionsByVerb[action.actionType] += 1 / totalActions;
     }
   });
-  return actionsByVerb;
-};
-
-// Takes array of action objects and returns an object with {key: value} pairs of {verb: #-of-actions}
-export const getActionNumByVerb = (actions) => {
-  const actionsByVerb = _.countBy(actions, 'actionType');
-  actionsByVerb.total = actions.length;
   return actionsByVerb;
 };
 

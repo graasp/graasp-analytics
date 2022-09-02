@@ -14,7 +14,6 @@ import {
 } from 'recharts';
 import EmptyChart from './EmptyChart';
 import {
-  getActionNumByVerb,
   filterActionsByUser,
   findYAxisMax,
 } from '../../../utils/api';
@@ -36,46 +35,40 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ActionsByUserChart = () => {
+const UsersByActionByChart = () => {
   const { t } = useTranslation();
   const classes = useStyles();
   const { actions, selectedUsers, selectedActions, allMembers } =
     useContext(DataContext);
-  const users = selectedUsers.length ? selectedUsers : allMembers;
-  const allActions = selectedActions.length ? selectedActions : actions;
+  const users = selectedUsers.size ? selectedUsers : allMembers;
+  const allActions = selectedActions.size ? selectedActions : actions;
   const actionTypes = Object.keys(groupBy('actionType', allActions));
   const yAxisMax = findYAxisMax(users);
 
   let formattedActions = [];
   users.forEach((user) => {
-    const actionsByVerb = getActionNumByVerb(
-      filterActionsByUser(actions, [{ id: user.id }]),
-    );
+    const filteredActions = filterActionsByUser(actions, [{ id: user.id }]);
+    const groupedActions = groupBy('actionType', filteredActions);
     const userActions = {
       id: user.id,
       name: user.name,
-      total: actionsByVerb.total,
+      total: 0,
     };
-    actionTypes.forEach((actionType) => {
-      if (actionsByVerb[actionType]) {
-        userActions[actionType] = actionsByVerb[actionType];
-      } else {
-        userActions[actionType] = 0;
-      }
+    Object.entries(groupedActions).forEach((action) => {
+        userActions[action[0]] = action[1].length;
+        userActions.total += action[1].length;
     });
     formattedActions.push(userActions);
   });
-
   const maxUsers = ACTIONS_BY_USER_MAX_DISPLAYED_USERS;
-  const title = 'Actions by Most Active Users';
-
+  const title = 'The Most Active Users by Actions';
+  
   // sort by total actions in descending order
   formattedActions.sort((a, b) => b.total - a.total);
   // get top 10 users
   formattedActions = formattedActions.slice(0, maxUsers);
   // filter out users with no actions
-  formattedActions = formattedActions.filter((user) => user.total);
-
+  // formattedActions = formattedActions.filter((user) => user.total);
   if (formattedActions.length === 0) {
     return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }
@@ -115,4 +108,4 @@ const ActionsByUserChart = () => {
   );
 };
 
-export default ActionsByUserChart;
+export default UsersByActionByChart;
