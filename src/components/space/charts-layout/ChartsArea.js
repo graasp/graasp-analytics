@@ -4,11 +4,11 @@ import ActionsByDayChart from '../charts/ActionsByDayChart';
 import ActionsByDayChartZoom from '../charts/ActionsByDayChartZoom';
 import ActionsMap from '../charts/ActionsMap';
 import ActionsByTimeOfDayChart from '../charts/ActionsByTimeOfDayChart';
-import ActionsByUserChart from '../charts/ActionsByUserChart';
 import ActionsByVerbChart from '../charts/ActionsByVerbChart';
 import ActionsByTypeChart from '../charts/ActionsByTypeChart';
 import ItemsByActionChart from '../charts/ItemsByActionChart';
 import ItemsByUserChart from '../charts/ItemsByUserChart';
+import UsersByActionChart from '../charts/UsersByActionChart';
 
 const ChartsArea = () => (
   <Grid container>
@@ -28,7 +28,7 @@ const ChartsArea = () => (
       <ActionsByVerbChart />
     </Grid>
     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-      <ActionsByUserChart />
+      <UsersByActionChart />
     </Grid>
     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
       <ItemsByActionChart />
