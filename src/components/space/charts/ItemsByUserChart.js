@@ -38,14 +38,14 @@ const ItemsByUserChart = () => {
   const userNames = Object.keys(groupBy('name', users));
   const yAxisMax = findYAxisMax(users);
 
-  const groupedActions = groupBy('itemPath', allActions);
+  const groupedItems = groupBy('itemPath', allActions);
   const formattedItemsByUser = [];
-  Object.entries(groupedActions).forEach((action) => {
-    const groupedUsers = groupBy('memberId', action[1]);
+  Object.entries(groupedItems).forEach((item) => {
     const userActions = {
-      name: action[0],
-      total: action[1].length,
+      name: item[0],
+      total: item[1].length,
     };
+    const groupedUsers = groupBy('memberId', item[1]);
     Object.entries(groupedUsers).forEach((groupedUser) => {
       users.forEach((user) => {
         if (user.id === groupedUser[0]) {
