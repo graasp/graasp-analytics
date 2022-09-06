@@ -37,17 +37,18 @@ const ItemsByActionChart = () => {
   const allActions = selectedActions.size ? selectedActions : actions;
   const actionTypes = Object.keys(groupBy('actionType', allActions));
   const yAxisMax = findYAxisMax(users);
-
   const groupedItems = groupBy('itemPath', allActions);
+
+  // const groupedItems = groupBy('itemPath', allActions);
   const formattedItemsByAction = [];
-  Object.entries(groupedItems).forEach((key) => {
-    const grouped = groupBy('actionType', key[1]);
+  Object.entries(groupedItems).forEach((groupedItem) => {
     const userActions = {
-      name: key[0],
-      total: key[1].length,
+      name: groupedItem[0],
+      total: groupedItem[1].length,
     };
-    Object.entries(grouped).forEach((k) => {
-      userActions[k[0]] = k[1].length;
+    const groupedActions = groupBy('actionType', groupedItem[1]);
+    Object.entries(groupedActions).forEach((groupedAction) => {
+      userActions[groupedAction[0]] = groupedAction[1].length;
     });
     formattedItemsByAction.push(userActions);
   });
@@ -57,7 +58,6 @@ const ItemsByActionChart = () => {
   if (!formattedItemsByAction.length) {
     return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }
-
   return (
     <>
       <Typography variant="h6" className={classes.typography}>
