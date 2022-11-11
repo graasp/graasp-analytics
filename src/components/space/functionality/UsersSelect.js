@@ -4,6 +4,7 @@ import Select from 'react-select';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { List } from 'immutable';
 import CustomValueContainer from '../../custom/CustomValueContainer';
 import customStyles from '../../../styles/react-select-styles';
 import { DataContext } from '../../context/DataProvider';
@@ -21,6 +22,7 @@ const UsersSelect = () => {
   const classes = useStyles();
   const { selectedUsers, setSelectedUsers, allMembers } =
     useContext(DataContext);
+
   if (!allMembers || !allMembers.size) {
     return null;
   }
@@ -32,7 +34,7 @@ const UsersSelect = () => {
   };
 
   const handleChange = (selectedUser) => {
-    setSelectedUsers(selectedUser);
+    setSelectedUsers(List(selectedUser));
   };
 
   return (
@@ -43,13 +45,13 @@ const UsersSelect = () => {
       <Grid item xs={2}>
         <Select
           styles={customStyles}
-          options={[allOption, ...allMembers]}
+          options={[allOption, ...allMembers.toArray()]}
           isMulti
           closeMenuOnSelect={false}
           hideSelectedOptions={false}
           getOptionValue={(option) => option.name}
           getOptionLabel={(option) => option.name}
-          value={selectedUsers}
+          value={selectedUsers.toArray()}
           onChange={(selected) => {
             if (
               // in the dropdown, say the option 'Option A' then the option 'Select All' are chosen

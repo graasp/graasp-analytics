@@ -13,7 +13,7 @@ import {
   ComposedChart,
 } from 'recharts';
 import EmptyChart from './EmptyChart';
-import { findYAxisMax } from '../../../utils/api';
+import { filterActionsByActionTypes, findYAxisMax } from '../../../utils/api';
 import { groupBy } from '../../../utils/array';
 import { DataContext } from '../../context/DataProvider';
 import { COLORS, CONTAINER_HEIGHT } from '../../../config/constants';
@@ -34,7 +34,7 @@ const ActionsByUserChart = () => {
   const { actions, selectedUsers, selectedActions, allMembers } =
     useContext(DataContext);
   const users = selectedUsers.size ? selectedUsers : allMembers;
-  const allActions = selectedActions.size ? selectedActions : actions;
+  const allActions = filterActionsByActionTypes(actions, selectedActions);
   const userNames = Object.keys(groupBy('name', users));
   const yAxisMax = findYAxisMax(users);
 

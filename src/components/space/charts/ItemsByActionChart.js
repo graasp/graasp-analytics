@@ -13,7 +13,11 @@ import {
   ComposedChart,
 } from 'recharts';
 import EmptyChart from './EmptyChart';
-import { findYAxisMax } from '../../../utils/api';
+import {
+  filterActionsByActionTypes,
+  findItemNameByPath,
+  findYAxisMax,
+} from '../../../utils/api';
 import { groupBy } from '../../../utils/array';
 import { DataContext } from '../../context/DataProvider';
 import { COLORS, CONTAINER_HEIGHT } from '../../../config/constants';
@@ -31,10 +35,16 @@ const useStyles = makeStyles(() => ({
 const ItemsByActionChart = () => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { actions, allMembers, selectedUsers, selectedActions } =
-    useContext(DataContext);
+  const {
+    actions,
+    allMembers,
+    selectedUsers,
+    selectedActions,
+    itemData: item,
+    itemChildren: children,
+  } = useContext(DataContext);
   const users = selectedUsers.size ? selectedUsers : allMembers;
-  const allActions = selectedActions.size ? selectedActions : actions;
+  const allActions = filterActionsByActionTypes(actions, selectedActions);
   const actionTypes = Object.keys(groupBy('actionType', allActions));
   const yAxisMax = findYAxisMax(users);
   const groupedItems = groupBy('itemPath', allActions);
@@ -42,8 +52,9 @@ const ItemsByActionChart = () => {
   // const groupedItems = groupBy('itemPath', allActions);
   const formattedItemsByAction = [];
   Object.entries(groupedItems).forEach((groupedItem) => {
+    const currentPath = groupedItem[0];
     const userActions = {
-      name: groupedItem[0],
+      name: findItemNameByPath(currentPath, children.push(item)),
       total: groupedItem[1].length,
     };
     const groupedActions = groupBy('actionType', groupedItem[1]);

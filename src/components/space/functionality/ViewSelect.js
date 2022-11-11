@@ -43,9 +43,9 @@ const ViewSelect = () => {
       viewMessage =
         "The 'player' view displays analytics from the standalone Graasp interface typically used by students to access an item.";
       break;
-    case Context.EXPLORER:
+    case Context.LIBRARY:
       viewMessage =
-        "The 'explore' view displays analytics from the standalone Graasp interface typically used by visualize resources.";
+        "The 'library' view displays analytics from the standalone Graasp interface typically used by visualize resources.";
       break;
     default:
       break;
@@ -65,7 +65,7 @@ const ViewSelect = () => {
             styles={customStyles}
             options={Object.values(Context)
               // does not show analyzer
-              .filter((context) => context !== Context.ANALYZER)
+              .filter((context) => context !== Context.ANALYTICS)
               .map((context) => ({
                 value: context,
                 name: context,

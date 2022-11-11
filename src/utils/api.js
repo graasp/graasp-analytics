@@ -12,13 +12,14 @@ import {
   NIGHT,
   ACCESSED_STRING,
   TOP_NUMBER_OF_ITEMS_TO_DISPLAY,
+  ITEM_NAME_MAX_LENGTH,
 } from '../config/constants';
 
 // Takes array of action objects and returns an object with {key: value} pairs of {date: #-of-actions}
 export const getActionsByDay = (actions) => {
   const dateKey = 'createdAt';
   const actionsByDay = {};
-  actions.forEach((action) => {
+  actions?.forEach((action) => {
     const actionDate = new Date(action[dateKey].slice(0, 10));
     if (!actionsByDay[actionDate]) {
       actionsByDay[actionDate] = 1;
@@ -76,7 +77,7 @@ export const getActionsByTimeOfDay = (actions) => {
     [EVENING]: 0,
     [NIGHT]: 0,
   };
-  actions.forEach((action) => {
+  actions?.forEach((action) => {
     const actionHourOfDay = getActionHourOfDay(action);
     if (actionHourOfDay >= 0 && actionHourOfDay < 4) {
       actionsByTimeOfDay[LATE_NIGHT] += 1;
@@ -92,7 +93,7 @@ export const getActionsByTimeOfDay = (actions) => {
       actionsByTimeOfDay[NIGHT] += 1;
     } else {
       // eslint-disable-next-line no-console
-      console.log(`actionHourOfDay ${actionHourOfDay} is undefined`);
+      console.error(`actionHourOfDay ${actionHourOfDay} is undefined`);
     }
   });
   return actionsByTimeOfDay;
@@ -167,7 +168,11 @@ export const filterActionsByUser = (actions, usersArray) => {
 };
 
 export const filterActionsByActionTypes = (actions, actionsArray) => {
-  actions.filter((action) =>
+  // no selection return whole array
+  if (!actionsArray || actionsArray.isEmpty()) {
+    return actions;
+  }
+  return actions.filter((action) =>
     actionsArray.some((act) => act.value === action.actionType),
   );
 };
@@ -330,4 +335,10 @@ export const extractItemTypes = (actions) => {
   const itemsReactSelect = [];
   items.forEach((item) => itemsReactSelect.push({ name: item, value: item }));
   return itemsReactSelect;
+};
+
+export const findItemNameByPath = (path, items) => {
+  const name =
+    items?.find(({ path: thisPath }) => path === thisPath)?.name ?? 'Unknown';
+  return _.truncate(name, { length: ITEM_NAME_MAX_LENGTH });
 };

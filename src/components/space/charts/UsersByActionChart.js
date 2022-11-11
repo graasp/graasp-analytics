@@ -13,7 +13,11 @@ import {
   ComposedChart,
 } from 'recharts';
 import EmptyChart from './EmptyChart';
-import { filterActionsByUser, findYAxisMax } from '../../../utils/api';
+import {
+  filterActionsByActionTypes,
+  filterActionsByUser,
+  findYAxisMax,
+} from '../../../utils/api';
 import { groupBy } from '../../../utils/array';
 import { DataContext } from '../../context/DataProvider';
 import {
@@ -38,13 +42,13 @@ const UsersByActionByChart = () => {
   const { actions, selectedUsers, selectedActions, allMembers } =
     useContext(DataContext);
   const users = selectedUsers.size ? selectedUsers : allMembers;
-  const allActions = selectedActions.size ? selectedActions : actions;
+  const allActions = filterActionsByActionTypes(actions, selectedActions);
   const actionTypes = Object.keys(groupBy('actionType', allActions));
   const yAxisMax = findYAxisMax(users);
 
   let formattedUsersByAction = [];
   users.forEach((user) => {
-    const filteredActions = filterActionsByUser(actions, [{ id: user.id }]);
+    const filteredActions = filterActionsByUser(allActions, [{ id: user.id }]);
     const groupedActions = groupBy('actionType', filteredActions);
     const userActions = {
       id: user.id,
@@ -58,7 +62,7 @@ const UsersByActionByChart = () => {
     formattedUsersByAction.push(userActions);
   });
   const maxUsers = ACTIONS_BY_USER_MAX_DISPLAYED_USERS;
-  const title = 'The Most Active Users by Actions';
+  const title = 'The Most Active Users';
 
   // sort by total actions in descending order
   formattedUsersByAction.sort((a, b) => b.total - a.total);

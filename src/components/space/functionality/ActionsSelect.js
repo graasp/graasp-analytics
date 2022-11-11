@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import { List } from 'immutable';
 import Select from 'react-select';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const ActionsSelect = () => {
   const { t } = useTranslation();
   const classes = useStyles();
+  // eslint-disable-next-line no-unused-vars
   const { actions, selectedActions, setSelectedActions } =
     useContext(DataContext);
   if (!actions || !actions.size) {
@@ -37,7 +39,7 @@ const ActionsSelect = () => {
   };
 
   const handleChange = (selectedAction) => {
-    setSelectedActions(selectedAction);
+    setSelectedActions(List(selectedAction));
   };
 
   return (
@@ -54,7 +56,7 @@ const ActionsSelect = () => {
           hideSelectedOptions={false}
           getOptionValue={(option) => option.name}
           getOptionLabel={(option) => option.name}
-          value={selectedActions}
+          value={selectedActions.toArray()}
           onChange={(selected) => {
             if (
               selected !== null &&

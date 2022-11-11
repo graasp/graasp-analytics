@@ -64,7 +64,9 @@ export const DEFAULT_REQUEST_SAMPLE_SIZE = 5000;
 export const Context = {
   BUILDER: 'builder',
   PLAYER: 'player',
-  EXPLORER: 'explorer',
-  ANALYZER: 'analyzer',
+  LIBRARY: 'library',
+  ANALYTICS: 'analytics',
   UNKNOWN: 'unknown',
 };
+
+export const ITEM_NAME_MAX_LENGTH = 20;

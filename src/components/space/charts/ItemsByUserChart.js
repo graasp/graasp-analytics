@@ -13,7 +13,11 @@ import {
   ComposedChart,
 } from 'recharts';
 import EmptyChart from './EmptyChart';
-import { findYAxisMax } from '../../../utils/api';
+import {
+  filterActionsByActionTypes,
+  findItemNameByPath,
+  findYAxisMax,
+} from '../../../utils/api';
 import { groupBy } from '../../../utils/array';
 import { DataContext } from '../../context/DataProvider';
 import { COLORS, CONTAINER_HEIGHT } from '../../../config/constants';
@@ -31,10 +35,16 @@ const useStyles = makeStyles(() => ({
 const ItemsByUserChart = () => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const { actions, selectedUsers, selectedActions, allMembers } =
-    useContext(DataContext);
+  const {
+    actions,
+    selectedUsers,
+    selectedActions,
+    allMembers,
+    itemChildren: children,
+    itemData,
+  } = useContext(DataContext);
   const users = selectedUsers.size ? selectedUsers : allMembers;
-  const allActions = selectedActions.size ? selectedActions : actions;
+  const allActions = filterActionsByActionTypes(actions, selectedActions);
   const userNames = Object.keys(groupBy('name', users));
   const yAxisMax = findYAxisMax(users);
 
@@ -42,7 +52,7 @@ const ItemsByUserChart = () => {
   const formattedItemsByUser = [];
   Object.entries(groupedItems).forEach((item) => {
     const userActions = {
-      name: item[0],
+      name: findItemNameByPath(item[0], children.push(itemData)),
       total: item[1].length,
     };
     const groupedUsers = groupBy('memberId', item[1]);
@@ -57,7 +67,7 @@ const ItemsByUserChart = () => {
   });
   formattedItemsByUser.sort((a, b) => b.total - a.total);
 
-  const title = 'Items by User';
+  const title = 'Most interacted items';
   if (!formattedItemsByUser.length) {
     return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }

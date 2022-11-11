@@ -47,10 +47,10 @@ const DataProvider = ({ children }) => {
   const { data: explorerData, isError: explorerIsError } = hooks.useActions(
     {
       itemId,
-      view: Context.EXPLORER,
+      view: Context.LIBRARY,
       requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     },
-    { enabled: Boolean(enabledArray[Context.EXPLORER]) },
+    { enabled: Boolean(enabledArray[Context.LIBRARY]) },
   );
 
   const { data: unknownData, isError: unknownIsError } = hooks.useActions(
@@ -63,6 +63,8 @@ const DataProvider = ({ children }) => {
   );
 
   const { data: itemData, isError: itemIsError } = hooks.useItem(itemId);
+  const { data: itemChildren } = hooks.useChildren(itemId);
+
   useEffect(() => {
     if (itemIsError) {
       setError(true);
@@ -103,7 +105,7 @@ const DataProvider = ({ children }) => {
   useEffect(() => {
     if (
       explorerData &&
-      view === Context.EXPLORER &&
+      view === Context.LIBRARY &&
       actions.size !== explorerData?.get('actions').size
     ) {
       setActions(explorerData?.get('actions'));
@@ -134,6 +136,7 @@ const DataProvider = ({ children }) => {
       setSelectedActions,
       error,
       itemData,
+      itemChildren,
     }),
     [actions, allMembers, error, selectedUsers, selectedActions, itemData],
   );
