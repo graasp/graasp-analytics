@@ -73,7 +73,7 @@ const ActionsByTimeOfDayChart = () => {
           margin={{ top: 30, bottom: 20, left: 20, right: 20 }}
         >
           <CartesianGrid strokeDasharray="2" />
-          <XAxis dataKey="timeOfDay" tick={{ fontSize: 14 }} />
+          <XAxis dataKey="timeOfDay" tick={{ fontSize: 12 }} />
           <YAxis tick={{ fontSize: 14 }} domain={[0, yAxisMax]} />
           <Tooltip content={<ActionsByTimeOfDayCustomTooltip />} />
           <Bar dataKey="count" name={t('Count')} fill="#8884d8" />
