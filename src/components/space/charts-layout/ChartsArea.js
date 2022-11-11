@@ -1,9 +1,11 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+
+import Grid from '@mui/material/Grid';
+
 import ActionsByDayChart from '../charts/ActionsByDayChart';
+import ActionsByTimeOfDayChart from '../charts/ActionsByTimeOfDayChart';
 import ActionsByUserChart from '../charts/ActionsByUserChart';
 import ActionsByVerbChart from '../charts/ActionsByVerbChart';
-import ActionsByTimeOfDayChart from '../charts/ActionsByTimeOfDayChart';
 import ActionsMap from '../charts/ActionsMap';
 import ItemsByActionChart from '../charts/ItemsByActionChart';
 import ItemsByUserChart from '../charts/ItemsByUserChart';
