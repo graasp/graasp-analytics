@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import Box from '@mui/material/Box';
 
-import StyledAlert from '../common/CustomAlert';
+import StyledAlert from '../common/StyledAlert';
 import { DataContext } from '../context/DataProvider';
 import { ViewDataContext } from '../context/ViewDataProvider';
 import ChartsAlerts from './charts-layout/ChartsAlerts';

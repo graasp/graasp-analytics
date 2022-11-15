@@ -5,7 +5,7 @@ import Info from '@mui/icons-material/Info';
 import Tooltip from '@mui/material/Tooltip';
 import { styled } from '@mui/material/styles';
 
-import StyledAlert from '../../common/CustomAlert';
+import StyledAlert from '../../common/StyledAlert';
 import { DataContext } from '../../context/DataProvider';
 import { ViewDataContext } from '../../context/ViewDataProvider';
 

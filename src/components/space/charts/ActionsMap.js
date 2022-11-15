@@ -11,7 +11,7 @@ import {
   DEFAULT_LATITUDE,
   DEFAULT_LONGITUDE,
   DEFAULT_ZOOM,
-  ENTER_KEY_CODE,
+  ENTER_KEY,
   MAX_CLUSTER_ZOOM,
 } from '../../../config/constants';
 import {
@@ -127,7 +127,7 @@ const ActionsMap = () => {
                     }}
                     onClick={() => handleClusterZoom(longitude, latitude)}
                     onKeyPress={(event) => {
-                      if (event.key === ENTER_KEY_CODE) {
+                      if (event.key === ENTER_KEY) {
                         handleClusterZoom(longitude, latitude);
                       }
                     }}
