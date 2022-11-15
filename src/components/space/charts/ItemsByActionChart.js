@@ -11,11 +11,15 @@ import {
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { COLORS } from '../../../config/constants';
+import {
+  COLORS,
+  TOP_NUMBER_OF_ITEMS_TO_DISPLAY,
+} from '../../../config/constants';
 import {
   filterActionsByActionTypes,
   findItemNameByPath,
   findYAxisMax,
+  groupByFirstLevelItems,
 } from '../../../utils/api';
 import { groupBy } from '../../../utils/array';
 import ChartContainer from '../../common/ChartContainer';
@@ -37,9 +41,8 @@ const ItemsByActionChart = () => {
   const allActions = filterActionsByActionTypes(actions, selectedActions);
   const actionTypes = Object.keys(groupBy('actionType', allActions));
   const yAxisMax = findYAxisMax(users);
-  const groupedItems = groupBy('itemPath', allActions);
 
-  // const groupedItems = groupBy('itemPath', allActions);
+  const groupedItems = groupByFirstLevelItems(allActions, item);
   const formattedItemsByAction = [];
   Object.entries(groupedItems).forEach((groupedItem) => {
     const currentPath = groupedItem[0];
@@ -55,17 +58,23 @@ const ItemsByActionChart = () => {
   });
   formattedItemsByAction.sort((a, b) => b.total - a.total);
 
-  const title = 'Items by Action';
+  const title = `${TOP_NUMBER_OF_ITEMS_TO_DISPLAY} Most Interacted Items by Action`;
   if (!formattedItemsByAction.length) {
     return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }
+
+  const firstFormattedItmesByUser = formattedItemsByAction.slice(
+    0,
+    TOP_NUMBER_OF_ITEMS_TO_DISPLAY,
+  );
+
   return (
     <>
       <ChartTitle>{t(title)}</ChartTitle>
       <ChartContainer>
-        <ComposedChart data={formattedItemsByAction}>
+        <ComposedChart data={firstFormattedItmesByUser}>
           <CartesianGrid strokeDasharray="2" />
-          <XAxis dataKey="name" tick={{ fontSize: 14 }} />
+          <XAxis interval={0} dataKey="name" tick={{ fontSize: 14 }} />
           <YAxis tick={{ fontSize: 14 }} domain={[0, yAxisMax]} />
           <Tooltip />
           {actionTypes.map((actionType, index) => (

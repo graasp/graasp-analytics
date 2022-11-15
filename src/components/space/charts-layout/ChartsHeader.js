@@ -41,13 +41,13 @@ const ChartsHeader = () => {
         pl={4}
         pb={2}
       >
-        <Grid item xs={8}>
+        <Grid item xs={9}>
           <ExportData />
           <ViewSelect />
           <UsersSelect />
           <ActionsSelect />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <ReportData />
         </Grid>
       </Grid>

@@ -11,11 +11,15 @@ import {
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { COLORS } from '../../../config/constants';
+import {
+  COLORS,
+  TOP_NUMBER_OF_ITEMS_TO_DISPLAY,
+} from '../../../config/constants';
 import {
   filterActionsByActionTypes,
   findItemNameByPath,
   findYAxisMax,
+  groupByFirstLevelItems,
 } from '../../../utils/api';
 import { groupBy } from '../../../utils/array';
 import ChartContainer from '../../common/ChartContainer';
@@ -38,7 +42,7 @@ const ItemsByUserChart = () => {
   const userNames = Object.keys(groupBy('name', users));
   const yAxisMax = findYAxisMax(users);
 
-  const groupedItems = groupBy('itemPath', allActions);
+  const groupedItems = groupByFirstLevelItems(allActions, itemData);
   const formattedItemsByUser = [];
   Object.entries(groupedItems).forEach((item) => {
     const userActions = {
@@ -55,20 +59,26 @@ const ItemsByUserChart = () => {
     });
     formattedItemsByUser.push(userActions);
   });
+
+  // limit to 10 first
   formattedItemsByUser.sort((a, b) => b.total - a.total);
 
-  const title = 'Most interacted items';
+  const title = `${TOP_NUMBER_OF_ITEMS_TO_DISPLAY} Most Interacted Items by User`;
   if (!formattedItemsByUser.length) {
     return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
   }
+  const firstFormattedItmesByUser = formattedItemsByUser.slice(
+    0,
+    TOP_NUMBER_OF_ITEMS_TO_DISPLAY,
+  );
 
   return (
     <>
       <ChartTitle>{t(title)}</ChartTitle>
       <ChartContainer>
-        <ComposedChart data={formattedItemsByUser}>
+        <ComposedChart data={firstFormattedItmesByUser}>
           <CartesianGrid strokeDasharray="2" />
-          <XAxis dataKey="name" tick={{ fontSize: 14 }} />
+          <XAxis dataKey="name" tick={{ fontSize: 14 }} interval={0} />
           <YAxis tick={{ fontSize: 14 }} domain={[0, yAxisMax]} />
           <Tooltip />
           {userNames.map((name, index) => (

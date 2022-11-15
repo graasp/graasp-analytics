@@ -69,4 +69,4 @@ export const Context = {
   UNKNOWN: 'unknown',
 };
 
-export const ITEM_NAME_MAX_LENGTH = 20;
+export const ITEM_NAME_MAX_LENGTH = 15;

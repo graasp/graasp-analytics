@@ -345,3 +345,21 @@ export const findItemNameByPath = (path, items) => {
     items?.find(({ path: thisPath }) => path === thisPath)?.name ?? 'Unknown';
   return truncate(name, { length: ITEM_NAME_MAX_LENGTH });
 };
+
+// group children of children under the same parent
+export const groupByFirstLevelItems = (actions, item) => {
+  if (!item) {
+    return {};
+  }
+
+  const nbLevelParent = item.path.split('.').length;
+
+  // compare first level only
+  const d = actions.groupBy((a) =>
+    a.itemPath
+      .split('.')
+      .slice(0, nbLevelParent + 1)
+      .join('.'),
+  );
+  return d.toJS();
+};

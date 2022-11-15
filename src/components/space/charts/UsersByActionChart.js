@@ -51,7 +51,7 @@ const UsersByActionByChart = () => {
     formattedUsersByAction.push(userActions);
   });
   const maxUsers = ACTIONS_BY_USER_MAX_DISPLAYED_USERS;
-  const title = 'The Most Active Users';
+  const title = `${ACTIONS_BY_USER_MAX_DISPLAYED_USERS} Most Active Users`;
 
   // sort by total actions in descending order
   formattedUsersByAction.sort((a, b) => b.total - a.total);

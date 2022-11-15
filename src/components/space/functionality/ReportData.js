@@ -12,7 +12,6 @@ import { styled } from '@mui/material/styles';
 import { DataContext } from '../../context/DataProvider';
 
 const CustomRoot = styled(Card)(() => ({
-  maxWidth: 300,
   maxHeight: 150,
   marginBottom: 5,
   textAlign: 'right',
