@@ -49,11 +49,13 @@ const ActionsMap = () => {
   } else {
     actionsToChart = filterActionsByUser(actions, selectedUsers);
   }
+  // eslint-disable-next-line no-console
   console.log(actionsToChart);
 
   // GeoJSON Feature objects
   const points = mapActionsToGeoJsonFeatureObjects(actionsToChart);
 
+  // eslint-disable-next-line no-console
   console.log(points.toJS());
 
   const { clusters } = useSupercluster({
