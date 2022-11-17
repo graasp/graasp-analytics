@@ -54,7 +54,7 @@ const ActionsMap = () => {
   const points = mapActionsToGeoJsonFeatureObjects(actionsToChart);
 
   const { clusters } = useSupercluster({
-    points,
+    points: points.toJS(),
     bounds,
     zoom,
     options: { radius: CLUSTER_RADIUS, maxZoom: MAX_CLUSTER_ZOOM },
