@@ -60,7 +60,7 @@
     "release:patch": "standard-version -a --release-as patch",
     "postinstall": "husky install",
     "cypress:open": "env-cmd -f ./.env.test cypress open",
-    "cypress:run": "env-cmd -f ./.env.test cypress run --headless --browser chrome --spec \"cypress/**/*.cy.js\""
+    "cypress:run": "env-cmd -f ./.env.test cypress run --headless --browser chrome --spec \"cypress/e2e/*.cy.ts\""
   },
   "browserslist": {
     "production": [
