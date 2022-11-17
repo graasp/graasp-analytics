@@ -49,9 +49,12 @@ const ActionsMap = () => {
   } else {
     actionsToChart = filterActionsByUser(actions, selectedUsers);
   }
+  console.log(actionsToChart);
 
   // GeoJSON Feature objects
   const points = mapActionsToGeoJsonFeatureObjects(actionsToChart);
+
+  console.log(points.toJS());
 
   const { clusters } = useSupercluster({
     points: points.toJS(),
