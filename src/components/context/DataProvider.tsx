@@ -11,7 +11,6 @@ import {
 import { useParams } from 'react-router-dom';
 
 import {
-  ActionDataRecord,
   ActionRecord,
   ItemRecord,
   MemberRecord,
@@ -53,8 +52,13 @@ type Props = {
   children: JSX.Element | JSX.Element[];
 };
 
-const DataProvider = ({ children }: Props) => {
-  const [enabledArray, setEnabledArray] = useState({});
+const DataProvider = ({ children }: Props): JSX.Element => {
+  const [enabledArray, setEnabledArray] = useState({
+    [Context.BUILDER]: false,
+    [Context.PLAYER]: false,
+    [Context.LIBRARY]: false,
+    [Context.UNKNOWN]: false,
+  });
   const [selectedUsers, setSelectedUsers] = useState<List<MemberRecord>>(
     List(),
   );
@@ -79,7 +83,7 @@ const DataProvider = ({ children }: Props) => {
       requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     },
     { enabled: Boolean(enabledArray[Context.BUILDER]) },
-  ) as { data?: ActionDataRecord; isError: boolean; isLoading: boolean };
+  );
 
   const {
     data: playerData,
@@ -92,7 +96,7 @@ const DataProvider = ({ children }: Props) => {
       requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     },
     { enabled: Boolean(enabledArray[Context.PLAYER]) },
-  ) as { data?: ActionDataRecord; isError: boolean; isLoading: boolean };
+  );
 
   const {
     data: explorerData,
@@ -105,7 +109,7 @@ const DataProvider = ({ children }: Props) => {
       requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     },
     { enabled: Boolean(enabledArray[Context.LIBRARY]) },
-  ) as { data?: ActionDataRecord; isError: boolean; isLoading: boolean };
+  );
 
   const {
     data: unknownData,
@@ -118,7 +122,7 @@ const DataProvider = ({ children }: Props) => {
       requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     },
     { enabled: Boolean(enabledArray[Context.UNKNOWN]) },
-  ) as { data?: ActionDataRecord; isError: boolean; isLoading: boolean };
+  );
 
   const {
     data: itemData,
