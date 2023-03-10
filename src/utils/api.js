@@ -112,6 +112,57 @@ export const formatActionsByTimeOfDay = (actionsByTimeOfDayObject) => {
   }));
 };
 
+// helper function used in getActionsByWeekday below
+const getActionWeekday = (action) => {
+  const dateKey = 'createdAt';
+  // createdAt should have the format "2020-12-31T23:59:59.999Z"
+  const date = new Date(action[dateKey]);
+  const weekday = date.getDay();
+  return weekday;
+};
+
+// Takes array of action objects and returns an object with {key: value} pairs of {weekday: #-of-actions}
+export const getActionsByWeekday = (actions) => {
+  const actionsByWeekday = {
+    SUNDAY: 0,
+    MONDAY: 0,
+    TUESDAY: 0,
+    WEDNESDAY: 0,
+    THURSDAY: 0,
+    FRIDAY: 0,
+    SATURDAY: 0,
+  };
+  const weekdayEnum = {
+    0: 'SUNDAY',
+    1: 'MONDAY',
+    2: 'TUESDAY',
+    3: 'WEDNESDAY',
+    4: 'THURSDAY',
+    5: 'FRIDAY',
+    6: 'SATURDAY',
+  };
+  actions?.forEach((action) => {
+    const actionWeekday = getActionWeekday(action);
+    if (actionWeekday >= 1 && actionWeekday <= 7) {
+      actionsByWeekday[weekdayEnum[actionWeekday]] += 1;
+    } else {
+      // eslint-disable-next-line no-console
+      console.error(`actionWeekday ${actionWeekday} is undefined`);
+    }
+  });
+  return actionsByWeekday;
+};
+
+// Takes object with {key: value} pairs of {weekday: #-of-actions}
+// returns an array in Recharts.js format
+export const formatActionsByWeekday = (actionsByWeekdayObject) => {
+  const actionsByWeekdayArray = Object.entries(actionsByWeekdayObject);
+  return actionsByWeekdayArray.map((entry) => ({
+    day: entry[0],
+    count: entry[1],
+  }));
+};
+
 // Takes array of action objects and returns an object with {key: value} pairs of {verb: %-of-actions}
 export const getActionsByVerb = (actions) => {
   const totalActions = actions.size;
