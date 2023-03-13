@@ -124,27 +124,18 @@ const getActionWeekday = (action) => {
 // Takes array of action objects and returns an object with {key: value} pairs of {weekday: #-of-actions}
 export const getActionsByWeekday = (actions) => {
   const actionsByWeekday = {
-    SUNDAY: 0,
-    MONDAY: 0,
-    TUESDAY: 0,
-    WEDNESDAY: 0,
-    THURSDAY: 0,
-    FRIDAY: 0,
-    SATURDAY: 0,
-  };
-  const weekdayEnum = {
-    0: 'SUNDAY',
-    1: 'MONDAY',
-    2: 'TUESDAY',
-    3: 'WEDNESDAY',
-    4: 'THURSDAY',
-    5: 'FRIDAY',
-    6: 'SATURDAY',
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
   };
   actions?.forEach((action) => {
     const actionWeekday = getActionWeekday(action);
     if (actionWeekday >= 1 && actionWeekday <= 7) {
-      actionsByWeekday[weekdayEnum[actionWeekday]] += 1;
+      actionsByWeekday[actionWeekday] += 1;
     } else {
       // eslint-disable-next-line no-console
       console.error(`actionWeekday ${actionWeekday} is undefined`);
@@ -156,10 +147,19 @@ export const getActionsByWeekday = (actions) => {
 // Takes object with {key: value} pairs of {weekday: #-of-actions}
 // returns an array in Recharts.js format
 export const formatActionsByWeekday = (actionsByWeekdayObject) => {
+  const weekdayEnum = {
+    0: 'Sunday',
+    1: 'Monday',
+    2: 'Tuesday',
+    3: 'Wednesday',
+    4: 'Thursday',
+    5: 'Friday',
+    6: 'Saturday',
+  };
   const actionsByWeekdayArray = Object.entries(actionsByWeekdayObject);
-  return actionsByWeekdayArray.map((entry) => ({
-    day: entry[0],
-    count: entry[1],
+  return actionsByWeekdayArray.map(([day, count]) => ({
+    day: weekdayEnum[day],
+    count,
   }));
 };
 

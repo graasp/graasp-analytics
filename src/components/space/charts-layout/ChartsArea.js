@@ -21,6 +21,9 @@ const ChartsArea = () => (
       <ActionsByTimeOfDayChart />
     </Grid>
     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+      <ActionsByWeekdayChart />
+    </Grid>
+    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
       <ActionsMap />
     </Grid>
     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -37,9 +40,6 @@ const ChartsArea = () => (
     </Grid>
     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
       <ItemsByActionChart />
-    </Grid>
-    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-      <ActionsByWeekdayChart />
     </Grid>
   </Grid>
 );

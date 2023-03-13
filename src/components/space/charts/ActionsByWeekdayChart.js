@@ -27,9 +27,9 @@ const ActionsByWeekdayChart = () => {
   // third condition above is necessary: some actions are made by users NOT in the users list (e.g. user account deleted)
   // e.g. we retrieve 100 total actions and 10 users, but these 10 users have only made 90 actions
   // therefore, to avoid confusion: when all users are selected, show all actions
-  let ActionsByWeekday = [];
+  let actionsByWeekday = [];
   if (actions?.size) {
-    ActionsByWeekday = filterActions({
+    actionsByWeekday = filterActions({
       selectedUsers,
       selectedActions,
       actions,
@@ -37,8 +37,8 @@ const ActionsByWeekdayChart = () => {
       chartFunction: getActionsByWeekday,
     });
   }
-  const yAxisMax = findYAxisMax(ActionsByWeekday);
-  const formattedActionsByWeekday = formatActionsByWeekday(ActionsByWeekday);
+  const yAxisMax = findYAxisMax(actionsByWeekday);
+  const formattedActionsByWeekday = formatActionsByWeekday(actionsByWeekday);
 
   const title = 'Actions By Weekday';
   // if selected user(s) have no actions, render component with message that there are no actions
