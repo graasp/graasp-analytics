@@ -1,6 +1,6 @@
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from 'recharts';
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -14,7 +14,7 @@ import ChartTitle from '../../common/ChartTitle';
 import { DataContext } from '../../context/DataProvider';
 import EmptyChart from './EmptyChart';
 
-const ActionsByWeekdayChart = () => {
+const ActionsByWeekdayChart = (): JSX.Element => {
   const { t } = useTranslation();
   const { actions, allMembers, selectedUsers, selectedActions } =
     useContext(DataContext);
@@ -43,7 +43,7 @@ const ActionsByWeekdayChart = () => {
   const title = 'Actions By Weekday';
   // if selected user(s) have no actions, render component with message that there are no actions
   if (formattedActionsByWeekday.every((weekday) => weekday.count === 0)) {
-    return <EmptyChart selectedUsers={selectedUsers} chartTitle={t(title)} />;
+    return <EmptyChart chartTitle={t(title)} />;
   }
 
   return (
@@ -54,6 +54,7 @@ const ActionsByWeekdayChart = () => {
           <CartesianGrid strokeDasharray="2" />
           <XAxis interval={0} dataKey="day" tick={{ fontSize: 14 }} />
           <YAxis tick={{ fontSize: 14 }} domain={[0, yAxisMax]} />
+          <Tooltip />
           <Bar dataKey="count" name={t('Count')} fill="#8884d8" />
         </BarChart>
       </ChartContainer>

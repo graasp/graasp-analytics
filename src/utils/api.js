@@ -123,24 +123,13 @@ const getActionWeekday = (action) => {
 
 // Takes array of action objects and returns an object with {key: value} pairs of {weekday: #-of-actions}
 export const getActionsByWeekday = (actions) => {
-  const actionsByWeekday = {
-    0: 0,
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-  };
-  actions?.forEach((action) => {
-    const actionWeekday = getActionWeekday(action);
-    if (actionWeekday >= 1 && actionWeekday <= 7) {
-      actionsByWeekday[actionWeekday] += 1;
-    } else {
-      // eslint-disable-next-line no-console
-      console.error(`actionWeekday ${actionWeekday} is undefined`);
+  const actionsByWeekdayMap = new Map(actions?.countBy(getActionWeekday));
+  for (let weekday = 0; weekday < 7; weekday += 1) {
+    if (!actionsByWeekdayMap.has(weekday)) {
+      actionsByWeekdayMap.set(weekday, 0);
     }
-  });
+  }
+  const actionsByWeekday = Object.fromEntries(actionsByWeekdayMap);
   return actionsByWeekday;
 };
 
