@@ -123,13 +123,10 @@ const getActionWeekday = (action) => {
 
 // Takes array of action objects and returns an object with {key: value} pairs of {weekday: #-of-actions}
 export const getActionsByWeekday = (actions) => {
+  const defaultActionsByWeekday = { ...Array(7).fill(0) };
   const actionsByWeekday = actions?.countBy(getActionWeekday).toJS();
-  for (let weekday = 0; weekday < 7; weekday += 1) {
-    if (!(weekday in actionsByWeekday)) {
-      actionsByWeekday[weekday] = 0;
-    }
-  }
-  return actionsByWeekday;
+  Object.assign(defaultActionsByWeekday, actionsByWeekday);
+  return defaultActionsByWeekday;
 };
 
 // Takes object with {key: value} pairs of {weekday: #-of-actions}
