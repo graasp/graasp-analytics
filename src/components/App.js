@@ -7,6 +7,7 @@ import ContextsWrapper from './context/ContextsWrapper';
 import Home from './home/Home';
 import Footer from './layout/Footer';
 import Header from './layout/Header';
+import Navigator from './navigator/Navigator';
 import ChartsLayout from './space/ChartsLayout';
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
             // eslint-disable-next-line react/jsx-wrap-multilines
             <>
               <Header />
+              <Navigator />
               <main style={{ flex: 1 }}>
                 <ContextsWrapper>
                   <ChartsLayout />
@@ -46,6 +48,21 @@ const App = () => {
             // eslint-disable-next-line react/jsx-wrap-multilines
             <>
               <Header />
+              <Navigator />
+              <main style={{ flex: 1 }}>
+                <Home />
+              </main>
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/shared"
+          element={
+            // eslint-disable-next-line react/jsx-wrap-multilines
+            <>
+              <Header />
+              <Navigator />
               <main style={{ flex: 1 }}>
                 <Home />
               </main>
