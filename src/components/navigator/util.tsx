@@ -33,6 +33,7 @@ const getParentsIdsFromPath = (
 
 const StyledLink = styled(Link)({
   textDecoration: 'none',
+  color: '#000000',
 });
 
 type ParentLinkProps = {

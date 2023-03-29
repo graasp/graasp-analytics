@@ -107,7 +107,11 @@ const Navigator = () => {
   );
 
   return (
-    <Breadcrumbs separator={<NavigateNextIcon />} aria-label="breadcrumb">
+    <Breadcrumbs
+      separator={<NavigateNextIcon />}
+      aria-label="breadcrumb"
+      style={{ backgroundColor: '#f6f6f6' }}
+    >
       {renderHome()}
       {renderRoot()}
       {itemId && renderParents()}
