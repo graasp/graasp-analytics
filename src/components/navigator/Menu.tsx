@@ -70,9 +70,10 @@ const RootMenu = ({ isShared }: { isShared: boolean }): JSX.Element => {
     return null;
   }
 
-  if (item.size === 0) {
+  if (!item || item.size === 0) {
     return null;
   }
+
   return (
     <>
       <StyledIconButton
