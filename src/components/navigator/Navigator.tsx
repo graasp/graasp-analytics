@@ -16,7 +16,7 @@ import {
 } from '../../config/paths';
 import { hooks } from '../../config/queryClient';
 import { HomeMenu, ItemMenu, RootMenu } from './Menu';
-import { ParentLink, StyledLink } from './util';
+import { ParentLink, StyledLink, getParentsIdsFromPath } from './util';
 
 const { useItem, useParents, useCurrentMember } = hooks;
 
@@ -83,13 +83,19 @@ const Navigator = () => {
     );
   };
 
-  const renderParents = () =>
-    parents?.map(({ name, id }) => (
+  const renderParents = () => {
+    const p = item?.path;
+    if (!p || getParentsIdsFromPath(p).length <= 1) {
+      return null;
+    }
+
+    return parents?.map(({ name, id }) => (
       <CenterAlignWrapper key={id}>
         <ParentLink name={name} id={id} />
         <ItemMenu itemId={id} />
       </CenterAlignWrapper>
     ));
+  };
 
   const renderHome = () => (
     <CenterAlignWrapper>
