@@ -1,6 +1,6 @@
 import truncate from 'lodash.truncate';
 
-import { useLocation, useMatch } from 'react-router-dom';
+import { Navigate, useLocation, useMatch } from 'react-router-dom';
 
 import HomeIcon from '@mui/icons-material/Home';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -99,6 +99,13 @@ const Navigator = () => {
       <HomeMenu />
     </CenterAlignWrapper>
   );
+  if (
+    item === undefined &&
+    pathname !== SHARED_ITEMS_PATH &&
+    pathname !== HOME_PATH
+  ) {
+    return <Navigate to={HOME_PATH} />;
+  }
 
   return (
     <Breadcrumbs
