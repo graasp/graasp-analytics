@@ -2,14 +2,14 @@ import truncate from 'lodash.truncate';
 
 import { Link } from 'react-router-dom';
 
-import { Typography, styled } from '@mui/material';
+import { IconButton, Typography, styled } from '@mui/material';
 
 import { ITEM_NAME_MAX_LENGTH } from '../../config/constants';
 import { buildItemPath } from '../../config/paths';
 
 const StyledLink = styled(Link)({
   textDecoration: 'none',
-  color: '#000000',
+  color: 'text.primary',
 });
 
 type ParentLinkProps = {
@@ -23,4 +23,8 @@ const ParentLink = ({ id, name }: ParentLinkProps) => (
   </StyledLink>
 );
 
-export { ParentLink, StyledLink };
+const StyledIconButton = styled(IconButton)({
+  margin: 0,
+});
+
+export { ParentLink, StyledLink, StyledIconButton };

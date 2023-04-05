@@ -1,5 +1,6 @@
 import truncate from 'lodash.truncate';
 
+import { useTranslation } from 'react-i18next';
 import { Navigate, useLocation, useMatch } from 'react-router-dom';
 
 import HomeIcon from '@mui/icons-material/Home';
@@ -8,14 +9,19 @@ import { styled } from '@mui/material';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
 
-import { ITEM_NAME_MAX_LENGTH } from '../../config/constants';
+import {
+  ITEM_NAME_MAX_LENGTH,
+  NAVIGATOR_BACKGROUND_COLOR,
+} from '../../config/constants';
 import {
   HOME_PATH,
   SHARED_ITEMS_PATH,
   buildItemPath,
 } from '../../config/paths';
 import { hooks } from '../../config/queryClient';
-import { HomeMenu, ItemMenu, RootMenu } from './Menu';
+import HomeMenu from './HomeMenu';
+import ItemMenu from './ItemMenu';
+import RootMenu from './RootMenu';
 import { ParentLink, StyledLink } from './util';
 
 const { useItem, useParents, useCurrentMember } = hooks;
@@ -34,6 +40,7 @@ const StyledHomeIcon = styled(HomeIcon)({
 });
 
 const Navigator = () => {
+  const { t } = useTranslation();
   const match = useMatch(buildItemPath());
   const { pathname } = useLocation();
   const itemId = match?.params?.itemId;
@@ -42,23 +49,19 @@ const Navigator = () => {
   const { data: item, isLoading: isItemLoading } = useItem(itemId);
   const itemPath = item?.path;
 
-  const { data: parents, isLoading: parentIsLoading } = useParents({
+  const { data: parents, isLoading: areParentsLoading } = useParents({
     id: itemId,
     path: itemPath,
     enabled: !!itemPath,
   });
 
-  if (isItemLoading) {
-    return null;
-  }
-
-  if (parentIsLoading) {
+  if (isItemLoading || areParentsLoading) {
     return null;
   }
 
   const renderRoot = () => {
     let to = HOME_PATH;
-    let text = 'My items';
+    let text = t('My items');
     let isShared = false;
 
     const isParentOwned =
@@ -69,7 +72,7 @@ const Navigator = () => {
       (pathname !== HOME_PATH && !isParentOwned)
     ) {
       to = SHARED_ITEMS_PATH;
-      text = 'Shared items';
+      text = t('Shared items');
       isShared = true;
     }
 
@@ -111,7 +114,7 @@ const Navigator = () => {
     <Breadcrumbs
       separator={<NavigateNextIcon />}
       aria-label="breadcrumb"
-      style={{ backgroundColor: '#f6f6f6' }}
+      style={{ backgroundColor: NAVIGATOR_BACKGROUND_COLOR }}
     >
       {renderHome()}
       {renderRoot()}
