@@ -107,7 +107,8 @@ const Navigator = () => {
     pathname !== SHARED_ITEMS_PATH &&
     pathname !== HOME_PATH
   ) {
-    return <Navigate to={HOME_PATH} />;
+    return null;
+    // return <Navigate to={HOME_PATH} />;
   }
 
   return (

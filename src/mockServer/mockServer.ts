@@ -1,10 +1,10 @@
 import { Model, RestSerializer, createServer } from 'miragejs';
 
 import { API_ROUTES } from '@graasp/query-client';
+import { Item, Member } from '@graasp/sdk';
 
-import { Item, Member } from './types';
 
-const {
+const { buildGetPublicItemRoute,
   buildGetItemRoute,
   GET_CURRENT_MEMBER_ROUTE,
   GET_OWN_ITEMS_ROUTE,
@@ -27,7 +27,7 @@ export const buildDatabase = ({
   currentMember,
   items = [],
   members,
-}: Partial<Database> = {}) => ({
+}: Partial<Database> = {}): Database => ({
   currentMember,
   items,
   members: members ?? [currentMember],
@@ -41,7 +41,7 @@ export const mockServer = ({
   urlPrefix?: string;
   database?: Database;
   externalUrls?: string[];
-} = {}) => {
+} = {}): void => {
   const { items, members } = database;
   const [currentMember] = members;
 
@@ -75,9 +75,28 @@ export const mockServer = ({
         return schema.find('item', itemId);
       });
 
+      // get item
+      this.get(`/${buildGetPublicItemRoute(':id')}`, (schema, request) => {
+        const itemId = request.url.split('/').at(-1);
+        return schema.find('item', itemId);
+      });
+
       // get children
       this.get(`/items/:id/children`, (schema, request) => {
         const itemId = request.url.split('/').at(-2);
+
+        return schema
+          .all('item')
+          .filter(({ id, path }) =>
+            path.includes(
+              `${itemId.replace(/-/g, '_')}.${id.replace(/-/g, '_')}`,
+            ),
+          );
+      });
+      // get children
+      this.get(`/p/items/:id/children`, (schema, request) => {
+        const itemId = request.url.split('/').at(-2);
+
         return schema
           .all('item')
           .filter(({ id, path }) =>
