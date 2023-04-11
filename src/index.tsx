@@ -5,13 +5,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Root from './components/Root';
+import { API_HOST, ENABLE_MOCK_API } from './config/constants';
 import {
   SENTRY_DSN,
   SENTRY_ENVIRONMENT,
   SENTRY_TRACE_SAMPLE_RATE,
 } from './config/sentry';
 import './index.css';
+import MOCK_ITEMS from './mockServer/mockData/items';
+import MOCK_MEMBERS from './mockServer/mockData/members';
+import mockServer, { buildDatabase } from './mockServer/mockServer';
 import * as serviceWorker from './serviceWorker';
+
+if (ENABLE_MOCK_API) {
+  mockServer({
+    urlPrefix: API_HOST,
+    database: window.Cypress
+      ? window.database
+      : buildDatabase({
+          currentMember: MOCK_MEMBERS[0],
+          items: MOCK_ITEMS,
+          members: MOCK_MEMBERS,
+        }),
+  });
+}
 
 Sentry.init({
   dsn: SENTRY_DSN,
