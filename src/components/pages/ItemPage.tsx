@@ -1,9 +1,11 @@
+import { Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 import ContextsWrapper from '../context/ContextsWrapper';
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 import Navigator from '../navigator/Navigator';
+import Sidebar from '../sidebar/Sidebar';
 import ChartsLayout from '../space/ChartsLayout';
 
 const ItemPage = ({ isEmbeded }: { isEmbeded: boolean }) => {
@@ -20,11 +22,23 @@ const ItemPage = ({ isEmbeded }: { isEmbeded: boolean }) => {
   return (
     <>
       <Header />
-      <Navigator />
       <main style={{ flex: 1 }}>
-        <ContextsWrapper>
-          <ChartsLayout />
-        </ContextsWrapper>
+        <Navigator />
+        <Grid container spacing={2}>
+          <Grid item xs={1.5}>
+            <Sidebar />
+          </Grid>
+          <Grid item xs={10.5}>
+            <ContextsWrapper>
+              <ChartsLayout />
+            </ContextsWrapper>
+            <div id="general">General</div>
+            <div id="contents">Contents</div>
+            <div id="actions">Actions</div>
+            <div id="chats">Chats</div>
+            <div id="apps">Apps</div>
+          </Grid>
+        </Grid>
       </main>
       <Footer />
     </>
