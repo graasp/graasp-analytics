@@ -1,7 +1,7 @@
 import truncate from 'lodash.truncate';
 
 import { useTranslation } from 'react-i18next';
-import { Navigate, useLocation, useMatch } from 'react-router-dom';
+import { useLocation, useMatch } from 'react-router-dom';
 
 import HomeIcon from '@mui/icons-material/Home';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -39,7 +39,7 @@ const StyledHomeIcon = styled(HomeIcon)({
   justifyContent: 'center',
 });
 
-const Navigator = () => {
+const Navigator = (): JSX.Element => {
   const { t } = useTranslation();
   const match = useMatch(buildItemPath());
   const { pathname } = useLocation();

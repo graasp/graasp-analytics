@@ -15,7 +15,6 @@ import './index.css';
 import MOCK_ITEMS from './mockServer/mockData/items';
 import MOCK_MEMBERS from './mockServer/mockData/members';
 import mockServer, { buildDatabase } from './mockServer/mockServer';
-import * as serviceWorker from './serviceWorker';
 
 if (ENABLE_MOCK_API) {
   mockServer({

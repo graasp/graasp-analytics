@@ -10,12 +10,17 @@ const defaultValue: {
   setView: Dispatch<string>;
 } = {
   view: Context.BUILDER,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setView: () => {},
 };
 
 export const ViewDataContext = createContext(defaultValue);
 
-const ViewDataProvider = ({ children }) => {
+const ViewDataProvider = ({
+  children,
+}: {
+  children: JSX.Element;
+}): JSX.Element => {
   const [view, setView] = useState(Context.BUILDER);
   const value = useMemo(() => ({ view, setView }), [view, setView]);
   return (

@@ -18,11 +18,15 @@ const RootMenu = ({ isShared }: { isShared: boolean }): JSX.Element => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const { data: items, isLoading: areItemsLoading } = isShared
-    ? useSharedItems()
-    : useOwnItems();
+  const { data: sharedItems, isLoading: areSharedItemsLoading } =
+    useSharedItems();
+  const { data: ownItems, isLoading: areOwnItemsLoading } = useOwnItems();
+  const items = isShared ? sharedItems : ownItems;
 
-  if (areItemsLoading) {
+  if (isShared && areSharedItemsLoading) {
+    return null;
+  }
+  if (!isShared && areOwnItemsLoading) {
     return null;
   }
 

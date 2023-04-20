@@ -87,6 +87,11 @@
       "rules": {
         "no-restricted-syntax": ["error"]
       }
+    },
+    {
+      // disable rules for JavaScript files
+      "files": ["src/**/*.js"],
+      "rules": { "@typescript-eslint/explicit-module-boundary-types": "off" }
     }
   ],
   "settings": {

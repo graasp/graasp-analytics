@@ -17,7 +17,7 @@ type ParentLinkProps = {
   name: string;
 };
 
-const ParentLink = ({ id, name }: ParentLinkProps) => (
+const ParentLink = ({ id, name }: ParentLinkProps): JSX.Element => (
   <StyledLink to={buildItemPath(id)}>
     <Typography>{truncate(name, { length: ITEM_NAME_MAX_LENGTH })}</Typography>
   </StyledLink>
