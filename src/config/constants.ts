@@ -70,7 +70,7 @@ export const Context = {
 };
 
 export const GRAASP_BUILDER_HOST =
-  process.env.REACT_APP_GRAASP_BUILDER_HOST || 'http://localhost:3111';
+  process.env.REACT_APP_GRAASP_COMPOSE_HOST || 'http://localhost:3111';
 export const GRAASP_PLAYER_HOST =
   process.env.REACT_APP_GRAASP_PERFORM_HOST || 'http://localhost:3112';
 export const GRAASP_LIBRARY_HOST =
