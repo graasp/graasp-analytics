@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
@@ -9,6 +11,7 @@ import Sidebar from '../sidebar/Sidebar';
 import ChartsLayout from '../space/ChartsLayout';
 
 const ItemPage = ({ isEmbeded }: { isEmbeded: boolean }) => {
+  const { t } = useTranslation();
   const theme = useTheme();
   if (isEmbeded) {
     return (
@@ -32,11 +35,11 @@ const ItemPage = ({ isEmbeded }: { isEmbeded: boolean }) => {
             <ContextsWrapper>
               <ChartsLayout />
             </ContextsWrapper>
-            <div id="general">General</div>
-            <div id="contents">Contents</div>
-            <div id="actions">Actions</div>
-            <div id="chats">Chats</div>
-            <div id="apps">Apps</div>
+            <div id="general">{t('General')}</div>
+            <div id="contents">{t('Contents')}</div>
+            <div id="actions">{t('Actions')}</div>
+            <div id="chats">{t('Chats')}</div>
+            <div id="apps">{t('Apps')}</div>
           </Grid>
         </Grid>
       </main>
