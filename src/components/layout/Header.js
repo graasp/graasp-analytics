@@ -14,9 +14,9 @@ import {
 import { HOST_MAP } from '../../config/constants';
 
 export const platformsHostsMap = defaultHostsMapper({
-  [Platform.Builder]: HOST_MAP.builder,
-  [Platform.Player]: HOST_MAP.player,
-  [Platform.Library]: HOST_MAP.library,
+  [Platform.Builder]: HOST_MAP[Context.BUILDER],
+  [Platform.Player]: HOST_MAP[Context.PLAYER],
+  [Platform.Library]: HOST_MAP[Context.LIBRARY],
 });
 
 const Header = () => {
