@@ -11,7 +11,7 @@ import {
   usePlatformNavigation,
 } from '@graasp/ui';
 
-import { HOST_MAP } from '../../config/constants';
+import { Context, HOST_MAP } from '../../config/constants';
 
 export const platformsHostsMap = defaultHostsMapper({
   [Platform.Builder]: HOST_MAP[Context.BUILDER],
