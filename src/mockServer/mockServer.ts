@@ -1,10 +1,11 @@
-import { Model, RestSerializer, createServer } from 'miragejs';
+import { StatusCodes } from 'http-status-codes';
+import { Model, Response, RestSerializer, createServer } from 'miragejs';
 
 import { API_ROUTES } from '@graasp/query-client';
-import { Item, Member } from '@graasp/sdk';
+import { Item, ItemMembership, Member } from '@graasp/sdk';
 
-
-const { buildGetPublicItemRoute,
+const {
+  buildGetPublicItemRoute,
   buildGetItemRoute,
   GET_CURRENT_MEMBER_ROUTE,
   GET_OWN_ITEMS_ROUTE,
@@ -14,7 +15,7 @@ const { buildGetPublicItemRoute,
 type Database = {
   currentMember?: Member;
   items?: Item[];
-  // itemMemberships?: ItemMembership[];
+  itemMemberships?: ItemMembership[];
   members?: Member[];
 };
 
@@ -23,13 +24,28 @@ const ApplicationSerializer = RestSerializer.extend({
   embed: true,
 });
 
+const checkPermission = (schema, itemId, currentMember) => {
+  const item = schema.find('item', itemId);
+  if (currentMember.id === item.creator) {
+    return true;
+  }
+  const itemPath = item.path;
+  const validPaths = schema
+    .all('membership')
+    .filter(({ memberId }) => memberId === currentMember.id)
+    .models.map((i) => i.itemPath);
+  return validPaths.some((path) => itemPath.includes(path));
+};
+
 export const buildDatabase = ({
   currentMember,
   items = [],
+  itemMemberships = [],
   members,
 }: Partial<Database> = {}): Database => ({
   currentMember,
   items,
+  itemMemberships,
   members: members ?? [currentMember],
 });
 
@@ -41,8 +57,8 @@ export const mockServer = ({
   urlPrefix?: string;
   database?: Database;
   externalUrls?: string[];
-} = {}): void => {
-  const { items, members } = database;
+} = {}): any => {
+  const { items, members, itemMemberships } = database;
   const [currentMember] = members;
 
   return createServer({
@@ -51,11 +67,13 @@ export const mockServer = ({
     models: {
       item: Model,
       member: Model,
+      membership: Model,
     },
 
     serializers: {
       item: ApplicationSerializer,
       member: ApplicationSerializer,
+      membership: ApplicationSerializer,
     },
     seeds(server) {
       members?.forEach((m) => {
@@ -63,6 +81,9 @@ export const mockServer = ({
       });
       items?.forEach((i) => {
         server.create('item', i);
+      });
+      itemMemberships?.forEach((m) => {
+        server.create('membership', m);
       });
     },
     routes() {
@@ -72,12 +93,18 @@ export const mockServer = ({
       // get item
       this.get(`/${buildGetItemRoute(':id')}`, (schema, request) => {
         const itemId = request.url.split('/').at(-1);
+        if (!checkPermission(schema, itemId, currentMember)) {
+          return new Response(StatusCodes.FORBIDDEN);
+        }
         return schema.find('item', itemId);
       });
 
       // get item
       this.get(`/${buildGetPublicItemRoute(':id')}`, (schema, request) => {
         const itemId = request.url.split('/').at(-1);
+        if (!checkPermission(schema, itemId, currentMember)) {
+          return new Response(StatusCodes.FORBIDDEN);
+        }
         return schema.find('item', itemId);
       });
 
@@ -93,6 +120,7 @@ export const mockServer = ({
             ),
           );
       });
+
       // get children
       this.get(`/p/items/:id/children`, (schema, request) => {
         const itemId = request.url.split('/').at(-2);
@@ -117,7 +145,15 @@ export const mockServer = ({
       );
 
       // get shared item
-      this.get(`/${SHARED_ITEM_WITH_ROUTE}`, () => []);
+      this.get(`/${SHARED_ITEM_WITH_ROUTE}`, (schema) => {
+        const sharedItem = schema
+          .all('membership')
+          .filter(({ memberId }) => memberId === currentMember.id)
+          .models.map((i) => i.itemPath);
+        return schema
+          .all('item')
+          .filter(({ path }) => sharedItem.includes(path));
+      });
 
       // passthrough external urls
       externalUrls.forEach((url) => {

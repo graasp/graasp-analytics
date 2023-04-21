@@ -17,11 +17,14 @@ export type Item = {
   creator: string;
 };
 
-export type Membership = {
+export type ItemMembership = {
   id: UUID;
   memberId: string;
-  itemId: string;
+  itemPath: string;
   permission: string;
+  createdAt: string;
+  updatedAt: string;
+  creator: string;
 };
 
 export type MemberExtra = {

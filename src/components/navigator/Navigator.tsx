@@ -19,6 +19,10 @@ import {
   buildItemPath,
 } from '../../config/paths';
 import { hooks } from '../../config/queryClient';
+import {
+  BREADCRUMBS_NAVIGATOR_ID,
+  buildBreadcrumbsItemLink,
+} from '../../config/selectors';
 import HomeMenu from './HomeMenu';
 import ItemMenu from './ItemMenu';
 import RootMenu from './RootMenu';
@@ -113,6 +117,7 @@ const Navigator = (): JSX.Element => {
 
   return (
     <Breadcrumbs
+      id={BREADCRUMBS_NAVIGATOR_ID}
       separator={<NavigateNextIcon />}
       aria-label="breadcrumb"
       style={{ backgroundColor: NAVIGATOR_BACKGROUND_COLOR }}
@@ -122,7 +127,11 @@ const Navigator = (): JSX.Element => {
       {itemId && renderParents()}
       {itemId && (
         <CenterAlignWrapper>
-          <StyledLink key={itemId} to={buildItemPath(itemId)}>
+          <StyledLink
+            id={buildBreadcrumbsItemLink(itemId)}
+            key={itemId}
+            to={buildItemPath(itemId)}
+          >
             <Typography>
               {truncate(item.name, { length: ITEM_NAME_MAX_LENGTH })}
             </Typography>

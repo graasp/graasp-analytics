@@ -14,6 +14,7 @@ import {
 import './index.css';
 import MOCK_ITEMS from './mockServer/mockData/items';
 import MOCK_MEMBERS from './mockServer/mockData/members';
+import MOCK_MEMBERSHIP from './mockServer/mockData/membership';
 import mockServer, { buildDatabase } from './mockServer/mockServer';
 
 if (ENABLE_MOCK_API) {
@@ -24,6 +25,7 @@ if (ENABLE_MOCK_API) {
       : buildDatabase({
           currentMember: MOCK_MEMBERS[0],
           items: MOCK_ITEMS,
+          itemMemberships: MOCK_MEMBERSHIP,
           members: MOCK_MEMBERS,
         }),
   });
