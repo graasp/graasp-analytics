@@ -114,7 +114,7 @@ export const mockServer = ({
 
         return schema
           .all('item')
-          .filter(({ id, path }) =>
+          .filter(({ id, path }: any) =>
             path.includes(
               `${itemId.replace(/-/g, '_')}.${id.replace(/-/g, '_')}`,
             ),
@@ -127,7 +127,7 @@ export const mockServer = ({
 
         return schema
           .all('item')
-          .filter(({ id, path }) =>
+          .filter(({ id, path }: any) =>
             path.includes(
               `${itemId.replace(/-/g, '_')}.${id.replace(/-/g, '_')}`,
             ),
@@ -139,7 +139,7 @@ export const mockServer = ({
         schema
           .all('item')
           .filter(
-            ({ id, creator, path }) =>
+            ({ id, creator, path }: any) =>
               creator === currentMember.id && id === path.replace(/_/g, '-'),
           ),
       );
@@ -148,11 +148,11 @@ export const mockServer = ({
       this.get(`/${SHARED_ITEM_WITH_ROUTE}`, (schema) => {
         const sharedItem = schema
           .all('membership')
-          .filter(({ memberId }) => memberId === currentMember.id)
-          .models.map((i) => i.itemPath);
+          .filter(({ memberId }: any) => memberId === currentMember.id)
+          .models.map((i: any) => i.itemPath);
         return schema
           .all('item')
-          .filter(({ path }) => sharedItem.includes(path));
+          .filter(({ path }: any) => sharedItem.includes(path));
       });
 
       // passthrough external urls

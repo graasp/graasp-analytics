@@ -17,6 +17,13 @@ import MOCK_MEMBERS from './mockServer/mockData/members';
 import MOCK_MEMBERSHIP from './mockServer/mockData/membership';
 import mockServer, { buildDatabase } from './mockServer/mockServer';
 
+declare global {
+  interface Window {
+    Cypress?: any;
+    database?: any;
+  }
+}
+
 if (ENABLE_MOCK_API) {
   mockServer({
     urlPrefix: API_HOST,

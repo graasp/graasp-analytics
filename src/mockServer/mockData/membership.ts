@@ -1,11 +1,11 @@
-import { ItemMembership } from '../types';
+import { ItemMembership, PermissionLevel } from '@graasp/sdk';
 
 const MOCK_MEMBERSHIP: ItemMembership[] = [
   {
     id: 'membership1',
     memberId: 'user1',
     itemPath: '1111_kkkk.1234_kkkk',
-    permission: 'Admin',
+    permission: PermissionLevel.Admin,
     createdAt: Date.now().toLocaleString(),
     updatedAt: Date.now().toLocaleString(),
     creator: 'user2',

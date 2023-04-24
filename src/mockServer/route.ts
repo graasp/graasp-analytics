@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-import { UUID } from './types';
+import { UUID } from '@graasp/sdk';
 
 export const ITEMS_ROUTE = 'items';
 export const buildGetItemRoute = (id: UUID): string => `${ITEMS_ROUTE}/${id}`;

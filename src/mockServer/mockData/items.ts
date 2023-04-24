@@ -1,4 +1,4 @@
-import { Item } from '../types';
+import { Item } from '@graasp/sdk';
 
 const MOCK_ITEMS: Item[] = [
   {
@@ -7,6 +7,7 @@ const MOCK_ITEMS: Item[] = [
     path: '1111_bbbb',
     type: 'folder',
     description: null,
+    settings: {},
     extra: {},
     creator: 'user1',
     createdAt: Date.now().toLocaleString(),
@@ -18,6 +19,7 @@ const MOCK_ITEMS: Item[] = [
     path: '1111_bbbb.2222_bbbb',
     type: 'folder',
     description: null,
+    settings: {},
     extra: {},
     creator: 'user1',
     createdAt: Date.now().toLocaleString(),
@@ -29,6 +31,7 @@ const MOCK_ITEMS: Item[] = [
     path: '1234_abcd',
     type: 'document',
     description: null,
+    settings: {},
     extra: {},
     creator: 'user1',
     createdAt: Date.now().toLocaleString(),
@@ -40,6 +43,7 @@ const MOCK_ITEMS: Item[] = [
     path: '1111_bbbb.2222_bbbb.5678_abcd',
     type: 'document',
     description: null,
+    settings: {},
     extra: {},
     creator: 'user1',
     createdAt: Date.now().toLocaleString(),
@@ -51,6 +55,7 @@ const MOCK_ITEMS: Item[] = [
     path: '1111_kkkk',
     type: 'folder',
     description: null,
+    settings: {},
     extra: {},
     creator: 'user2',
     createdAt: Date.now().toLocaleString(),
@@ -62,6 +67,7 @@ const MOCK_ITEMS: Item[] = [
     path: '1111_kkkk.1234_kkkk',
     type: 'folder',
     description: null,
+    settings: {},
     extra: {},
     creator: 'user2',
     createdAt: Date.now().toLocaleString(),
@@ -73,6 +79,7 @@ const MOCK_ITEMS: Item[] = [
     path: '1111_kkkk.1234_kkkk.5678_kkkk',
     type: 'document',
     description: null,
+    settings: {},
     extra: {},
     creator: 'user2',
     createdAt: Date.now().toLocaleString(),
