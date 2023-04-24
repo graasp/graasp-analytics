@@ -112,32 +112,39 @@ export const mockServer = ({
       this.get(`/items/:id/children`, (schema, request) => {
         const itemId = request.url.split('/').at(-2);
 
-        return schema
-          .all('item')
-          .filter(({ id, path }: any) =>
-            path.includes(
-              `${itemId.replace(/-/g, '_')}.${id.replace(/-/g, '_')}`,
-            ),
-          );
+        return (
+          schema
+            .all('item')
+            // TODO: remove any after figuring out the type
+            .filter(({ id, path }: any) =>
+              path.includes(
+                `${itemId.replace(/-/g, '_')}.${id.replace(/-/g, '_')}`,
+              ),
+            )
+        );
       });
 
       // get children
       this.get(`/p/items/:id/children`, (schema, request) => {
         const itemId = request.url.split('/').at(-2);
 
-        return schema
-          .all('item')
-          .filter(({ id, path }: any) =>
-            path.includes(
-              `${itemId.replace(/-/g, '_')}.${id.replace(/-/g, '_')}`,
-            ),
-          );
+        return (
+          schema
+            .all('item')
+            // TODO: remove any after figuring out the type
+            .filter(({ id, path }: any) =>
+              path.includes(
+                `${itemId.replace(/-/g, '_')}.${id.replace(/-/g, '_')}`,
+              ),
+            )
+        );
       });
 
       // get own item
       this.get(`/${GET_OWN_ITEMS_ROUTE}`, (schema) =>
         schema
           .all('item')
+          // TODO: remove any after figuring out the type
           .filter(
             ({ id, creator, path }: any) =>
               creator === currentMember.id && id === path.replace(/_/g, '-'),
@@ -148,11 +155,15 @@ export const mockServer = ({
       this.get(`/${SHARED_ITEM_WITH_ROUTE}`, (schema) => {
         const sharedItem = schema
           .all('membership')
+          // TODO: remove any after figuring out the type
           .filter(({ memberId }: any) => memberId === currentMember.id)
           .models.map((i: any) => i.itemPath);
-        return schema
-          .all('item')
-          .filter(({ path }: any) => sharedItem.includes(path));
+        return (
+          schema
+            .all('item')
+            // TODO: remove any after figuring out the type
+            .filter(({ path }: any) => sharedItem.includes(path))
+        );
       });
 
       // passthrough external urls

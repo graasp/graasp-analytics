@@ -1,6 +1,3 @@
-// TODO: remove after figuring out the type errors
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import { List } from 'immutable';
 
 import {
@@ -132,9 +129,7 @@ const DataProvider = ({ children }: Props): JSX.Element => {
     isError: itemIsError,
     isLoading: itemIsLoading,
   } = hooks.useItem(itemId);
-  const { data: itemChildren } = hooks.useChildren(itemId) as {
-    data: List<ItemRecord>;
-  };
+  const { data: itemChildren } = hooks.useChildren(itemId);
 
   useEffect(() => {
     if (itemIsError) {
