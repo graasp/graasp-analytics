@@ -10,8 +10,9 @@ const defaultValue: {
   setView: Dispatch<string>;
 } = {
   view: Context.BUILDER,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setView: () => {},
+  setView: () => {
+    // do nothing
+  },
 };
 
 export const ViewDataContext = createContext(defaultValue);

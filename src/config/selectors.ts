@@ -13,4 +13,4 @@ export const buildMenu = (id: string): string => `menu-${id}`;
 export const buildMenuDropdownButton = (id: string): string =>
   `menuDropdownButton-${id}`;
 export const buildMenuItem = (id: string, parent: string): string =>
-  `menuitem-${parent}-${id}`;
+  `menuItem-${parent}-${id}`;

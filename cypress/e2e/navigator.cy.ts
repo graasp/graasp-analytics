@@ -1,3 +1,4 @@
+import { SHARED_ITEMS_PATH } from '../../src/config/paths';
 import {
   HOME_MENU_DROPDOWN_BUTTON_ID,
   HOME_MENU_OWN_MENUITEM_ID,
@@ -7,6 +8,7 @@ import {
   buildMenuDropdownButton,
   buildMenuItem,
 } from '../../src/config/selectors';
+import MOCK_ITEMS from '../../src/mockServer/mockData/items';
 
 describe('Breadcrumbs', () => {
   beforeEach(() => {
@@ -31,10 +33,10 @@ describe('Breadcrumbs', () => {
     //    - folder2
     //      - document2
     //  - document1
-    const FOLDER1_ID = '1111-bbbb';
-    const FOLDER2_ID = '2222-bbbb';
-    const DOCUMENT1_ID = '1234-abcd';
-    const DOCUMENT2_ID = '5678-abcd';
+    const FOLDER1_ID = MOCK_ITEMS[0].id;
+    const FOLDER2_ID = MOCK_ITEMS[1].id;
+    const DOCUMENT1_ID = MOCK_ITEMS[2].id;
+    const DOCUMENT2_ID = MOCK_ITEMS[3].id;
 
     // Navigate to the folder1 by the dropdown menu
     cy.visit('/');
@@ -103,12 +105,12 @@ describe('Breadcrumbs', () => {
     //  - folder3
     //    - sharedFolder1
     //      - sharedDocument1
-    const FOLDER3_ID = '1111-kkkk';
-    const SHARED_FOLDER1_ID = '1234-kkkk';
-    const SHARED_DOCUMENT1_ID = '5678-kkkk';
+    const FOLDER3_ID = MOCK_ITEMS[4].id;
+    const SHARED_FOLDER1_ID = MOCK_ITEMS[5].id;
+    const SHARED_DOCUMENT1_ID = MOCK_ITEMS[6].id;
 
     // Navigate to the shared folder1 by the dropdown menu
-    cy.visit('/shared');
+    cy.visit(SHARED_ITEMS_PATH);
     cy.get(`#${ROOT_MENU_DROPDOWN_BUTTON_ID}`).click();
     cy.get(`#${buildMenuItem(SHARED_FOLDER1_ID, ROOT_MENU_ID)}`)
       .should('be.visible')

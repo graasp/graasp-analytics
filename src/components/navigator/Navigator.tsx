@@ -112,7 +112,6 @@ const Navigator = (): JSX.Element => {
     pathname !== HOME_PATH
   ) {
     return null;
-    // return <Navigate to={HOME_PATH} />;
   }
 
   return (

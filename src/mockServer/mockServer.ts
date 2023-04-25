@@ -37,6 +37,8 @@ const checkPermission = (schema, itemId, currentMember) => {
   return validPaths.some((path) => itemPath.includes(path));
 };
 
+const buildPathFromId = (id) => id.replace(/-/g, '_');
+
 export const buildDatabase = ({
   currentMember,
   items = [],
@@ -118,7 +120,7 @@ export const mockServer = ({
             // TODO: remove any after figuring out the type
             .filter(({ id, path }: any) =>
               path.includes(
-                `${itemId.replace(/-/g, '_')}.${id.replace(/-/g, '_')}`,
+                `${buildPathFromId(itemId)}.${buildPathFromId(id)}`,
               ),
             )
         );
@@ -134,7 +136,7 @@ export const mockServer = ({
             // TODO: remove any after figuring out the type
             .filter(({ id, path }: any) =>
               path.includes(
-                `${itemId.replace(/-/g, '_')}.${id.replace(/-/g, '_')}`,
+                `${buildPathFromId(itemId)}.${buildPathFromId(id)}`,
               ),
             )
         );
@@ -147,7 +149,7 @@ export const mockServer = ({
           // TODO: remove any after figuring out the type
           .filter(
             ({ id, creator, path }: any) =>
-              creator === currentMember.id && id === path.replace(/_/g, '-'),
+              creator === currentMember.id && buildPathFromId(id) === path,
           ),
       );
 
