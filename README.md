@@ -2,6 +2,28 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Installation
+
+1. Run yarn to install the dependencies.
+2. Run the API at `localhost:3000`
+3. Set the following environnement variables in `.env.local`
+
+```
+REACT_APP_API_HOST=http://localhost:3000
+PORT=3113
+REACT_APP_SHOW_NOTIFICATIONS=true
+REACT_APP_AUTHENTICATION_HOST=http://localhost:3001
+REACT_APP_GRAASP_PERFORM_HOST = http://localhost:3112
+REACT_APP_HIDDEN_ITEM_TAG_ID=b5373e38-e89b-4dc7-b4b9-fd3601504467
+REACT_APP_GRAASP_ANALYZER_HOST=http://localhost:3113
+REACT_APP_DOMAIN=localhost
+REACT_APP_H5P_ASSETS_BASE_URL=https://h5p.dev.graasp.org/h5p-assets
+REACT_APP_H5P_CONTENT_BASE_URL=https://h5p.dev.graasp.org/h5p-content
+REACT_APP_ENABLE_MOCK_API=false
+```
+
+4. Run yarn start. The client should be accessible at `localhost:3113`
+
 ## Available Scripts
 
 In the project directory, you can run:
