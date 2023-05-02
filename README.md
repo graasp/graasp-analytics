@@ -20,8 +20,6 @@ REACT_APP_HIDDEN_ITEM_TAG_ID=b5373e38-e89b-4dc7-b4b9-fd3601504467
 # This should match the hidden tag id variable in the backend env file
 REACT_APP_GRAASP_ANALYZER_HOST=http://localhost:3113
 REACT_APP_DOMAIN=localhost
-REACT_APP_H5P_ASSETS_BASE_URL=https://h5p.dev.graasp.org/h5p-assets
-REACT_APP_H5P_CONTENT_BASE_URL=https://h5p.dev.graasp.org/h5p-content
 REACT_APP_ENABLE_MOCK_API=false
 ```
 
