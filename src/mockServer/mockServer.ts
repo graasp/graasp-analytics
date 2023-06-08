@@ -116,18 +116,17 @@ export const mockServer = ({
         );
       });
 
-      // get children
-      this.get(`/p/items/:id/children`, (schema, request) => {
+      // get parents
+      this.get(`/items/:id/parents`, (schema, request) => {
         const itemId = request.url.split('/').at(-2);
+        const itemPath = (schema.find('item', itemId) as unknown as Item).path;
 
         return (
           schema
             .all('item')
             // TODO: remove any after figuring out the type
-            .filter(({ id, path }: any) =>
-              path.includes(
-                `${buildPathFromId(itemId)}.${buildPathFromId(id)}`,
-              ),
+            .filter(
+              ({ path }: any) => itemPath.startsWith(path) && itemPath !== path,
             )
         );
       });
@@ -139,24 +138,26 @@ export const mockServer = ({
           // TODO: remove any after figuring out the type
           .filter(
             ({ id, creator, path }: any) =>
-              creator === currentMember.id && buildPathFromId(id) === path,
+              creator.id === currentMember.id && buildPathFromId(id) === path,
           ),
       );
 
       // get shared item
-      this.get(`/${SHARED_ITEM_WITH_ROUTE}`, (schema) => {
-        const sharedItem = schema
-          .all('membership')
-          // TODO: remove any after figuring out the type
-          .filter(({ member }: any) => member.id === currentMember.id)
-          .models.map((i: any) => i.itemPath);
-        return (
+      this.get(
+        `/${SHARED_ITEM_WITH_ROUTE}`,
+        (schema) =>
           schema
-            .all('item')
+            .all('membership')
             // TODO: remove any after figuring out the type
-            .filter(({ path }: any) => sharedItem.includes(path))
-        );
-      });
+            .filter(({ member }: any) => member.id === currentMember.id)
+            .models.map((i: any) => i.item),
+        // return (
+        //   schema
+        //     .all('item')
+        //     // TODO: remove any after figuring out the type
+        //     .filter(({ path }: any) => sharedItem.includes(path))
+        // );
+      );
 
       // passthrough external urls
       externalUrls.forEach((url) => {
