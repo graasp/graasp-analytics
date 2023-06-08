@@ -59,8 +59,6 @@ const Navigator = (): JSX.Element => {
     enabled: !!itemPath,
   });
 
-  console.log(itemPath);
-
   if (isItemLoading || areParentsLoading) {
     return null;
   }
