@@ -99,7 +99,7 @@ describe('Breadcrumbs', () => {
     cy.url().should('include', `${DOCUMENT1_ID}`);
   });
 
-  it.only('Navigate shared items', () => {
+  it('Navigate shared items', () => {
     // The testing file structure is in the following
     // - Shared Items
     //  - folder3
