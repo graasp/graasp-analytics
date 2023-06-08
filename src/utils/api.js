@@ -21,7 +21,7 @@ import {
 const getActionDay = (action) => {
   const dateKey = 'createdAt';
   // createdAt should have the format "2020-12-31T23:59:59.999Z"
-  const dateObject = new Date(action[dateKey]);
+  const dateObject = action[dateKey];
   // extract only the date information
   const day = new Date(dateObject.toDateString());
   return day;
@@ -67,7 +67,7 @@ export const mapActionsToGeoJsonFeatureObjects = (actions) =>
 const getActionHourOfDay = (action) => {
   const dateKey = 'createdAt';
   // createdAt should have the format "2020-12-31T23:59:59.999Z"
-  const date = new Date(action[dateKey]);
+  const date = action[dateKey];
   const hours = date.getHours();
   return hours;
 };
@@ -118,7 +118,7 @@ export const formatActionsByTimeOfDay = (actionsByTimeOfDayObject) => {
 const getActionWeekday = (action) => {
   const dateKey = 'createdAt';
   // createdAt should have the format "2020-12-31T23:59:59.999Z"
-  const date = new Date(action[dateKey]);
+  const date = action[dateKey];
   const weekday = date.getDay();
   return weekday;
 };
