@@ -1,3 +1,4 @@
+import { List } from 'immutable';
 import truncate from 'lodash.truncate';
 
 import { useTranslation } from 'react-i18next';
@@ -53,7 +54,7 @@ const Navigator = (): JSX.Element => {
   const { data: item, isLoading: isItemLoading } = useItem(itemId);
   const itemPath = item?.path;
 
-  const { data: parents, isLoading: areParentsLoading } = useParents({
+  const { data: parentsData, isLoading: areParentsLoading } = useParents({
     id: itemId,
     path: itemPath,
     enabled: !!itemPath,
@@ -62,6 +63,9 @@ const Navigator = (): JSX.Element => {
   if (isItemLoading || areParentsLoading) {
     return null;
   }
+
+  // TODO: the query client randomly return different type of data when the data is empty. Fix it in the query-client repo.
+  const parents = typeof parentsData === 'string' ? List() : parentsData;
 
   const renderRoot = () => {
     let to = HOME_PATH;
@@ -91,7 +95,7 @@ const Navigator = (): JSX.Element => {
   };
 
   const renderParents = () =>
-    parents?.map(({ name, id }) => (
+    parents?.reverse().map(({ name, id }) => (
       <CenterAlignWrapper key={id}>
         <ParentLink name={name} id={id} />
         <ItemMenu itemId={id} />

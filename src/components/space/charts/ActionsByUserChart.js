@@ -90,6 +90,10 @@ const ActionsByUserChart = () => {
 
   formattedData.sort((a, b) => b.total - a.total);
 
+  if (formattedData.length === 0) {
+    return <EmptyChart chartTitle={t(title)} />;
+  }
+
   return (
     <>
       <ChartTitle title={t(title)} />

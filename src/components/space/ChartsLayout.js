@@ -5,6 +5,7 @@ import { Grid, Skeleton } from '@mui/material';
 import Box from '@mui/material/Box';
 
 import { CONTAINER_HEIGHT } from '../../config/constants';
+import SectionTitle from '../common/SectionTitle';
 import StyledAlert from '../common/StyledAlert';
 import { DataContext } from '../context/DataProvider';
 import { ViewDataContext } from '../context/ViewDataProvider';
@@ -48,8 +49,23 @@ const ChartsLayout = () => {
       {!error && !isLoading && (
         <>
           <ChartsAlerts />
-          <GeneralAnalytics />
-          <ChartsArea />
+          <div id="general">
+            <SectionTitle title={t('General Analytics')} />
+            <GeneralAnalytics />
+          </div>
+          <div id="contents" hidden>
+            <SectionTitle title={t('Contents Analytics')} />
+          </div>
+          <div id="actions">
+            <SectionTitle title={t('Actions Analytics')} />
+            <ChartsArea />
+          </div>
+          <div id="chats" hidden>
+            <SectionTitle title={t('Chats Analytics')} />
+          </div>
+          <div id="apps" hidden>
+            <SectionTitle title={t('Apps Analytics')} />
+          </div>
         </>
       )}
     </div>

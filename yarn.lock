@@ -2329,7 +2329,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "@graasp/etherpad-api@npm:2.1.1":
   version: 2.1.1
   resolution: "@graasp/etherpad-api@npm:2.1.1"
@@ -2343,20 +2342,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@npm:1.0.0-rc1":
-  version: 1.0.0-rc1
-  resolution: "@graasp/query-client@npm:1.0.0-rc1"
+"@graasp/query-client@portal:/Users/ray/graasp_repo/graasp-query-client::locator=graasp-analytics%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@graasp/query-client@portal:/Users/ray/graasp_repo/graasp-query-client::locator=graasp-analytics%40workspace%3A."
   dependencies:
     "@graasp/sdk": 1.0.0-rc1
     "@graasp/translations": 1.13.0
-=======
-"@graasp/query-client@github:graasp/graasp-query-client#typeorm":
-  version: 0.4.0
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=fcf6440127ca54696061aebc13135be7dffb16ca"
-  dependencies:
-    "@graasp/sdk": "github:graasp/graasp-sdk#typeorm"
-    "@graasp/translations": "github:graasp/graasp-translations#89-email"
->>>>>>> feat: add aggregate analytics
     axios: 0.27.2
     crypto-js: 4.1.1
     http-status-codes: 2.2.0
@@ -2366,10 +2357,8 @@ __metadata:
     uuid: 9.0.0
   peerDependencies:
     react: ^17.0.0
-<<<<<<< HEAD
-  checksum: 7e06c40b7b9375a2c84c703edc301988a0cdd57fa122d549f494f465e98cb719973c6c01fc4cfe0cff05764ee6300ffb09c80b0c4c14438020356f079914221a
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@graasp/sdk@npm:1.0.0-rc1":
   version: 1.0.0-rc1
@@ -2405,45 +2394,6 @@ __metadata:
   dependencies:
     "@graasp/sdk": 1.0.0-rc1
     clsx: 1.2.1
-=======
-  checksum: f72086168d355545f95e80dcbef9e60e8c618143b16954891a13587b34c3bad3266202d7f9f9a2399f609a893c7cc1d9fbb6ad921ce348aeffedb106b354dd7d
-  languageName: node
-  linkType: hard
-
-"@graasp/sdk@github:graasp/graasp-sdk#typeorm":
-  version: 0.9.2
-  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=614446a8cb067db939d755506c29528d9712301e"
-  dependencies:
-    "@fastify/secure-session": 5.3.0
-    aws-sdk: 2.1310.0
-    fastify: 3.29.5
-    fluent-json-schema: 3.1.0
-    immutable: 4.2.4
-    js-cookie: 3.0.1
-    qs: 6.11.0
-    slonik: 28.1.1
-    typeorm: 0.3.12
-    uuid: 9.0.0
-  checksum: 7eb918093a0c6e7673813d9edf076f1e46d0008e21a721d656c012cbf4600d821dded1bdb985a19260d4c1828bd2333f0e09e063f81e718f3b8b3496407e5703
-  languageName: node
-  linkType: hard
-
-"@graasp/translations@github:graasp/graasp-translations#89-email":
-  version: 1.8.0
-  resolution: "@graasp/translations@https://github.com/graasp/graasp-translations.git#commit=012b8d7736690c7bd468fe1a0ef0c5bcbdd1be30"
-  dependencies:
-    i18next: 21.8.1
-  checksum: 9c321d949c43450c401a329d4bb4e7bf1c38006aeb17e566f5b8c08c76193c12f8e05c1ebeb819d6834de87773dec711393449dd9cccd1f5b8f1be437bd980bf
-  languageName: node
-  linkType: hard
-
-"@graasp/ui@github:graasp/graasp-ui#typeorm":
-  version: 2.2.0
-  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=9e7ff9bcdc9bbae2f6dea992ef864dec41ad23f7"
-  dependencies:
-    "@graasp/sdk": "github:graasp/graasp-sdk#typeorm"
-    clsx: 1.1.1
->>>>>>> feat: add aggregate analytics
     http-status-codes: 2.2.0
     immutable: 4.3.0
     katex: 0.16.7
@@ -2473,11 +2423,7 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-<<<<<<< HEAD
   checksum: e0af9d2dcf00612b05eaea8acfac2dd4a9b13803684f31e398cfc803fe4eed1d27ab1ba22c1f058246833435633cdc2788bcb0d710a70ac81d3f42661b40eb0a
-=======
-  checksum: 37daed7ac8a522c0bbfa0993dda84216075345e4b373c06fb5fca14952b7b44694187b09d69cd99bf33196cee260201fd98e3d57c49c2f74fc4df3148c374c98
->>>>>>> feat: add aggregate analytics
   languageName: node
   linkType: hard
 
@@ -5151,15 +5097,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "aws-sdk@npm:2.1370.0":
   version: 2.1370.0
   resolution: "aws-sdk@npm:2.1370.0"
-=======
-"aws-sdk@npm:2.1310.0":
-  version: 2.1310.0
-  resolution: "aws-sdk@npm:2.1310.0"
->>>>>>> feat: add aggregate analytics
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -5170,13 +5110,8 @@ __metadata:
     url: 0.10.3
     util: ^0.12.4
     uuid: 8.0.0
-<<<<<<< HEAD
     xml2js: 0.5.0
   checksum: 6f4170efb47c1e9731afbf48928d365231f348f0245a6c36a4284fa2aed07571c20f64f805c309bc73b288c1d345aaf90a5394520b4ca15b9259807f766f719f
-=======
-    xml2js: 0.4.19
-  checksum: 648141461eaaaac1bcd8a2f1df460bb4603176541a28ed0aa7c344cc9fe19d69b2a463cb975c767bfb913ebc462103474fcd0315d07918c5fa35b0fef5f00f56
->>>>>>> feat: add aggregate analytics
   languageName: node
   linkType: hard
 
@@ -5662,16 +5597,6 @@ __metadata:
     base64-js: ^1.3.1
     ieee754: ^1.2.1
   checksum: 5ad23293d9a731e4318e420025800b42bf0d264004c0286c8cc010af7a270c7a0f6522e84f54b9ad65cbd6db20b8badbfd8d2ebf4f80fa03dab093b89e68c3f9
-<<<<<<< HEAD
-=======
-  languageName: node
-  linkType: hard
-
-"bufferput@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "bufferput@npm:0.1.3"
-  checksum: 535e2d6b56537a3042e46291db8a9071f847ece8de1952f80fadaed20e63ad414be34d17a013046800e522b7a401eff9646f02960011d4aa90dc94953f14780a
->>>>>>> feat: add aggregate analytics
   languageName: node
   linkType: hard
 
@@ -7161,13 +7086,6 @@ __metadata:
     whatwg-mimetype: ^2.3.0
     whatwg-url: ^8.0.0
   checksum: 97caf828aac25e25e04ba6869db0f99c75e6859bb5b424ada28d3e7841941ebf08ddff3c1b1bb4585986bd507a5d54c2a716853ea6cb98af877400e637393e71
-  languageName: node
-  linkType: hard
-
-"date-fns@npm:^2.29.3":
-  version: 2.29.3
-  resolution: "date-fns@npm:2.29.3"
-  checksum: e01cf5b62af04e05dfff921bb9c9933310ed0e1ae9a81eb8653452e64dc841acf7f6e01e1a5ae5644d0337e9a7f936175fd2cb6819dc122fdd9c5e86c56be484
   languageName: node
   linkType: hard
 
@@ -8718,6 +8636,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fake-xml-http-request@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "fake-xml-http-request@npm:2.1.2"
+  checksum: 7b1ebea1955c46cbda0e0c3308716cc82beca7bb6c549f1d1c2a8134203c9d6c5a21194e2c1e17650ff073ecbcd3e56cf1e21f248a86cbcb3567fd7a9ca4850e
+  languageName: node
+  linkType: hard
+
 "fast-content-type-parse@npm:^1.0.0":
   version: 1.0.0
   resolution: "fast-content-type-parse@npm:1.0.0"
@@ -9672,15 +9597,9 @@ __metadata:
     "@cypress/instrument-cra": 1.4.0
     "@emotion/react": 11.10.5
     "@emotion/styled": 11.10.5
-<<<<<<< HEAD
     "@graasp/query-client": 1.0.0-rc1
     "@graasp/sdk": 1.0.0-rc1
     "@graasp/ui": 3.0.0-rc.2
-=======
-    "@graasp/query-client": "github:graasp/graasp-query-client#typeorm"
-    "@graasp/sdk": "github:graasp/graasp-sdk#typeorm"
-    "@graasp/ui": "github:graasp/graasp-ui#typeorm"
->>>>>>> feat: add aggregate analytics
     "@mui/icons-material": 5.11.0
     "@mui/lab": 5.0.0-alpha.118
     "@mui/material": 5.11.7
@@ -9709,7 +9628,7 @@ __metadata:
     http-status-codes: 2.2.0
     husky: 8.0.3
     i18next: 22.4.9
-    immutable: 4.2.4
+    immutable: 4.3.0
     istanbul-lib-coverage: 3.2.0
     lodash.capitalize: 4.2.1
     lodash.sortby: 4.7.0
@@ -9718,7 +9637,7 @@ __metadata:
     nyc: 15.1.0
     prettier: 2.8.3
     prop-types: 15.8.1
-    qs: 6.11.0
+    qs: 6.11.1
     react: 18.2.0
     react-app-rewired: 2.2.1
     react-dom: 18.2.0
@@ -10292,17 +10211,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"immutable@npm:4.2.4":
-  version: 4.2.4
-  resolution: "immutable@npm:4.2.4"
-  checksum: 3be84eded37b05e65cad57bfba630bc1bf170c498b7472144bc02d2650cc9baef79daf03574a9c2e41d195ebb55a1c12c9b312f41ee324b653927b24ad8bcaa7
-  languageName: node
-  linkType: hard
-
-"immutable@npm:4.2.4":
-  version: 4.2.4
-  resolution: "immutable@npm:4.2.4"
-  checksum: 3be84eded37b05e65cad57bfba630bc1bf170c498b7472144bc02d2650cc9baef79daf03574a9c2e41d195ebb55a1c12c9b312f41ee324b653927b24ad8bcaa7
+"immutable@npm:4.3.0":
+  version: 4.3.0
+  resolution: "immutable@npm:4.3.0"
+  checksum: bbd7ea99e2752e053323543d6ff1cc71a4b4614fa6121f321ca766db2bd2092f3f1e0a90784c5431350b7344a4f792fa002eac227062d59b9377b6c09063b58b
   languageName: node
   linkType: hard
 
@@ -13520,6 +13432,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"parse-srcset@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "parse-srcset@npm:1.0.2"
+  checksum: 3a0380380c6082021fcce982f0b89fb8a493ce9dfd7d308e5e6d855201e80db8b90438649b31fdd82a3d6089a8ca17dccddaa2b730a718389af4c037b8539ebf
+  languageName: node
+  linkType: hard
+
 "parse5-htmlparser2-tree-adapter@npm:^6.0.0":
   version: 6.0.1
   resolution: "parse5-htmlparser2-tree-adapter@npm:6.0.1"
@@ -13529,18 +13448,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"parse5-htmlparser2-tree-adapter@npm:^6.0.0":
-  version: 6.0.1
-  resolution: "parse5-htmlparser2-tree-adapter@npm:6.0.1"
-  dependencies:
-    parse5: ^6.0.1
-  checksum: 1848378b355d027915645c13f13f982e60502d201f53bc2067a508bf2dba4aac08219fc781dcd160167f5f50f0c73f58d20fa4fb3d90ee46762c20234fa90a6d
-  languageName: node
-  linkType: hard
-
-=======
->>>>>>> feat: add aggregate analytics
 "parse5@npm:6.0.1, parse5@npm:^6.0.1":
   version: 6.0.1
   resolution: "parse5@npm:6.0.1"
@@ -14827,6 +14734,15 @@ __metadata:
 "qs@npm:6.11.0":
   version: 6.11.0
   resolution: "qs@npm:6.11.0"
+  dependencies:
+    side-channel: ^1.0.4
+  checksum: 6e1f29dd5385f7488ec74ac7b6c92f4d09a90408882d0c208414a34dd33badc1a621019d4c799a3df15ab9b1d0292f97c1dd71dc7c045e69f81a8064e5af7297
+  languageName: node
+  linkType: hard
+
+"qs@npm:6.11.1":
+  version: 6.11.1
+  resolution: "qs@npm:6.11.1"
   dependencies:
     side-channel: ^1.0.4
   checksum: 82ee78ef12a16f3372fae5b64f76f8aedecb000feea882bbff1af146c147f6eb66b08f9c3f34d7e076f28563586956318b9b2ca41141846cdd6d5ad6f241d52f
@@ -17198,7 +17114,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "thread-stream@npm:^2.0.0":
   version: 2.3.0
   resolution: "thread-stream@npm:2.3.0"
@@ -17208,8 +17123,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feat: add aggregate analytics
 "throat@npm:^6.0.1":
   version: 6.0.2
   resolution: "throat@npm:6.0.2"
@@ -17569,41 +17482,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "typeorm@npm:0.3.15":
   version: 0.3.15
   resolution: "typeorm@npm:0.3.15"
-=======
-"typeorm@npm:0.3.12":
-  version: 0.3.12
-  resolution: "typeorm@npm:0.3.12"
->>>>>>> feat: add aggregate analytics
   dependencies:
     "@sqltools/formatter": ^1.2.5
     app-root-path: ^3.1.0
     buffer: ^6.0.3
     chalk: ^4.1.2
     cli-highlight: ^2.1.11
-<<<<<<< HEAD
     debug: ^4.3.4
     dotenv: ^16.0.3
     glob: ^8.1.0
-=======
-    date-fns: ^2.29.3
-    debug: ^4.3.4
-    dotenv: ^16.0.3
-    glob: ^8.1.0
-    js-yaml: ^4.1.0
->>>>>>> feat: add aggregate analytics
     mkdirp: ^2.1.3
     reflect-metadata: ^0.1.13
     sha.js: ^2.4.11
     tslib: ^2.5.0
     uuid: ^9.0.0
-<<<<<<< HEAD
-=======
-    xml2js: ^0.4.23
->>>>>>> feat: add aggregate analytics
     yargs: ^17.6.2
   peerDependencies:
     "@google-cloud/spanner": ^5.18.0
@@ -17611,13 +17506,8 @@ __metadata:
     better-sqlite3: ^7.1.2 || ^8.0.0
     hdb-pool: ^0.1.6
     ioredis: ^5.0.4
-<<<<<<< HEAD
     mongodb: ^5.2.0
     mssql: ^9.1.1
-=======
-    mongodb: ^3.6.0
-    mssql: ^7.3.0
->>>>>>> feat: add aggregate analytics
     mysql2: ^2.2.5 || ^3.0.1
     oracledb: ^5.1.0
     pg: ^8.5.1
@@ -17667,11 +17557,7 @@ __metadata:
     typeorm: cli.js
     typeorm-ts-node-commonjs: cli-ts-node-commonjs.js
     typeorm-ts-node-esm: cli-ts-node-esm.js
-<<<<<<< HEAD
   checksum: 91038765ac3472ede5a979454c6e5c9b9d93527d5e61426c6c434e5f37c3561230fe9517fad93b8309fcf5cdd57648521b86791ecf9f6cbbb7872bfba74cf4f8
-=======
-  checksum: 67dd3b72522ba6d79770c8ed9ef87c8e60ecf11f1a76df82317bb629db8ca31121ec9dadd91a5d8051f24910367c491bc29706e2a5a4fe5de5fb8fa7c07b9e5c
->>>>>>> feat: add aggregate analytics
   languageName: node
   linkType: hard
 
@@ -18707,29 +18593,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "xml2js@npm:0.5.0":
   version: 0.5.0
   resolution: "xml2js@npm:0.5.0"
-=======
-"xml2js@npm:0.4.19":
-  version: 0.4.19
-  resolution: "xml2js@npm:0.4.19"
-  dependencies:
-    sax: ">=0.6.0"
-    xmlbuilder: ~9.0.1
-  checksum: ca8b2fee430d450a18947786bfd7cd1a353ee00fc6fd550acbc8a8e65f1b4df5e9786fcb2990c1a5514ecd554d445fb74e1d716b3a4fcfffc10554aeb5db482b
-  languageName: node
-  linkType: hard
-
-"xml2js@npm:^0.4.23":
-  version: 0.4.23
-  resolution: "xml2js@npm:0.4.23"
->>>>>>> feat: add aggregate analytics
   dependencies:
     sax: ">=0.6.0"
     xmlbuilder: ~11.0.0
-  checksum: ca0cf2dfbf6deeaae878a891c8fbc0db6fd04398087084edf143cdc83d0509ad0fe199b890f62f39c4415cf60268a27a6aed0d343f0658f8779bd7add690fa98
+  checksum: 1aa71d62e5bc2d89138e3929b9ea46459157727759cbc62ef99484b778641c0cd21fb637696c052d901a22f82d092a3e740a16b4ce218e81ac59b933535124ea
   languageName: node
   linkType: hard
 

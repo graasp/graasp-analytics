@@ -24,7 +24,7 @@ const ActiveUsersCard = (): JSX.Element => {
   const { view } = useContext(ViewDataContext);
   const { itemId } = useParams();
 
-  // get aggregate actions
+  // get total users
   const {
     data: totalUsersData,
     isLoading: totalUsersDataIsLoading,
@@ -40,11 +40,58 @@ const ActiveUsersCard = (): JSX.Element => {
     aggregateBy: [],
   });
 
-  if (totalUsersDataIsLoading || totalUsersDataIsError) {
+  // get aggregate actions
+  const {
+    data: aggregateData,
+    isLoading: isAggregateDataLoading,
+    isError: isAggregateDataError,
+  } = hooks.useAggregateActions({
+    itemId,
+    view,
+    requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
+    type: null,
+    countGroupBy: ['user', 'createdDay'],
+    aggregateFunction: 'count',
+    aggregateMetric: 'actionCount',
+    aggregateBy: ['createdDay'],
+  });
+
+  if (
+    isAggregateDataLoading ||
+    isAggregateDataError ||
+    totalUsersDataIsLoading ||
+    totalUsersDataIsError
+  ) {
     return null;
   }
 
   const totalUsers = totalUsersData.get(0).aggregateResult;
+
+  const today = new Date();
+  today.setDate(today.getDate() - 1);
+  const oneWeekAgo = new Date();
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+  const oneMonthAgo = new Date();
+  oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
+
+  let averageDailyUsersThisMonth = 0;
+  let averageDailyUsersThisWeek = 0;
+  let usersToday = 0;
+
+  aggregateData.toArray().forEach((o) => {
+    const actionTime = o.createdDay.getTime();
+    if (actionTime > today) {
+      usersToday += parseInt(o.aggregateResult, 10);
+    }
+    if (actionTime > oneWeekAgo) {
+      averageDailyUsersThisWeek += parseInt(o.aggregateResult, 10);
+    }
+    if (actionTime > oneMonthAgo) {
+      averageDailyUsersThisMonth += parseInt(o.aggregateResult, 10);
+    }
+  });
+  averageDailyUsersThisWeek /= 7;
+  averageDailyUsersThisMonth /= 30;
 
   return (
     <>
@@ -73,9 +120,11 @@ const ActiveUsersCard = (): JSX.Element => {
             </Grid>
             <Grid item xs={9}>
               <Typography component="div" align="center">
-                {t('Users this month')}
+                {t('Average daily users')}
+                <br />
+                {t('this month')}
                 <Typography variant="h5" component="div" align="center">
-                  --
+                  {averageDailyUsersThisMonth}
                 </Typography>
               </Typography>
             </Grid>
@@ -90,9 +139,11 @@ const ActiveUsersCard = (): JSX.Element => {
             </Grid>
             <Grid item xs={9}>
               <Typography component="div" align="center">
-                {t('Users this week')}
+                {t('Average daily users')}
+                <br />
+                {t('this week')}
                 <Typography variant="h5" component="div" align="center">
-                  --
+                  {averageDailyUsersThisWeek}
                 </Typography>
               </Typography>
             </Grid>
@@ -109,7 +160,7 @@ const ActiveUsersCard = (): JSX.Element => {
               <Typography component="div" align="center">
                 {t('Users today')}
                 <Typography variant="h5" component="div" align="center">
-                  --
+                  {usersToday}
                 </Typography>
               </Typography>
             </Grid>

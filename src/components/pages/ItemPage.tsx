@@ -11,7 +11,6 @@ import Sidebar from '../sidebar/Sidebar';
 import ChartsLayout from '../space/ChartsLayout';
 
 const ItemPage = ({ isEmbeded }: { isEmbeded: boolean }): JSX.Element => {
-  const { t } = useTranslation();
   const theme = useTheme();
   if (isEmbeded) {
     return (
@@ -35,11 +34,6 @@ const ItemPage = ({ isEmbeded }: { isEmbeded: boolean }): JSX.Element => {
             <ContextsWrapper>
               <ChartsLayout />
             </ContextsWrapper>
-            <div id="general">{t('General')}</div>
-            <div id="contents">{t('Contents')}</div>
-            <div id="actions">{t('Actions')}</div>
-            <div id="chats">{t('Chats')}</div>
-            <div id="apps">{t('Apps')}</div>
           </Grid>
         </Grid>
       </main>

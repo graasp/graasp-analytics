@@ -28,6 +28,7 @@ const Sidebar: FC = () => {
           onClick={() => scrollTo('contents')}
           icon={<MenuBookIcon />}
           text={t('Contents')}
+          disabled
         />
         <MenuItem
           onClick={() => scrollTo('actions')}
@@ -38,11 +39,13 @@ const Sidebar: FC = () => {
           onClick={() => scrollTo('chats')}
           icon={<ChatIcon />}
           text={t('Chats')}
+          disabled
         />
         <MenuItem
           onClick={() => scrollTo('apps')}
           icon={<AppsIcon />}
           text={t('Apps')}
+          disabled
         />
       </>
     </GraaspMainMenu>

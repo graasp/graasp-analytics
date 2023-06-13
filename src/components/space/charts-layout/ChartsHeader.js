@@ -36,20 +36,20 @@ const ChartsHeader = () => {
         justifyContent="space-between"
         alignItems="center"
         pt={1}
-        pr={2}
-        pl={4}
+        pr={1}
+        pl={1}
         pb={2}
       >
-        <Grid item xs={3.5}>
+        <Grid item xs={3.8}>
           <ViewSelect />
         </Grid>
-        <Grid item xs={3.5}>
+        <Grid item xs={3.8}>
           <UsersSelect />
         </Grid>
-        <Grid item xs={3.5}>
+        <Grid item xs={3.8}>
           <ActionsSelect />
         </Grid>
-        <Grid item xs={1.5}>
+        <Grid item xs={0.6}>
           <ExportData />
         </Grid>
         {/* <Grid item xs={9}>
