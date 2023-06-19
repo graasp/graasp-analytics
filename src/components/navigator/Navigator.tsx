@@ -1,18 +1,9 @@
-import truncate from 'lodash.truncate';
-
 import { useTranslation } from 'react-i18next';
 import { useLocation, useMatch } from 'react-router-dom';
 
-import HomeIcon from '@mui/icons-material/Home';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { styled } from '@mui/material';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Typography from '@mui/material/Typography';
+import { ItemRecord } from '@graasp/sdk/frontend';
+import { HomeMenu, ItemMenu, Navigation } from '@graasp/ui';
 
-import {
-  ITEM_NAME_MAX_LENGTH,
-  NAVIGATOR_BACKGROUND_COLOR,
-} from '../../config/constants';
 import {
   HOME_PATH,
   SHARED_ITEMS_PATH,
@@ -23,25 +14,15 @@ import {
   BREADCRUMBS_NAVIGATOR_ID,
   buildBreadcrumbsItemLink,
 } from '../../config/selectors';
-import HomeMenu from './HomeMenu';
-import ItemMenu from './ItemMenu';
-import RootMenu from './RootMenu';
-import { ParentLink, StyledLink } from './util';
 
-const { useItem, useParents, useCurrentMember } = hooks;
-
-const CenterAlignWrapper = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-});
-
-const StyledHomeIcon = styled(HomeIcon)({
-  padding: '8px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-});
+const {
+  useItem,
+  useParents,
+  useCurrentMember,
+  useChildren,
+  useOwnItems,
+  useSharedItems,
+} = hooks;
 
 const Navigator = (): JSX.Element => {
   const { t } = useTranslation();
@@ -59,53 +40,39 @@ const Navigator = (): JSX.Element => {
     enabled: !!itemPath,
   });
 
+  const isParentOwned =
+    (item?.creator?.id ?? parents?.first()?.creator?.id) === currentMemberId;
+
   if (isItemLoading || areParentsLoading) {
     return null;
   }
 
-  const renderRoot = () => {
-    let to = HOME_PATH;
-    let text = t('My items');
-    let isShared = false;
+  const buildToItemPath = (id) => buildItemPath(id);
 
-    const isParentOwned =
-      (item?.creator?.id ?? parents?.first()?.creator?.id) === currentMemberId;
+  const menu = [
+    { name: t('Home'), id: 'home', to: HOME_PATH },
+    { name: t('Shared Items'), id: 'shared', to: SHARED_ITEMS_PATH },
+  ];
 
-    if (
-      pathname === SHARED_ITEMS_PATH ||
-      (pathname !== HOME_PATH && !isParentOwned)
-    ) {
-      to = SHARED_ITEMS_PATH;
-      text = t('Shared items');
-      isShared = true;
+  const renderRoot = (thisItem?: ItemRecord) => {
+    if (!thisItem) {
+      return null;
     }
 
     return (
-      <CenterAlignWrapper>
-        <StyledLink color="inherit" to={to}>
-          <Typography>{text}</Typography>
-        </StyledLink>
-        <RootMenu isShared={isShared} />
-      </CenterAlignWrapper>
+      <>
+        <HomeMenu selected={menu[0]} elements={menu} />
+        <ItemMenu
+          itemId={thisItem.id}
+          useChildren={
+            isParentOwned ? (useOwnItems as any) : (useSharedItems as any)
+          }
+          buildToItemPath={buildToItemPath}
+        />
+      </>
     );
   };
 
-  const renderParents = () =>
-    parents?.map(({ name, id }) => (
-      <CenterAlignWrapper key={id}>
-        <ParentLink name={name} id={id} />
-        <ItemMenu itemId={id} />
-      </CenterAlignWrapper>
-    ));
-
-  const renderHome = () => (
-    <CenterAlignWrapper>
-      <StyledLink to="#">
-        <StyledHomeIcon />
-      </StyledLink>
-      <HomeMenu />
-    </CenterAlignWrapper>
-  );
   if (
     item === undefined &&
     pathname !== SHARED_ITEMS_PATH &&
@@ -115,30 +82,16 @@ const Navigator = (): JSX.Element => {
   }
 
   return (
-    <Breadcrumbs
+    <Navigation
       id={BREADCRUMBS_NAVIGATOR_ID}
-      separator={<NavigateNextIcon />}
-      aria-label="breadcrumb"
-      style={{ backgroundColor: NAVIGATOR_BACKGROUND_COLOR }}
-    >
-      {renderHome()}
-      {renderRoot()}
-      {itemId && renderParents()}
-      {itemId && (
-        <CenterAlignWrapper>
-          <StyledLink
-            id={buildBreadcrumbsItemLink(itemId)}
-            key={itemId}
-            to={buildItemPath(itemId)}
-          >
-            <Typography>
-              {truncate(item.name, { length: ITEM_NAME_MAX_LENGTH })}
-            </Typography>
-          </StyledLink>
-          <ItemMenu itemId={itemId} />
-        </CenterAlignWrapper>
-      )}
-    </Breadcrumbs>
+      sx={{ marginLeft: 2 }}
+      item={item}
+      buildToItemPath={buildToItemPath}
+      parents={parents}
+      renderRoot={renderRoot}
+      buildBreadcrumbsItemLinkId={buildBreadcrumbsItemLink}
+      useChildren={useChildren}
+    />
   );
 };
 

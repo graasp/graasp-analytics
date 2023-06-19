@@ -2389,9 +2389,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@npm:3.0.0-rc.2":
+"@graasp/ui@github:graasp/graasp-ui#367-navigation":
   version: 3.0.0-rc.2
-  resolution: "@graasp/ui@npm:3.0.0-rc.2"
+  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=131bcf066f6dbb042cbaf16651692e2dcf8a8d6d"
   dependencies:
     "@graasp/sdk": 1.0.0-rc1
     clsx: 1.2.1
@@ -2424,7 +2424,7 @@ __metadata:
       optional: true
     ag-grid-react:
       optional: true
-  checksum: e0af9d2dcf00612b05eaea8acfac2dd4a9b13803684f31e398cfc803fe4eed1d27ab1ba22c1f058246833435633cdc2788bcb0d710a70ac81d3f42661b40eb0a
+  checksum: c8ab4bc84c108f6fbabd9406835820019488216256a12dd3de5c94c053619752a0b609eac696e5b52e7dbe07df60def099d683903bd7268f084d8dc87a211d9c
   languageName: node
   linkType: hard
 
@@ -9600,7 +9600,7 @@ __metadata:
     "@emotion/styled": 11.10.5
     "@graasp/query-client": 1.0.0-rc1
     "@graasp/sdk": 1.0.0-rc1
-    "@graasp/ui": 3.0.0-rc.2
+    "@graasp/ui": "github:graasp/graasp-ui#367-navigation"
     "@mui/icons-material": 5.11.0
     "@mui/lab": 5.0.0-alpha.118
     "@mui/material": 5.11.7

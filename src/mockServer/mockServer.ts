@@ -25,7 +25,7 @@ const ApplicationSerializer = RestSerializer.extend({
 
 const checkPermission = (schema, itemId, currentMember) => {
   const item = schema.find('item', itemId);
-  if (currentMember.id === item.creator) {
+  if (currentMember.id === item.creator.id) {
     return true;
   }
   const itemPath = item.path;
