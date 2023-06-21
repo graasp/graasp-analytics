@@ -55,7 +55,7 @@
     "hooks:uninstall": "husky uninstall",
     "hooks:install": "husky install",
     "lint": "eslint .",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc --noEmit && tsc --noEmit -p cypress/tsconfig.json",
     "prettier:check": "prettier --check 'src/**/*.js'",
     "prettier:write": "prettier --write 'src/**/*.js'",
     "release": "standard-version -a",

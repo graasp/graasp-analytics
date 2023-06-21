@@ -4,6 +4,7 @@ import { useLocation, useMatch } from 'react-router-dom';
 import { ItemRecord } from '@graasp/sdk/frontend';
 import { HomeMenu, ItemMenu, Navigation } from '@graasp/ui';
 
+import { NAVIGATOR_BACKGROUND_COLOR } from '../../config/constants';
 import {
   HOME_PATH,
   SHARED_ITEMS_PATH,
@@ -12,7 +13,11 @@ import {
 import { hooks } from '../../config/queryClient';
 import {
   BREADCRUMBS_NAVIGATOR_ID,
+  HOME_MENU_DROPDOWN_BUTTON_ID,
+  HOME_MENU_ID,
   buildBreadcrumbsItemLink,
+  buildMenuItemId,
+  buildNavigationDropDownId,
 } from '../../config/selectors';
 
 const {
@@ -30,7 +35,6 @@ const Navigator = (): JSX.Element => {
   const { pathname } = useLocation();
   const itemId = match?.params?.itemId;
   const { data: currentMember } = useCurrentMember();
-  const currentMemberId = currentMember?.id;
   const { data: item, isLoading: isItemLoading } = useItem(itemId);
   const itemPath = item?.path;
 
@@ -41,7 +45,7 @@ const Navigator = (): JSX.Element => {
   });
 
   const isParentOwned =
-    (item?.creator?.id ?? parents?.first()?.creator?.id) === currentMemberId;
+    (item?.creator?.id ?? parents?.first()?.creator?.id) === currentMember?.id;
 
   if (isItemLoading || areParentsLoading) {
     return null;
@@ -54,18 +58,27 @@ const Navigator = (): JSX.Element => {
     { name: t('Shared Items'), id: 'shared', to: SHARED_ITEMS_PATH },
   ];
 
-  const renderRoot = (thisItem?: ItemRecord) => {
-    if (!thisItem) {
-      return null;
-    }
+  const renderRoot = () => {
+    const selected =
+      isParentOwned || pathname === HOME_PATH ? menu[0] : menu[1];
 
     return (
       <>
-        <HomeMenu selected={menu[0]} elements={menu} />
+        <HomeMenu
+          selected={selected}
+          elements={menu}
+          menuId={HOME_MENU_ID}
+          homeDropdownId={HOME_MENU_DROPDOWN_BUTTON_ID}
+          buildMenuItemId={buildBreadcrumbsItemLink}
+        />
         <ItemMenu
-          itemId={thisItem.id}
+          buildIconId={buildNavigationDropDownId}
+          itemId="root"
+          buildMenuItemId={buildMenuItemId}
           useChildren={
-            isParentOwned ? (useOwnItems as any) : (useSharedItems as any)
+            isParentOwned || pathname === HOME_PATH
+              ? useOwnItems
+              : useSharedItems
           }
           buildToItemPath={buildToItemPath}
         />
@@ -84,13 +97,16 @@ const Navigator = (): JSX.Element => {
   return (
     <Navigation
       id={BREADCRUMBS_NAVIGATOR_ID}
-      sx={{ marginLeft: 2 }}
+      sx={{ paddingLeft: 2 }}
       item={item}
       buildToItemPath={buildToItemPath}
       parents={parents}
       renderRoot={renderRoot}
+      backgroundColor={NAVIGATOR_BACKGROUND_COLOR}
       buildBreadcrumbsItemLinkId={buildBreadcrumbsItemLink}
+      buildMenuItemId={buildMenuItemId}
       useChildren={useChildren}
+      buildIconId={buildNavigationDropDownId}
     />
   );
 };
