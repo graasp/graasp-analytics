@@ -1,12 +1,7 @@
 import { SHARED_ITEMS_PATH, buildItemPath } from '../../src/config/paths';
 import {
   HOME_MENU_DROPDOWN_BUTTON_ID,
-  HOME_MENU_ID,
-  HOME_MENU_OWN_MENUITEM_ID,
-  ROOT_MENU_DROPDOWN_BUTTON_ID,
-  ROOT_MENU_ID,
   buildBreadcrumbsItemLink,
-  buildMenuDropdownButton,
   buildMenuItemId,
   buildNavigationDropDownId,
 } from '../../src/config/selectors';

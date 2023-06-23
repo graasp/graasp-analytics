@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useLocation, useMatch } from 'react-router-dom';
 
-import { ItemRecord } from '@graasp/sdk/frontend';
 import { HomeMenu, ItemMenu, Navigation } from '@graasp/ui';
 
 import { NAVIGATOR_BACKGROUND_COLOR } from '../../config/constants';
@@ -29,7 +28,7 @@ const {
   useSharedItems,
 } = hooks;
 
-const Navigator = (): JSX.Element => {
+const Navigator = (): JSX.Element | null => {
   const { t } = useTranslation();
   const match = useMatch(buildItemPath());
   const { pathname } = useLocation();
@@ -39,8 +38,8 @@ const Navigator = (): JSX.Element => {
   const itemPath = item?.path;
 
   const { data: parents, isLoading: areParentsLoading } = useParents({
-    id: itemId,
-    path: itemPath,
+    id: itemId ?? '',
+    path: itemPath ?? '',
     enabled: !!itemPath,
   });
 
@@ -50,8 +49,6 @@ const Navigator = (): JSX.Element => {
   if (isItemLoading || areParentsLoading) {
     return null;
   }
-
-  const buildToItemPath = (id) => buildItemPath(id);
 
   const menu = [
     { name: t('Home'), id: 'home', to: HOME_PATH },
@@ -77,20 +74,16 @@ const Navigator = (): JSX.Element => {
           buildMenuItemId={buildMenuItemId}
           useChildren={
             isParentOwned || pathname === HOME_PATH
-              ? useOwnItems
+              ? (useOwnItems as any)
               : useSharedItems
           }
-          buildToItemPath={buildToItemPath}
+          buildToItemPath={buildItemPath}
         />
       </>
     );
   };
 
-  if (
-    item === undefined &&
-    pathname !== SHARED_ITEMS_PATH &&
-    pathname !== HOME_PATH
-  ) {
+  if (!item && pathname !== SHARED_ITEMS_PATH && pathname !== HOME_PATH) {
     return null;
   }
 
@@ -99,13 +92,13 @@ const Navigator = (): JSX.Element => {
       id={BREADCRUMBS_NAVIGATOR_ID}
       sx={{ paddingLeft: 2 }}
       item={item}
-      buildToItemPath={buildToItemPath}
+      buildToItemPath={buildItemPath}
       parents={parents}
       renderRoot={renderRoot}
       backgroundColor={NAVIGATOR_BACKGROUND_COLOR}
       buildBreadcrumbsItemLinkId={buildBreadcrumbsItemLink}
       buildMenuItemId={buildMenuItemId}
-      useChildren={useChildren}
+      useChildren={useChildren as any}
       buildIconId={buildNavigationDropDownId}
     />
   );
