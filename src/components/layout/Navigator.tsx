@@ -38,8 +38,8 @@ const Navigator = (): JSX.Element | null => {
   const itemPath = item?.path;
 
   const { data: parents, isLoading: areParentsLoading } = useParents({
-    id: itemId ?? '',
-    path: itemPath ?? '',
+    id: itemId,
+    path: itemPath,
     enabled: !!itemPath,
   });
 
