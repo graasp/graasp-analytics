@@ -12,9 +12,9 @@
   "dependencies": {
     "@emotion/react": "11.10.5",
     "@emotion/styled": "11.10.5",
-    "@graasp/query-client": "github:graasp/graasp-query-client#use-parents",
-    "@graasp/sdk": "1.0.0-rc1",
-    "@graasp/ui": "github:graasp/graasp-ui#367-navigation",
+    "@graasp/query-client": "1.0.1",
+    "@graasp/sdk": "1.1.0",
+    "@graasp/ui": "3.1.0",
     "@mui/icons-material": "5.11.0",
     "@mui/lab": "5.0.0-alpha.118",
     "@mui/material": "5.11.7",

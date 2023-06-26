@@ -56,6 +56,11 @@ const Navigator = (): JSX.Element | null => {
   ];
 
   const renderRoot = () => {
+    // no root access if signed out
+    if (!currentMember) {
+      return null;
+    }
+
     const selected =
       isParentOwned || pathname === HOME_PATH ? menu[0] : menu[1];
 
