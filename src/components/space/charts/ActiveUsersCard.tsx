@@ -124,7 +124,7 @@ const ActiveUsersCard = (): JSX.Element => {
                 <br />
                 {t('this month')}
                 <Typography variant="h5" component="div" align="center">
-                  {averageDailyUsersThisMonth}
+                  {averageDailyUsersThisMonth.toFixed(3)}
                 </Typography>
               </Typography>
             </Grid>
@@ -143,7 +143,7 @@ const ActiveUsersCard = (): JSX.Element => {
                 <br />
                 {t('this week')}
                 <Typography variant="h5" component="div" align="center">
-                  {averageDailyUsersThisWeek}
+                  {averageDailyUsersThisWeek.toFixed(3)}
                 </Typography>
               </Typography>
             </Grid>

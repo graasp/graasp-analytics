@@ -8,7 +8,7 @@ const styleConstants = {
 
 const customStyles = {
   menu: () => ({
-    width: '250px',
+    width: '200px',
     position: 'absolute',
     zIndex: 999999,
     backgroundColor: 'white',
@@ -16,7 +16,7 @@ const customStyles = {
   }),
   control: () => ({
     display: 'flex',
-    minWidth: '250px',
+    minWidth: '200px',
     maxWidth: '600px',
     backgroundColor: 'white',
     ...styleConstants,

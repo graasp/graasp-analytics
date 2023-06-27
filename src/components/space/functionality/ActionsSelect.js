@@ -40,10 +40,10 @@ const ActionsSelect = () => {
 
   return (
     <CustomRoot container>
-      <Grid item xs={2}>
+      <Grid item xs={3}>
         <Typography>{t('Select Action(s)')}</Typography>
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={3}>
         <Select
           styles={customStyles}
           options={[allOption, ...allActions]}

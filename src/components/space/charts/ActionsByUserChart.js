@@ -2,7 +2,6 @@ import {
   Bar,
   CartesianGrid,
   ComposedChart,
-  Line,
   Tooltip,
   XAxis,
   YAxis,
@@ -77,6 +76,7 @@ const ActionsByUserChart = () => {
     const userActions = {
       type: key,
       total: aggregateDataMap.get(key),
+      others: aggregateDataMap.get(key),
     };
     Object.entries(groupedUsers).forEach((groupedUser) => {
       users.forEach((user) => {
@@ -87,6 +87,14 @@ const ActionsByUserChart = () => {
     });
     formattedData.push(userActions);
   });
+
+  formattedData.forEach((userActions) => {
+    userNames.forEach((name) => {
+      // eslint-disable-next-line no-param-reassign
+      userActions.others -= userActions[name] ?? 0;
+    });
+  });
+  userNames.push('others');
 
   formattedData.sort((a, b) => b.total - a.total);
 
@@ -111,13 +119,6 @@ const ActionsByUserChart = () => {
               fill={COLORS[index % COLORS.length]}
             />
           ))}
-          <Line
-            dataKey="total"
-            name={t('Total')}
-            type="monotone"
-            stroke="#8884d8"
-            activeDot={{ r: 6 }}
-          />
         </ComposedChart>
       </ChartContainer>
     </>

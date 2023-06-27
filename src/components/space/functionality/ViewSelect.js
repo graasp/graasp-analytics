@@ -53,10 +53,10 @@ const ViewSelect = () => {
   }
   return (
     <CustomRoot container>
-      <Grid item xs={2}>
+      <Grid item xs={3}>
         <Typography>{t('Select a View')}</Typography>
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={3}>
         <Select
           styles={customStyles}
           options={Object.values(Context)

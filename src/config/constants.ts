@@ -62,11 +62,11 @@ export const TOP_NUMBER_OF_ITEMS_TO_DISPLAY = 10;
 export const DEFAULT_REQUEST_SAMPLE_SIZE = 5000;
 
 export const Context = {
-  BUILDER: 'builder',
-  PLAYER: 'player',
-  LIBRARY: 'library',
-  ANALYTICS: 'analytics',
-  UNKNOWN: 'unknown',
+  BUILDER: 'Builder',
+  PLAYER: 'Player',
+  LIBRARY: 'Library',
+  ANALYTICS: 'Analytics',
+  UNKNOWN: 'Unknown',
 };
 
 export const GRAASP_BUILDER_HOST =

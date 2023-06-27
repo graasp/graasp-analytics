@@ -3,7 +3,6 @@ import {
   Bar,
   CartesianGrid,
   ComposedChart,
-  Line,
   Tooltip,
   XAxis,
   YAxis,
@@ -94,13 +93,6 @@ const ItemsByUserChart = () => {
               fill={COLORS[index % COLORS.length]}
             />
           ))}
-          <Line
-            dataKey="total"
-            name={t('Total')}
-            type="monotone"
-            stroke="#8884d8"
-            activeDot={{ r: 6 }}
-          />
         </ComposedChart>
       </ChartContainer>
     </>
