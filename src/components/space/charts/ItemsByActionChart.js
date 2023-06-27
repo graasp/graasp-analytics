@@ -3,7 +3,6 @@ import {
   Bar,
   CartesianGrid,
   ComposedChart,
-  Line,
   Tooltip,
   XAxis,
   YAxis,
