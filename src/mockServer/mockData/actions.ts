@@ -6,7 +6,7 @@ import { DAY, DUMMY_TIMESTAMP, HOUR } from './util';
 
 const MOCK_ACTIONS: Action[] = [
   {
-    id: '1234',
+    id: '712427d1-258a-0004-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[0],
     view: Context.Builder,
@@ -15,7 +15,7 @@ const MOCK_ACTIONS: Action[] = [
     createdAt: new Date(DUMMY_TIMESTAMP + 11 * HOUR),
   },
   {
-    id: '12342',
+    id: '712427d1-258a-0000-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[0],
     view: Context.Builder,
@@ -24,7 +24,7 @@ const MOCK_ACTIONS: Action[] = [
     createdAt: new Date(DUMMY_TIMESTAMP + 10 * HOUR),
   },
   {
-    id: '12344',
+    id: '712427d1-258a-0001-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[0],
     view: Context.Builder,
@@ -33,7 +33,7 @@ const MOCK_ACTIONS: Action[] = [
     createdAt: new Date(DUMMY_TIMESTAMP - DAY + 11 * HOUR),
   },
   {
-    id: '12345',
+    id: '712427d1-258a-0002-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[0],
     view: Context.Builder,
@@ -42,7 +42,7 @@ const MOCK_ACTIONS: Action[] = [
     createdAt: new Date(DUMMY_TIMESTAMP - DAY + 11 * HOUR),
   },
   {
-    id: '12346',
+    id: '712427d1-258a-0003-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[0],
     view: Context.Builder,
@@ -51,7 +51,7 @@ const MOCK_ACTIONS: Action[] = [
     createdAt: new Date(DUMMY_TIMESTAMP - DAY + 11 * HOUR),
   },
   {
-    id: 'sss',
+    id: '712427d1-258a-1111-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[1],
     view: Context.Builder,
@@ -59,9 +59,8 @@ const MOCK_ACTIONS: Action[] = [
     extra: {},
     createdAt: new Date(DUMMY_TIMESTAMP - 2 * DAY + 12 * HOUR),
   },
-
   {
-    id: 'asss',
+    id: '712427d1-258a-1112-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[1],
     view: Context.Builder,
@@ -69,9 +68,8 @@ const MOCK_ACTIONS: Action[] = [
     extra: {},
     createdAt: new Date(DUMMY_TIMESTAMP - 2 * DAY + 12 * HOUR),
   },
-
   {
-    id: 'aasss',
+    id: '712427d1-258a-1113-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[1],
     view: Context.Builder,
@@ -79,9 +77,8 @@ const MOCK_ACTIONS: Action[] = [
     extra: {},
     createdAt: new Date(DUMMY_TIMESTAMP + 12 * HOUR),
   },
-
   {
-    id: 'aaasss',
+    id: '712427d1-258a-1114-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[1],
     view: Context.Builder,
@@ -89,9 +86,8 @@ const MOCK_ACTIONS: Action[] = [
     extra: {},
     createdAt: new Date(DUMMY_TIMESTAMP + 12 * HOUR),
   },
-
   {
-    id: 'aaaassss',
+    id: '712427d1-258a-1115-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[1],
     view: Context.Builder,
@@ -99,9 +95,8 @@ const MOCK_ACTIONS: Action[] = [
     extra: {},
     createdAt: new Date(DUMMY_TIMESTAMP + 12 * HOUR),
   },
-
   {
-    id: 'aaaaasssss',
+    id: '712427d1-258a-1116-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[1],
     view: Context.Builder,
@@ -109,9 +104,8 @@ const MOCK_ACTIONS: Action[] = [
     extra: {},
     createdAt: new Date(DUMMY_TIMESTAMP + 12 * HOUR),
   },
-
   {
-    id: 'aaaaaaasssssss',
+    id: '712427d1-258a-1117-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[1],
     view: Context.Builder,
@@ -119,9 +113,8 @@ const MOCK_ACTIONS: Action[] = [
     extra: {},
     createdAt: new Date(DUMMY_TIMESTAMP + 12 * HOUR),
   },
-
   {
-    id: 'aaaaaaasssssss',
+    id: '712427d1-258a-1118-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[1],
     view: Context.Builder,
@@ -129,9 +122,8 @@ const MOCK_ACTIONS: Action[] = [
     extra: {},
     createdAt: new Date(DUMMY_TIMESTAMP + 12 * HOUR),
   },
-
   {
-    id: 'ddd',
+    id: '712427d1-258a-2222-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[2],
     view: Context.Builder,
@@ -140,7 +132,7 @@ const MOCK_ACTIONS: Action[] = [
     createdAt: new Date(DUMMY_TIMESTAMP - 2 * DAY + 12 * HOUR),
   },
   {
-    id: 'dddd',
+    id: '712427d1-258a-2223-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[2],
     view: Context.Builder,
@@ -149,7 +141,7 @@ const MOCK_ACTIONS: Action[] = [
     createdAt: new Date(DUMMY_TIMESTAMP - 2 * DAY + 12 * HOUR),
   },
   {
-    id: 'ddddd',
+    id: '712427d1-258a-2224-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[2],
     view: Context.Builder,
@@ -158,7 +150,7 @@ const MOCK_ACTIONS: Action[] = [
     createdAt: new Date(DUMMY_TIMESTAMP - 2 * DAY + 12 * HOUR),
   },
   {
-    id: 'dddddd',
+    id: '712427d1-258a-2225-926b-8b57d63042e6',
     item: MOCK_ITEMS[2],
     member: MOCK_MEMBERS[2],
     view: Context.Builder,
