@@ -2342,9 +2342,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@portal:/Users/ray/graasp_repo/graasp-query-client::locator=graasp-analytics%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@graasp/query-client@portal:/Users/ray/graasp_repo/graasp-query-client::locator=graasp-analytics%40workspace%3A."
+"@graasp/query-client@github:graasp/graasp-query-client#279-add-aggregate-actions":
+  version: 1.0.0-rc1
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=309ed1ec4bf3b41ca12f51b1d31803d48dead1c8"
   dependencies:
     "@graasp/sdk": 1.0.0-rc1
     "@graasp/translations": 1.13.0
@@ -2357,8 +2357,9 @@ __metadata:
     uuid: 9.0.0
   peerDependencies:
     react: ^17.0.0
+  checksum: 5089d621b9201225e6f83f283208b7120825da4ffd2f29c609c12b178415f8105d6565a70e1e36ddeefd65d083f2c68cf29deba204d9e50e8dc69fb1613007ff
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "@graasp/sdk@npm:1.0.0-rc1":
   version: 1.0.0-rc1
@@ -9597,7 +9598,7 @@ __metadata:
     "@cypress/instrument-cra": 1.4.0
     "@emotion/react": 11.10.5
     "@emotion/styled": 11.10.5
-    "@graasp/query-client": 1.0.0-rc1
+    "@graasp/query-client": "github:graasp/graasp-query-client#279-add-aggregate-actions"
     "@graasp/sdk": 1.0.0-rc1
     "@graasp/ui": 3.0.0-rc.2
     "@mui/icons-material": 5.11.0
