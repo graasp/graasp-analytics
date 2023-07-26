@@ -40,7 +40,7 @@ const ActionsMap = () => {
   // e.g. we retrieve 100 total actions and 10 users, but these 10 users have only made 90 actions
   // therefore, to avoid confusion: when all users are selected, show all actions
   let actionsToChart;
-  if (selectedUsers === null) {
+  if (!selectedUsers) {
     actionsToChart = actions;
   } else {
     actionsToChart = filterActionsByUser(actions, selectedUsers);

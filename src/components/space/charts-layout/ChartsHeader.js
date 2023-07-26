@@ -52,15 +52,6 @@ const ChartsHeader = () => {
         <Grid item xs={0.6}>
           <ExportData />
         </Grid>
-        {/* <Grid item xs={9}>
-          <ExportData />
-          <ViewSelect />
-          <UsersSelect />
-          <ActionsSelect />
-        </Grid>
-        <Grid item xs={3}>
-          <ReportData />
-        </Grid> */}
       </Grid>
     );
   }

@@ -12,7 +12,11 @@ import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
-import { DEFAULT_REQUEST_SAMPLE_SIZE } from '../../../config/constants';
+import {
+  AVERAGE_COLOR,
+  DEFAULT_REQUEST_SAMPLE_SIZE,
+  GENERAL_COLOR,
+} from '../../../config/constants';
 import { hooks } from '../../../config/queryClient';
 import {
   formatActionsByTimeOfDay,
@@ -53,7 +57,7 @@ const ActionsByTimeOfDayChart = () => {
     return null;
   }
 
-  if (aggregateData.size === 0) {
+  if (!aggregateData.size) {
     return <EmptyChart chartTitle={t(title)} />;
   }
 
@@ -64,6 +68,7 @@ const ActionsByTimeOfDayChart = () => {
 
   const timeOfDayEntry = formattedAggregateData.map((o) => o.timeOfDay);
 
+  // fill with empty data for missing hour
   for (let hour = 0; hour < 24; hour += 1) {
     if (!timeOfDayEntry.includes(hour)) {
       formattedAggregateData.push({
@@ -129,11 +134,11 @@ const ActionsByTimeOfDayChart = () => {
           <YAxis tick={{ fontSize: 14 }} domain={[0, yAxisMax]} />
           <Tooltip />
           <Legend />
-          <Bar dataKey="count" name={t('Count')} fill="#8884d8" />
+          <Bar dataKey="count" name={t('Count')} fill={GENERAL_COLOR} />
           <Bar
             dataKey="averageCount"
             name={t('Average Count')}
-            fill="#F99417"
+            fill={AVERAGE_COLOR}
           />
         </BarChart>
       </ChartContainer>

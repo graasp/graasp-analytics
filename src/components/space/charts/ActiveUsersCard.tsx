@@ -51,7 +51,7 @@ const ActiveUsersCard = (): JSX.Element => {
     requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     type: null,
     countGroupBy: ['user', 'createdDay'],
-    aggregateFunction: 'count',
+    aggregateFunction: 'avg',
     aggregateMetric: 'actionCount',
     aggregateBy: ['createdDay'],
   });

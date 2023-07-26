@@ -12,7 +12,7 @@ import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
-import { DEFAULT_REQUEST_SAMPLE_SIZE } from '../../../config/constants';
+import { DEFAULT_REQUEST_SAMPLE_SIZE, GENERAL_COLOR } from '../../../config/constants';
 import { hooks } from '../../../config/queryClient';
 import ChartContainer from '../../common/ChartContainer';
 import ChartTitle from '../../common/ChartTitle';
@@ -45,7 +45,7 @@ const ActiveUsersChart = (): JSX.Element => {
   }
 
   const title = 'Active Users by Day';
-  if (aggregateData.size === 0) {
+  if (!aggregateData.size) {
     return <EmptyChart chartTitle={t(title)} />;
   }
 
@@ -83,7 +83,7 @@ const ActiveUsersChart = (): JSX.Element => {
           <Line
             dataKey="count"
             name={t('Count')}
-            stroke="#8884d8"
+            stroke={GENERAL_COLOR}
             strokeWidth={3}
             activeDot={{ r: 6 }}
           />

@@ -12,7 +12,11 @@ import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
-import { DEFAULT_REQUEST_SAMPLE_SIZE } from '../../../config/constants';
+import {
+  AVERAGE_COLOR,
+  DEFAULT_REQUEST_SAMPLE_SIZE,
+  GENERAL_COLOR,
+} from '../../../config/constants';
 import { hooks } from '../../../config/queryClient';
 import { formatActionsByDay, getActionsByDay } from '../../../utils/api';
 import { filterActions } from '../../../utils/array';
@@ -50,12 +54,13 @@ const ActionsByDayChart = () => {
   }
 
   const title = 'Actions by Day';
-  if (aggregateData.size === 0) {
+  if (!aggregateData?.size) {
     return <EmptyChart chartTitle={t(title)} />;
   }
 
   const formattedAggregateData = aggregateData
     .toArray()
+    // sort by creation date
     .sort((a, b) => a.createdDay.getTime() - b.createdDay.getTime())
     .map((d) => ({
       averageCount: parseFloat(d.aggregateResult).toFixed(2),
@@ -118,14 +123,14 @@ const ActionsByDayChart = () => {
           <Line
             dataKey="count"
             name={t('Count')}
-            stroke="#8884d8"
+            stroke={GENERAL_COLOR}
             activeDot={{ r: 6 }}
             strokeWidth={3}
           />
           <Line
             dataKey="averageCount"
             name={t('Average Count')}
-            stroke="#F99417"
+            stroke={AVERAGE_COLOR}
             activeDot={{ r: 6 }}
             strokeWidth={3}
           />

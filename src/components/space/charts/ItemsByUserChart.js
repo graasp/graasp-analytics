@@ -37,7 +37,7 @@ const ItemsByUserChart = () => {
     itemChildren: children,
     itemData,
   } = useContext(DataContext);
-  const users = selectedUsers !== null ? [selectedUsers] : allMembers;
+  const users = selectedUsers ? [selectedUsers] : allMembers;
   const allActions = filterActionsByActionTypes(actions, selectedActions);
   const userNames = Object.keys(groupBy('name', users));
   const yAxisMax = findYAxisMax(users);

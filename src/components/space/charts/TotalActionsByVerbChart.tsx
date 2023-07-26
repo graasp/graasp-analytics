@@ -39,7 +39,7 @@ const TotalActionsByVerbChart = (): JSX.Element => {
   }
 
   const title = 'Total Actions Distributions';
-  if (aggregateData.size === 0) {
+  if (!aggregateData.size) {
     return <EmptyChart chartTitle={t(title)} />;
   }
 

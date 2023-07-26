@@ -47,6 +47,9 @@ export const COLORS = [
   '#FFFFAF',
 ];
 
+export const AVERAGE_COLOR = "#F99417"
+export const GENERAL_COLOR = "#8884d8"
+
 // strings used in components/custom/CustomTooltip to generate added tooltip text in ActionsByTimeOfDay
 export const LATE_NIGHT = 'Late night';
 export const EARLY_MORNING = 'Early morning';

@@ -16,8 +16,7 @@ const ShareItemPage = (): JSX.Element => (
       }}
     >
       <QueryStatsIcon fontSize="large" />
-      <h1>Please select a shared item from the navigator</h1>
-      <h1>to view the analytics.</h1>
+      <h1>Please select a shared item from the navigator to view the analytics.</h1>
     </main>
     <Footer />
   </>

@@ -16,8 +16,7 @@ const HomePage = (): JSX.Element => (
       }}
     >
       <QueryStatsIcon fontSize="large" />
-      <h1>Please select an item from the navigator</h1>
-      <h1>to view the analytics.</h1>
+      <h1>Please select an item from the navigator to view the analytics.</h1>
     </main>
     <Footer />
   </>

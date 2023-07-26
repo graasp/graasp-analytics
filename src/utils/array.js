@@ -13,9 +13,6 @@ export const filterActions = ({
   selectedUsers,
   selectedActions,
   actions,
-  // TODO: remove the argument
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  allMembersLength,
   chartFunction,
 }) => {
   const noUsers = selectedUsers === null;

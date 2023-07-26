@@ -12,7 +12,7 @@ import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
-import { DEFAULT_REQUEST_SAMPLE_SIZE } from '../../../config/constants';
+import { AVERAGE_COLOR, DEFAULT_REQUEST_SAMPLE_SIZE, GENERAL_COLOR } from '../../../config/constants';
 import { hooks } from '../../../config/queryClient';
 import {
   formatActionsByWeekday,
@@ -53,7 +53,7 @@ const ActionsByWeekdayChart = (): JSX.Element => {
   }
 
   const title = 'Actions By Weekday';
-  if (aggregateData.size === 0) {
+  if (!aggregateData.size) {
     return <EmptyChart chartTitle={t(title)} />;
   }
 
@@ -65,6 +65,7 @@ const ActionsByWeekdayChart = (): JSX.Element => {
     (o) => o.createdDayOfWeek,
   );
 
+  // fill with empty data
   for (let day = 0; day < 7; day += 1) {
     if (!createdDayOfWeekEntry.includes(day)) {
       formattedAggregateData.push({
@@ -145,11 +146,11 @@ const ActionsByWeekdayChart = (): JSX.Element => {
           <YAxis tick={{ fontSize: 14 }} domain={[0, yAxisMax]} />
           <Tooltip />
           <Legend />
-          <Bar dataKey="count" name={t('Count')} fill="#8884d8" />
+          <Bar dataKey="count" name={t('Count')} fill={GENERAL_COLOR} />
           <Bar
             dataKey="averageCount"
             name={t('Average Count')}
-            fill="#F99417"
+            fill={AVERAGE_COLOR}
           />
         </BarChart>
       </ChartContainer>

@@ -54,7 +54,7 @@ const ActionsByUserChart = () => {
       .map((d) => [d.actionType, parseInt(d.aggregateResult, 10)]),
   );
 
-  const users = selectedUsers !== null ? [selectedUsers] : allMembers;
+  const users = selectedUsers ? [selectedUsers] : allMembers;
   const title = 'Actions by User';
   if (!users) {
     return <EmptyChart chartTitle={t(title)} />;
@@ -98,7 +98,7 @@ const ActionsByUserChart = () => {
 
   formattedData.sort((a, b) => b.total - a.total);
 
-  if (formattedData.length === 0) {
+  if (!formattedData.length) {
     return <EmptyChart chartTitle={t(title)} />;
   }
 
