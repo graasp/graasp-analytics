@@ -26,7 +26,7 @@ const CustomRoot = styled(Card)(() => ({
   margin: 20,
 }));
 
-const ActiveUsersCard = (): JSX.Element => {
+const ActiveUsersCard = (): JSX.Element | null => {
   const { t } = useTranslation();
   const { view } = useContext(ViewDataContext);
   const { itemId } = useParams();
@@ -39,7 +39,6 @@ const ActiveUsersCard = (): JSX.Element => {
     itemId,
     view,
     requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
-    type: null,
     countGroupBy: [CountGroupBy.User, CountGroupBy.CreatedDay],
     aggregateFunction: AggregateFunction.Sum,
     aggregateMetric: AggregateMetric.ActionCount,
