@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Box, Chip, FormControl, InputLabel, MenuItem } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import Select from '@mui/material/Select';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { styled } from '@mui/material/styles';
 
 import { MemberRecord } from '@graasp/sdk/frontend';
@@ -18,7 +18,7 @@ const CustomRoot = styled(Grid)(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
 
-const UsersSelect = (): JSX.Element => {
+const UsersSelect = (): JSX.Element | null => {
   const { t } = useTranslation();
   const { selectedUsers, setSelectedUsers, allMembers } =
     useContext(DataContext);
@@ -27,11 +27,11 @@ const UsersSelect = (): JSX.Element => {
     return null;
   }
 
-  const handleChange = (event) => {
+  const handleChange = (event: SelectChangeEvent<MemberRecord[]>) => {
     const {
       target: { value },
     } = event;
-    setSelectedUsers(List(value));
+    setSelectedUsers(List(value as MemberRecord[]));
   };
 
   return (

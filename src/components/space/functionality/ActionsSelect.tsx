@@ -5,10 +5,9 @@ import { useTranslation } from 'react-i18next';
 
 import { Box, Chip, FormControl, InputLabel, MenuItem } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import Select from '@mui/material/Select';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { styled } from '@mui/material/styles';
 
-import { groupBy } from '../../../utils/array';
 import { DataContext } from '../../context/DataProvider';
 
 const CustomRoot = styled(Grid)(({ theme }) => ({
@@ -17,7 +16,7 @@ const CustomRoot = styled(Grid)(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
 
-const ActionsSelect = (): JSX.Element => {
+const ActionsSelect = (): JSX.Element | null => {
   const { t } = useTranslation();
   // eslint-disable-next-line no-unused-vars
   const { actions, selectedActionTypes, setSelectedActionTypes } =
@@ -25,9 +24,9 @@ const ActionsSelect = (): JSX.Element => {
   if (!actions || !actions.size) {
     return null;
   }
-  const allActions = Object.keys(groupBy('type', actions));
+  const allActions = [...new Set(actions.map((a) => a.type))];
 
-  const handleChange = (event) => {
+  const handleChange = (event: SelectChangeEvent<string[]>) => {
     const {
       target: { value },
     } = event;

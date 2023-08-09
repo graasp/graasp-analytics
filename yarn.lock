@@ -5236,6 +5236,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/google-map-react@npm:2.1.7":
+  version: 2.1.7
+  resolution: "@types/google-map-react@npm:2.1.7"
+  dependencies:
+    "@types/react": "*"
+  checksum: 0e8e014208e39624c861616021b4f8f8e085caaad3600418f33e6bf2481451ea97a1167ae4a2157cf3d1e397905721955a012b00e55d7c07d7e4bd95694dc69e
+  languageName: node
+  linkType: hard
+
 "@types/graceful-fs@npm:^4.1.2":
   version: 4.1.6
   resolution: "@types/graceful-fs@npm:4.1.6"
@@ -5324,6 +5333,31 @@ __metadata:
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: e60b153664572116dfea673c5bda7778dbff150498f44f998e34b5886d8afc47f16799280e4b6e241c0472aef1bc36add771c569c68fc5125fc2ae519a3eb9ac
+  languageName: node
+  linkType: hard
+
+"@types/lodash.capitalize@npm:4.2.7":
+  version: 4.2.7
+  resolution: "@types/lodash.capitalize@npm:4.2.7"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: dab8b781d7dcc56c18ba0c8286a6ccb61cc598d936a449265453a473e62b2b6d7c109c4447dfeb8ccacc4088769bc3bfd0d39bc8797f03e4e685d4f4b1bc7c01
+  languageName: node
+  linkType: hard
+
+"@types/lodash.truncate@npm:4.4.7":
+  version: 4.4.7
+  resolution: "@types/lodash.truncate@npm:4.4.7"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: d95ed373b514d63535f07a523244c6513bdbf4512f6b96cac28fde408be5a1212d9f5de847614c521508752a4cc150cc470b1295ad543ee31b79cb0bd310e716
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:*":
+  version: 4.14.196
+  resolution: "@types/lodash@npm:4.14.196"
+  checksum: 201d17c3e62ae02a93c99ec78e024b2be9bd75564dd8fd8c26f6ac51a985ab280d28ce2688c3bcdfe785b0991cd9814edff19ee000234c7b45d9a697f09feb6a
   languageName: node
   linkType: hard
 
@@ -11332,7 +11366,10 @@ __metadata:
     "@testing-library/react": 13.4.0
     "@testing-library/user-event": 14.4.3
     "@trivago/prettier-plugin-sort-imports": 4.0.0
+    "@types/google-map-react": 2.1.7
     "@types/jest": 29.4.0
+    "@types/lodash.capitalize": 4.2.7
+    "@types/lodash.truncate": 4.4.7
     "@types/node": 18.11.18
     "@typescript-eslint/eslint-plugin": 5.50.0
     "@typescript-eslint/parser": 5.50.0

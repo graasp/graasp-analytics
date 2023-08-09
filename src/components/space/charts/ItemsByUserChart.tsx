@@ -11,11 +11,12 @@ import {
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { ItemRecord } from '@graasp/sdk/frontend';
+
 import {
   COLORS,
   TOP_NUMBER_OF_ITEMS_TO_DISPLAY,
 } from '../../../config/constants';
-import { groupBy } from '../../../utils/array';
 import {
   filterActionsByActionTypes,
   findItemNameByPath,
@@ -38,32 +39,32 @@ const ItemsByUserChart = (): JSX.Element => {
   } = useContext(DataContext);
   const users = selectedUsers?.size ? selectedUsers : allMembers;
   const allActions = filterActionsByActionTypes(actions, selectedActionTypes);
-  const userNames = Object.keys(groupBy('name', users));
+  const userNames = [...new Set(users.map(({ name }) => name).toJS())];
 
   const groupedItems = groupByFirstLevelItems(allActions, itemData);
-  const formattedItemsByUser = [];
-  Object.entries(groupedItems).forEach(([path, actionsByItem]) => {
-    const userActions = {
-      name: findItemNameByPath(path, (children ?? List()).push(itemData)),
-      total: actionsByItem.length,
+  const formattedItemsByUser: any = [];
+  const allItems =
+    itemData && children ? children.push(itemData) : List<ItemRecord>();
+  for (const [path, actionsByItem] of groupedItems) {
+    const userActions: any = {
+      name: findItemNameByPath(path, allItems),
+      total: actionsByItem.size,
     };
-    const groupedUsers = groupBy(
-      'memberId',
-      // add memberId data to root level
-      List(actionsByItem.map((a) => ({ ...a, memberId: a?.member?.id }))),
-    );
-    Object.entries(groupedUsers).forEach((groupedUser) => {
+    const groupedUsers = actionsByItem.groupBy((i) => i.member?.id);
+    for (const groupedUser of groupedUsers) {
       users.forEach((user) => {
         if (user.id === groupedUser[0]) {
-          userActions[user.name] = groupedUser[1].length;
+          userActions[user.name] = groupedUser[1].size;
         }
       });
-    });
+    }
     formattedItemsByUser.push(userActions);
-  });
+  }
 
   // limit to 10 first
-  formattedItemsByUser.sort((a, b) => b.total - a.total);
+  formattedItemsByUser.sort(
+    (a: { total: number }, b: { total: number }) => b.total - a.total,
+  );
 
   const title = `${TOP_NUMBER_OF_ITEMS_TO_DISPLAY} Most Interacted Items by User`;
   if (!formattedItemsByUser.length) {

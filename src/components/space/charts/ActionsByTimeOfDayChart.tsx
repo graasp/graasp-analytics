@@ -36,7 +36,7 @@ import { DataContext } from '../../context/DataProvider';
 import { ViewDataContext } from '../../context/ViewDataProvider';
 import EmptyChart from './EmptyChart';
 
-const ActionsByTimeOfDayChart = (): JSX.Element => {
+const ActionsByTimeOfDayChart = (): JSX.Element | null => {
   const { t } = useTranslation();
   const { actions, selectedUsers, selectedActionTypes } =
     useContext(DataContext);
@@ -68,10 +68,15 @@ const ActionsByTimeOfDayChart = (): JSX.Element => {
     return <EmptyChart chartTitle={t(title)} />;
   }
 
-  const formattedAggregateData = aggregateData.toArray().map((d) => ({
-    averageCount: parseFloat(d.aggregateResult),
-    timeOfDay: parseFloat(d.createdTimeOfDay),
-  }));
+  const formattedAggregateData: {
+    averageCount: number;
+    timeOfDay: number;
+  }[] = aggregateData
+    .toArray()
+    .map((d: { aggregateResult: number; createdTimeOfDay: string }) => ({
+      averageCount: d.aggregateResult,
+      timeOfDay: parseFloat(d.createdTimeOfDay),
+    }));
 
   const timeOfDayEntry = formattedAggregateData.map((o) => o.timeOfDay);
 

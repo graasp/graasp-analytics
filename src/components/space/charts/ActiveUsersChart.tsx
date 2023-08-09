@@ -30,7 +30,7 @@ import { DataContext } from '../../context/DataProvider';
 import { ViewDataContext } from '../../context/ViewDataProvider';
 import EmptyChart from './EmptyChart';
 
-const ActiveUsersChart = (): JSX.Element => {
+const ActiveUsersChart = (): JSX.Element | null => {
   const { t } = useTranslation();
   const { view } = useContext(ViewDataContext);
   const { selectedActionTypes } = useContext(DataContext);
@@ -61,15 +61,19 @@ const ActiveUsersChart = (): JSX.Element => {
     return <EmptyChart chartTitle={t(title)} />;
   }
 
-  const formattedAggregateData = aggregateData
-    .toArray()
-    .sort((a, b) => a.createdDay.getTime() - b.createdDay.getTime())
-    .map((d) => ({
-      count: d.aggregateResult,
-      date: `${d.createdDay.getDate()}-${
-        d.createdDay.getMonth() + 1
-      }-${d.createdDay.getFullYear()}`,
-    }));
+  const formattedAggregateData: { count: number; date: string }[] =
+    aggregateData
+      .toArray()
+      .sort(
+        (a: { createdDay: Date }, b: { createdDay: Date }) =>
+          a.createdDay.getTime() - b.createdDay.getTime(),
+      )
+      .map((d: { aggregateResult: number; createdDay: Date }) => ({
+        count: d.aggregateResult,
+        date: `${d.createdDay.getDate()}-${
+          d.createdDay.getMonth() + 1
+        }-${d.createdDay.getFullYear()}`,
+      }));
 
   const maxCount = formattedAggregateData.reduce(
     (max, cur) => Math.max(max, cur.count),

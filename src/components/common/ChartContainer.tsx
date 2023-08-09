@@ -7,7 +7,7 @@ import { CONTAINER_HEIGHT } from '../../config/constants';
 const ChartContainer = ({
   children,
 }: {
-  children?: JSX.Element;
+  children: JSX.Element;
 }): JSX.Element => (
   <Box
     sx={{

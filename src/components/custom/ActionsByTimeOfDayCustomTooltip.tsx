@@ -21,10 +21,10 @@ const ActionsByTimeOfDayCustomTooltip = ({
   active: boolean;
   payload: { value: string }[];
   label: string;
-}): JSX.Element => {
+}): JSX.Element | null => {
   const { t } = useTranslation();
 
-  const generateAddedTooltipText = (input) => {
+  const generateAddedTooltipText = (input: string) => {
     switch (input) {
       case LATE_NIGHT:
         return '00:00-04:00';

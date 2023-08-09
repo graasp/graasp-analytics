@@ -19,10 +19,7 @@ type Props = {
   selectFilter?: JSX.Element;
 };
 
-const EmptyChart = ({
-  chartTitle,
-  selectFilter = null,
-}: Props): JSX.Element => {
+const EmptyChart = ({ chartTitle, selectFilter }: Props): JSX.Element => {
   const { t } = useTranslation();
 
   const message = t('No actions to show for this user');

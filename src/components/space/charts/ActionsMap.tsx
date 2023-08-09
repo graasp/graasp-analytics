@@ -13,6 +13,7 @@ import {
   DEFAULT_ZOOM,
   ENTER_KEY,
   MAX_CLUSTER_ZOOM,
+  REACT_APP_GOOGLE_KEY,
 } from '../../../config/constants';
 import {
   filterActionsByUsers,
@@ -22,15 +23,19 @@ import ChartContainer from '../../common/ChartContainer';
 import ChartTitle from '../../common/ChartTitle';
 import { DataContext } from '../../context/DataProvider';
 
-const Marker = ({ children }) => children;
+const Marker = ({ children }: { children: JSX.Element }) => children;
 
-const ActionsMap = (): JSX.Element => {
+const ActionsMap = (): JSX.Element | null => {
   const theme = useTheme();
   const { t } = useTranslation();
   const mapRef = useRef<any>();
-  const [bounds, setBounds] = useState(null);
+  const [bounds, setBounds] = useState<number[]>();
   const [zoom, setZoom] = useState(DEFAULT_ZOOM);
   const { actions, selectedUsers } = useContext(DataContext);
+
+  if (!REACT_APP_GOOGLE_KEY) {
+    return null;
+  }
 
   // actionsToChart is the array converted to GeoJSON Feature objects below
   // if you remove all names in the react-select dropdown, selectedUsers becomes null
@@ -47,7 +52,9 @@ const ActionsMap = (): JSX.Element => {
   }
 
   // GeoJSON Feature objects
-  const points = mapActionsToGeoJsonFeatureObjects(actionsToChart.toJS());
+  const points = mapActionsToGeoJsonFeatureObjects(
+    actionsToChart.toJS() as any,
+  );
 
   const { clusters } = useSupercluster({
     points,
@@ -57,13 +64,13 @@ const ActionsMap = (): JSX.Element => {
   });
 
   const calculateClusterRadius = (
-    clusterCount,
-    totalCount,
-    baseRadius,
-    scalar,
+    clusterCount: number,
+    totalCount: number,
+    baseRadius: number,
+    scalar: number,
   ) => baseRadius + (clusterCount / totalCount) * scalar;
 
-  const handleClusterZoom = (longitude, latitude) => {
+  const handleClusterZoom = (longitude: number, latitude: number) => {
     if (!mapRef.current) {
       return;
     }
@@ -77,12 +84,9 @@ const ActionsMap = (): JSX.Element => {
       <ChartTitle title={t('Actions by Location')} />
       <ChartContainer>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
+          bootstrapURLKeys={{ key: REACT_APP_GOOGLE_KEY }}
           defaultCenter={{ lat: DEFAULT_LATITUDE, lng: DEFAULT_LONGITUDE }}
           defaultZoom={DEFAULT_ZOOM}
-          distanceToMouse={() => {
-            // do nothing
-          }}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map }) => {
             mapRef.current = map;

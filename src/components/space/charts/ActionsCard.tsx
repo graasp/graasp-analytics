@@ -61,17 +61,19 @@ const ActiveUsersCard = (): JSX.Element | null => {
   let totalActionsThisWeek = 0;
   let totalActionsToday = 0;
 
-  aggregateData.toArray().forEach((o) => {
-    const actionTime = o.createdDay.getTime();
-    totalActions += parseInt(o.aggregateResult, 10);
-    if (actionTime > today) {
-      totalActionsToday += parseInt(o.aggregateResult, 10);
+  (
+    aggregateData.toArray() as { createdDay: Date; aggregateResult: number }[]
+  ).forEach(({ aggregateResult, createdDay }) => {
+    const actionTime = createdDay.getTime();
+    totalActions += aggregateResult;
+    if (actionTime > today.getTime()) {
+      totalActionsToday += aggregateResult;
     }
-    if (actionTime > oneWeekAgo) {
-      totalActionsThisWeek += parseInt(o.aggregateResult, 10);
+    if (actionTime > oneWeekAgo.getTime()) {
+      totalActionsThisWeek += aggregateResult;
     }
-    if (actionTime > oneMonthAgo) {
-      totalActionsThisMonth += parseInt(o.aggregateResult, 10);
+    if (actionTime > oneMonthAgo.getTime()) {
+      totalActionsThisMonth += aggregateResult;
     }
   });
 

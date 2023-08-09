@@ -1,4 +1,4 @@
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 import capitalize from 'lodash.capitalize';
 import truncate from 'lodash.truncate';
 
@@ -11,7 +11,7 @@ import {
   OTHER_VERB,
 } from '../config/constants';
 
-const getActionDay = (action) => {
+const getActionDay = (action: ActionRecord) => {
   const dateKey = 'createdAt';
   // createdAt should have the format "2020-12-31T23:59:59.999Z"
   const dateObject = action[dateKey];
@@ -32,20 +32,22 @@ export const getActionsByDay = (
 // Takes object with {key: value} pairs of {date: #-of-actions} and returns a date-sorted array in Recharts.js format
 // TODO: types
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const formatActionsByDay = (actionsByDayObject: any): any => {
+export const formatActionsByDay = (
+  actionsByDayObject: Map<string, List<ActionRecord>>,
+) => {
   const actionsByDayArray = Object.entries(actionsByDayObject);
   const sortedActionsByDay = actionsByDayArray.sort(
-    (entryA, entryB) => Date.parse(entryA[0]) - Date.parse(entryB[0]),
+    ([d1], [d2]) => Date.parse(d1) - Date.parse(d2),
   );
-  return sortedActionsByDay.map((entry) => {
-    const entryDate = new Date(entry[0]);
+  return sortedActionsByDay.map(([date, count]) => {
+    const entryDate = new Date(date);
     return {
       date: `${entryDate.getDate()}-${
         entryDate.getMonth() + 1
       }-${entryDate.getFullYear()}`,
-      count: entry[1],
+      count,
     };
-  });
+  }) as { date: string; count: number }[];
 };
 
 export const mapActionsToGeoJsonFeatureObjects = (
@@ -75,7 +77,7 @@ export const mapActionsToGeoJsonFeatureObjects = (
     });
 
 // helper function used in getActionsByTimeOfDay below
-const getActionHourOfDay = (action) => {
+const getActionHourOfDay = (action: ActionRecord) => {
   const dateKey = 'createdAt';
   // createdAt should have the format "2020-12-31T23:59:59.999Z"
   const date = new Date(action[dateKey]);
@@ -87,7 +89,7 @@ const getActionHourOfDay = (action) => {
 export const getActionsByTimeOfDay = (
   actions: List<ActionRecord>,
 ): { [key: number]: number } => {
-  const actionsByTimeOfDay = {};
+  const actionsByTimeOfDay: { [key: number]: number } = {};
   for (let hours = 0; hours < 24; hours += 1) {
     actionsByTimeOfDay[hours] = 0;
   }
@@ -111,10 +113,9 @@ export const formatActionsByTimeOfDay = (actionsByTimeOfDayObject: {
 };
 
 // helper function used in getActionsByWeekday below
-const getActionWeekday = (action) => {
-  const dateKey = 'createdAt';
+const getActionWeekday = (action: ActionRecord) => {
   // createdAt should have the format "2020-12-31T23:59:59.999Z"
-  const date = action[dateKey];
+  const date = action.createdAt;
   const weekday = date.getDay();
   return weekday;
 };
@@ -133,9 +134,11 @@ export const getActionsByWeekday = (
 // Takes object with {key: value} pairs of {weekday: #-of-actions}
 // returns an array in Recharts.js format
 export const formatActionsByWeekday = (actionsByWeekdayObject: {
-  [key: string]: number;
+  [key: number]: number;
 }): { day: string; count: number }[] => {
-  const weekdayEnum = {
+  const weekdayEnum: {
+    [key: string]: string;
+  } = {
     0: 'Sunday',
     1: 'Monday',
     2: 'Tuesday',
@@ -156,7 +159,7 @@ export const getActionsByVerb = (
   actions: List<ActionRecord>,
 ): { [key: string]: number } => {
   const totalActions = actions.size;
-  const actionsByVerb = {};
+  const actionsByVerb: { [key: string]: number } = {};
   actions.forEach((action) => {
     if (!actionsByVerb[action.type]) {
       // if type is still not in the actionsByVerb object, add it and assign it to (1 / totalActions)
@@ -177,12 +180,12 @@ export const formatActionsByVerb = (actionsByVerbObject: {
 }[] => {
   const actionsByVerbArray = Object.entries(actionsByVerbObject);
   // capitalize verbs (entry[0][0]), convert 0.0x notation to x% and round to two decimal places (entry[0][1])
-  const formattedActionsByVerbArray = actionsByVerbArray
-    .map((entry) => [
-      capitalize(entry[0]),
-      parseFloat((entry[1] * 100).toFixed(2)),
-    ])
-    .filter((entry) => entry[1] >= MIN_PERCENTAGE_TO_SHOW_VERB);
+  let formattedActionsByVerbArray: [string, number][] = actionsByVerbArray.map(
+    (entry) => [capitalize(entry[0]), parseFloat((entry[1] * 100).toFixed(2))],
+  );
+  formattedActionsByVerbArray = formattedActionsByVerbArray.filter(
+    (entry: [string, number]) => entry[1] >= MIN_PERCENTAGE_TO_SHOW_VERB,
+  );
 
   // add ['other', x%] to cover all verbs that are filtered out of the array
   if (formattedActionsByVerbArray.length) {
@@ -217,8 +220,9 @@ export const filterActionsByUsers = (
     return actions;
   }
   const selectedUserIds = selectedUsers.map(({ id }) => id);
-  return actions.filter((action) =>
-    selectedUserIds.includes(action?.member?.id),
+  return actions.filter(
+    (action) =>
+      action?.member?.id && selectedUserIds.includes(action.member.id),
   );
 };
 
@@ -234,7 +238,9 @@ export const filterActionsByActionTypes = (
 };
 
 // given an object key->count, findYAxisMax finds max value to set on the yAxis in the graph in ActionsByDayChart.js
-export const findYAxisMax = (actions: { [key: string]: number }): number => {
+export const findYAxisMax = (actions: {
+  [key: string]: number;
+}): number | null => {
   const arrayOfActionsCount = Object.values(actions);
   if (!arrayOfActionsCount.length) {
     return null;
@@ -262,20 +268,22 @@ export const findItemNameByPath = (
 // group children of children under the same parent
 export const groupByFirstLevelItems = (
   actions: List<ActionRecord>,
-  item: ItemRecord,
-): { [key: string]: Action[] } => {
+  item?: ItemRecord,
+): Map<string, List<ActionRecord>> => {
   if (!item) {
-    return {};
+    return Map();
   }
 
   const nbLevelParent = item.path.split('.').length;
 
   // compare first level only
-  const d = actions.groupBy((a) =>
-    a.item?.path
-      ?.split('.')
-      ?.slice(0, nbLevelParent + 1)
-      ?.join('.'),
-  );
-  return d.toJS() as { [key: string]: Action[] };
+  const d = actions
+    .filter((a) => a.item)
+    .groupBy((a) =>
+      a
+        .item!.path.split('.')
+        .slice(0, nbLevelParent + 1)
+        .join('.'),
+    );
+  return d;
 };

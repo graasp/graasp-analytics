@@ -14,7 +14,6 @@ import {
   ACTIONS_BY_USER_MAX_DISPLAYED_USERS,
   COLORS,
 } from '../../../config/constants';
-import { groupBy } from '../../../utils/array';
 import {
   filterActionsByActionTypes,
   filterActionsByUsers,
@@ -29,22 +28,27 @@ const UsersByActionByChart = (): JSX.Element => {
   const { actions, selectedUsers, selectedActionTypes, allMembers } =
     useContext(DataContext);
   const allActions = filterActionsByActionTypes(actions, selectedActionTypes);
-  const types = Object.keys(groupBy('type', allActions));
+  const types = [...new Set(allActions.map((a) => a.type).toJS())];
 
-  let formattedUsersByAction = [];
+  let formattedUsersByAction: any[] = [];
+  const filteredActions = filterActionsByUsers(
+    allActions,
+    selectedUsers,
+  ).groupBy((a) => a.member?.id);
   allMembers.forEach((user) => {
-    const filteredActions = filterActionsByUsers(allActions, selectedUsers);
-    const groupedActions = groupBy('type', filteredActions);
-    const userActions = {
-      id: user.id,
-      name: user.name,
-      total: 0,
-    };
-    Object.entries(groupedActions).forEach((action) => {
-      userActions[action[0]] = action[1].length;
-      userActions.total += action[1].length;
-    });
-    formattedUsersByAction.push(userActions);
+    const groupedActions = filteredActions.get(user.id)?.groupBy((a) => a.type);
+    if (groupedActions?.size) {
+      const userActions: any = {
+        id: user.id,
+        name: user.name,
+        total: 0,
+      };
+      for (const [type, list] of groupedActions.entries()) {
+        userActions[type] = list.size;
+        userActions.total += list.size;
+      }
+      formattedUsersByAction.push(userActions);
+    }
   });
   const maxUsers = ACTIONS_BY_USER_MAX_DISPLAYED_USERS;
   const title = `${ACTIONS_BY_USER_MAX_DISPLAYED_USERS} Most Active Users`;

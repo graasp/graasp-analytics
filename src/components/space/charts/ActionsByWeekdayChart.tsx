@@ -36,7 +36,7 @@ import { DataContext } from '../../context/DataProvider';
 import { ViewDataContext } from '../../context/ViewDataProvider';
 import EmptyChart from './EmptyChart';
 
-const ActionsByWeekdayChart = (): JSX.Element => {
+const ActionsByWeekdayChart = (): JSX.Element | null => {
   const { t } = useTranslation();
   const { actions, selectedUsers, selectedActionTypes } =
     useContext(DataContext);
@@ -68,10 +68,15 @@ const ActionsByWeekdayChart = (): JSX.Element => {
     return <EmptyChart chartTitle={t(title)} />;
   }
 
-  let formattedAggregateData = aggregateData.toArray().map((d) => ({
-    aggregateResult: parseFloat(d.aggregateResult),
-    createdDayOfWeek: parseFloat(d.createdDayOfWeek),
-  }));
+  const formattedAggregateData: {
+    aggregateResult: number;
+    createdDayOfWeek: number;
+  }[] = aggregateData
+    .toArray()
+    .map((d: { aggregateResult: number; createdDayOfWeek: string }) => ({
+      aggregateResult: d.aggregateResult,
+      createdDayOfWeek: parseFloat(d.createdDayOfWeek),
+    }));
   const createdDayOfWeekEntry = formattedAggregateData.map(
     (o) => o.createdDayOfWeek,
   );
@@ -99,8 +104,10 @@ const ActionsByWeekdayChart = (): JSX.Element => {
   formattedAggregateData.sort(
     (a, b) => a.createdDayOfWeek - b.createdDayOfWeek,
   );
-  formattedAggregateData = formattedAggregateData.map((d) => ({
+  const formattedAggregateDataWithWeekday = formattedAggregateData.map((d) => ({
     averageCount: d.aggregateResult,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     day: weekdayEnum[d.createdDayOfWeek],
   }));
 
@@ -124,7 +131,7 @@ const ActionsByWeekdayChart = (): JSX.Element => {
 
   const formattedActionsByWeekday = formatActionsByWeekday(actionsByWeekday);
 
-  const mergedData = formattedAggregateData.map((o1) =>
+  const mergedData = formattedAggregateDataWithWeekday.map((o1) =>
     Object.assign(
       o1,
       formattedActionsByWeekday.find((o2) => o2.day === o1.day) ?? {

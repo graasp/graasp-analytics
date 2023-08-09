@@ -15,8 +15,10 @@ const ExportData = (): JSX.Element => {
   const { itemId } = useParams();
 
   const onClick = () => {
-    setClicked(true);
-    exportActions(itemId);
+    if (itemId) {
+      setClicked(true);
+      exportActions(itemId);
+    }
   };
 
   if (clicked) {

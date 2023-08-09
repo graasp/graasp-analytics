@@ -32,7 +32,7 @@ const defaultValue: {
 } = {
   actions: List(),
   allMembers: List(),
-  selectedUsers: null,
+  selectedUsers: List(),
   itemChildren: List(),
   setSelectedUsers: () => {
     // do nothing
@@ -40,7 +40,7 @@ const defaultValue: {
   setSelectedActionTypes: () => {
     // do nothing
   },
-  selectedActionTypes: null,
+  selectedActionTypes: List(),
   error: false,
   isLoading: true,
   requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
@@ -166,6 +166,8 @@ const DataProvider = ({ children }: Props): JSX.Element => {
 
   useEffect(() => {
     // fetch corresponding data only when view is shown
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     if (!enabledArray[view]) {
       setEnabledArray({ ...enabledArray, [view]: true });
     }

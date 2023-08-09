@@ -2,7 +2,13 @@ import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import InfoIcon from '@mui/icons-material/Info';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Tooltip from '@mui/material/Tooltip';
 import { styled } from '@mui/material/styles';
@@ -22,8 +28,8 @@ const ViewSelect = (): JSX.Element => {
 
   const { view, setView } = useContext(ViewDataContext);
 
-  const handleChange = ({ target: { value } }) => {
-    setView(value);
+  const handleChange = ({ target: { value } }: SelectChangeEvent<Context>) => {
+    setView(value as Context);
   };
 
   let viewMessage = '';

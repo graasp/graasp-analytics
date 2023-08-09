@@ -19,7 +19,7 @@ import { DataContext } from '../../context/DataProvider';
 import { ViewDataContext } from '../../context/ViewDataProvider';
 import EmptyChart from './EmptyChart';
 
-const TotalActionsByVerbChart = (): JSX.Element => {
+const TotalActionsByVerbChart = (): JSX.Element | null => {
   const { t } = useTranslation();
   const { selectedActionTypes } = useContext(DataContext);
   const { view } = useContext(ViewDataContext);
@@ -50,10 +50,13 @@ const TotalActionsByVerbChart = (): JSX.Element => {
     return <EmptyChart chartTitle={t(title)} />;
   }
 
-  const formattedAggregateData = aggregateData.toArray().map((d) => ({
-    actionCount: parseFloat(d.aggregateResult),
-    type: d.actionType,
-  }));
+  const formattedAggregateData: { actionCount: number; type: string }[] =
+    aggregateData
+      .toArray()
+      .map((d: { aggregateResult: number; actionType: string }) => ({
+        actionCount: d.aggregateResult,
+        type: d.actionType,
+      }));
 
   const totalActions = formattedAggregateData.reduce(
     (sum, cur) => sum + cur.actionCount,

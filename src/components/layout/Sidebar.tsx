@@ -11,7 +11,7 @@ const Sidebar: FC = () => {
   const { t } = useTranslation();
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
-    element.scrollIntoView({ behavior: 'smooth' });
+    element?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

@@ -1,4 +1,3 @@
-import { List } from 'immutable';
 import {
   Bar,
   CartesianGrid,
@@ -21,7 +20,6 @@ import {
 
 import { COLORS, DEFAULT_REQUEST_SAMPLE_SIZE } from '../../../config/constants';
 import { hooks } from '../../../config/queryClient';
-import { groupBy } from '../../../utils/array';
 import { filterActionsByActionTypes } from '../../../utils/utils';
 import ChartContainer from '../../common/ChartContainer';
 import ChartTitle from '../../common/ChartTitle';
@@ -29,7 +27,7 @@ import { DataContext } from '../../context/DataProvider';
 import { ViewDataContext } from '../../context/ViewDataProvider';
 import EmptyChart from './EmptyChart';
 
-const ActionsByUserChart = (): JSX.Element => {
+const ActionsByUserChart = (): JSX.Element | null => {
   const { t } = useTranslation();
   const { actions, selectedUsers, selectedActionTypes, allMembers } =
     useContext(DataContext);
@@ -58,7 +56,10 @@ const ActionsByUserChart = (): JSX.Element => {
   const aggregateDataMap = new Map(
     aggregateData
       .toArray()
-      .map((d) => [d.actionType, parseInt(d.aggregateResult, 10)]),
+      .map((d: { actionType: string; aggregateResult: number }) => [
+        d.actionType,
+        d.aggregateResult,
+      ]),
   );
 
   const users = selectedUsers?.size ? selectedUsers : allMembers;
@@ -68,45 +69,33 @@ const ActionsByUserChart = (): JSX.Element => {
   }
 
   const allActions = filterActionsByActionTypes(actions, selectedActionTypes);
-  const userNames = Object.keys(groupBy('name', users));
+  const actionsByUser = users.groupBy((u) => u.name);
 
   // for each action type, further group by member id, and then sum the number of actions
-  let groupedActions = Object.entries(groupBy('type', allActions));
-  const formattedData = [];
+  const groupedActions = allActions.groupBy((a) => a.type);
+  const formattedData: { type: any; total: any; others: any }[] = [];
 
-  // filter out non selected action types
-  if (selectedActionTypes?.size) {
-    groupedActions = groupedActions.filter(([type]) =>
-      selectedActionTypes.includes(type),
-    );
-  }
-  groupedActions.forEach(([key, actionsByType]) => {
-    const groupedUsers = groupBy(
-      'memberId',
-      // add member id to root level
-      List(actionsByType.map((a) => ({ ...a, memberId: a?.member?.id }))),
-    );
-    const userActions = {
-      type: key,
-      total: aggregateDataMap.get(key) ?? 0,
-      others: aggregateDataMap.get(key) ?? 0,
+  for (const [type, actionsByType] of groupedActions.entries()) {
+    // filter out non selected action types
+    if (selectedActionTypes.size && !selectedActionTypes.includes(type)) {
+      continue;
+    }
+    const groupedUsers = actionsByType.groupBy((a) => a?.member?.id);
+
+    const userActions: any = {
+      type,
+      total: aggregateDataMap.get(type) ?? 0,
+      others: aggregateDataMap.get(type) ?? 0,
     };
-    Object.entries(groupedUsers).forEach((groupedUser) => {
+    for (const [id, list] of groupedUsers.entries()) {
       users.forEach((user) => {
-        if (user.id === groupedUser[0]) {
-          userActions[user.name] = groupedUser[1].length;
+        if (user.id === id) {
+          userActions[user.name] = list.size;
         }
       });
-    });
+    }
     formattedData.push(userActions);
-  });
-  formattedData.forEach((userActions) => {
-    userNames.forEach((name) => {
-      // eslint-disable-next-line no-param-reassign
-      userActions.others -= userActions[name] ?? 0;
-    });
-  });
-  userNames.push('others');
+  }
 
   formattedData.sort((a, b) => b.total - a.total);
 
@@ -123,7 +112,7 @@ const ActionsByUserChart = (): JSX.Element => {
           <XAxis dataKey="type" tick={{ fontSize: 14 }} />
           <YAxis tick={{ fontSize: 14 }} />
           <Tooltip />
-          {userNames.map((name, index) => (
+          {Array.from(actionsByUser.keys(), (name, index) => (
             <Bar
               key=""
               dataKey={name}

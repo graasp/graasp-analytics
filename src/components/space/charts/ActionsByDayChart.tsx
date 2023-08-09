@@ -1,3 +1,4 @@
+import { List, Map } from 'immutable';
 import {
   CartesianGrid,
   Legend,
@@ -18,6 +19,7 @@ import {
   AggregateMetric,
   CountGroupBy,
 } from '@graasp/sdk';
+import { ActionRecord } from '@graasp/sdk/frontend';
 
 import {
   AVERAGE_COLOR,
@@ -33,7 +35,7 @@ import { DataContext } from '../../context/DataProvider';
 import { ViewDataContext } from '../../context/ViewDataProvider';
 import EmptyChart from './EmptyChart';
 
-const ActionsByDayChart = (): JSX.Element => {
+const ActionsByDayChart = (): JSX.Element | null => {
   const { t } = useTranslation();
   const { actions, selectedUsers, selectedActionTypes } =
     useContext(DataContext);
@@ -65,12 +67,13 @@ const ActionsByDayChart = (): JSX.Element => {
     return <EmptyChart chartTitle={t(title)} />;
   }
 
-  const formattedAggregateData = aggregateData
-    .toArray()
+  const formattedAggregateData = (
+    aggregateData.toArray() as { aggregateResult: number; createdDay: Date }[]
+  )
     // sort by creation date
     .sort((a, b) => a.createdDay.getTime() - b.createdDay.getTime())
     .map((d) => ({
-      averageCount: parseFloat(d.aggregateResult).toFixed(2),
+      averageCount: d.aggregateResult,
       date: `${d.createdDay.getDate()}-${
         d.createdDay.getMonth() + 1
       }-${d.createdDay.getFullYear()}`,
@@ -84,7 +87,7 @@ const ActionsByDayChart = (): JSX.Element => {
   // e.g. we retrieve 100 total actions and 10 users, but these 10 users have only made 90 actions
   // therefore, to avoid confusion: when all users are selected, show all actions
 
-  let actionsByDay = {};
+  let actionsByDay = Map<string, List<ActionRecord>>();
   if (actions?.size) {
     actionsByDay = filterActions({
       selectedUsers,
@@ -95,7 +98,11 @@ const ActionsByDayChart = (): JSX.Element => {
   }
 
   const formattedActionsByDay = formatActionsByDay(actionsByDay);
-  const mergedData = formattedAggregateData.map((o1) =>
+  const mergedData: {
+    date: string;
+    count: number;
+    averageCount: number;
+  }[] = formattedAggregateData.map((o1) =>
     Object.assign(
       o1,
       formattedActionsByDay.find((o2) => o2.date === o1.date) ?? { count: 0 },
@@ -119,7 +126,12 @@ const ActionsByDayChart = (): JSX.Element => {
     <>
       <ChartTitle title={t(title)} />
       <ChartContainer>
-        <LineChart data={mergedData}>
+        <LineChart
+          data={mergedData.map((entry) => ({
+            ...entry,
+            averageCount: entry.averageCount.toFixed(2),
+          }))}
+        >
           <CartesianGrid strokeDasharray="2" />
           <XAxis dataKey="date" tick={{ fontSize: 14 }} />
           <YAxis tick={{ fontSize: 14 }} domain={[0, yAxisMax]} />

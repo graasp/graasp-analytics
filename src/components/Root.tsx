@@ -16,7 +16,9 @@ import {
 } from '../config/queryClient';
 import App from './App';
 
-ReactGa.initialize(REACT_APP_GOOGLE_ANALYTICS_ID);
+if (REACT_APP_GOOGLE_ANALYTICS_ID) {
+  ReactGa.initialize(REACT_APP_GOOGLE_ANALYTICS_ID);
+}
 
 const CustomRoot = styled('div')({
   display: 'flex',

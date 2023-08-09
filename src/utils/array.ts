@@ -4,16 +4,6 @@ import { ActionRecord, MemberRecord } from '@graasp/sdk/frontend';
 
 import { filterActionsByActionTypes, filterActionsByUsers } from './utils';
 
-export function groupBy<T>(key: string, arr: List<T>): { [key: string]: T[] } {
-  return arr.reduce(
-    (acc, cur) => ({
-      ...acc,
-      [cur[key]]: cur[key] in acc ? acc[cur[key]].concat(cur) : [cur],
-    }),
-    {},
-  );
-}
-
 export function filterActions<T>({
   selectedUsers,
   selectedActionTypes,

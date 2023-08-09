@@ -11,11 +11,12 @@ import {
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { ItemRecord } from '@graasp/sdk/frontend';
+
 import {
   COLORS,
   TOP_NUMBER_OF_ITEMS_TO_DISPLAY,
 } from '../../../config/constants';
-import { groupBy } from '../../../utils/array';
 import {
   filterActionsByActionTypes,
   findItemNameByPath,
@@ -35,22 +36,23 @@ const ItemsByActionChart = (): JSX.Element => {
     itemChildren: children,
   } = useContext(DataContext);
   const allActions = filterActionsByActionTypes(actions, selectedActionTypes);
-  const types = Object.keys(groupBy('type', allActions));
+  const types = [...new Set(allActions.map((a) => a.type).toJS())];
 
   const groupedItems = groupByFirstLevelItems(allActions, item);
-  const formattedItemsByAction = [];
-  Object.entries(groupedItems).forEach((groupedItem) => {
-    const currentPath = groupedItem[0];
-    const userActions = {
-      name: findItemNameByPath(currentPath, (children ?? List()).push(item)),
-      total: groupedItem[1].length,
+  const formattedItemsByAction: any[] = [];
+  const allItems: List<ItemRecord> =
+    item && children ? children.push(item) : List();
+  for (const [currentPath, items] of groupedItems) {
+    const userActions: any = {
+      name: findItemNameByPath(currentPath, allItems),
+      total: items.size,
     };
-    const groupedActions = groupBy('type', List(groupedItem[1]));
-    Object.entries(groupedActions).forEach((groupedAction) => {
-      userActions[groupedAction[0]] = groupedAction[1].length;
-    });
+    const groupedActions = items.groupBy((i) => i.type);
+    for (const groupedAction of groupedActions) {
+      userActions[groupedAction[0]] = groupedAction[1].size;
+    }
     formattedItemsByAction.push(userActions);
-  });
+  }
   formattedItemsByAction.sort((a, b) => b.total - a.total);
   const title = `${TOP_NUMBER_OF_ITEMS_TO_DISPLAY} Most Interacted Items by Action`;
   if (!formattedItemsByAction.length) {
