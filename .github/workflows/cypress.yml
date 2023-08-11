@@ -36,7 +36,7 @@ jobs:
         run: yarn build
         shell: bash
         env:
-          REACT_APP_API_HOST: ${{ secrets.REACT_APP_API_HOST }}
+          REACT_APP_API_HOST: 'http://localhost:3000'
           REACT_APP_ENABLE_MOCK_API: true
           PORT: 3113
 
@@ -52,8 +52,8 @@ jobs:
           config-file: cypress.config.ts
           cache-key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
         env:
-          REACT_APP_API_HOST: ${{ secrets.REACT_APP_API_HOST }}
-          REACT_APP_ENABLE_MOCK_API: 'true'
+          REACT_APP_API_HOST: 'http://localhost:3000'
+          REACT_APP_ENABLE_MOCK_API: true
           PORT: 3113
 
       # after the test run completes
