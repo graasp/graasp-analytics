@@ -37,6 +37,7 @@ jobs:
         shell: bash
         env:
           REACT_APP_API_HOST: ${{ secrets.REACT_APP_API_HOST }}
+          REACT_APP_ENABLE_MOCK_API: true
 
       #  use the Cypress GitHub Action to run Cypress tests within the chrome browser
       - name: Cypress run
@@ -51,6 +52,7 @@ jobs:
           cache-key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
         env:
           REACT_APP_API_HOST: ${{ secrets.REACT_APP_API_HOST }}
+          REACT_APP_ENABLE_MOCK_API: true
 
       # after the test run completes
       # store any screenshots
