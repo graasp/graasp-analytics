@@ -44,7 +44,7 @@ jobs:
         with:
           install: false
           # we launch the app in preview mode to avoid issues with hmr websockets from vite polluting the mocks
-          start: yarn preview:test
+          start: yarn start:ci
           browser: chrome
           quiet: true
           config-file: cypress.config.ts
