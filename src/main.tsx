@@ -1,15 +1,18 @@
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 
+import pkg from '../package.json';
 import Root from './components/Root';
-import { API_HOST, ENABLE_MOCK_API } from './config/constants';
 import {
+  API_HOST,
+  APP_VERSION,
+  ENABLE_MOCK_API,
   SENTRY_DSN,
-  SENTRY_ENVIRONMENT,
-  SENTRY_TRACE_SAMPLE_RATE,
-} from './config/sentry';
+} from './config/env';
+import { SENTRY_ENVIRONMENT, SENTRY_TRACE_SAMPLE_RATE } from './config/sentry';
 import './index.css';
 import MOCK_ITEMS from './mockServer/mockData/items';
 import MOCK_MEMBERS from './mockServer/mockData/members';
@@ -41,7 +44,7 @@ Sentry.init({
   dsn: SENTRY_DSN,
   integrations: [new BrowserTracing()],
   environment: SENTRY_ENVIRONMENT,
-
+  release: `${pkg.name}@${APP_VERSION}`,
   // Set tracesSampleRate to 1.0 to capture 100%
   // of transactions for performance monitoring.
   // We recommend adjusting this value in production
@@ -51,7 +54,11 @@ Sentry.init({
 const container = document.getElementById('root');
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const root = createRoot(container!);
-root.render(<Root />);
+root.render(
+  <React.StrictMode>
+    <Root />
+  </React.StrictMode>,
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
