@@ -1,8 +1,8 @@
-import * as Sentry from '@sentry/react';
-import { BrowserTracing } from '@sentry/tracing';
-
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+
+import * as Sentry from '@sentry/react';
+import { BrowserTracing } from '@sentry/tracing';
 
 import pkg from '../package.json';
 import Root from './components/Root';
