@@ -1,8 +1,7 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 
 import * as Sentry from '@sentry/react';
-import { BrowserTracing } from '@sentry/tracing';
 
 import pkg from '../package.json';
 import Root from './components/Root';
@@ -13,7 +12,6 @@ import {
   SENTRY_DSN,
 } from './config/env';
 import { SENTRY_ENVIRONMENT, SENTRY_TRACE_SAMPLE_RATE } from './config/sentry';
-import './index.css';
 import MOCK_ITEMS from './mockServer/mockData/items';
 import MOCK_MEMBERS from './mockServer/mockData/members';
 import MOCK_MEMBERSHIP from './mockServer/mockData/membership';
@@ -42,7 +40,7 @@ if (ENABLE_MOCK_API) {
 
 Sentry.init({
   dsn: SENTRY_DSN,
-  integrations: [new BrowserTracing()],
+  integrations: [new Sentry.BrowserTracing()],
   environment: SENTRY_ENVIRONMENT,
   release: `${pkg.name}@${APP_VERSION}`,
   // Set tracesSampleRate to 1.0 to capture 100%
@@ -51,16 +49,8 @@ Sentry.init({
   tracesSampleRate: SENTRY_TRACE_SAMPLE_RATE,
 });
 
-const container = document.getElementById('root');
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const root = createRoot(container!);
-root.render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Root />
   </React.StrictMode>,
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();

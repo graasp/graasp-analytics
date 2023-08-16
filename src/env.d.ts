@@ -11,6 +11,7 @@ interface ImportMetaEnv {
   readonly VITE_GRAASP_BUILDER_HOST?: string;
   readonly VITE_SENTRY_ENV: string;
   readonly VITE_SENTRY_DSN: string;
+  readonly VITE_GOOGLE_KEY: string;
 }
 
 interface ImportMeta {

@@ -1,15 +1,5 @@
 name: Deploy to production environment
 
-# Control when the action will run
-on:
-  # Triggers the workflow on push events only for the main branch
-  push:
-    branches:
-      - main
-
-  # Allows to run the workflow manually from the Actions tab
-  workflow_dispatch:
-
 jobs:
   deploy-app:
     name: Deploy to production
@@ -18,6 +8,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.client_payload.tag }}
 
       - name: Yarn install and Cache dependencies
         uses: graasp/graasp-deploy/.github/actions/yarn-install-and-cache@v1
@@ -25,7 +17,7 @@ jobs:
       - name: Yarn build
         # Set environment variables required to perform the build. These are only available to this step
         env:
-          VITE_VERSION: ${{ github.sha }}
+          VITE_VERSION: ${{ github.event.client_payload.tag }}
           VITE_GRAASP_DOMAIN: ${{ vars.GRAASP_DOMAIN }}
           VITE_GRAASP_API_HOST: ${{ vars.GRAASP_API_HOST }}
           VITE_GRAASP_AUTH_HOST: ${{ vars.GRAASP_AUTH_HOST }}
