@@ -25,12 +25,12 @@ const Sidebar: FC = () => {
       <MenuItem
         onClick={() => scrollTo('users')}
         icon={<PersonIcon />}
-        text={t('Users')}
+        text={t('TAB_USERS')}
       />
       <MenuItem
         onClick={() => scrollTo('items')}
         icon={<FolderIcon />}
-        text={t('Items')}
+        text={t('TAB_ITEMS')}
       />
     </GraaspMainMenu>
   );
