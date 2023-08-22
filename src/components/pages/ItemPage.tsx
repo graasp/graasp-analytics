@@ -13,8 +13,6 @@ import {
   usePlatformNavigation,
 } from '@graasp/ui';
 
-import i18n from '@/config/i18n';
-
 import { HOST_MAP } from '../../config/constants';
 import ContextsWrapper from '../context/ContextsWrapper';
 import CookiesBanner from '../layout/CookieBanner';
@@ -31,8 +29,6 @@ const platformsHostsMap = defaultHostsMapper({
 
 const ItemPage = ({ isEmbeded }: { isEmbeded: boolean }): JSX.Element => {
   const theme = useTheme();
-
-  i18n.changeLanguage('fr');
 
   const { itemId } = useParams();
   const getNavigationEvents = usePlatformNavigation(platformsHostsMap, itemId);
