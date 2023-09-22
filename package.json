@@ -10,7 +10,8 @@
     "Hagop Taminian",
     "Juan Carlos Farah",
     "Kim Lan Phan Hoang",
-    "Po-Jui Chang"
+    "Po-Jui Chang",
+    "Basile Spaenlehauer"
   ],
   "dependencies": {
     "@emotion/cache": "11.11.0",
