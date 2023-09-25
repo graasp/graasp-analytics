@@ -23,7 +23,7 @@
   "MOST_INTERACTED_ITEMS_BY_ACTION": "Les {{nb}} éléments les plus utilisés par action",
   "MOST_INTERACTED_ITEMS_BY_USER": "Les {{nb}} éléments les plus utilisés par utilisateur",
   "NO_ACTIONS_TO_SHOW_FOR_THIS_USER": "Aucune action à afficher pour ces utilisateurs",
-  "NO_ITEM_SELECTED": "Sélectionnez un élément à afficher via la navigation pour voir ses analytics.",
+  "NO_ITEM_SELECTED": "Sélectionnez un élément à afficher via la navigation pour voir ses données analytiques.",
   "NO_USER_SELECTED": "Aucun utilisateur sélectionné",
   "OTHER_ACTION_TYPE": "Autre",
   "Request the full dataset for this item": "Faire une demande pour télécharger toutes les données pour la vue '{{view}}' de cet élément",
