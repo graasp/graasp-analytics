@@ -62,10 +62,11 @@ const ActiveUsersCard = (): JSX.Element | null => {
   let totalActionsThisWeek = 0;
   let totalActionsToday = 0;
 
-  (
-    aggregateData.toArray() as { createdDay: Date; aggregateResult: number }[]
-  ).forEach(({ aggregateResult, createdDay }) => {
-    const actionTime = createdDay.getTime();
+  aggregateData?.forEach(({ aggregateResult, createdDay }) => {
+    if (!createdDay) {
+      return -1;
+    }
+    const actionTime = new Date(createdDay).getTime();
     totalActions += aggregateResult;
     if (actionTime > today.getTime()) {
       totalActionsToday += aggregateResult;

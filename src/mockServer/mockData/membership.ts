@@ -9,8 +9,8 @@ const MOCK_MEMBERSHIP: ItemMembership[] = [
     member: MOCK_MEMBERS[0],
     item: MOCK_ITEMS[5],
     permission: PermissionLevel.Admin,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: Date.now().toString(),
+    updatedAt: Date.now().toString(),
     creator: MOCK_MEMBERS[1],
   },
 ];

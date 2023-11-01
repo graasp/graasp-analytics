@@ -1,8 +1,6 @@
 import { useContext } from 'react';
 
-import { ItemRecord } from '@graasp/sdk/frontend';
-
-import { List } from 'immutable';
+import groupBy from 'lodash.groupby';
 import {
   Bar,
   CartesianGrid,
@@ -37,20 +35,19 @@ const ItemsByActionChart = (): JSX.Element => {
     itemChildren: children,
   } = useContext(DataContext);
   const allActions = filterActionsByActionTypes(actions, selectedActionTypes);
-  const types = [...new Set(allActions.map((a) => a.type).toJS())];
+  const types = [...new Set(allActions.map((a) => a.type))];
 
   const groupedItems = groupByFirstLevelItems(allActions, item);
   const formattedItemsByAction: any[] = [];
-  const allItems: List<ItemRecord> =
-    item && children ? children.push(item) : List();
-  for (const [currentPath, items] of groupedItems) {
+  const allItems = item && children ? [...children, item] : [];
+  for (const [currentPath, items] of Object.entries(groupedItems)) {
     const userActions: any = {
       name: findItemNameByPath(currentPath, allItems),
-      total: items.size,
+      total: items.length,
     };
-    const groupedActions = items.groupBy((i) => i.type);
-    for (const groupedAction of groupedActions) {
-      userActions[groupedAction[0]] = groupedAction[1].size;
+    const groupedActions = groupBy(items, (i) => i.type);
+    for (const groupedAction of Object.entries(groupedActions)) {
+      userActions[groupedAction[0]] = groupedAction[1].length;
     }
     formattedItemsByAction.push(userActions);
   }

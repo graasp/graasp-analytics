@@ -28,7 +28,7 @@ const ActionsByVerbChart = (): JSX.Element => {
     useContext(DataContext);
 
   let actionsByVerb = {};
-  if (actions?.size) {
+  if (actions?.length) {
     actionsByVerb = filterActions({
       selectedUsers,
       selectedActionTypes,
@@ -41,7 +41,7 @@ const ActionsByVerbChart = (): JSX.Element => {
 
   // if no user is selected, this chart will be the same as Total Actions Distribution
   // instead show an info text
-  if (!selectedUsers?.size) {
+  if (!selectedUsers?.length) {
     return (
       <>
         <ChartTitle title={t(title)} />

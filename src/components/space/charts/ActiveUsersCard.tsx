@@ -71,7 +71,7 @@ const ActiveUsersCard = (): JSX.Element | null => {
     return null;
   }
 
-  const totalUsers = totalUsersData.get(0).aggregateResult;
+  const totalUsers = totalUsersData?.[0]?.aggregateResult;
 
   const today = new Date();
   today.setDate(today.getDate() - 1);
@@ -84,20 +84,21 @@ const ActiveUsersCard = (): JSX.Element | null => {
   let averageDailyUsersThisWeek = 0;
   let usersToday = 0;
 
-  aggregateData
-    .toArray()
-    .forEach((o: { createdDay: Date; aggregateResult: number }) => {
-      const actionTime = o.createdDay.getTime();
-      if (actionTime > today.getTime()) {
-        usersToday += o.aggregateResult;
-      }
-      if (actionTime > oneWeekAgo.getTime()) {
-        averageDailyUsersThisWeek += o.aggregateResult;
-      }
-      if (actionTime > oneMonthAgo.getTime()) {
-        averageDailyUsersThisMonth += o.aggregateResult;
-      }
-    });
+  aggregateData?.forEach((o) => {
+    if (!o.createdDay) {
+      return -1;
+    }
+    const actionTime = new Date(o.createdDay).getTime();
+    if (actionTime > today.getTime()) {
+      usersToday += o.aggregateResult;
+    }
+    if (actionTime > oneWeekAgo.getTime()) {
+      averageDailyUsersThisWeek += o.aggregateResult;
+    }
+    if (actionTime > oneMonthAgo.getTime()) {
+      averageDailyUsersThisMonth += o.aggregateResult;
+    }
+  });
   averageDailyUsersThisWeek /= 7;
   averageDailyUsersThisMonth /= 30;
 
