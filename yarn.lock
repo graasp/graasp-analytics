@@ -1950,7 +1950,7 @@ __metadata:
 
 "@graasp/query-client@github:graasp/graasp-query-client#433-remove-immutable":
   version: 1.11.1
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=266aad02433239d0235c7068a2ae79836ef4b4af"
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=acacdb2654303c63a05aaea418ac28fabd7d3e6d"
   dependencies:
     "@graasp/sdk": "github:graasp/graasp-sdk#remove-frontend"
     "@graasp/translations": 1.19.4
@@ -1962,7 +1962,7 @@ __metadata:
     uuid: 9.0.1
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
-  checksum: 18a6ad19dd6a318ecb3a4ca0f6ff9a230fdffa1246eb4c1ac29fb9a2929ffeb8022bb94b8e569eb89f1e677cc2b2f30b6b76fe8c58850093826b5c9f52ae6d4c
+  checksum: fdbf25442795f6506a6159f770f04ca626d05e001ad374307eab67f7ee137c63644f64838b80d949ccf8b249b7e9adc9cc2f9514569c02f9f4dd1bb423999044
   languageName: node
   linkType: hard
 
