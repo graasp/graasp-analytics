@@ -31,8 +31,7 @@ const TotalActionsByVerbChart = (): JSX.Element | null => {
     data: aggregateData,
     isLoading,
     isError,
-  } = hooks.useAggregateActions({
-    itemId,
+  } = hooks.useAggregateActions(itemId, {
     view,
     requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     type: selectedActionTypes,
@@ -72,7 +71,8 @@ const TotalActionsByVerbChart = (): JSX.Element | null => {
     type: t('OTHER_ACTION_TYPE'),
   });
 
-  formattedAggregateData.sort((a, b) =>
+  const formattedAggregateDataSorted = [...formattedAggregateData];
+  formattedAggregateDataSorted.sort((a, b) =>
     (a?.type ?? 'Unknown').localeCompare(b.type ?? 'Unknown'),
   );
 
@@ -82,13 +82,13 @@ const TotalActionsByVerbChart = (): JSX.Element | null => {
       <ChartContainer>
         <PieChart>
           <Pie
-            data={formattedAggregateData}
+            data={formattedAggregateDataSorted}
             dataKey="actionCount"
             nameKey="type"
             fill="#82ca9d"
             label={({ value }) => `${value}%`}
           >
-            {formattedAggregateData.map((entry, index) => (
+            {formattedAggregateDataSorted.map((entry, index) => (
               <Cell key={entry.type} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>

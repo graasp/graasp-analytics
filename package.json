@@ -4,7 +4,7 @@
   "private": true,
   "author": "Graasp",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "contributors": [
     "Hagop Taminian",
@@ -17,10 +17,10 @@
     "@emotion/cache": "11.11.0",
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
-    "@graasp/query-client": "github:graasp/graasp-query-client#433-remove-immutable",
-    "@graasp/sdk": "github:graasp/graasp-sdk#remove-frontend",
+    "@graasp/query-client": "2.0.1",
+    "@graasp/sdk": "2.0.0",
     "@graasp/translations": "1.19.4",
-    "@graasp/ui": "github:graasp/graasp-ui#remove-immutable",
+    "@graasp/ui": "4.0.0",
     "@mui/icons-material": "5.14.6",
     "@mui/lab": "5.0.0-alpha.141",
     "@mui/material": "5.14.6",

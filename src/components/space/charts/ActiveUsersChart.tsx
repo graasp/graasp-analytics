@@ -42,8 +42,7 @@ const ActiveUsersChart = (): JSX.Element | null => {
     data: aggregateData,
     isLoading,
     isError,
-  } = hooks.useAggregateActions({
-    itemId,
+  } = hooks.useAggregateActions(itemId, {
     view,
     requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     type: selectedActionTypes,
@@ -71,13 +70,14 @@ const ActiveUsersChart = (): JSX.Element | null => {
     }-${new Date(datestring).getFullYear()}`;
   };
 
-  aggregateData.sort((a, b) => {
+  const aggregateDataSorted = [...aggregateData];
+  aggregateDataSorted.sort((a, b) => {
     if (!a.createdDay || !b.createdDay) {
       return -1;
     }
     return new Date(a.createdDay).getTime() - new Date(b.createdDay).getTime();
   });
-  const formattedAggregateData = aggregateData.map((d) => ({
+  const formattedAggregateData = aggregateDataSorted.map((d) => ({
     count: d.aggregateResult,
     date: formatDate(d.createdDay),
   }));

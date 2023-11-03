@@ -50,8 +50,7 @@ const ActionsByTimeOfDayChart = (): JSX.Element | null => {
     data: aggregateData,
     isLoading,
     isError,
-  } = hooks.useAggregateActions({
-    itemId,
+  } = hooks.useAggregateActions(itemId, {
     view,
     requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     type: selectedActionTypes,

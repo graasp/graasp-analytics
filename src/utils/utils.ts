@@ -1,6 +1,5 @@
 import { Action, DiscriminatedItem, Member } from '@graasp/sdk';
 
-import { Dictionary } from 'cypress/types/lodash';
 import capitalize from 'lodash.capitalize';
 import countBy from 'lodash.countby';
 import groupBy from 'lodash.groupby';
@@ -35,9 +34,8 @@ export const formatActionsByDay = (actionsByDayObject: {
 }): { date: string; count: number }[] => {
   const actionsByDayArray: [string, number][] =
     Object.entries(actionsByDayObject);
-  const sortedActionsByDay = actionsByDayArray.sort(
-    ([d1], [d2]) => Date.parse(d1) - Date.parse(d2),
-  );
+  const sortedActionsByDay = [...actionsByDayArray];
+  sortedActionsByDay.sort(([d1], [d2]) => Date.parse(d1) - Date.parse(d2));
   return sortedActionsByDay.map(([date, count]) => {
     const entryDate = new Date(date);
     return {
@@ -268,7 +266,7 @@ export const findItemNameByPath = (
 export const groupByFirstLevelItems = (
   actions: Action[],
   item?: DiscriminatedItem,
-): Dictionary<Action[]> => {
+): { [key: string]: Action[] } => {
   if (!item) {
     return {};
   }
@@ -279,7 +277,6 @@ export const groupByFirstLevelItems = (
   const d = groupBy(
     actions.filter((a) => a.item),
     (a) =>
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       a
         .item!.path.split('.')
         .slice(0, nbLevelParent + 1)

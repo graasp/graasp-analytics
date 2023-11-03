@@ -37,8 +37,7 @@ const ActiveUsersCard = (): JSX.Element | null => {
     data: totalUsersData,
     isLoading: totalUsersDataIsLoading,
     isError: totalUsersDataIsError,
-  } = hooks.useAggregateActions({
-    itemId,
+  } = hooks.useAggregateActions(itemId, {
     view,
     requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     countGroupBy: [CountGroupBy.User],
@@ -52,8 +51,7 @@ const ActiveUsersCard = (): JSX.Element | null => {
     data: aggregateData,
     isLoading: isAggregateDataLoading,
     isError: isAggregateDataError,
-  } = hooks.useAggregateActions({
-    itemId,
+  } = hooks.useAggregateActions(itemId, {
     view,
     requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
     countGroupBy: [CountGroupBy.User, CountGroupBy.CreatedDay],
