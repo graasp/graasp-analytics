@@ -55,8 +55,8 @@ const ItemsByUserChart = (): JSX.Element => {
     const groupedUsers = groupBy(actionsByItem, (i) => i.member?.id);
     for (const groupedUser of Object.keys(groupedUsers)) {
       users.forEach((user) => {
-        if (user.id === groupedUser[0]) {
-          userActions[user.name] = groupedUser[1].length;
+        if (user.id === groupedUser) {
+          userActions[user.name] = groupedUsers[user.id].length;
         }
       });
     }

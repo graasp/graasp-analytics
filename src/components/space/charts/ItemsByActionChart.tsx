@@ -36,12 +36,15 @@ const ItemsByActionChart = (): JSX.Element => {
   } = useContext(DataContext);
   const allActions = filterActionsByActionTypes(actions, selectedActionTypes);
   const types = [...new Set(allActions.map((a) => a.type))];
-
   const groupedItems = groupByFirstLevelItems(allActions, item);
-  const formattedItemsByAction: any[] = [];
+  const formattedItemsByAction = [];
   const allItems = item && children ? [...children, item] : [];
   for (const [currentPath, items] of Object.entries(groupedItems)) {
-    const userActions: any = {
+    const userActions: {
+      name: string;
+      total: number;
+      [key: string]: string | number;
+    } = {
       name: findItemNameByPath(currentPath, allItems),
       total: items.length,
     };
@@ -59,7 +62,7 @@ const ItemsByActionChart = (): JSX.Element => {
     return <EmptyChart chartTitle={t(title)} />;
   }
 
-  const firstFormattedItmesByUser = formattedItemsByAction.slice(
+  const firstFormattedItemsByUser = formattedItemsByAction.slice(
     0,
     TOP_NUMBER_OF_ITEMS_TO_DISPLAY,
   );
@@ -67,7 +70,7 @@ const ItemsByActionChart = (): JSX.Element => {
     <>
       <ChartTitle title={title} />
       <ChartContainer>
-        <ComposedChart data={firstFormattedItmesByUser}>
+        <ComposedChart data={firstFormattedItemsByUser}>
           <CartesianGrid strokeDasharray="2" />
           <XAxis interval={0} dataKey="name" tick={{ fontSize: 14 }} />
           <YAxis tick={{ fontSize: 14 }} />
