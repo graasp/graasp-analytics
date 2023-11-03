@@ -2105,6 +2105,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graasp/translations@npm:1.19.4":
+  version: 1.19.4
+  resolution: "@graasp/translations@npm:1.19.4"
+  dependencies:
+    i18next: 23.6.0
+  checksum: 50bd0ee306b1ffe0387987ca09922f6f1f4a348fb7f82169826e6fa58a132614eb92a1aedb4fbc0af514aa82af210db2d560d9be2ff2b201b0dc01c4cf542bdd
+  languageName: node
+  linkType: hard
+
 "@graasp/ui@npm:3.5.1":
   version: 3.5.1
   resolution: "@graasp/ui@npm:3.5.1"
@@ -7009,7 +7018,7 @@ __metadata:
     "@emotion/styled": 11.11.0
     "@graasp/query-client": 1.4.3
     "@graasp/sdk": 1.2.1
-    "@graasp/translations": 1.18.3
+    "@graasp/translations": 1.19.4
     "@graasp/ui": 3.5.1
     "@mui/icons-material": 5.14.6
     "@mui/lab": 5.0.0-alpha.141
@@ -7341,6 +7350,15 @@ __metadata:
   dependencies:
     "@babel/runtime": ^7.22.5
   checksum: faa968dcba328528231e3cd140d5a0f4b9b472b75874b7cbf8415e2dbff48397f1cdcc36a739ea6915f6970c367fdd7f985f120e63e1c30a839c53e366d851fd
+  languageName: node
+  linkType: hard
+
+"i18next@npm:23.6.0":
+  version: 23.6.0
+  resolution: "i18next@npm:23.6.0"
+  dependencies:
+    "@babel/runtime": ^7.22.5
+  checksum: 0898be75ce56a5901eb9763c8cd941a23cfc24fbe7b32ba0479c08f58c40c1c88c95596430154a6250087ec76d150335144b2cb637ebaa443490b9af7b6e275e
   languageName: node
   linkType: hard
 
