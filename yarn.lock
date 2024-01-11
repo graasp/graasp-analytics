@@ -1347,9 +1347,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@npm:2.2.3":
-  version: 2.2.3
-  resolution: "@graasp/query-client@npm:2.2.3"
+"@graasp/query-client@github:graasp/graasp-query-client#fix-allow-union-litterals-aggregate":
+  version: 2.3.0
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=8141fef8a4d21cc2320a6ab18aa0bcf63cce7f3b"
   dependencies:
     "@graasp/sdk": "npm:3.4.1"
     "@graasp/translations": "npm:1.22.1"
@@ -1361,7 +1361,7 @@ __metadata:
     uuid: "npm:9.0.1"
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
-  checksum: cf7d3ebc8b7098b0c8b2d04d71ed56ff8004d5e892ac12bdb7cb088bdb25db559795e2fb73400410b748a09a17b06e1d3c83f28e02f8a6805669c349a13535fe
+  checksum: f79425ed7af88d9d4645689f39f9f527df7d5b97dccb5a26b56acca3e081cef992d9886d16666fec8cf8c855787306467579d565374af3deeea1ef3846f5153e
   languageName: node
   linkType: hard
 
@@ -5751,7 +5751,7 @@ __metadata:
     "@emotion/cache": "npm:11.11.0"
     "@emotion/react": "npm:11.11.3"
     "@emotion/styled": "npm:11.11.0"
-    "@graasp/query-client": "npm:2.2.3"
+    "@graasp/query-client": "github:graasp/graasp-query-client#fix-allow-union-litterals-aggregate"
     "@graasp/sdk": "npm:3.4.1"
     "@graasp/translations": "npm:1.22.0"
     "@graasp/ui": "npm:4.3.1"
