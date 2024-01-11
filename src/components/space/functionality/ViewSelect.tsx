@@ -80,7 +80,7 @@ const ViewSelect = (): JSX.Element => {
         </FormControl>
       </Grid>
       <Grid item ml={2} mr={1}>
-        <Tooltip title={viewMessage}>
+        <Tooltip title={t(viewMessage)}>
           <InfoIcon color="primary" />
         </Tooltip>
       </Grid>
