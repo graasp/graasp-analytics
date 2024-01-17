@@ -1,7 +1,6 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-import { Box, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { Box, Typography, styled, useTheme } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
 import {
@@ -12,6 +11,8 @@ import {
   defaultHostsMapper,
   usePlatformNavigation,
 } from '@graasp/ui';
+
+import { HOME_PATH } from '@/config/paths';
 
 import { HOST_MAP } from '../../config/constants';
 import ContextsWrapper from '../context/ContextsWrapper';
@@ -27,6 +28,12 @@ const platformsHostsMap = defaultHostsMapper({
   [Platform.Library]: HOST_MAP[Context.Library],
 });
 
+const StyledLink = styled(Link)(() => ({
+  textDecoration: 'none',
+  color: 'inherit',
+  display: 'flex',
+  alignItems: 'center',
+}));
 const ItemPage = ({ isEmbeded }: { isEmbeded: boolean }): JSX.Element => {
   const theme = useTheme();
 
@@ -59,10 +66,12 @@ const ItemPage = ({ isEmbeded }: { isEmbeded: boolean }): JSX.Element => {
 
   const leftContent = (
     <Box display="flex" ml={2} alignItems="center">
-      <GraaspLogo height={40} sx={{ fill: 'white' }} />
-      <Typography variant="h6" color="inherit" mr={2} ml={1}>
-        Graasp
-      </Typography>
+      <StyledLink to={HOME_PATH}>
+        <GraaspLogo height={40} sx={{ fill: 'white' }} />
+        <Typography variant="h6" color="inherit" mr={2} ml={1}>
+          Graasp
+        </Typography>
+      </StyledLink>
       <PlatformSwitch
         selected={Platform.Analytics}
         platformsProps={platformProps}
