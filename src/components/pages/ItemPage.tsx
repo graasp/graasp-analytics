@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 
-import { Box, Typography, styled, useTheme } from '@mui/material';
+import { Box, Grid, Typography, styled, useTheme } from '@mui/material';
 
 import { Context } from '@graasp/sdk';
 import {
@@ -15,6 +15,7 @@ import {
 import { HOME_PATH } from '@/config/paths';
 
 import { HOST_MAP } from '../../config/constants';
+import UserSwitchWrapper from '../common/UserSwitchWrapper';
 import ContextsWrapper from '../context/ContextsWrapper';
 import CookiesBanner from '../layout/CookieBanner';
 import Footer from '../layout/Footer';
@@ -80,10 +81,19 @@ const ItemPage = ({ isEmbeded }: { isEmbeded: boolean }): JSX.Element => {
     </Box>
   );
 
+  const rightContent = (
+    <Grid container>
+      <Grid item>
+        <UserSwitchWrapper />
+      </Grid>
+    </Grid>
+  );
+
   return (
     <GraaspMain
       context={Context.Analytics}
       headerLeftContent={leftContent}
+      headerRightContent={rightContent}
       sidebar={<Sidebar />}
       open
     >
