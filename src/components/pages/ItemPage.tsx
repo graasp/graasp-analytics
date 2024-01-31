@@ -90,20 +90,20 @@ const ItemPage = ({ isEmbeded }: { isEmbeded: boolean }): JSX.Element => {
   );
 
   return (
-    <GraaspMain
-      context={Context.Analytics}
-      headerLeftContent={leftContent}
-      headerRightContent={rightContent}
-      sidebar={<Sidebar />}
-      open
-    >
-      <CookiesBanner />
-      <Navigator />
-      <ContextsWrapper>
+    <ContextsWrapper>
+      <GraaspMain
+        context={Context.Analytics}
+        headerLeftContent={leftContent}
+        headerRightContent={rightContent}
+        sidebar={<Sidebar />}
+        open
+      >
+        <CookiesBanner />
+        <Navigator />
         <ChartsLayout />
-      </ContextsWrapper>
-      <Footer />
-    </GraaspMain>
+        <Footer />
+      </GraaspMain>
+    </ContextsWrapper>
   );
 };
 

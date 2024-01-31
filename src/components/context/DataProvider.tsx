@@ -114,6 +114,18 @@ const DataProvider = ({ children }: Props): JSX.Element => {
     },
     { enabled: Boolean(enabledArray[Context.Library]) },
   );
+  // const {
+  //   data: appsData,
+  //   isError: appsIsError,
+  //   isLoading: appsIsLoading,
+  // } = hooks.useActions(
+  //   {
+  //     itemId,
+  //     view: Context.A,
+  //     requestedSampleSize,
+  //   },
+  //   { enabled: Boolean(enabledArray[Context.Library]) },
+  // );
 
   const {
     data: itemData,
