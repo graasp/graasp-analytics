@@ -7,7 +7,9 @@ const HomeMessage = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
   return (
     <Box
+      id="HomeMessage"
       display="flex"
+      flexDirection="column"
       flexGrow={1}
       justifyContent="center"
       alignItems="center"
