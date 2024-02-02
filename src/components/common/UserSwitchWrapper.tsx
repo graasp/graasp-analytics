@@ -4,7 +4,6 @@ import { UserSwitchWrapper as GraaspUserSwitch } from '@graasp/ui';
 import { GRAASP_ACCOUNT_HOST } from '@/config/env';
 import { SIGN_IN_PATH } from '@/config/externalPaths';
 import { mutations } from '@/config/queryClient';
-import '@/config/selectors';
 import {
   HEADER_MEMBER_MENU_BUTTON_ID,
   HEADER_MEMBER_MENU_SEE_PROFILE_BUTTON_ID,
