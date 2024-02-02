@@ -39,7 +39,6 @@ const UsersSelect = (): JSX.Element | null => {
           {t('USERS_SELECT')}
         </InputLabel>
         <Select
-          sx={{ height: '56px', p: 2 }}
           label={t('USERS_SELECT')}
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"

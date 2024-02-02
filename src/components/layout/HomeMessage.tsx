@@ -2,12 +2,13 @@ import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import { Box, Stack, Typography } from '@mui/material';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
+import { HOME_MESSAGE_ID } from '@/config/selectors';
 
 const HomeMessage = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
   return (
     <Box
-      id="HomeMessage"
+      id={HOME_MESSAGE_ID}
       display="flex"
       flexDirection="column"
       flexGrow={1}

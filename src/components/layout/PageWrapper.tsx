@@ -12,6 +12,7 @@ import {
 } from '@graasp/ui';
 
 import { HOST_MAP } from '@/config/constants';
+import { useAnalyticsTranslation } from '@/config/i18n';
 import { HOME_PATH } from '@/config/paths';
 
 import UserSwitchWrapper from '../common/UserSwitchWrapper';
@@ -36,6 +37,7 @@ const LinkComponent = ({ children }: { children: JSX.Element }) => (
 );
 
 const PageWrapper = ({ children }: { children: JSX.Element }): JSX.Element => {
+  const { t } = useAnalyticsTranslation();
   const { itemId } = useParams();
   const getNavigationEvents = usePlatformNavigation(platformsHostsMap, itemId);
 
@@ -57,7 +59,7 @@ const PageWrapper = ({ children }: { children: JSX.Element }): JSX.Element => {
     <Main
       context={Context.Analytics}
       drawerContent={<Sidebar />}
-      drawerOpenAriaLabel={''}
+      drawerOpenAriaLabel={t('DRAWER_OPEN_ARIA')}
       headerRightContent={<UserSwitchWrapper />}
       PlatformComponent={
         <PlatformSwitch
@@ -69,10 +71,13 @@ const PageWrapper = ({ children }: { children: JSX.Element }): JSX.Element => {
       LinkComponent={LinkComponent}
     >
       <Box
+        height="100%"
         display="flex"
         flexGrow={1}
         justifyContent="space-between"
         flexDirection="column"
+        // counteract the footer
+        pb="64px"
       >
         <Box id="navigatorContainer" width="100%">
           <Navigator />
