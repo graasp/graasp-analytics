@@ -955,6 +955,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@faker-js/faker@npm:8.4.0":
+  version: 8.4.0
+  resolution: "@faker-js/faker@npm:8.4.0"
+  checksum: 10/f9253d0b4846ab0fd769cd78be88c4ea24741d9201cccb0038b3627ac21041a2aef150b0f843b2f63d5a056737bec28bcdf493e0b72201a892df4423be0dff79
+  languageName: node
+  linkType: hard
+
 "@floating-ui/core@npm:^1.6.0":
   version: 1.6.0
   resolution: "@floating-ui/core@npm:1.6.0"
@@ -1002,11 +1009,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@npm:2.5.0":
-  version: 2.5.0
-  resolution: "@graasp/query-client@npm:2.5.0"
+"@graasp/query-client@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@graasp/query-client@npm:2.6.0"
   dependencies:
-    "@graasp/sdk": "npm:3.6.0"
+    "@graasp/sdk": "npm:3.7.0"
     "@graasp/translations": "npm:1.23.0"
     axios: "npm:0.27.2"
     crypto-js: "npm:4.2.0"
@@ -1017,7 +1024,7 @@ __metadata:
     uuid: "npm:9.0.1"
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
-  checksum: 10/3f609bc338770a04ae1764a5a9663ee9bd788261d09983e89e7dc8d2299ce75eeee267106903158b06da46e0698ef9f04f20f937eab52785a3b10ef273fda934
+  checksum: 10/050cf66f683150f393eb5f27f66535871b981b39a1de1df8a1d2d95c73ddb40950b73f58c93028121a41f5e1580cfb6b2ed7680c2ddc82f9354e3967f730e9d2
   languageName: node
   linkType: hard
 
@@ -1043,6 +1050,20 @@ __metadata:
     date-fns: ^3
     uuid: ^9
   checksum: 10/df52e11764c727e17ce69d247805fd8a2d49ba291b84e00ca390f853f0b0eb7fc4a2153e7003044cb8f84edf9c2c9cae91b79a55d1e71e71c69317e40145ad12
+  languageName: node
+  linkType: hard
+
+"@graasp/sdk@npm:3.7.0":
+  version: 3.7.0
+  resolution: "@graasp/sdk@npm:3.7.0"
+  dependencies:
+    "@faker-js/faker": "npm:8.4.0"
+    js-cookie: "npm:3.0.5"
+    validator: "npm:13.11.0"
+  peerDependencies:
+    date-fns: ^3
+    uuid: ^9
+  checksum: 10/686ecf2f252ccaf17a63730e3a9f486bbf5d4744a62c66fc338ec7bc4e1c9161387ce1c72bd560946a57aaa6798ef5e50fe97ccd8178c52ff5c497c8d11ee131
   languageName: node
   linkType: hard
 
@@ -5082,7 +5103,7 @@ __metadata:
     "@emotion/cache": "npm:11.11.0"
     "@emotion/react": "npm:11.11.3"
     "@emotion/styled": "npm:11.11.0"
-    "@graasp/query-client": "npm:2.5.0"
+    "@graasp/query-client": "npm:2.6.0"
     "@graasp/sdk": "npm:3.6.0"
     "@graasp/translations": "npm:1.23.0"
     "@graasp/ui": "npm:4.6.0"
