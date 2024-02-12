@@ -41,7 +41,7 @@ const config = ({ mode }: { mode: string }): UserConfigExport => {
         forceBuildInstrument: mode === 'test',
         checkProd: true,
       }),
-      ...(mode === 'development'
+      ...(process.env.ENABLE_BUNDLE_ANALYSIS
         ? [
             visualizer({
               template: 'treemap', // or sunburst

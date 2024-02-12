@@ -45,3 +45,5 @@ yarn-error.log*
 
 # cypress download screenshots
 cypress/downloads/
+
+bundle_analysis.html
