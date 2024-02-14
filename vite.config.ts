@@ -30,6 +30,7 @@ const config = ({ mode }: { mode: string }): UserConfigExport => {
     },
     build: {
       outDir: 'build',
+      // target: mode === 'test' ? 'esnext' : undefined,
     },
     plugins: [
       checker({

@@ -15,10 +15,11 @@ declare global {
   }
 }
 
-if (import.meta.env.DEV) {
+if (import.meta.env.MODE === 'test') {
   if (ENABLE_MOCK_API) {
-    const { initMockServer } = await import('./mockServer/mockServer');
-    initMockServer();
+    import('./mockServer/mockServer').then(({ initMockServer }) =>
+      initMockServer(),
+    );
   }
 }
 

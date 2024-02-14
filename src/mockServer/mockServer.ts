@@ -2,7 +2,13 @@ import { API_ROUTES } from '@graasp/query-client';
 import { DiscriminatedItem, ItemMembership, Member } from '@graasp/sdk';
 
 import { StatusCodes } from 'http-status-codes';
-import { Model, Response, RestSerializer, createServer } from 'miragejs';
+import {
+  Model,
+  Response,
+  RestSerializer,
+  Server,
+  createServer,
+} from 'miragejs';
 
 import { API_HOST } from '@/config/env';
 
@@ -69,7 +75,7 @@ const mockServer = ({
   urlPrefix?: string;
   database?: ReturnType<typeof buildDatabase>;
   externalUrls?: string[];
-} = {}): any => {
+}): Server => {
   const { items, members, itemMemberships } = database;
   const currentMember = members?.[0];
 
@@ -268,7 +274,7 @@ const mockServer = ({
   });
 };
 
-export const initMockServer = (): void =>
+export const initMockServer = (): void => {
   mockServer({
     urlPrefix: API_HOST,
     database: window.Cypress
@@ -280,3 +286,4 @@ export const initMockServer = (): void =>
           members: MOCK_MEMBERS,
         }),
   });
+};

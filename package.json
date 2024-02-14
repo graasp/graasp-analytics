@@ -68,10 +68,10 @@
     "test": "yarn build:test && concurrently -k -s first \"yarn preview:test\" \"yarn cypress:run\"",
     "cypress": "yarn test",
     "cypress:open": "env-cmd -f ./.env.test cypress open --browser chrome",
-    "cypress:run": "env-cmd -f ./.env.test cypress run --headless --browser chrome",
+    "cypress:run": "env-cmd -f ./.env.test cypress run --browser chrome",
     "prettier:check": "prettier --check 'src/**/*.{js,tsx,ts}'",
     "prettier:write": "prettier --write 'src/**/*.{js,tsx,ts}'",
-    "postinstall": "husky install"
+    "postinstall": "husky"
   },
   "browserslist": {
     "production": [
