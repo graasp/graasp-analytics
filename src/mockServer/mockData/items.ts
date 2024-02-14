@@ -1,5 +1,9 @@
-import { DiscriminatedItem, ItemType } from '@graasp/sdk';
-import { DocumentItemFactory, FolderItemFactory } from '@graasp/sdk/factories';
+import {
+  DiscriminatedItem,
+  DocumentItemFactory,
+  FolderItemFactory,
+  ItemType,
+} from '@graasp/sdk';
 
 import MOCK_MEMBERS from './members';
 

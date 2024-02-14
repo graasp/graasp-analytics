@@ -6,6 +6,7 @@ import { Model, Response, RestSerializer, createServer } from 'miragejs';
 
 import { API_HOST } from '@/config/env';
 
+import { buildDatabase } from './database';
 import MOCK_ACTION_DATA from './mockData/actions';
 import {
   MOCK_AGGREGATE_ACTIONS_ACTIVE_USERS,
@@ -26,13 +27,6 @@ const {
   GET_OWN_ITEMS_ROUTE,
   SHARED_ITEM_WITH_ROUTE,
 } = API_ROUTES;
-
-type Database = {
-  currentMember?: Member;
-  items?: DiscriminatedItem[];
-  itemMemberships?: ItemMembership[];
-  members?: Member[];
-};
 
 const ApplicationSerializer = RestSerializer.extend({
   root: false,
@@ -67,25 +61,13 @@ const checkPermission = (
 
 const buildPathFromId = (id: string) => id.replace(/-/g, '_');
 
-export const buildDatabase = ({
-  currentMember,
-  items = [],
-  itemMemberships = [],
-  members,
-}: Partial<Database> = {}): Database => ({
-  currentMember,
-  items,
-  itemMemberships,
-  members: members ?? (currentMember ? [currentMember] : []),
-});
-
 const mockServer = ({
   urlPrefix,
   database = buildDatabase(),
   externalUrls = [],
 }: {
   urlPrefix?: string;
-  database?: Database;
+  database?: ReturnType<typeof buildDatabase>;
   externalUrls?: string[];
 } = {}): any => {
   const { items, members, itemMemberships } = database;
