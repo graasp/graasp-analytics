@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { COOKIE_KEYS } from '@graasp/sdk';
+import { CookieKeys } from '@graasp/sdk';
 
 import { buildDatabase } from '../../src/mockServer/database';
 import MOCK_ITEMS from '../../src/mockServer/mockData/items';
@@ -14,7 +14,7 @@ declare global {
 }
 
 Cypress.Commands.add('setUpApi', () => {
-  cy.setCookie(COOKIE_KEYS.SESSION_KEY, 'session_key');
+  cy.setCookie(CookieKeys.Session, 'session_key');
   // mock api and database
   Cypress.on('window:before:load', (win: Window) => {
     // eslint-disable-next-line no-param-reassign

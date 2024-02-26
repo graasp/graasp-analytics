@@ -1,4 +1,4 @@
-import { Context, Item } from '@graasp/sdk';
+import { Context } from '@graasp/sdk';
 
 import {
   SELECT_VIEW_ID,
@@ -9,7 +9,7 @@ import {
 import { buildItemPath } from '../../src/config/paths';
 import MOCK_ITEMS from '../../src/mockServer/mockData/items';
 
-const visitItemPage = (item: Item) => {
+const visitItemPage = (item: { id: string }) => {
   cy.visit(buildItemPath(item.id));
 };
 
