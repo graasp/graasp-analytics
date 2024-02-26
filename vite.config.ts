@@ -30,9 +30,15 @@ const config = ({ mode }: { mode: string }): UserConfigExport => {
     },
     build: {
       outDir: 'build',
-      // this target setup is needed in order to support the top level await
-      // that is used to instantiate the mock server
-      target: mode === 'test' ? 'esnext' : undefined,
+      rollupOptions: {
+        output: {
+          manualChunks: (id: string) => {
+            if (id.includes('mockServerEntry')) {
+              return 'mockServerEntry';
+            }
+          },
+        },
+      },
     },
     plugins: [
       checker({

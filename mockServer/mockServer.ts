@@ -12,8 +12,7 @@ import {
 
 import { API_HOST } from '@/config/env';
 
-import { buildDatabase } from './database';
-import MOCK_ACTION_DATA from './mockData/actions';
+import MOCK_ACTION_DATA from '../cypress/fixtures/actions';
 import {
   MOCK_AGGREGATE_ACTIONS_ACTIVE_USERS,
   MOCK_AGGREGATE_ACTIONS_BY_DAY,
@@ -22,10 +21,8 @@ import {
   MOCK_AGGREGATE_ACTIONS_TOTAL_ACTIONS,
   MOCK_AGGREGATE_ACTIONS_TOTAL_USERS,
   MOCK_AGGREGATE_ACTIONS_TYPE,
-} from './mockData/aggregateActions';
-import MOCK_ITEMS from './mockData/items';
-import MOCK_MEMBERS from './mockData/members';
-import MOCK_MEMBERSHIP from './mockData/membership';
+} from '../cypress/fixtures/aggregateActions';
+import { buildDatabase } from './database';
 
 const {
   buildGetItemRoute,
@@ -286,13 +283,6 @@ const mockServer = ({
 export const initMockServer = (): void => {
   mockServer({
     urlPrefix: API_HOST,
-    database: window.Cypress
-      ? window.database
-      : buildDatabase({
-          currentMember: MOCK_MEMBERS[0],
-          items: MOCK_ITEMS,
-          itemMemberships: MOCK_MEMBERSHIP,
-          members: MOCK_MEMBERS,
-        }),
+    database: window.Cypress ? window.database : undefined,
   });
 };

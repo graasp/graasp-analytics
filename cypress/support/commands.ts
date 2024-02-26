@@ -1,17 +1,10 @@
 /// <reference types="cypress" />
 import { CookieKeys } from '@graasp/sdk';
 
-import { buildDatabase } from '../../src/mockServer/database';
-import MOCK_ITEMS from '../../src/mockServer/mockData/items';
-import MOCK_MEMBERS from '../../src/mockServer/mockData/members';
-import MOCK_MEMBERSHIP from '../../src/mockServer/mockData/membership';
-
-declare global {
-  interface Window {
-    Cypress?: any;
-    database?: any;
-  }
-}
+import MOCK_ITEMS from '../fixtures/items';
+import MOCK_MEMBERS from '../fixtures/members';
+import MOCK_MEMBERSHIP from '../fixtures/membership';
+import { buildDatabase } from './database';
 
 Cypress.Commands.add('setUpApi', () => {
   cy.setCookie(CookieKeys.Session, 'session_key');
