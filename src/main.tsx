@@ -17,9 +17,9 @@ declare global {
 
 if (import.meta.env.MODE === 'test') {
   if (ENABLE_MOCK_API) {
-    import('./mockServer/mockServer').then(({ initMockServer }) =>
-      initMockServer(),
-    );
+    const { initMockServer } = await import('./mockServer/mockServer');
+    console.log('Initializing mock server');
+    initMockServer();
   }
 }
 

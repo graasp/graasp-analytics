@@ -114,6 +114,15 @@ const mockServer = ({
         return new Response(StatusCodes.UNAUTHORIZED);
       });
 
+      // members route
+      this.get(`/members/:id`, (schema, request) => {
+        return schema.find('member', request.params.id);
+      });
+      // members avatar route
+      this.get(`/members/:id/avatar/:size`, () => {
+        return new Response(StatusCodes.NOT_FOUND);
+      });
+
       // get item
       this.get(`/${buildGetItemRoute(':id')}`, (schema, request) => {
         const itemId = request.url.split('/').at(-1);
@@ -131,7 +140,7 @@ const mockServer = ({
 
       // get children
       this.get(`/items/:id/children`, (schema, request) => {
-        const itemId = request.url.split('/').at(-2);
+        const itemId = request.params.id;
         if (!itemId) {
           throw new Error('item id does not exist');
         }
@@ -150,7 +159,7 @@ const mockServer = ({
 
       // get parents
       this.get(`/items/:id/parents`, (schema, request) => {
-        const itemId = request.url.split('/').at(-2);
+        const itemId = request.params.id;
         if (!itemId) {
           throw new Error('item id does not exist');
         }
