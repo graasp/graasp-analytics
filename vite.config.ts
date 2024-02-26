@@ -30,7 +30,9 @@ const config = ({ mode }: { mode: string }): UserConfigExport => {
     },
     build: {
       outDir: 'build',
-      // target: mode === 'test' ? 'esnext' : undefined,
+      // this target setup is needed in order to support the top level await
+      // that is used to instantiate the mock server
+      target: mode === 'test' ? 'esnext' : undefined,
     },
     plugins: [
       checker({
