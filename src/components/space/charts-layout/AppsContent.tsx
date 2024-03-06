@@ -7,7 +7,7 @@ import {
   PermissionLevelCompare,
 } from '@graasp/sdk';
 import { DEFAULT_LANG } from '@graasp/translations';
-import { AppItem } from '@graasp/ui';
+import { AppItem, Loader } from '@graasp/ui';
 
 import { API_HOST } from '@/config/env';
 import { axios, hooks } from '@/config/queryClient';
@@ -24,7 +24,7 @@ const AppContent = ({
   const { data: memberships, isLoading } = hooks.useItemMemberships(item.id);
 
   if (isLoading) {
-    return null;
+    return <Loader />;
   }
   const userMemberships = memberships
     ?.filter((m) => m.member.id === member?.id)
