@@ -20,9 +20,12 @@ const AppContent = ({
 }: {
   item: AppItemType;
   member?: CompleteMember | null;
-}): JSX.Element => {
-  const { data: memberships } = hooks.useItemMemberships(item.id);
+}): JSX.Element | null => {
+  const { data: memberships, isLoading } = hooks.useItemMemberships(item.id);
 
+  if (isLoading) {
+    return null;
+  }
   const userMemberships = memberships
     ?.filter((m) => m.member.id === member?.id)
     .reduce((acc: PermissionLevel[], curr) => [...acc, curr.permission], []);
@@ -30,16 +33,6 @@ const AppContent = ({
   const permission =
     userMemberships && PermissionLevelCompare.getHighest(userMemberships);
 
-  console.log(permission, 'permission');
-  const contextPayload = {
-    apiHost: API_HOST,
-    itemId: item.id,
-    memberId: member?.id,
-    permission: permission || PermissionLevel.Read,
-    settings: item.settings,
-    lang: item.settings?.lang || member?.extra?.lang || DEFAULT_LANG,
-    context: Context.Analytics,
-  };
   return (
     <AppItem
       isResizable
@@ -50,7 +43,15 @@ const AppContent = ({
         key: string;
         origin: string;
       }) => Api.requestApiAccessToken(payload, { API_HOST, axios })}
-      contextPayload={contextPayload}
+      contextPayload={{
+        apiHost: API_HOST,
+        itemId: item.id,
+        memberId: member?.id,
+        permission: permission || PermissionLevel.Read,
+        settings: item.settings,
+        lang: item.settings?.lang || member?.extra?.lang || DEFAULT_LANG,
+        context: Context.Analytics,
+      }}
     />
   );
 };
