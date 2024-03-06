@@ -32,6 +32,7 @@ const defaultValue: {
   itemChildren?: DiscriminatedItem[];
   isLoading: boolean;
   requestedSampleSize: number;
+  descendantsApps: DiscriminatedItem[];
 } = {
   actions: [],
   allMembers: [],
@@ -47,6 +48,7 @@ const defaultValue: {
   error: false,
   isLoading: true,
   requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
+  descendantsApps: [],
 };
 
 export const DataContext = createContext(defaultValue);
@@ -75,6 +77,9 @@ const DataProvider = ({ children }: Props): JSX.Element => {
 
   // todo: have a dynamic value
   const requestedSampleSize = DEFAULT_REQUEST_SAMPLE_SIZE;
+  const { data: descendants = [] } = hooks.useDescendants({
+    id: itemId || '',
+  });
 
   const {
     data: builderData,
@@ -114,18 +119,6 @@ const DataProvider = ({ children }: Props): JSX.Element => {
     },
     { enabled: Boolean(enabledArray[Context.Library]) },
   );
-  // const {
-  //   data: appsData,
-  //   isError: appsIsError,
-  //   isLoading: appsIsLoading,
-  // } = hooks.useActions(
-  //   {
-  //     itemId,
-  //     view: Context.A,
-  //     requestedSampleSize,
-  //   },
-  //   { enabled: Boolean(enabledArray[Context.Library]) },
-  // );
 
   const {
     data: itemData,
@@ -135,6 +128,10 @@ const DataProvider = ({ children }: Props): JSX.Element => {
   const { data: itemChildren } = hooks.useChildren(itemId, undefined, {
     enabled: itemData?.type === ItemType.FOLDER,
   });
+
+  const descendantsApps = (
+    itemData ? [itemData, ...descendants] : descendants
+  )?.filter(({ type }) => type === ItemType.APP);
 
   useEffect(() => {
     if (itemIsError) {
@@ -216,6 +213,7 @@ const DataProvider = ({ children }: Props): JSX.Element => {
       itemChildren,
       isLoading,
       requestedSampleSize,
+      descendantsApps,
     }),
     [
       actions,
@@ -227,6 +225,7 @@ const DataProvider = ({ children }: Props): JSX.Element => {
       isLoading,
       itemChildren,
       requestedSampleSize,
+      descendantsApps,
     ],
   );
 

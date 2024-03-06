@@ -3,8 +3,6 @@ import { useContext } from 'react';
 import { Grid, Skeleton } from '@mui/material';
 import Box from '@mui/material/Box';
 
-import { ItemType } from '@graasp/sdk';
-
 import { useAnalyticsTranslation } from '@/config/i18n';
 
 import { CONTAINER_HEIGHT } from '../../config/constants';
@@ -24,7 +22,7 @@ import ExportData from './functionality/ExportData';
 const ChartsLayout = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
   const { view } = useContext(ViewDataContext);
-  const { error, isLoading, itemData: item } = useContext(DataContext);
+  const { error, isLoading, descendantsApps } = useContext(DataContext);
 
   return (
     <>
@@ -72,7 +70,7 @@ const ChartsLayout = (): JSX.Element => {
             <SectionTitle title={t('ITEMS_ANALYTICS_TITLE')} />
             <ItemsAnalytics />
           </div>
-          {item?.type === ItemType.APP && (
+          {descendantsApps.length && (
             <div id="apps">
               <SectionTitle
                 title={t('APPS_ANALYTICS_TITLE')}

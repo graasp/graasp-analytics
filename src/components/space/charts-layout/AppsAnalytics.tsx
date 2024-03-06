@@ -2,24 +2,26 @@ import { useContext } from 'react';
 
 import { Grid } from '@mui/material';
 
+import { AppItemType } from '@graasp/sdk';
+
 import { DataContext } from '@/components/context/DataProvider';
 import { hooks } from '@/config/queryClient';
 
-import AppContent from './AppsData';
+import AppContent from './AppsContent';
 
 const AppsAnalytics = (): JSX.Element => {
   const { data: member } = hooks.useCurrentMember();
+  const { descendantsApps } = useContext(DataContext);
 
-  const { itemData: item } = useContext(DataContext);
-  if (item) {
-    return (
-      <Grid container>
-        {' '}
-        <AppContent item={item} member={member} />{' '}
-      </Grid>
-    );
-  }
-  return <div>no item found</div>;
+  return (
+    <Grid container spacing={2}>
+      {descendantsApps.map((item) => (
+        <Grid item key={item.id} xs="auto">
+          <AppContent item={item as AppItemType} member={member} />
+        </Grid>
+      ))}
+    </Grid>
+  );
 };
 
 export default AppsAnalytics;
