@@ -27,7 +27,7 @@ const ChartsLayout = (): JSX.Element => {
   const { error, isLoading, itemData: item } = useContext(DataContext);
 
   return (
-    <div>
+    <>
       <ChartsHeader />
       {error && (
         <Box pl={2} pr={2} mb={2} flexGrow={1}>
@@ -83,7 +83,7 @@ const ChartsLayout = (): JSX.Element => {
           )}
         </>
       )}
-    </div>
+    </>
   );
 };
 

@@ -1,14 +1,18 @@
 /// <reference types="./src/env.d.ts"/>
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
-import { visualizer } from 'rollup-plugin-visualizer';
-import { PluginOption, UserConfigExport, defineConfig, loadEnv } from 'vite';
+import { UserConfigExport, defineConfig, loadEnv } from 'vite';
 import checker from 'vite-plugin-checker';
 import istanbul from 'vite-plugin-istanbul';
 
 // https://vitejs.dev/config/
 const config = ({ mode }: { mode: string }): UserConfigExport => {
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+  process.env = {
+    VITE_VERSION: 'default',
+    VITE_BUILD_TIMESTAMP: new Date().toISOString(),
+    ...process.env,
+    ...loadEnv(mode, process.cwd()),
+  };
 
   return defineConfig({
     base: '/',
@@ -26,11 +30,21 @@ const config = ({ mode }: { mode: string }): UserConfigExport => {
     },
     build: {
       outDir: 'build',
+      rollupOptions: {
+        output: {
+          manualChunks: (id: string) => {
+            if (id.includes('mockServerEntry')) {
+              return 'mockServerEntry';
+            }
+          },
+        },
+      },
     },
     plugins: [
       checker({
         typescript: true,
         eslint: { lintCommand: 'eslint "./**/*.{ts,tsx}"' },
+        overlay: { initialIsOpen: false },
       }),
       react(),
       istanbul({
@@ -41,17 +55,6 @@ const config = ({ mode }: { mode: string }): UserConfigExport => {
         forceBuildInstrument: mode === 'test',
         checkProd: true,
       }),
-      ...(mode === 'development'
-        ? [
-            visualizer({
-              template: 'treemap', // or sunburst
-              open: true,
-              gzipSize: true,
-              brotliSize: true,
-              filename: 'bundle_analysis.html',
-            }) as PluginOption,
-          ]
-        : []),
     ],
     resolve: {
       alias: {

@@ -2,9 +2,17 @@ import { API_ROUTES } from '@graasp/query-client';
 import { DiscriminatedItem, ItemMembership, Member } from '@graasp/sdk';
 
 import { StatusCodes } from 'http-status-codes';
-import { Model, Response, RestSerializer, createServer } from 'miragejs';
+import {
+  Model,
+  Response,
+  RestSerializer,
+  Server,
+  createServer,
+} from 'miragejs';
 
-import MOCK_ACTION_DATA from './mockData/actions';
+import { API_HOST } from '@/config/env';
+
+import MOCK_ACTION_DATA from '../cypress/fixtures/actions';
 import {
   MOCK_AGGREGATE_ACTIONS_ACTIVE_USERS,
   MOCK_AGGREGATE_ACTIONS_BY_DAY,
@@ -13,7 +21,8 @@ import {
   MOCK_AGGREGATE_ACTIONS_TOTAL_ACTIONS,
   MOCK_AGGREGATE_ACTIONS_TOTAL_USERS,
   MOCK_AGGREGATE_ACTIONS_TYPE,
-} from './mockData/aggregateActions';
+} from '../cypress/fixtures/aggregateActions';
+import { buildDatabase } from './database';
 
 const {
   buildGetItemRoute,
@@ -21,13 +30,6 @@ const {
   GET_OWN_ITEMS_ROUTE,
   SHARED_ITEM_WITH_ROUTE,
 } = API_ROUTES;
-
-type Database = {
-  currentMember?: Member;
-  items?: DiscriminatedItem[];
-  itemMemberships?: ItemMembership[];
-  members?: Member[];
-};
 
 const ApplicationSerializer = RestSerializer.extend({
   root: false,
@@ -62,27 +64,15 @@ const checkPermission = (
 
 const buildPathFromId = (id: string) => id.replace(/-/g, '_');
 
-export const buildDatabase = ({
-  currentMember,
-  items = [],
-  itemMemberships = [],
-  members,
-}: Partial<Database> = {}): Database => ({
-  currentMember,
-  items,
-  itemMemberships,
-  members: members ?? (currentMember ? [currentMember] : []),
-});
-
-export const mockServer = ({
+const mockServer = ({
   urlPrefix,
   database = buildDatabase(),
   externalUrls = [],
 }: {
   urlPrefix?: string;
-  database?: Database;
+  database?: ReturnType<typeof buildDatabase>;
   externalUrls?: string[];
-} = {}): any => {
+}): Server => {
   const { items, members, itemMemberships } = database;
   const currentMember = members?.[0];
 
@@ -121,6 +111,15 @@ export const mockServer = ({
         return new Response(StatusCodes.UNAUTHORIZED);
       });
 
+      // members route
+      this.get(`/members/:id`, (schema, request) => {
+        return schema.find('member', request.params.id);
+      });
+      // members avatar route
+      this.get(`/members/:id/avatar/:size`, () => {
+        return new Response(StatusCodes.NOT_FOUND);
+      });
+
       // get item
       this.get(`/${buildGetItemRoute(':id')}`, (schema, request) => {
         const itemId = request.url.split('/').at(-1);
@@ -138,7 +137,7 @@ export const mockServer = ({
 
       // get children
       this.get(`/items/:id/children`, (schema, request) => {
-        const itemId = request.url.split('/').at(-2);
+        const itemId = request.params.id;
         if (!itemId) {
           throw new Error('item id does not exist');
         }
@@ -157,7 +156,7 @@ export const mockServer = ({
 
       // get parents
       this.get(`/items/:id/parents`, (schema, request) => {
-        const itemId = request.url.split('/').at(-2);
+        const itemId = request.params.id;
         if (!itemId) {
           throw new Error('item id does not exist');
         }
@@ -281,4 +280,9 @@ export const mockServer = ({
   });
 };
 
-export default mockServer;
+export const initMockServer = (): void => {
+  mockServer({
+    urlPrefix: API_HOST,
+    database: window.Cypress ? window.database : undefined,
+  });
+};
