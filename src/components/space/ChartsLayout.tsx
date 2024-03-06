@@ -70,7 +70,7 @@ const ChartsLayout = (): JSX.Element => {
             <SectionTitle title={t('ITEMS_ANALYTICS_TITLE')} />
             <ItemsAnalytics />
           </div>
-          {descendantsApps.length && (
+          {descendantsApps.length > 0 && (
             <div id="apps">
               <SectionTitle title={t('APPS_ANALYTICS_TITLE')} />
               <AppsAnalytics />

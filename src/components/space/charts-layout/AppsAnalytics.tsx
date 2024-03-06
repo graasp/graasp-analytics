@@ -14,7 +14,7 @@ const AppsAnalytics = (): JSX.Element => {
   const { descendantsApps } = useContext(DataContext);
 
   return (
-    <Grid container spacing={2} m={2}>
+    <Grid container mt={2}>
       {descendantsApps.map((item) => (
         <Grid item key={item.id} xs={12}>
           <AppContent item={item as AppItemType} member={member} />

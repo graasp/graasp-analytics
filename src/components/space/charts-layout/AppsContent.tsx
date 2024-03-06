@@ -1,3 +1,5 @@
+import { Typography } from '@mui/material';
+
 import { Api } from '@graasp/query-client';
 import {
   AppItemType,
@@ -34,25 +36,30 @@ const AppContent = ({
     userMemberships && PermissionLevelCompare.getHighest(userMemberships);
 
   return (
-    <AppItem
-      isResizable
-      item={item}
-      height={ITEM_DEFAULT_HEIGHT}
-      requestApiAccessToken={(payload: {
-        id: string;
-        key: string;
-        origin: string;
-      }) => Api.requestApiAccessToken(payload, { API_HOST, axios })}
-      contextPayload={{
-        apiHost: API_HOST,
-        itemId: item.id,
-        memberId: member?.id,
-        permission: permission || PermissionLevel.Read,
-        settings: item.settings,
-        lang: item.settings?.lang || member?.extra?.lang || DEFAULT_LANG,
-        context: Context.Analytics,
-      }}
-    />
+    <>
+      <Typography m={1} variant="h6" align="center">
+        {item.name}
+      </Typography>
+      <AppItem
+        isResizable
+        item={item}
+        height={ITEM_DEFAULT_HEIGHT}
+        requestApiAccessToken={(payload: {
+          id: string;
+          key: string;
+          origin: string;
+        }) => Api.requestApiAccessToken(payload, { API_HOST, axios })}
+        contextPayload={{
+          apiHost: API_HOST,
+          itemId: item.id,
+          memberId: member?.id,
+          permission: permission || PermissionLevel.Read,
+          settings: item.settings,
+          lang: item.settings?.lang || member?.extra?.lang || DEFAULT_LANG,
+          context: Context.Analytics,
+        }}
+      />
+    </>
   );
 };
 
