@@ -1,3 +1,5 @@
+import { FC, useContext } from 'react';
+
 import AppsIcon from '@mui/icons-material/Apps';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import FolderIcon from '@mui/icons-material/Folder';
@@ -7,12 +9,16 @@ import { MainMenu as GraaspMainMenu, MenuItem } from '@graasp/ui';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 
-const Sidebar = ({ isContainApp }: { isContainApp: boolean }): JSX.Element => {
+import { DataContext } from '../context/DataProvider';
+
+const Sidebar: FC = () => {
   const { t } = useAnalyticsTranslation();
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: 'smooth' });
   };
+  const { descendantsApps } = useContext(DataContext);
+
   return (
     <GraaspMainMenu>
       <MenuItem
@@ -30,7 +36,7 @@ const Sidebar = ({ isContainApp }: { isContainApp: boolean }): JSX.Element => {
         icon={<FolderIcon />}
         text={t('TAB_ITEMS')}
       />
-      {isContainApp ? (
+      {descendantsApps.length ? (
         <MenuItem
           onClick={() => scrollTo('apps')}
           icon={<AppsIcon />}

@@ -72,10 +72,7 @@ const ChartsLayout = (): JSX.Element => {
           </div>
           {descendantsApps.length && (
             <div id="apps">
-              <SectionTitle
-                title={t('APPS_ANALYTICS_TITLE')}
-                icons={[<ExportData key="export" />]}
-              />
+              <SectionTitle title={t('APPS_ANALYTICS_TITLE')} />
               <AppsAnalytics />
             </div>
           )}

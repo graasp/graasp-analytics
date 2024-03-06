@@ -30,6 +30,16 @@ const AppContent = ({
   const permission =
     userMemberships && PermissionLevelCompare.getHighest(userMemberships);
 
+  console.log(permission, 'permission');
+  const contextPayload = {
+    apiHost: API_HOST,
+    itemId: item.id,
+    memberId: member?.id,
+    permission: permission || PermissionLevel.Read,
+    settings: item.settings,
+    lang: item.settings?.lang || member?.extra?.lang || DEFAULT_LANG,
+    context: Context.Analytics,
+  };
   return (
     <AppItem
       isResizable
@@ -40,15 +50,7 @@ const AppContent = ({
         key: string;
         origin: string;
       }) => Api.requestApiAccessToken(payload, { API_HOST, axios })}
-      contextPayload={{
-        apiHost: API_HOST,
-        itemId: item.id,
-        memberId: member?.id,
-        permission: permission || PermissionLevel.Read,
-        settings: item.settings,
-        lang: item.settings?.lang || member?.extra?.lang || DEFAULT_LANG,
-        context: Context.Analytics,
-      }}
+      contextPayload={contextPayload}
     />
   );
 };

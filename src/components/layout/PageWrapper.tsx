@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { Box, styled } from '@mui/material';
@@ -17,7 +16,6 @@ import { useAnalyticsTranslation } from '@/config/i18n';
 import { HOME_PATH } from '@/config/paths';
 
 import UserSwitchWrapper from '../common/UserSwitchWrapper';
-import { DataContext } from '../context/DataProvider';
 import Footer from './Footer';
 import Navigator from './Navigator';
 import Sidebar from './Sidebar';
@@ -43,8 +41,6 @@ const PageWrapper = ({ children }: { children: JSX.Element }): JSX.Element => {
   const { itemId } = useParams();
   const getNavigationEvents = usePlatformNavigation(platformsHostsMap, itemId);
 
-  const { descendantsApps } = useContext(DataContext);
-
   const platformProps = {
     [Platform.Builder]: {
       ...getNavigationEvents(Platform.Builder),
@@ -62,7 +58,7 @@ const PageWrapper = ({ children }: { children: JSX.Element }): JSX.Element => {
   return (
     <Main
       context={Context.Analytics}
-      drawerContent={<Sidebar isContainApp={Boolean(descendantsApps.length)} />}
+      drawerContent={<Sidebar />}
       drawerOpenAriaLabel={t('DRAWER_OPEN_ARIA')}
       headerRightContent={<UserSwitchWrapper />}
       PlatformComponent={
