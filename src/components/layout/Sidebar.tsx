@@ -8,6 +8,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { MainMenu as GraaspMainMenu, MenuItem } from '@graasp/ui';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
+import { buildSidebarListItemId } from '@/config/selectors';
 
 import { DataContext } from '../context/DataProvider';
 
@@ -41,6 +42,7 @@ const Sidebar: FC = () => {
           onClick={() => scrollTo('apps')}
           icon={<AppsIcon />}
           text={t('TAB_APPS')}
+          id={buildSidebarListItemId('app')}
         />
       ) : (
         <></>

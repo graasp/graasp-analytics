@@ -154,6 +154,25 @@ const mockServer = ({
         );
       });
 
+      // get descendants
+      this.get(`/items/:id/descendants`, (schema, request) => {
+        const itemId = request.params.id;
+        if (!itemId) {
+          throw new Error('item id does not exist');
+        }
+
+        return (
+          schema
+            .all('item')
+            // TODO: remove any after figuring out the type
+            .filter(({ id, path }: any) =>
+              path.includes(
+                `${buildPathFromId(itemId)}.${buildPathFromId(id)}`,
+              ),
+            )
+        );
+      });
+
       // get parents
       this.get(`/items/:id/parents`, (schema, request) => {
         const itemId = request.params.id;
