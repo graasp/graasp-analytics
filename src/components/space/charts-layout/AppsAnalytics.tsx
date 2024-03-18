@@ -11,11 +11,11 @@ import AppContent from './AppsContent';
 
 const AppsAnalytics = (): JSX.Element => {
   const { data: member } = hooks.useCurrentMember();
-  const { descendantsApps } = useContext(DataContext);
+  const { descendantApps } = useContext(DataContext);
 
   return (
-    <Grid container mt={2}>
-      {descendantsApps.map((item) => (
+    <Grid container spacing={2} p={2}>
+      {descendantApps.map((item) => (
         <Grid item key={item.id} xs={12}>
           <AppContent item={item as AppItemType} member={member} />
         </Grid>

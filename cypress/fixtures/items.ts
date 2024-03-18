@@ -82,4 +82,11 @@ export const APP_ITEM_WITH_PARENT = AppItemFactory({
   parentItem: MOCK_ITEMS[0],
 });
 
+export const CALC_APP_ITEM_WITH_PARENT = AppItemFactory({
+  id: 'd70ec385-e6b7-4665-b4ea-fd06badeccdd',
+  name: 'Calculator with parent',
+  creator: MOCK_MEMBERS[0],
+  parentItem: MOCK_ITEMS[0],
+});
+
 export default MOCK_ITEMS;

@@ -32,7 +32,7 @@ const defaultValue: {
   itemChildren?: DiscriminatedItem[];
   isLoading: boolean;
   requestedSampleSize: number;
-  descendantsApps: DiscriminatedItem[];
+  descendantApps: DiscriminatedItem[];
 } = {
   actions: [],
   allMembers: [],
@@ -48,7 +48,7 @@ const defaultValue: {
   error: false,
   isLoading: true,
   requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
-  descendantsApps: [],
+  descendantApps: [],
 };
 
 export const DataContext = createContext(defaultValue);
@@ -129,7 +129,7 @@ const DataProvider = ({ children }: Props): JSX.Element => {
     enabled: itemData?.type === ItemType.FOLDER,
   });
 
-  const descendantsApps = (
+  const descendantApps = (
     itemData ? [itemData, ...descendants] : descendants
   )?.filter(({ type }) => type === ItemType.APP);
 
@@ -213,7 +213,7 @@ const DataProvider = ({ children }: Props): JSX.Element => {
       itemChildren,
       isLoading,
       requestedSampleSize,
-      descendantsApps,
+      descendantApps,
     }),
     [
       actions,
@@ -225,7 +225,7 @@ const DataProvider = ({ children }: Props): JSX.Element => {
       isLoading,
       itemChildren,
       requestedSampleSize,
-      descendantsApps,
+      descendantApps,
     ],
   );
 

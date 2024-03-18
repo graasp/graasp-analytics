@@ -8,7 +8,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { MainMenu as GraaspMainMenu, MenuItem } from '@graasp/ui';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
-import { buildSidebarListItemId } from '@/config/selectors';
+import { APPS_ID, APP_ITEM, buildSidebarListItemId } from '@/config/selectors';
 
 import { DataContext } from '../context/DataProvider';
 
@@ -18,7 +18,7 @@ const Sidebar: FC = () => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: 'smooth' });
   };
-  const { descendantsApps } = useContext(DataContext);
+  const { descendantApps } = useContext(DataContext);
 
   return (
     <GraaspMainMenu>
@@ -37,12 +37,12 @@ const Sidebar: FC = () => {
         icon={<FolderIcon />}
         text={t('TAB_ITEMS')}
       />
-      {descendantsApps.length ? (
+      {descendantApps.length ? (
         <MenuItem
-          onClick={() => scrollTo('apps')}
+          onClick={() => scrollTo(APPS_ID)}
           icon={<AppsIcon />}
           text={t('TAB_APPS')}
-          id={buildSidebarListItemId('app')}
+          id={buildSidebarListItemId(APP_ITEM)}
         />
       ) : (
         <></>
