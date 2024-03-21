@@ -13,7 +13,7 @@ const AppsAnalyticPage = (): JSX.Element | null => {
   const { descendantApps } = useContext(DataContext);
 
   return descendantApps.length > 0 ? (
-    <Box id={APPS_ID}>
+    <Box id={APPS_ID} paddingTop={2}>
       <SectionTitle title={t('APPS_ANALYTICS_TITLE')} />
       <AppsAnalytics />
     </Box>
