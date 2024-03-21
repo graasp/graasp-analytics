@@ -1,4 +1,5 @@
 import { FC, useContext } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import AppsIcon from '@mui/icons-material/Apps';
 import BarChartIcon from '@mui/icons-material/BarChart';
@@ -8,41 +9,50 @@ import PersonIcon from '@mui/icons-material/Person';
 import { MainMenu as GraaspMainMenu, MenuItem } from '@graasp/ui';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
-import { APPS_ID, APP_ITEM, buildSidebarListItemId } from '@/config/selectors';
+import {
+  buildAppsAnalyticsPath,
+  buildItemPath,
+  buildItemsAnalyticsPath,
+  buildUsersAnalyticsPath,
+} from '@/config/paths';
+import { APP_ITEM, buildSidebarListItemId } from '@/config/selectors';
 
 import { DataContext } from '../context/DataProvider';
 
 const Sidebar: FC = () => {
   const { t } = useAnalyticsTranslation();
-  const scrollTo = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const { itemId } = useParams();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { descendantApps } = useContext(DataContext);
 
   return (
     <GraaspMainMenu>
       <MenuItem
-        onClick={() => scrollTo('general')}
+        onClick={() => navigate(buildItemPath(itemId))}
         icon={<BarChartIcon />}
         text={t('TAB_GENERAL')}
+        selected={pathname === buildItemPath(itemId)}
       />
       <MenuItem
-        onClick={() => scrollTo('users')}
+        onClick={() => navigate(buildUsersAnalyticsPath(itemId))}
         icon={<PersonIcon />}
         text={t('TAB_USERS')}
+        selected={pathname === buildUsersAnalyticsPath(itemId)}
       />
       <MenuItem
-        onClick={() => scrollTo('items')}
+        onClick={() => navigate(buildItemsAnalyticsPath(itemId))}
         icon={<FolderIcon />}
         text={t('TAB_ITEMS')}
+        selected={pathname === buildItemsAnalyticsPath(itemId)}
       />
       {descendantApps.length ? (
         <MenuItem
-          onClick={() => scrollTo(APPS_ID)}
+          onClick={() => navigate(buildAppsAnalyticsPath(itemId))}
           icon={<AppsIcon />}
           text={t('TAB_APPS')}
           id={buildSidebarListItemId(APP_ITEM)}
+          selected={pathname === buildAppsAnalyticsPath(itemId)}
         />
       ) : (
         <></>

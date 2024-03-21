@@ -1,0 +1,23 @@
+import React, { useContext } from 'react';
+
+import { Box } from '@mui/material';
+
+import SectionTitle from '@/components/common/SectionTitle';
+import { DataContext } from '@/components/context/DataProvider';
+import AppsAnalytics from '@/components/space/charts-layout/AppsAnalytics';
+import { useAnalyticsTranslation } from '@/config/i18n';
+import { APPS_ID } from '@/config/selectors';
+
+const AppsAnalyticPage = (): JSX.Element | null => {
+  const { t } = useAnalyticsTranslation();
+  const { descendantApps } = useContext(DataContext);
+
+  return descendantApps.length > 0 ? (
+    <Box id={APPS_ID}>
+      <SectionTitle title={t('APPS_ANALYTICS_TITLE')} />
+      <AppsAnalytics />
+    </Box>
+  ) : null;
+};
+
+export default AppsAnalyticPage;
