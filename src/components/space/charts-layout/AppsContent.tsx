@@ -41,7 +41,7 @@ const AppContent = ({
         </Typography>
         <Box sx={{ border: '1px solid rgba(0, 0, 0, 0.12)' }}>
           <AppItem
-            isResizable
+            isResizable={false}
             item={item}
             height={ITEM_DEFAULT_HEIGHT}
             requestApiAccessToken={(payload: {

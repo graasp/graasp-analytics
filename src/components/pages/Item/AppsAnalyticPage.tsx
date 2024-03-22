@@ -12,12 +12,15 @@ const AppsAnalyticPage = (): JSX.Element | null => {
   const { t } = useAnalyticsTranslation();
   const { descendantApps } = useContext(DataContext);
 
-  return descendantApps.length > 0 ? (
-    <Box id={APPS_ID} paddingTop={2}>
-      <SectionTitle title={t('APPS_ANALYTICS_TITLE')} />
-      <AppsAnalytics />
-    </Box>
-  ) : null;
+  if (descendantApps.length) {
+    return (
+      <Box id={APPS_ID} paddingTop={2}>
+        <SectionTitle title={t('APPS_ANALYTICS_TITLE')} />
+        <AppsAnalytics />
+      </Box>
+    );
+  }
+  return null;
 };
 
 export default AppsAnalyticPage;
