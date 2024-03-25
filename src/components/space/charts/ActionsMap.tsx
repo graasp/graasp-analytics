@@ -5,6 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import GoogleMapReact from 'google-map-react';
 import useSupercluster from 'use-supercluster';
 
+import StyledAlert from '@/components/common/StyledAlert';
 import { GOOGLE_KEY } from '@/config/env';
 import { useAnalyticsTranslation } from '@/config/i18n';
 
@@ -34,10 +35,6 @@ const ActionsMap = (): JSX.Element | null => {
   const [zoom, setZoom] = useState(DEFAULT_ZOOM);
   const { actions, selectedUsers } = useContext(DataContext);
 
-  if (!GOOGLE_KEY) {
-    return null;
-  }
-
   // actionsToChart is the array converted to GeoJSON Feature objects below
   // if you remove all names in the react-select dropdown, selectedUsers becomes null
   // if no users are selected (i.e. selectedUsers.size === 0), show all actions
@@ -52,8 +49,25 @@ const ActionsMap = (): JSX.Element | null => {
     actionsToChart = filterActionsByUsers(actions, selectedUsers);
   }
 
+  // NO Google key or no actions at all
+  if (!GOOGLE_KEY || !actionsToChart.length) {
+    return null;
+  }
+
   // GeoJSON Feature objects
   const points = mapActionsToGeoJsonFeatureObjects(actionsToChart);
+
+  // if there's actions but with no geolocation points
+  if (!points.length) {
+    return (
+      <>
+        <ChartTitle title={t('ACTIONS_BY_LOCATION')} />
+        <StyledAlert severity="warning">
+          {t('ACTIONS_MIGHT_HAS_NO_GEOLOCATION')}
+        </StyledAlert>
+      </>
+    );
+  }
 
   const { clusters } = useSupercluster({
     points,
