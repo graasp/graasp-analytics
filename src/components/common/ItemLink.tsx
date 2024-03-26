@@ -45,7 +45,7 @@ const ItemLink = ({ item }: { item: DiscriminatedItem }): JSX.Element => {
           {item.creator?.name}
         </Typography>
       )}
-      <Typography variant="caption" lineHeight={2}>
+      <Typography variant="caption" lineHeight={2} color="GrayText">
         {formatDate(item.createdAt, { locale: i18n.language })}
       </Typography>
     </Box>
