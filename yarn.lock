@@ -6029,7 +6029,7 @@ __metadata:
     react-i18next: "npm:14.0.5"
     react-router-dom: "npm:6.22.1"
     react-toastify: "npm:10.0.5"
-    recharts: "npm:2.12.1"
+    recharts: "npm:2.12.3"
     stylis: "npm:4.3.1"
     stylis-plugin-rtl: "npm:2.1.1"
     supercluster: "npm:8.0.1"
@@ -8781,9 +8781,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"recharts@npm:2.12.1":
-  version: 2.12.1
-  resolution: "recharts@npm:2.12.1"
+"recharts@npm:2.12.3":
+  version: 2.12.3
+  resolution: "recharts@npm:2.12.3"
   dependencies:
     clsx: "npm:^2.0.0"
     eventemitter3: "npm:^4.0.1"
@@ -8796,7 +8796,7 @@ __metadata:
   peerDependencies:
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 10/66effa61835df5755cc320896004570d211a2954ceebc1bb6afb0b5cc9b84e0f9deba1a05b97920f52a4e6b56c2acecf3209b172194c04e9ef813c0e6c930b0f
+  checksum: 10/2ddc8fe628a50f1a4d61d875d5dc18885d2e233bbc937a1ae6065a48ac59cd8ea90bd84290487bf02113f1ed40d890e716ee907d46cb90c36bca67a985e3236f
   languageName: node
   linkType: hard
 
