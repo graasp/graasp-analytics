@@ -5,7 +5,6 @@ type Props = {
   cy: number;
   innerRadius: number;
   outerRadius: number;
-  startAngle: number;
   midAngle: number;
   percent: number;
   fill: string;
