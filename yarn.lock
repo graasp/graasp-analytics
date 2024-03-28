@@ -381,9 +381,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/code-coverage@npm:3.12.26":
-  version: 3.12.26
-  resolution: "@cypress/code-coverage@npm:3.12.26"
+"@cypress/code-coverage@npm:3.12.32":
+  version: 3.12.32
+  resolution: "@cypress/code-coverage@npm:3.12.32"
   dependencies:
     "@cypress/webpack-preprocessor": "npm:^6.0.0"
     chalk: "npm:4.1.2"
@@ -400,7 +400,7 @@ __metadata:
     babel-loader: ^8.3 || ^9
     cypress: "*"
     webpack: ^4 || ^5
-  checksum: 10/10d74acb89ac3ef533f3d8dd0194a11265cf29a3bb91b9ab7d63ec349c1d8f0c3e598ebb1f5b64f1718dd087e770014188f99e009ba117fff71380842584969f
+  checksum: 10/fc67b523c7341bd6b970e2007af8e82024ae00240aaa45d49116a300e0d578942cec5b140e40f6b91db93862cdc92fc829fc96396d9b852c2dc6082dd067daad
   languageName: node
   linkType: hard
 
@@ -2126,9 +2126,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react@npm:14.2.1":
-  version: 14.2.1
-  resolution: "@testing-library/react@npm:14.2.1"
+"@testing-library/react@npm:14.2.2":
+  version: 14.2.2
+  resolution: "@testing-library/react@npm:14.2.2"
   dependencies:
     "@babel/runtime": "npm:^7.12.5"
     "@testing-library/dom": "npm:^9.0.0"
@@ -2136,7 +2136,7 @@ __metadata:
   peerDependencies:
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 10/e02b2f32ae79665a79fc4d8ee053fd3832bfcd4753aa1dba05cdece1a9f59c72a0fae91e0a9387597dcb686d631a722729f2878e38dc95e6f23b291ad8d09b6c
+  checksum: 10/3605577fda8d5e27b8919f390f749af91494d03e7ba5ccaf6480ed1184248372c5a4e8fe1c8c3ad4c1a7b3536f37144ba4b4626900ed46dc9811312f280eee31
   languageName: node
   linkType: hard
 
@@ -2494,12 +2494,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.11.20":
-  version: 20.11.20
-  resolution: "@types/node@npm:20.11.20"
+"@types/node@npm:20.11.30":
+  version: 20.11.30
+  resolution: "@types/node@npm:20.11.30"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10/ff449bdc94810dadb54e0f77dd587c6505ef79ffa5a208c16eb29b223365b188f4c935a3abaf0906a01d05257c3da1f72465594a841d35bcf7b6deac7a6938fb
+  checksum: 10/78515bc768d2b878e2e06a1c20eb4f5840072b79b8d28ff3dd0a7feaaf48fd3a2ac03cfa5bc7564da82db5906b43e9ba0e5df9f43d870b7aae2942306e208815
   languageName: node
   linkType: hard
 
@@ -5974,7 +5974,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "graasp-analytics@workspace:."
   dependencies:
-    "@cypress/code-coverage": "npm:3.12.26"
+    "@cypress/code-coverage": "npm:3.12.32"
     "@emotion/cache": "npm:11.11.0"
     "@emotion/react": "npm:11.11.3"
     "@emotion/styled": "npm:11.11.0"
@@ -5987,7 +5987,7 @@ __metadata:
     "@mui/material": "npm:5.15.11"
     "@sentry/react": "npm:7.103.0"
     "@testing-library/jest-dom": "npm:6.4.2"
-    "@testing-library/react": "npm:14.2.1"
+    "@testing-library/react": "npm:14.2.2"
     "@testing-library/user-event": "npm:14.5.2"
     "@trivago/prettier-plugin-sort-imports": "npm:4.3.0"
     "@types/google-map-react": "npm:2.1.10"
@@ -5995,7 +5995,7 @@ __metadata:
     "@types/lodash.countby": "npm:4.6.9"
     "@types/lodash.groupby": "npm:4.6.9"
     "@types/lodash.truncate": "npm:4.4.9"
-    "@types/node": "npm:20.11.20"
+    "@types/node": "npm:20.11.30"
     "@typescript-eslint/eslint-plugin": "npm:7.1.0"
     "@typescript-eslint/parser": "npm:7.1.0"
     "@vitejs/plugin-react": "npm:4.2.1"
@@ -6036,7 +6036,7 @@ __metadata:
     typescript: "npm:5.3.3"
     use-supercluster: "npm:0.4.0"
     uuid: "npm:9.0.1"
-    vite: "npm:5.1.4"
+    vite: "npm:5.1.7"
     vite-plugin-checker: "npm:0.6.4"
     vite-plugin-istanbul: "npm:5.0.0"
   languageName: unknown
@@ -10333,9 +10333,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:5.1.4":
-  version: 5.1.4
-  resolution: "vite@npm:5.1.4"
+"vite@npm:5.1.7":
+  version: 5.1.7
+  resolution: "vite@npm:5.1.7"
   dependencies:
     esbuild: "npm:^0.19.3"
     fsevents: "npm:~2.3.3"
@@ -10369,7 +10369,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/e9003b853f0784260f4fe7ce0190124b347fd8fd6bf889a07080facd0d9a9667eaff4022eddb1ba3f0283ef69d15d77f84bca832082e48874a7a62e7f6d66b08
+  checksum: 10/f1b31e32699f33ba18501413a35e1f7ced20cbf39510543c59041c3482aa877a10970f2ad64623707671c112e3ef3ea3095f125911e65fcb165bdee5a4116263
   languageName: node
   linkType: hard
 
