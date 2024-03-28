@@ -3,12 +3,14 @@ import React, { useContext, useState } from 'react';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import {
   Box,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   Fab,
   List,
   ListItem,
-  ListItemAvatar,
   ListItemText,
-  Popover,
+  Tooltip,
   Typography,
   styled,
 } from '@mui/material';
@@ -27,18 +29,17 @@ const actionsDescriptionTransKeys: { [key: string]: string } = {
 };
 
 const StyledFab = styled(Fab)(({ theme }) => ({
-  flexGrow: 1,
-  flexShrink: 0,
-  width: theme.spacing(3),
-  height: theme.spacing(3),
-  minHeight: theme.spacing(3),
+  position: 'fixed',
+  bottom: theme.spacing(10),
+  right: theme.spacing(8),
 }));
 
-const StyledItemAvatar = styled(ListItemAvatar)<{ background: string }>(
+const ActionColorBox = styled(Box)<{ background: string }>(
   ({ theme, background }) => ({
-    width: theme.spacing(3),
-    height: theme.spacing(3),
-    minWidth: theme.spacing(3),
+    width: theme.spacing(2),
+    height: theme.spacing(2),
+    minWidth: theme.spacing(2),
+    borderRadius: theme.spacing(0.5),
     background,
   }),
 );
@@ -47,47 +48,50 @@ const ActionsLegend = (): JSX.Element => {
   const { actions } = useContext(DataContext);
   const { t } = useAnalyticsTranslation();
 
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const [open, setOpen] = useState(false);
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setOpen(false);
   };
 
-  const open = Boolean(anchorEl);
   const types = [...new Set(actions.map((a) => a.type))];
 
   return (
     <>
-      <StyledFab
-        color="primary"
-        aria-label="actions-legend"
-        onClick={handleClick}
-      >
-        <QuestionMarkIcon fontSize="small" />
-      </StyledFab>
-      <Popover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      >
-        <Box sx={{ width: '400px', padding: 3 }}>
-          <Typography>{t('ACTIONS_LEGEND_MODAL_TITLE')}</Typography>
-          <List sx={{ maxHeight: '50vh', overflow: 'auto' }}>
+      <Tooltip title={t('ACTIONS_LEGEND_MODAL_TITLE')} placement="left">
+        <StyledFab
+          color="primary"
+          aria-label="actions-legend"
+          onClick={() => setOpen(true)}
+          size="large"
+        >
+          <QuestionMarkIcon />
+        </StyledFab>
+      </Tooltip>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle sx={{ paddingBottom: 0 }}>
+          {t('ACTIONS_LEGEND_MODAL_TITLE')}
+        </DialogTitle>
+        <DialogContent sx={{ maxWidth: '400px' }}>
+          <List sx={{ maxHeight: '50vh' }}>
             {types.map((ele, index) => (
-              <ListItem key={ele} sx={{ gap: 1, p: 0 }}>
-                <StyledItemAvatar background={COLORS[index]} />
+              <ListItem key={ele} sx={{ p: 0, marginBottom: 1 }}>
                 <ListItemText
-                  primary={<Typography variant="body2">{ele}</Typography>}
+                  primary={
+                    <Box display="flex" gap={1} alignItems="center">
+                      <ActionColorBox background={COLORS[index]} />
+                      <Typography variant="body2" lineHeight={2}>
+                        {ele}
+                      </Typography>
+                    </Box>
+                  }
                   secondary={
-                    <Typography color="gray" variant="caption">
+                    <Typography
+                      color="gray"
+                      variant="caption"
+                      lineHeight={1.5}
+                      display="block"
+                    >
                       {t(actionsDescriptionTransKeys[ele])}
                     </Typography>
                   }
@@ -95,8 +99,8 @@ const ActionsLegend = (): JSX.Element => {
               </ListItem>
             ))}
           </List>
-        </Box>
-      </Popover>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

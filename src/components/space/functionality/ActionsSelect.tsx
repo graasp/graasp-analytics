@@ -13,7 +13,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useAnalyticsTranslation } from '@/config/i18n';
 
 import { DataContext } from '../../context/DataProvider';
-import ActionsLegend from '../charts-layout/ActionsLegend';
 
 const ActionsSelect = (): JSX.Element | null => {
   const { t } = useAnalyticsTranslation();
@@ -73,7 +72,6 @@ const ActionsSelect = (): JSX.Element | null => {
           ))}
         </Select>
       </FormControl>
-      <ActionsLegend />
     </Stack>
   );
 };
