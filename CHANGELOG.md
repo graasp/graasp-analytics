@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.1](https://github.com/graasp/graasp-analytics/compare/v2.5.0...v2.5.1) (2024-03-28)
+
+
+### Bug Fixes
+
+* don't display map if there's no geolocation actions ([#335](https://github.com/graasp/graasp-analytics/issues/335)) ([7d08891](https://github.com/graasp/graasp-analytics/commit/7d0889150d2eeb1f6a5cf900c0de4fec8a2ff4e3))
+* use stacked notifs ([#342](https://github.com/graasp/graasp-analytics/issues/342)) ([d23a207](https://github.com/graasp/graasp-analytics/commit/d23a207edb7d52fc747efd3fb7c6ca38366e4d4d))
+
 ## [2.5.0](https://github.com/graasp/graasp-analytics/compare/v2.4.0...v2.5.0) (2024-03-22)
 
 
