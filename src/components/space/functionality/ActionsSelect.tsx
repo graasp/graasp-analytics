@@ -13,6 +13,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useAnalyticsTranslation } from '@/config/i18n';
 
 import { DataContext } from '../../context/DataProvider';
+import ActionsLegend from '../charts-layout/ActionsLegend';
 
 const ActionsSelect = (): JSX.Element | null => {
   const { t } = useAnalyticsTranslation();
@@ -31,7 +32,13 @@ const ActionsSelect = (): JSX.Element | null => {
     setSelectedActionTypes(Array.isArray(value) ? value : [value]);
   };
   return (
-    <Stack direction="row" alignItems="center" flexGrow={1} flexShrink={0}>
+    <Stack
+      direction="row"
+      alignItems="center"
+      flexGrow={1}
+      flexShrink={0}
+      gap={1}
+    >
       <FormControl fullWidth>
         <InputLabel id="demo-multiple-chip-label">
           {t('ACTION_TYPES')}
@@ -66,6 +73,7 @@ const ActionsSelect = (): JSX.Element | null => {
           ))}
         </Select>
       </FormControl>
+      <ActionsLegend />
     </Stack>
   );
 };
