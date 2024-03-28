@@ -1,6 +1,5 @@
 import { Action, DiscriminatedItem, Member } from '@graasp/sdk';
 
-import capitalize from 'lodash.capitalize';
 import countBy from 'lodash.countby';
 import groupBy from 'lodash.groupby';
 import truncate from 'lodash.truncate';
@@ -172,9 +171,9 @@ export const formatActionsByVerb = (actionsByVerbObject: {
   percentage: number;
 }[] => {
   const actionsByVerbArray = Object.entries(actionsByVerbObject);
-  // capitalize verbs (entry[0][0]), convert 0.0x notation to x% and round to two decimal places (entry[0][1])
+  // convert 0.0x notation to x% and round to two decimal places (entry[0][1])
   let formattedActionsByVerbArray: [string, number][] = actionsByVerbArray.map(
-    (entry) => [capitalize(entry[0]), parseFloat((entry[1] * 100).toFixed(2))],
+    (entry) => [entry[0], parseFloat((entry[1] * 100).toFixed(2))],
   );
   formattedActionsByVerbArray = formattedActionsByVerbArray.filter(
     (entry: [string, number]) => entry[1] >= MIN_PERCENTAGE_TO_SHOW_VERB,

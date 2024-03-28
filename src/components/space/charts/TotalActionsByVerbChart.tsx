@@ -12,7 +12,7 @@ import { Cell, Pie, PieChart, Tooltip } from 'recharts';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 
-import { COLORS, DEFAULT_REQUEST_SAMPLE_SIZE } from '../../../config/constants';
+import { DEFAULT_REQUEST_SAMPLE_SIZE } from '../../../config/constants';
 import { hooks } from '../../../config/queryClient';
 import ChartContainer from '../../common/ChartContainer';
 import ChartTitle from '../../common/ChartTitle';
@@ -22,7 +22,7 @@ import EmptyChart from './EmptyChart';
 
 const TotalActionsByVerbChart = (): JSX.Element | null => {
   const { t } = useAnalyticsTranslation();
-  const { selectedActionTypes } = useContext(DataContext);
+  const { selectedActionTypes, actionsColorMap } = useContext(DataContext);
   const { view } = useContext(ViewDataContext);
   const { itemId } = useParams();
 
@@ -85,11 +85,11 @@ const TotalActionsByVerbChart = (): JSX.Element | null => {
             data={formattedAggregateDataSorted}
             dataKey="actionCount"
             nameKey="type"
-            fill="#82ca9d"
+            // fill="#82ca9d"
             label={({ value }) => `${value}%`}
           >
-            {formattedAggregateDataSorted.map((entry, index) => (
-              <Cell key={entry.type} fill={COLORS[index % COLORS.length]} />
+            {formattedAggregateDataSorted.map((entry) => (
+              <Cell key={entry.type} fill={actionsColorMap[entry.type]} />
             ))}
           </Pie>
           <Tooltip formatter={(value) => `${value}%`} />

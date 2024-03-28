@@ -12,10 +12,7 @@ import {
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 
-import {
-  ACTIONS_BY_USER_MAX_DISPLAYED_USERS,
-  COLORS,
-} from '../../../config/constants';
+import { ACTIONS_BY_USER_MAX_DISPLAYED_USERS } from '../../../config/constants';
 import {
   filterActionsByActionTypes,
   filterActionsByUsers,
@@ -27,8 +24,13 @@ import EmptyChart from './EmptyChart';
 
 const UsersByActionByChart = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
-  const { actions, selectedUsers, selectedActionTypes, allMembers } =
-    useContext(DataContext);
+  const {
+    actions,
+    selectedUsers,
+    selectedActionTypes,
+    allMembers,
+    actionsColorMap,
+  } = useContext(DataContext);
   const allActions = filterActionsByActionTypes(actions, selectedActionTypes);
   const types = [...new Set(allActions.map((a) => a.type))];
 
@@ -76,12 +78,12 @@ const UsersByActionByChart = (): JSX.Element => {
           <XAxis dataKey="name" tick={{ fontSize: 14 }} />
           <YAxis tick={{ fontSize: 14 }} />
           <Tooltip />
-          {types.map((type, index) => (
+          {types.map((type) => (
             <Bar
               key=""
               dataKey={type}
               stackId="1"
-              fill={COLORS[index % COLORS.length]}
+              fill={actionsColorMap[type]}
             />
           ))}
         </ComposedChart>
