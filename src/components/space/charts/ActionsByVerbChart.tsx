@@ -13,6 +13,7 @@ import { formatActionsByVerb, getActionsByVerb } from '../../../utils/utils';
 import ChartContainer from '../../common/ChartContainer';
 import ChartTitle from '../../common/ChartTitle';
 import { DataContext } from '../../context/DataProvider';
+import ActionChartLabel from '../charts-layout/ActionChartLabel';
 import EmptyChart from './EmptyChart';
 
 const EmptyChartAlert = styled('div')({
@@ -70,7 +71,7 @@ const ActionsByVerbChart = (): JSX.Element => {
             dataKey="percentage"
             nameKey="type"
             fill="#82ca9d"
-            label={({ value }) => `${value}%`}
+            label={ActionChartLabel}
           >
             {formattedActionsByVerbSorted.map((entry, index) => (
               <Cell key={entry.type} fill={COLORS[index % COLORS.length]} />
