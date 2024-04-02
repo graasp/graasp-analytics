@@ -12,7 +12,11 @@ import {
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 
-import { ACTIONS_BY_USER_MAX_DISPLAYED_USERS } from '../../../config/constants';
+import {
+  ACTIONS_BY_USER_MAX_DISPLAYED_USERS,
+  ACTION_TRIGGER_TO_COLOR,
+  DEFAULT_ACTION_CELL_COLOR,
+} from '../../../config/constants';
 import {
   filterActionsByActionTypes,
   filterActionsByUsers,
@@ -24,13 +28,8 @@ import EmptyChart from './EmptyChart';
 
 const UsersByActionByChart = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
-  const {
-    actions,
-    selectedUsers,
-    selectedActionTypes,
-    allMembers,
-    actionsColorMap,
-  } = useContext(DataContext);
+  const { actions, selectedUsers, selectedActionTypes, allMembers } =
+    useContext(DataContext);
   const allActions = filterActionsByActionTypes(actions, selectedActionTypes);
   const types = [...new Set(allActions.map((a) => a.type))];
 
@@ -83,7 +82,7 @@ const UsersByActionByChart = (): JSX.Element => {
               key=""
               dataKey={type}
               stackId="1"
-              fill={actionsColorMap[type]}
+              fill={ACTION_TRIGGER_TO_COLOR[type] || DEFAULT_ACTION_CELL_COLOR}
             />
           ))}
         </ComposedChart>

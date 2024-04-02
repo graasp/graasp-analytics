@@ -1,4 +1,4 @@
-import { Context, UnionOfConst } from '@graasp/sdk';
+import { ActionTriggers, Context, UnionOfConst } from '@graasp/sdk';
 
 import {
   GRAASP_BUILDER_HOST,
@@ -53,9 +53,30 @@ export const COLORS = [
   '#FFFFAF',
 ];
 
+export const ACTION_TRIGGER_TO_COLOR: { [key: string]: string } = {
+  [ActionTriggers.CollectionView]: '#3066BE',
+  [ActionTriggers.Copy]: '#96CCE6',
+  [ActionTriggers.Create]: '#20A39E',
+  [ActionTriggers.Delete]: '#61D095',
+  [ActionTriggers.ItemDownload]: '#FFBA49',
+  [ActionTriggers.ItemEmbed]: '#EF5B5B',
+  [ActionTriggers.ItemLike]: '#FFA8A8',
+  [ActionTriggers.ItemSearch]: '#A4036F',
+  [ActionTriggers.ItemUnlike]: '#B54A3F',
+  [ActionTriggers.ItemView]: '#cc3333',
+  [ActionTriggers.LinkOpen]: '#800080',
+  [ActionTriggers.Move]: '#07bc0c',
+  [ActionTriggers.Update]: '#CCD9E5',
+  [ActionTriggers.ChatClear]: '#C4E5F7',
+  [ActionTriggers.ChatCreate]: '#800040',
+  [ActionTriggers.ChatDelete]: '#004080',
+  [ActionTriggers.ChatUpdate]: '#E5CCE5',
+};
+
 export const AVERAGE_COLOR = '#F99417';
 export const GENERAL_COLOR = '#8884d8';
 
+export const DEFAULT_ACTION_CELL_COLOR = '#ADADEA';
 // strings used in components/custom/CustomTooltip to generate added tooltip text in ActionsByTimeOfDay
 export const LATE_NIGHT = 'Late night';
 export const EARLY_MORNING = 'Early morning';

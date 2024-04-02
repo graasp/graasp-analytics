@@ -16,7 +16,7 @@ import {
   Member,
 } from '@graasp/sdk';
 
-import { COLORS, DEFAULT_REQUEST_SAMPLE_SIZE } from '../../config/constants';
+import { DEFAULT_REQUEST_SAMPLE_SIZE } from '../../config/constants';
 import { hooks } from '../../config/queryClient';
 import { ViewDataContext } from './ViewDataProvider';
 
@@ -33,7 +33,6 @@ const defaultValue: {
   isLoading: boolean;
   requestedSampleSize: number;
   descendantApps: DiscriminatedItem[];
-  actionsColorMap: { [key: string]: string };
 } = {
   actions: [],
   allMembers: [],
@@ -50,7 +49,6 @@ const defaultValue: {
   isLoading: true,
   requestedSampleSize: DEFAULT_REQUEST_SAMPLE_SIZE,
   descendantApps: [],
-  actionsColorMap: {},
 };
 
 export const DataContext = createContext(defaultValue);
@@ -202,15 +200,6 @@ const DataProvider = ({ children }: Props): JSX.Element => {
     }
   }, [explorerData, view, actions, explorerIsError]);
 
-  // create a color map for item actions to be unified through the whole app
-  const actionsColorMap = useMemo(() => {
-    const allActions = [...new Set(actions.map((a) => a.type))];
-    return allActions.reduce((acc: { [key: string]: string }, curr, index) => {
-      acc[curr] = COLORS[index];
-      return acc;
-    }, {});
-  }, [actions]);
-
   const value = useMemo(
     () => ({
       actions,
@@ -225,7 +214,6 @@ const DataProvider = ({ children }: Props): JSX.Element => {
       isLoading,
       requestedSampleSize,
       descendantApps,
-      actionsColorMap,
     }),
     [
       actions,

@@ -12,7 +12,11 @@ import {
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 
-import { TOP_NUMBER_OF_ITEMS_TO_DISPLAY } from '../../../config/constants';
+import {
+  ACTION_TRIGGER_TO_COLOR,
+  DEFAULT_ACTION_CELL_COLOR,
+  TOP_NUMBER_OF_ITEMS_TO_DISPLAY,
+} from '../../../config/constants';
 import {
   filterActionsByActionTypes,
   findItemNameByPath,
@@ -30,7 +34,6 @@ const ItemsByActionChart = (): JSX.Element => {
     selectedActionTypes,
     itemData: item,
     itemChildren: children,
-    actionsColorMap,
   } = useContext(DataContext);
   const allActions = filterActionsByActionTypes(actions, selectedActionTypes);
   const types = [...new Set(allActions.map((a) => a.type))];
@@ -78,7 +81,7 @@ const ItemsByActionChart = (): JSX.Element => {
               key=""
               dataKey={type}
               stackId="1"
-              fill={actionsColorMap[type]}
+              fill={ACTION_TRIGGER_TO_COLOR[type] || DEFAULT_ACTION_CELL_COLOR}
             />
           ))}
         </ComposedChart>

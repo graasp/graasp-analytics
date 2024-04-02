@@ -7,7 +7,11 @@ import { Cell, Pie, PieChart, Tooltip } from 'recharts';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 
-import { CONTAINER_HEIGHT } from '../../../config/constants';
+import {
+  ACTION_TRIGGER_TO_COLOR,
+  CONTAINER_HEIGHT,
+  DEFAULT_ACTION_CELL_COLOR,
+} from '../../../config/constants';
 import { filterActions } from '../../../utils/array';
 import { formatActionsByVerb, getActionsByVerb } from '../../../utils/utils';
 import ChartContainer from '../../common/ChartContainer';
@@ -24,7 +28,7 @@ const EmptyChartAlert = styled('div')({
 
 const ActionsByVerbChart = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
-  const { actions, selectedUsers, selectedActionTypes, actionsColorMap } =
+  const { actions, selectedUsers, selectedActionTypes } =
     useContext(DataContext);
 
   let actionsByVerb = {};
@@ -70,9 +74,13 @@ const ActionsByVerbChart = (): JSX.Element => {
             dataKey="percentage"
             nameKey="type"
             label={({ value }) => `${value}%`}
+            fill={DEFAULT_ACTION_CELL_COLOR}
           >
             {formattedActionsByVerbSorted.map((entry) => (
-              <Cell key={entry.type} fill={actionsColorMap[entry.type]} />
+              <Cell
+                key={entry.type}
+                fill={ACTION_TRIGGER_TO_COLOR[entry.type]}
+              />
             ))}
           </Pie>
           <Tooltip formatter={(value) => `${value}%`} />
