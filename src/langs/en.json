@@ -63,5 +63,6 @@
   "RECENT_ITEMS_TITLE": "Recent Items",
   "NO_ITEMS_EXIT": "No items found.",
   "NO_ITEMS_MATCH_SEARCH": "No search results found.",
-  "HOME_SHOW_MORE": "Show more..."
+  "HOME_SHOW_MORE": "Show more...",
+  "ACTIONS_MIGHT_HAS_NO_GEOLOCATION": "Some actions might have no geolocation records"
 }
