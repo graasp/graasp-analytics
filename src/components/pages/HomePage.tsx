@@ -1,6 +1,13 @@
 import { useState } from 'react';
 
-import { Alert, Box, Button, Stack, Typography } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Button,
+  Container,
+  Stack,
+  Typography,
+} from '@mui/material';
 
 import { SearchInput } from '@graasp/ui';
 
@@ -26,9 +33,9 @@ const HomePage = (): JSX.Element => {
 
   if (accessibleItems?.data) {
     return (
-      <Stack padding={3} spacing={2}>
+      <Container>
         <Alert severity="warning">{t('NO_ITEM_SELECTED')}</Alert>
-        <Stack flexDirection="row" alignItems="center" gap={4}>
+        <Stack flexDirection="row" alignItems="center" mt={2} gap={4}>
           <Typography variant="h4" textAlign="center">
             {t('RECENT_ITEMS_TITLE')}
           </Typography>
@@ -46,7 +53,7 @@ const HomePage = (): JSX.Element => {
             ))}
             {accessibleItems.data.length < accessibleItems.totalCount && (
               <Button variant="text" onClick={() => setPage((p) => p + 1)}>
-                {t('MORE')}
+                {t('HOME_SHOW_MORE')}
               </Button>
             )}
           </Box>
@@ -55,7 +62,7 @@ const HomePage = (): JSX.Element => {
             {searchQuery ? t('NO_ITEMS_MATCH_SEARCH') : t('NO_ITEMS_EXIT')}
           </Typography>
         )}
-      </Stack>
+      </Container>
     );
   }
 

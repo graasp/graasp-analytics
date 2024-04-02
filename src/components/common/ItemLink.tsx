@@ -40,7 +40,7 @@ const ItemLink = ({ item }: { item: DiscriminatedItem }): JSX.Element => {
       >
         {item.name}
       </Link>
-      {data?.id !== item.creator?.id && (
+      {item.creator && data?.id !== item.creator?.id && (
         <Typography variant="body1" lineHeight={2}>
           {item.creator?.name}
         </Typography>
