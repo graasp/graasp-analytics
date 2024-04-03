@@ -8,9 +8,8 @@ import { Cell, Pie, PieChart, Tooltip } from 'recharts';
 import { useAnalyticsTranslation } from '@/config/i18n';
 
 import {
-  ACTION_TRIGGER_TO_COLOR,
   CONTAINER_HEIGHT,
-  DEFAULT_ACTION_CELL_COLOR,
+  getColorForActionTriggerType,
 } from '../../../config/constants';
 import { filterActions } from '../../../utils/array';
 import { formatActionsByVerb, getActionsByVerb } from '../../../utils/utils';
@@ -74,12 +73,11 @@ const ActionsByVerbChart = (): JSX.Element => {
             dataKey="percentage"
             nameKey="type"
             label={({ value }) => `${value}%`}
-            fill={DEFAULT_ACTION_CELL_COLOR}
           >
             {formattedActionsByVerbSorted.map((entry) => (
               <Cell
                 key={entry.type}
-                fill={ACTION_TRIGGER_TO_COLOR[entry.type]}
+                fill={getColorForActionTriggerType(entry.type)}
               />
             ))}
           </Pie>

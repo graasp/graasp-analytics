@@ -13,9 +13,8 @@ import { Cell, Pie, PieChart, Tooltip } from 'recharts';
 import { useAnalyticsTranslation } from '@/config/i18n';
 
 import {
-  ACTION_TRIGGER_TO_COLOR,
-  DEFAULT_ACTION_CELL_COLOR,
   DEFAULT_REQUEST_SAMPLE_SIZE,
+  getColorForActionTriggerType,
 } from '../../../config/constants';
 import { hooks } from '../../../config/queryClient';
 import ChartContainer from '../../common/ChartContainer';
@@ -90,12 +89,11 @@ const TotalActionsByVerbChart = (): JSX.Element | null => {
             dataKey="actionCount"
             nameKey="type"
             label={({ value }) => `${value}%`}
-            fill={DEFAULT_ACTION_CELL_COLOR}
           >
             {formattedAggregateDataSorted.map((entry) => (
               <Cell
                 key={entry.type}
-                fill={ACTION_TRIGGER_TO_COLOR[entry.type]}
+                fill={getColorForActionTriggerType(entry.type)}
               />
             ))}
           </Pie>

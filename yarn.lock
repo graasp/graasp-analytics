@@ -1030,9 +1030,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/sdk@https://github.com/graasp/graasp-sdk.git#463-add-missing-triggers":
-  version: 4.4.0
-  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=ae54a572e6181a8fd55f6997651d844185470e1f"
+"@graasp/sdk@npm:4.5.0":
+  version: 4.5.0
+  resolution: "@graasp/sdk@npm:4.5.0"
   dependencies:
     "@faker-js/faker": "npm:8.4.1"
     js-cookie: "npm:3.0.5"
@@ -1040,7 +1040,7 @@ __metadata:
   peerDependencies:
     date-fns: ^3
     uuid: ^9
-  checksum: 10/47e8046991fd9ac3155627a890dfb1bbd04df48b4e9e33804af19bbcbff26fa2c916d2372b6523d13a0292dc10ed48c5132766051c0645dd242bd7b2d8cd0107
+  checksum: 10/835e7613126e3fb7e0d6175c4df30f75812b578ad7a5299d538c64259ee56aec2be4a0a967ebb88162d5ddd800fd999525db747d677b8b8daa6bd5b09e60d166
   languageName: node
   linkType: hard
 
@@ -5979,7 +5979,7 @@ __metadata:
     "@emotion/react": "npm:11.11.3"
     "@emotion/styled": "npm:11.11.0"
     "@graasp/query-client": "npm:2.8.0"
-    "@graasp/sdk": "https://github.com/graasp/graasp-sdk.git#463-add-missing-triggers"
+    "@graasp/sdk": "npm:4.5.0"
     "@graasp/translations": "npm:1.25.2"
     "@graasp/ui": "npm:4.9.1"
     "@mui/icons-material": "npm:5.15.11"

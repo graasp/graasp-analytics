@@ -52,31 +52,52 @@ export const COLORS = [
   '#B54A3F',
   '#FFFFAF',
 ];
+export const DEFAULT_ACTION_CELL_COLOR = '#ADADEA';
 
-export const ACTION_TRIGGER_TO_COLOR: { [key: string]: string } = {
-  [ActionTriggers.CollectionView]: '#3066BE',
-  [ActionTriggers.Copy]: '#96CCE6',
-  [ActionTriggers.Create]: '#20A39E',
-  [ActionTriggers.Delete]: '#61D095',
-  [ActionTriggers.ItemDownload]: '#FFBA49',
-  [ActionTriggers.ItemEmbed]: '#EF5B5B',
-  [ActionTriggers.ItemLike]: '#FFA8A8',
-  [ActionTriggers.ItemSearch]: '#A4036F',
-  [ActionTriggers.ItemUnlike]: '#B54A3F',
-  [ActionTriggers.ItemView]: '#cc3333',
-  [ActionTriggers.LinkOpen]: '#800080',
-  [ActionTriggers.Move]: '#07bc0c',
-  [ActionTriggers.Update]: '#CCD9E5',
-  [ActionTriggers.ChatClear]: '#C4E5F7',
-  [ActionTriggers.ChatCreate]: '#800040',
-  [ActionTriggers.ChatDelete]: '#004080',
-  [ActionTriggers.ChatUpdate]: '#E5CCE5',
+export const getColorForActionTriggerType = (type: string): string => {
+  switch (type) {
+    case ActionTriggers.Create:
+      return '#20A39E';
+    case ActionTriggers.CollectionView:
+      return '#3066BE';
+    case ActionTriggers.Copy:
+      return '#96CCE6';
+    case ActionTriggers.Delete:
+      return '#61D095';
+    case ActionTriggers.ItemDownload:
+      return '#FFBA49';
+    case ActionTriggers.ItemEmbed:
+      return '#EF5B5B';
+    case ActionTriggers.ItemLike:
+      return '#FFA8A8';
+    case ActionTriggers.ItemSearch:
+      return '#A4036F';
+    case ActionTriggers.ItemUnlike:
+      return '#B54A3F';
+    case ActionTriggers.ItemView:
+      return '#cc3333';
+    case ActionTriggers.LinkOpen:
+      return '#800080';
+    case ActionTriggers.Move:
+      return '#07bc0c';
+    case ActionTriggers.Update:
+      return '#CCD9E5';
+    case ActionTriggers.ChatClear:
+      return '#C4E5F7';
+    case ActionTriggers.ChatCreate:
+      return '#800040';
+    case ActionTriggers.ChatDelete:
+      return '#004080';
+    case ActionTriggers.ChatUpdate:
+      return '#E5CCE5';
+    default:
+      return DEFAULT_ACTION_CELL_COLOR;
+  }
 };
 
 export const AVERAGE_COLOR = '#F99417';
 export const GENERAL_COLOR = '#8884d8';
 
-export const DEFAULT_ACTION_CELL_COLOR = '#ADADEA';
 // strings used in components/custom/CustomTooltip to generate added tooltip text in ActionsByTimeOfDay
 export const LATE_NIGHT = 'Late night';
 export const EARLY_MORNING = 'Early morning';
