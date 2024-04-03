@@ -237,7 +237,10 @@ export const findYAxisMax = (actions: {
   if (!arrayOfActionsCount.length) {
     return null;
   }
-  const maxActionsCount = arrayOfActionsCount.reduce((a, b) => Math.max(a, b));
+  const maxActionsCount = arrayOfActionsCount.reduce(
+    (a, b) => Math.max(a, b),
+    0,
+  );
   let yAxisMax;
   // if maxActionsCount <= 100, round up yAxisMax to the nearest ten; else, to the nearest hundred
   if (maxActionsCount <= 100) {
