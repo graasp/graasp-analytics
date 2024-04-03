@@ -55,14 +55,7 @@ const ChartsHeader = (): JSX.Element => {
           </Typography>
           <ExportData />
         </Grid>
-        <Grid
-          item
-          xs={6}
-          justifyContent="flex-end"
-          alignItems="center"
-          display="flex"
-          flexWrap={'wrap'}
-        >
+        <Grid item xs={6} justifyContent="flex-end" alignItems="center">
           <ViewSelect />
           <UsersSelect />
           <ActionsSelect />
