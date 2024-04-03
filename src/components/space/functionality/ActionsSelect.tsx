@@ -23,7 +23,7 @@ const ActionsSelect = (): JSX.Element | null => {
     setSelectedActionTypes(actions);
   };
   return (
-    <Stack direction="row" alignItems="center" flexGrow={1} flexShrink={0}>
+    <Stack direction="row" alignItems="center" width="100%">
       <FormControl fullWidth>
         <Autocomplete
           onChange={handleChange}
@@ -33,6 +33,7 @@ const ActionsSelect = (): JSX.Element | null => {
           )}
           multiple
           value={selectedActionTypes}
+          limitTags={2}
         />
       </FormControl>
     </Stack>

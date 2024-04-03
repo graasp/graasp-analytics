@@ -25,7 +25,7 @@ const UsersSelect = (): JSX.Element | null => {
   };
 
   return (
-    <Stack direction="row" alignItems="center" flexGrow={1} flexShrink={0}>
+    <Stack direction="row" alignItems="center" width="100%">
       <FormControl fullWidth>
         <Autocomplete
           multiple
@@ -36,6 +36,7 @@ const UsersSelect = (): JSX.Element | null => {
           )}
           getOptionLabel={(option) => option.name}
           options={allMembers}
+          limitTags={2}
         />
       </FormControl>
     </Stack>
