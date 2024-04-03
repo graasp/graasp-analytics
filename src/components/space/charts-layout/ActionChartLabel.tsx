@@ -21,7 +21,7 @@ const ActionChartLabel = ({
   fill,
   type,
 }: Props): JSX.Element => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 1.2;
+  const radius = innerRadius + (outerRadius - innerRadius) * 1.15;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
@@ -32,10 +32,9 @@ const ActionChartLabel = ({
       fill={fill}
       fontSize={14}
       textAnchor={x > cx ? 'start' : 'end'}
-      dominantBaseline="central"
     >
       <tspan>{`${(percent * 100).toFixed(0)}%`}</tspan>
-      <tspan x={x} y={y + 15}>
+      <tspan x={x} y={y + 12}>
         {type}
       </tspan>
     </text>

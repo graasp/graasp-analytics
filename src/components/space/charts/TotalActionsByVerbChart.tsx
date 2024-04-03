@@ -88,6 +88,7 @@ const TotalActionsByVerbChart = (): JSX.Element | null => {
             nameKey="type"
             fill="#82ca9d"
             label={ActionChartLabel}
+            outerRadius={'78%'}
           >
             {formattedAggregateDataSorted.map((entry, index) => (
               <Cell key={entry.type} fill={COLORS[index % COLORS.length]} />

@@ -72,6 +72,7 @@ const ActionsByVerbChart = (): JSX.Element => {
             nameKey="type"
             fill="#82ca9d"
             label={ActionChartLabel}
+            outerRadius={'78%'}
           >
             {formattedActionsByVerbSorted.map((entry, index) => (
               <Cell key={entry.type} fill={COLORS[index % COLORS.length]} />

@@ -16,22 +16,14 @@ import {
 } from '@mui/material';
 
 import { DataContext } from '@/components/context/DataProvider';
+import { actionsDescriptionTransKeys } from '@/config/actionTriggers';
 import { COLORS } from '@/config/constants';
 import { useAnalyticsTranslation } from '@/config/i18n';
 
-const actionsDescriptionTransKeys: { [key: string]: string } = {
-  'item-view': 'ITEM_VIEW_ACTION_DESCRIPTION',
-  copy: 'COPY_ACTION_DESCRIPTION',
-  update: 'UPDATE_ACTION_DESCRIPTION',
-  'item-download': 'ITEM_DOWNLOAD_ACTION_DESCRIPTION',
-  create: 'CREATE_ACTION_DESCRIPTION',
-  move: 'MOVE_ACTION_DESCRIPTION',
-};
-
 const StyledFab = styled(Fab)(({ theme }) => ({
   position: 'fixed',
-  bottom: theme.spacing(10),
-  right: theme.spacing(8),
+  bottom: theme.spacing(2),
+  right: theme.spacing(4),
 }));
 
 const ActionColorBox = styled(Box)<{ background: string }>(
@@ -61,7 +53,7 @@ const ActionsLegend = (): JSX.Element => {
       <Tooltip title={t('ACTIONS_LEGEND_MODAL_TITLE')} placement="left">
         <StyledFab
           color="primary"
-          aria-label="actions-legend"
+          aria-label={t('ACTIONS_LEGEND_MODAL_TITLE')}
           onClick={() => setOpen(true)}
           size="large"
         >
@@ -72,10 +64,13 @@ const ActionsLegend = (): JSX.Element => {
         <DialogTitle sx={{ paddingBottom: 0 }}>
           {t('ACTIONS_LEGEND_MODAL_TITLE')}
         </DialogTitle>
-        <DialogContent sx={{ maxWidth: '400px' }}>
-          <List sx={{ maxHeight: '50vh' }}>
+        <DialogContent>
+          <List sx={{ columns: types.length > 3 ? 2 : 1 }}>
             {types.map((ele, index) => (
-              <ListItem key={ele} sx={{ p: 0, marginBottom: 1 }}>
+              <ListItem
+                key={ele}
+                sx={{ p: 0, marginBottom: 1, breakInside: 'avoid' }}
+              >
                 <ListItemText
                   primary={
                     <Box display="flex" gap={1} alignItems="center">
