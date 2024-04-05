@@ -18,62 +18,73 @@ import { useAnalyticsTranslation } from '@/config/i18n';
 const CustomListItem = styled(ListItem)(({ theme }) => ({
   paddingTop: 0,
   '&:before': {
-    content: '"•"', // Using bullet unicode as an example; you might want to find a circle unicode or use an SVG/background.
-    color: theme.palette.text.primary, // Adjust color to match your theme or preference
-    paddingRight: theme.spacing(1), // Adjust spacing as needed
-    fontSize: theme.typography.body1.fontSize, // Ensure the pseudo-element matches the font size of the list item text; adjust as necessary.
-    // Vertical alignment can be tricky; adjust as needed based on your design.
-    lineHeight: '24px', // Adjust based on the actual height of your list items.
+    content: '"•"',
+    paddingRight: theme.spacing(1),
+    fontSize: theme.typography.body1.fontSize,
   },
 }));
 
 const ExportAnalyticsPage = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
 
+  const dataToExportExplanation = [
+    {
+      id: 'item',
+      primary: t('EXPORT_LIST_ITEM_ITEM_TITLE'),
+      secondary: t('EXPORT_LIST_ITEM_ITEM_DESCRIPTION'),
+    },
+    {
+      id: 'descendants',
+      primary: t('EXPORT_LIST_ITEM_DESCENDANTS_TITLE'),
+      secondary: t('EXPORT_LIST_ITEM_DESCENDANTS_DESCRIPTION'),
+    },
+    {
+      id: 'apps',
+      primary: t('EXPORT_LIST_ITEM_APPS_TITLE'),
+      secondary: t('EXPORT_LIST_ITEM_APPS_DESCRIPTION'),
+    },
+    {
+      id: 'members',
+      primary: t('EXPORT_LIST_ITEM_MEMBERS_TITLE'),
+      secondary: t('EXPORT_LIST_ITEM_MEMBERS_DESCRIPTION'),
+    },
+    {
+      id: 'chat',
+      primary: t('EXPORT_LIST_ITEM_CHATS_TITLE'),
+      secondary: t('EXPORT_LIST_ITEM_CHATS_DESCRIPTION'),
+    },
+    {
+      id: 'actions',
+      primary: t('EXPORT_LIST_ITEM_ACTIONS_TITLE'),
+      secondary: t('EXPORT_LIST_ITEM_ACTIONS_DESCRIPTION'),
+    },
+  ];
   return (
     <Container>
-      <Stack paddingY={2} spacing={2} alignItems="center">
-        <SectionTitle title={t('EXPORT_ANALYTICS_TITLE')} />
-        <Typography variant="body1" whiteSpace="pre-line">
+      <Stack paddingY={2} spacing={2}>
+        <Box width="fit-content">
+          <SectionTitle title={t('EXPORT_ANALYTICS_TITLE')} />
+        </Box>
+        <Typography
+          variant="body1"
+          whiteSpace="pre-line"
+          sx={{ maxWidth: '100ch' }}
+        >
           {t('EXPORT_ANALYTICS_DESCRIPTION')}
         </Typography>
-        <Stack
-          // direction="row"
-          // alignItems="center"
-          // justifyContent="space-around"
-          width="100%"
-          // gap={5}
-        >
-          <Box alignSelf={'self-start'}>
-            <Typography variant="h6">What about to export?</Typography>
-            <List dense>
-              <CustomListItem sx={{ listStyle: 'circle' }}>
-                <ListItemText
-                  primary="Tracked actions within different view"
-                  secondary={'Library, Player, Account, and Analytics'}
-                />
+        <Box>
+          <Typography variant="h6">{t('WHAT_TO_EXPORT_TITLE')}</Typography>
+          <List dense sx={{ paddingTop: 0 }}>
+            {dataToExportExplanation.map(({ id, primary, secondary }) => (
+              <CustomListItem key={id}>
+                <ListItemText primary={primary} secondary={secondary} />
               </CustomListItem>
-              <CustomListItem>
-                <ListItemText primary="Descendants" />
-              </CustomListItem>
-              <CustomListItem>
-                <ListItemText primary="Item" />
-              </CustomListItem>
-              <CustomListItem>
-                <ListItemText primary="Members and memberships" />
-              </CustomListItem>
-              <CustomListItem>
-                <ListItemText primary="Chat" />
-              </CustomListItem>
-              <CustomListItem>
-                <ListItemText primary="Apps" />
-              </CustomListItem>
-            </List>
-          </Box>
-          <Box>
-            <ExportData />
-          </Box>
-        </Stack>
+            ))}
+          </List>
+        </Box>
+        <Box>
+          <ExportData />
+        </Box>
       </Stack>
     </Container>
   );
