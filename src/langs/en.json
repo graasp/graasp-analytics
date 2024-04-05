@@ -81,5 +81,5 @@
   "EXPORT_LIST_ITEM_CHATS_DESCRIPTION": "Conversations or discussions related to this item will be captured in the export.",
   "EXPORT_LIST_ITEM_ACTIONS_TITLE": "Tracked Actions",
   "EXPORT_LIST_ITEM_ACTIONS_DESCRIPTION": "Actions or activities that have been recorded for this item within different view including Library, Player, Account, and Analytics.",
-  "WHAT_TO_EXPORT_TITLE": "Data about to export:"
+  "WHAT_TO_EXPORT_TITLE": "What actions does the archive include?"
 }
