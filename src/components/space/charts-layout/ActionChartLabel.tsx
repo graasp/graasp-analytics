@@ -26,17 +26,9 @@ const ActionChartLabel = ({
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
   return (
-    <text
-      x={x}
-      y={y}
-      fill={fill}
-      fontSize={14}
-      textAnchor={x > cx ? 'start' : 'end'}
-    >
-      <tspan>{`${(percent * 100).toFixed(0)}%`}</tspan>
-      <tspan x={x} y={y + 12}>
-        {type}
-      </tspan>
+    <text x={x} y={y} fill={fill} fontSize={14} textAnchor={'middle'}>
+      <tspan>{type}</tspan>
+      <tspan x={x} y={y + 15}>{`${(percent * 100).toFixed(0)}%`}</tspan>
     </text>
   );
 };

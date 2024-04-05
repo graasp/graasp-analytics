@@ -90,7 +90,7 @@ const TotalActionsByVerbChart = (): JSX.Element | null => {
             dataKey="actionCount"
             nameKey="type"
             label={ActionChartLabel}
-            outerRadius={'78%'}
+            labelLine={false}
           >
             {formattedAggregateDataSorted.map((entry) => (
               <Cell

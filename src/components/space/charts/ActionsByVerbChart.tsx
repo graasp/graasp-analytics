@@ -74,7 +74,7 @@ const ActionsByVerbChart = (): JSX.Element => {
             dataKey="percentage"
             nameKey="type"
             label={ActionChartLabel}
-            outerRadius={'78%'}
+            labelLine={false}
           >
             {formattedActionsByVerbSorted.map((entry) => (
               <Cell

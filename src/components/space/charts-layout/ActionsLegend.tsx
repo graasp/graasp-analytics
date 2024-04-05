@@ -17,7 +17,7 @@ import {
 
 import { DataContext } from '@/components/context/DataProvider';
 import { actionsDescriptionTransKeys } from '@/config/actionTriggers';
-import { COLORS } from '@/config/constants';
+import { getColorForActionTriggerType } from '@/config/constants';
 import { useAnalyticsTranslation } from '@/config/i18n';
 
 const StyledFab = styled(Fab)(({ theme }) => ({
@@ -65,8 +65,8 @@ const ActionsLegend = (): JSX.Element => {
           {t('ACTIONS_LEGEND_MODAL_TITLE')}
         </DialogTitle>
         <DialogContent>
-          <List sx={{ columns: types.length > 3 ? 2 : 1 }}>
-            {types.map((ele, index) => (
+          <List sx={{ columns: types.length > 5 ? 2 : 1 }}>
+            {types.map((ele) => (
               <ListItem
                 key={ele}
                 sx={{ p: 0, marginBottom: 1, breakInside: 'avoid' }}
@@ -74,7 +74,9 @@ const ActionsLegend = (): JSX.Element => {
                 <ListItemText
                   primary={
                     <Box display="flex" gap={1} alignItems="center">
-                      <ActionColorBox background={COLORS[index]} />
+                      <ActionColorBox
+                        background={getColorForActionTriggerType(ele)}
+                      />
                       <Typography variant="body2" lineHeight={2}>
                         {ele}
                       </Typography>
