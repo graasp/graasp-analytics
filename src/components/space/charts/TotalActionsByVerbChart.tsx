@@ -89,7 +89,7 @@ const TotalActionsByVerbChart = (): JSX.Element | null => {
             data={formattedAggregateDataSorted}
             dataKey="actionCount"
             nameKey="type"
-            label={ActionChartLabel}
+            label={(props) => <ActionChartLabel {...props} />}
             labelLine={false}
           >
             {formattedAggregateDataSorted.map((entry) => (

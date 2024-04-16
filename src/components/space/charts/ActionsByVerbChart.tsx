@@ -73,7 +73,7 @@ const ActionsByVerbChart = (): JSX.Element => {
             data={formattedActionsByVerbSorted}
             dataKey="percentage"
             nameKey="type"
-            label={ActionChartLabel}
+            label={(props) => <ActionChartLabel {...props} />}
             labelLine={false}
           >
             {formattedActionsByVerbSorted.map((entry) => (
