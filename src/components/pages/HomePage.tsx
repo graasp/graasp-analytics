@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   Alert,
   Box,
   Button,
   Container,
+  Skeleton,
   Stack,
   Typography,
 } from '@mui/material';
 
+import { DiscriminatedItem } from '@graasp/sdk';
 import { SearchInput } from '@graasp/ui';
 
 import { ITEM_PAGE_SIZE } from '@/config/constants';
@@ -22,14 +24,34 @@ const HomePage = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
 
   const [page, setPage] = useState(1);
+  const [items, setItems] = useState<DiscriminatedItem[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const { data: accessibleItems, isLoading } = hooks.useAccessibleItems(
+  const {
+    data: accessibleItems,
+    isLoading,
+    error,
+  } = hooks.useAccessibleItems(
     { name: searchQuery },
     // get items cumulative
-    { pageSize: page * ITEM_PAGE_SIZE },
+    { pageSize: ITEM_PAGE_SIZE, page },
   );
 
-  if (accessibleItems?.data) {
+  useEffect(() => {
+    if (accessibleItems?.data) {
+      if (page === 1) {
+        setItems(accessibleItems?.data);
+      } else {
+        setItems((prev) => {
+          const newItems = accessibleItems.data.filter(
+            (item) => !prev.some((p) => p.id === item.id),
+          );
+          return [...prev, ...newItems];
+        });
+      }
+    }
+  }, [accessibleItems?.data, page]);
+
+  if (!isLoading && !error) {
     return (
       <Box p={2}>
         <Container>
@@ -45,27 +67,31 @@ const HomePage = (): JSX.Element => {
               </Typography>
               <SearchInput
                 size="small"
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setPage(1);
+                }}
                 value={searchQuery}
                 placeholder={t('ITEM_SEARCH_PLACEHOLDER')}
               />
             </Stack>
-            {accessibleItems?.data.length ? (
+            {items.length ? (
               <Stack spacing={1}>
                 <Box>
-                  {accessibleItems?.data.map((item) => (
+                  {items.map((item) => (
                     <ItemLink key={item.id} item={item} />
                   ))}
                 </Box>
-                {accessibleItems.data.length < accessibleItems.totalCount && (
-                  <Button
-                    variant="text"
-                    sx={{ textTransform: 'none', maxWidth: 'max-content' }}
-                    onClick={() => setPage((p) => p + 1)}
-                  >
-                    {t('HOME_SHOW_MORE')}
-                  </Button>
-                )}
+                {accessibleItems?.totalCount &&
+                  items.length < accessibleItems?.totalCount && (
+                    <Button
+                      variant="text"
+                      sx={{ textTransform: 'none', maxWidth: 'max-content' }}
+                      onClick={() => setPage((p) => p + 1)}
+                    >
+                      {t('HOME_SHOW_MORE')}
+                    </Button>
+                  )}
               </Stack>
             ) : (
               <Typography variant="subtitle1">
@@ -80,12 +106,17 @@ const HomePage = (): JSX.Element => {
 
   if (isLoading) {
     return (
-      <Box padding={2}>
-        {Array(ITEM_PAGE_SIZE)
-          .fill(0)
-          .map((_, index) => (
-            <ItemLoaderSkelton key={index} />
-          ))}
+      <Box padding={2} marginTop={2}>
+        <Container>
+          <Skeleton variant="rectangular" width="100%" height={30}></Skeleton>
+          <Stack spacing={1} marginTop={1}>
+            {Array(ITEM_PAGE_SIZE)
+              .fill(0)
+              .map((_, index) => (
+                <ItemLoaderSkelton key={index} />
+              ))}
+          </Stack>
+        </Container>
       </Box>
     );
   }
