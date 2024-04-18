@@ -69,7 +69,7 @@
   "CHAT_CLEAR_ACTION_DESCRIPTION": "Nombre de fois où la discussion de l'élément a été effacé",
   "LINK_OPEN_ACTION_DESCRIPTION": "Nombre de fois où le lien de l'élément a été ouvert",
   "ITEM_SEARCH_ACTION_DESCRIPTION": "Nombre de fois où les utilisateurs effectuent des recherches sur votre élément",
-  "ITEM_UNLIKE_ACTION_DESCRIPTION": "Nombre de fois où les utilisateurs suppriment le like sur votre élément",
+  "ITEM_UNLIKE_ACTION_DESCRIPTION": "Nombre de fois où les utilisateurs suppriment votre élément des éléments aimés",
   "ITEM_LIKE_ACTION_DESCRIPTION": "Nombre de fois où les utilisateurs ont aimé votre élément",
   "ITEM_EMBED_ACTION_DESCRIPTION": "Nombre de fois où votre élément a été intégré (via intégration HTML)",
   "DELETE_ACTION_DESCRIPTION": "Nombre de fois où votre élément a été supprimé",
