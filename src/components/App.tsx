@@ -19,7 +19,7 @@ import {
   buildItemPath,
 } from '../config/paths';
 import PageWrapper from './layout/PageWrapper';
-import HomePage from './pages/HomePage';
+import HomePageWrapper from './pages/HomePage';
 import AppsAnalyticPage from './pages/Item/AppsAnalyticPage';
 import ExportAnalyticsPage from './pages/Item/ExportAnalyticsPage';
 import GeneralAnalyticsPage from './pages/Item/GeneralAnalyticsPage';
@@ -49,7 +49,7 @@ const App = (): JSX.Element => {
             </PageWrapper>
           }
         >
-          <Route path={HOME_PATH} element={<HomePage />} />
+          <Route path={HOME_PATH} element={<HomePageWrapper />} />
           <Route path={buildItemPath()} element={<ItemPage />}>
             <Route index element={<GeneralAnalyticsPage />} />
             <Route

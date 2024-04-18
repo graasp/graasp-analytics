@@ -20,14 +20,6 @@ import { hooks } from '@/config/queryClient';
 import ItemLink from '../common/ItemLink';
 import ItemLoaderSkelton from '../common/ItemLoaderSkeleton';
 
-const HomePageWrapper = ({ children }: { children: JSX.Element }) => {
-  return (
-    <Box p={2}>
-      <Container>{children}</Container>
-    </Box>
-  );
-};
-
 const HomePage = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
 
@@ -61,73 +53,79 @@ const HomePage = (): JSX.Element => {
 
   if (!isLoading && !error) {
     return (
-      <HomePageWrapper>
-        <Stack direction="column" spacing={2}>
-          <Alert severity="warning">{t('NO_ITEM_SELECTED')}</Alert>
-          <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            alignItems={{ xs: 'flex-start', sm: 'center' }}
-            spacing={{ xs: 1, sm: 4 }}
-          >
-            <Typography variant="h4" textAlign="center">
-              {t('RECENT_ITEMS_TITLE')}
-            </Typography>
-            <SearchInput
-              size="small"
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setPage(1);
-              }}
-              value={searchQuery}
-              placeholder={t('ITEM_SEARCH_PLACEHOLDER')}
-            />
-          </Stack>
-          {items.length ? (
-            <Stack spacing={1}>
-              <Box>
-                {items.map((item) => (
-                  <ItemLink key={item.id} item={item} />
-                ))}
-              </Box>
-              {accessibleItems?.totalCount &&
-                items.length < accessibleItems?.totalCount && (
-                  <Button
-                    variant="text"
-                    sx={{ textTransform: 'none', maxWidth: 'max-content' }}
-                    onClick={() => setPage((p) => p + 1)}
-                  >
-                    {t('HOME_SHOW_MORE')}
-                  </Button>
-                )}
-            </Stack>
-          ) : (
-            <Typography variant="subtitle1">
-              {searchQuery ? t('NO_ITEMS_MATCH_SEARCH') : t('NO_ITEMS_EXIT')}
-            </Typography>
-          )}
+      <Stack direction="column" spacing={2}>
+        <Alert severity="warning">{t('NO_ITEM_SELECTED')}</Alert>
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          alignItems={{ xs: 'flex-start', sm: 'center' }}
+          spacing={{ xs: 1, sm: 4 }}
+        >
+          <Typography variant="h4" textAlign="center">
+            {t('RECENT_ITEMS_TITLE')}
+          </Typography>
+          <SearchInput
+            size="small"
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setPage(1);
+            }}
+            value={searchQuery}
+            placeholder={t('ITEM_SEARCH_PLACEHOLDER')}
+          />
         </Stack>
-      </HomePageWrapper>
+        {items.length ? (
+          <Stack spacing={1}>
+            <Box>
+              {items.map((item) => (
+                <ItemLink key={item.id} item={item} />
+              ))}
+            </Box>
+            {accessibleItems?.totalCount &&
+              items.length < accessibleItems?.totalCount && (
+                <Button
+                  variant="text"
+                  sx={{ textTransform: 'none', maxWidth: 'max-content' }}
+                  onClick={() => setPage((p) => p + 1)}
+                >
+                  {t('HOME_SHOW_MORE')}
+                </Button>
+              )}
+          </Stack>
+        ) : (
+          <Typography variant="subtitle1">
+            {searchQuery ? t('NO_ITEMS_MATCH_SEARCH') : t('NO_ITEMS_EXIT')}
+          </Typography>
+        )}
+      </Stack>
     );
   }
 
   if (isLoading) {
     return (
-      <HomePageWrapper>
-        <>
-          <Skeleton variant="rectangular" width="100%" height={30}></Skeleton>
-          <Stack spacing={1} marginTop={1}>
-            {Array(ITEM_PAGE_SIZE)
-              .fill(0)
-              .map((_, index) => (
-                <ItemLoaderSkelton key={index} />
-              ))}
-          </Stack>
-        </>
-      </HomePageWrapper>
+      <>
+        <Skeleton variant="rectangular" width="100%" height={30}></Skeleton>
+        <Stack spacing={1} marginTop={1}>
+          {Array(ITEM_PAGE_SIZE)
+            .fill(0)
+            .map((_, index) => (
+              <ItemLoaderSkelton key={index} />
+            ))}
+        </Stack>
+      </>
     );
   }
 
   return <Alert severity="error">{t('ERROR_FETCHING_DATA')}</Alert>;
 };
 
-export default HomePage;
+const HomePageWrapper = (): JSX.Element => {
+  return (
+    <Box p={2}>
+      <Container>
+        <HomePage />
+      </Container>
+    </Box>
+  );
+};
+
+export default HomePageWrapper;
