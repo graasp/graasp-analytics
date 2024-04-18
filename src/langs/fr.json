@@ -83,7 +83,7 @@
   "NO_ITEMS_EXIT": "Aucun élément trouvé.",
   "NO_ITEMS_MATCH_SEARCH": "Aucun résultat trouvé pour votre recherche.",
   "HOME_SHOW_MORE": "Montrer plus...",
-  "ACTIONS_MIGHT_HAS_NO_GEOLOCATION": "Certaines actions peuvent ne pas contenir de données de géolocalisation",
+  "ACTIONS_MIGHT_HAS_NO_GEOLOCATION": "Certaines actions peuvent ne pas contenir de données de géolocalisation.",
   "EXPORT_ANALYTICS_TITLE": "Exportation des analyses",
   "EXPORT_ANALYTICS_DESCRIPTION": "Vous pouvez exporter les traces analytiques laissées par les utilisateurs lors de l'interaction avec votre élément (et ses enfants). La collecte des données dans une archive peut prendre un certain temps, après quoi vous recevrez un lien par e-mail pour le téléchargement. Ce lien reste valable 7 jours.\n \n Vous avez droit à une demande de données par jour. Toute demande supplémentaire produira la même archive. Par exemple, si une archive est générée à 8h et que vous demandez une autre exportation à 10h, vous recevrez la même archive que celle générée à 8h, sans inclure les données entre 8h et 10h.",
   "EXPORT_ITEM_DATASET": "Exporter l'ensemble de données de l'élément",
