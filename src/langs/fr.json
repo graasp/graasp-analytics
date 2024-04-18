@@ -98,6 +98,6 @@
   "EXPORT_LIST_ITEM_CHATS_TITLE": "Historique des discussions (le cas échéant)",
   "EXPORT_LIST_ITEM_CHATS_DESCRIPTION": "Les conversations ou discussions liées à cet élément seront capturées lors de l'exportation.",
   "EXPORT_LIST_ITEM_ACTIONS_TITLE": "Actions dans les apps",
-  "EXPORT_LIST_ITEM_ACTIONS_DESCRIPTION": "Actions ou activités qui ont été enregistrées pour cet élément dans différentes vues, notamment Librairie, Player, Analytics et Builder.",
+  "EXPORT_LIST_ITEM_ACTIONS_DESCRIPTION": "Actions ou activités qui ont été enregistrées pour cet élément dans différentes vues, notamment Library, Player, Analytics et Builder.",
   "WHAT_TO_EXPORT_TITLE": "Quelles actions les archives incluent-elles ?"
 }
