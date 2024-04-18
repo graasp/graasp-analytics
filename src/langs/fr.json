@@ -78,7 +78,7 @@
   "CHAT_DELETE_ACTION_DESCRIPTION": "Nombre de fois où un message de la discussion de l'élément a été supprimé",
   "CHAT_CREATE_ACTION_DESCRIPTION": "Nombre de fois où un message de la discussion de l'élément a été créé",
   "ERROR_FETCHING_DATA": "Une erreur s'est produite lors de la récupération des données. Veuillez réessayer plus tard.",
-  "ITEM_SEARCH_PLACEHOLDER": "Rechercher les élément par nom",
+  "ITEM_SEARCH_PLACEHOLDER": "Chercher les éléments par nom",
   "RECENT_ITEMS_TITLE": "Éléments récents",
   "NO_ITEMS_EXIT": "Aucun élément trouvé.",
   "NO_ITEMS_MATCH_SEARCH": "Aucun résultat trouvé pour votre recherche.",
