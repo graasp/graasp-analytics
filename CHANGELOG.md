@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.3](https://github.com/graasp/graasp-analytics/compare/v2.7.2...v2.7.3) (2024-04-22)
+
+
+### Bug Fixes
+
+* home pagination ([#359](https://github.com/graasp/graasp-analytics/issues/359)) ([848f2e0](https://github.com/graasp/graasp-analytics/commit/848f2e0be0a9a89c5486b087ff2b3785d5904220))
+
+## [2.7.2](https://github.com/graasp/graasp-analytics/compare/v2.7.1...v2.7.2) (2024-04-18)
+
+
+### Bug Fixes
+
+* **french:** update translations for actions export ([#358](https://github.com/graasp/graasp-analytics/issues/358)) ([625609f](https://github.com/graasp/graasp-analytics/commit/625609f4ef750ae9b471f7f5222cf4349be94baf))
+* home navigation item selected is always home ([#357](https://github.com/graasp/graasp-analytics/issues/357)) ([58020bc](https://github.com/graasp/graasp-analytics/commit/58020bc9a9aa6ca96fe468faf7ae852637e1c9af))
+* redirect to login if user not logged in ([#360](https://github.com/graasp/graasp-analytics/issues/360)) ([90f6955](https://github.com/graasp/graasp-analytics/commit/90f6955cc22530148a0d78b72a1f41dea1a9c228))
+
 ## [2.7.1](https://github.com/graasp/graasp-analytics/compare/v2.7.0...v2.7.1) (2024-04-15)
 
 
