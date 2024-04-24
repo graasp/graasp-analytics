@@ -10,7 +10,7 @@ import {
 
 import { Cell, Pie, PieChart, Tooltip } from 'recharts';
 
-import { useAnalyticsTranslation } from '@/config/i18n';
+import { useActionsTranslation, useAnalyticsTranslation } from '@/config/i18n';
 
 import {
   DEFAULT_REQUEST_SAMPLE_SIZE,
@@ -26,6 +26,7 @@ import EmptyChart from './EmptyChart';
 
 const TotalActionsByVerbChart = (): JSX.Element | null => {
   const { t } = useAnalyticsTranslation();
+  const { t: translateActions } = useActionsTranslation();
   const { selectedActionTypes } = useContext(DataContext);
   const { view } = useContext(ViewDataContext);
   const { itemId } = useParams();
@@ -99,7 +100,12 @@ const TotalActionsByVerbChart = (): JSX.Element | null => {
               />
             ))}
           </Pie>
-          <Tooltip formatter={(value) => `${value}%`} />
+          <Tooltip
+            formatter={(value, name: string) => [
+              `${value}%`,
+              translateActions(name),
+            ]}
+          />
         </PieChart>
       </ChartContainer>
     </>
