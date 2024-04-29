@@ -49,18 +49,21 @@ const Sidebar: FC = () => {
       text={t('TAB_GENERAL')}
       to={buildItemPath(itemId)}
       disabled={disableMenuItem}
+      key={'TAB_GENERAL'}
     />,
     <LinkMenuItem
       to={buildUsersAnalyticsPath(itemId)}
       disabled={disableMenuItem}
       icon={<PersonIcon />}
       text={t('TAB_USERS')}
+      key={'TAB_USERS'}
     />,
     <LinkMenuItem
       to={buildItemsAnalyticsPath(itemId)}
       disabled={disableMenuItem}
       icon={<FolderIcon />}
       text={t('TAB_ITEMS')}
+      key={'TAB_ITEMS'}
     />,
   ];
 
@@ -72,6 +75,7 @@ const Sidebar: FC = () => {
         id={buildSidebarListItemId(APP_ITEM)}
         to={buildAppsAnalyticsPath(itemId)}
         disabled={disableMenuItem}
+        key={'TAB_APPS'}
       />,
     );
   }
@@ -86,6 +90,7 @@ const Sidebar: FC = () => {
         disabled={disableMenuItem}
         icon={<CloudDownloadIcon />}
         text={t('TAB_EXPORT')}
+        key={'TAB_EXPORT'}
       />,
     );
   }
