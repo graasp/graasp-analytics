@@ -80,6 +80,7 @@ const Sidebar: FC = () => {
     );
   }
 
+  // read access users don't have permission over export actions
   if (
     memberPermissionOverItem &&
     memberPermissionOverItem !== PermissionLevel.Read

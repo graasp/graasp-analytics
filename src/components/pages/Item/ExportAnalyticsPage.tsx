@@ -109,6 +109,8 @@ const ExportAnalyticsPage = (): JSX.Element => {
       </Container>
     );
   }
+
+  // read access users don't have permission over export actions
   return <Navigate to={buildItemPath(itemId)} replace />;
 };
 
