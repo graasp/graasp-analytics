@@ -7,6 +7,7 @@ import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import FolderIcon from '@mui/icons-material/Folder';
 import PersonIcon from '@mui/icons-material/Person';
 
+import { PermissionLevel, PermissionLevelCompare } from '@graasp/sdk';
 import { MainMenu as GraaspMainMenu } from '@graasp/ui';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
@@ -18,6 +19,7 @@ import {
   buildItemsAnalyticsPath,
   buildUsersAnalyticsPath,
 } from '@/config/paths';
+import { hooks } from '@/config/queryClient';
 import { APP_ITEM, buildSidebarListItemId } from '@/config/selectors';
 
 import { DataContext } from '../context/DataProvider';
@@ -31,46 +33,64 @@ const Sidebar: FC = () => {
 
   const disableMenuItem = pathname === HOME_PATH;
 
-  return (
-    <GraaspMainMenu>
-      <LinkMenuItem
-        icon={<BarChartIcon />}
-        text={t('TAB_GENERAL')}
-        to={buildItemPath(itemId)}
-        disabled={disableMenuItem}
-      />
-      <LinkMenuItem
-        to={buildUsersAnalyticsPath(itemId)}
-        disabled={disableMenuItem}
-        icon={<PersonIcon />}
-        text={t('TAB_USERS')}
-      />
-      <LinkMenuItem
-        to={buildItemsAnalyticsPath(itemId)}
-        disabled={disableMenuItem}
-        icon={<FolderIcon />}
-        text={t('TAB_ITEMS')}
-      />
+  const { data: memberships } = hooks.useItemMemberships(itemId);
+  const { data: currentMember } = hooks.useCurrentMember();
 
-      {descendantApps.length ? (
-        <LinkMenuItem
-          icon={<AppsIcon />}
-          text={t('TAB_APPS')}
-          id={buildSidebarListItemId(APP_ITEM)}
-          to={buildAppsAnalyticsPath(itemId)}
-          disabled={disableMenuItem}
-        />
-      ) : (
-        <></>
-      )}
+  const userMemberships = memberships
+    ?.filter((m) => m.member.id === currentMember?.id)
+    .reduce((acc: PermissionLevel[], curr) => [...acc, curr.permission], []);
+
+  const memberPermissionOverItem =
+    userMemberships && PermissionLevelCompare.getHighest(userMemberships);
+
+  const menuItems = [
+    <LinkMenuItem
+      icon={<BarChartIcon />}
+      text={t('TAB_GENERAL')}
+      to={buildItemPath(itemId)}
+      disabled={disableMenuItem}
+    />,
+    <LinkMenuItem
+      to={buildUsersAnalyticsPath(itemId)}
+      disabled={disableMenuItem}
+      icon={<PersonIcon />}
+      text={t('TAB_USERS')}
+    />,
+    <LinkMenuItem
+      to={buildItemsAnalyticsPath(itemId)}
+      disabled={disableMenuItem}
+      icon={<FolderIcon />}
+      text={t('TAB_ITEMS')}
+    />,
+  ];
+
+  if (descendantApps.length) {
+    menuItems.push(
+      <LinkMenuItem
+        icon={<AppsIcon />}
+        text={t('TAB_APPS')}
+        id={buildSidebarListItemId(APP_ITEM)}
+        to={buildAppsAnalyticsPath(itemId)}
+        disabled={disableMenuItem}
+      />,
+    );
+  }
+
+  if (
+    memberPermissionOverItem &&
+    memberPermissionOverItem !== PermissionLevel.Read
+  ) {
+    menuItems.push(
       <LinkMenuItem
         to={buildExportAnalyticsPath(itemId)}
         disabled={disableMenuItem}
         icon={<CloudDownloadIcon />}
         text={t('TAB_EXPORT')}
-      />
-    </GraaspMainMenu>
-  );
+      />,
+    );
+  }
+
+  return <GraaspMainMenu>{menuItems}</GraaspMainMenu>;
 };
 
 export default Sidebar;
