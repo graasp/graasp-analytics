@@ -8,7 +8,7 @@ import FolderIcon from '@mui/icons-material/Folder';
 import PersonIcon from '@mui/icons-material/Person';
 
 import { PermissionLevel, PermissionLevelCompare } from '@graasp/sdk';
-import { MainMenu as GraaspMainMenu } from '@graasp/ui';
+import { MainMenu as GraaspMainMenu, Loader } from '@graasp/ui';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 import {
@@ -31,17 +31,12 @@ const Sidebar: FC = () => {
   const { pathname } = useLocation();
   const { descendantApps } = useContext(DataContext);
 
+  const { data: item, isLoading } = hooks.useItem(itemId);
   const disableMenuItem = pathname === HOME_PATH;
 
-  const { data: memberships } = hooks.useItemMemberships(itemId);
-  const { data: currentMember } = hooks.useCurrentMember();
-
-  const userMemberships = memberships
-    ?.filter((m) => m.member.id === currentMember?.id)
-    .reduce((acc: PermissionLevel[], curr) => [...acc, curr.permission], []);
-
-  const memberPermissionOverItem =
-    userMemberships && PermissionLevelCompare.getHighest(userMemberships);
+  if (isLoading) {
+    return <Loader />;
+  }
 
   const menuItems = [
     <LinkMenuItem
@@ -82,8 +77,8 @@ const Sidebar: FC = () => {
 
   // read access users don't have permission over export actions
   if (
-    memberPermissionOverItem &&
-    PermissionLevelCompare.gte(memberPermissionOverItem, PermissionLevel.Write)
+    item?.permission &&
+    PermissionLevelCompare.gte(item.permission, PermissionLevel.Write)
   ) {
     menuItems.push(
       <LinkMenuItem

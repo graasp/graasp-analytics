@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 
 import { PermissionLevel, PermissionLevelCompare } from '@graasp/sdk';
+import { Loader } from '@graasp/ui';
 
 import SectionTitle from '@/components/common/SectionTitle';
 import ExportData from '@/components/space/functionality/ExportData';
@@ -32,15 +33,8 @@ const CustomListItem = styled(ListItem)(({ theme }) => ({
 const ExportAnalyticsPage = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
   const { itemId } = useParams();
-  const { data: memberships } = hooks.useItemMemberships(itemId);
-  const { data: currentMember } = hooks.useCurrentMember();
 
-  const userMemberships = memberships
-    ?.filter((m) => m.member.id === currentMember?.id)
-    .reduce((acc: PermissionLevel[], curr) => [...acc, curr.permission], []);
-
-  const memberPermissionOverItem =
-    userMemberships && PermissionLevelCompare.getHighest(userMemberships);
+  const { data: item, isLoading } = hooks.useItem(itemId);
 
   const dataToExportExplanation = [
     {
@@ -76,8 +70,9 @@ const ExportAnalyticsPage = (): JSX.Element => {
   ];
 
   if (
-    memberPermissionOverItem &&
-    PermissionLevelCompare.gte(memberPermissionOverItem, PermissionLevel.Write)
+    !isLoading &&
+    item?.permission &&
+    PermissionLevelCompare.gte(item.permission, PermissionLevel.Write)
   ) {
     return (
       <Container>
@@ -110,6 +105,9 @@ const ExportAnalyticsPage = (): JSX.Element => {
     );
   }
 
+  if (isLoading) {
+    return <Loader />;
+  }
   // read access users don't have permission over export actions
   return <Navigate to={buildItemPath(itemId)} replace />;
 };
