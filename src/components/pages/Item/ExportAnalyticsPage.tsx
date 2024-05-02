@@ -77,7 +77,7 @@ const ExportAnalyticsPage = (): JSX.Element => {
 
   if (
     memberPermissionOverItem &&
-    memberPermissionOverItem !== PermissionLevel.Read
+    PermissionLevelCompare.gte(memberPermissionOverItem, PermissionLevel.Write)
   ) {
     return (
       <Container>

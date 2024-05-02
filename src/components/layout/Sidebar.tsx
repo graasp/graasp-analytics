@@ -83,7 +83,7 @@ const Sidebar: FC = () => {
   // read access users don't have permission over export actions
   if (
     memberPermissionOverItem &&
-    memberPermissionOverItem !== PermissionLevel.Read
+    PermissionLevelCompare.gte(memberPermissionOverItem, PermissionLevel.Write)
   ) {
     menuItems.push(
       <LinkMenuItem
