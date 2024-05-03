@@ -16,8 +16,8 @@
   ],
   "dependencies": {
     "@emotion/cache": "11.11.0",
-    "@emotion/react": "11.11.3",
-    "@emotion/styled": "11.11.0",
+    "@emotion/react": "11.11.4",
+    "@emotion/styled": "11.11.5",
     "@graasp/query-client": "3.6.0",
     "@graasp/sdk": "4.9.0",
     "@graasp/translations": "1.27.0",
