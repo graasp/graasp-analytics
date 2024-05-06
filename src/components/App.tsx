@@ -36,7 +36,7 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     if (currentMember?.extra?.lang !== i18n.language) {
-      i18n.changeLanguage('fr' ?? 'en');
+      i18n.changeLanguage(currentMember?.extra?.lang ?? 'en');
     }
   }, [currentMember]);
 

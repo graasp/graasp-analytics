@@ -1,5 +1,7 @@
 import { Action, DiscriminatedItem, Member } from '@graasp/sdk';
 
+import { parseISO, startOfWeek } from 'date-fns';
+import { fromPairs, orderBy, toPairs } from 'lodash';
 import countBy from 'lodash.countby';
 import groupBy from 'lodash.groupby';
 import truncate from 'lodash.truncate';
@@ -281,4 +283,21 @@ export const groupByFirstLevelItems = (
         .join('.'),
   );
   return d;
+};
+
+export const groupActionsByWeeks = (
+  actions: Action[],
+): { [key: string]: Action[] } => {
+  const groupedByWeek = groupBy(actions, (item) => {
+    // Parse the date string to a Date object
+    const date = parseISO(item.createdAt);
+
+    // Get the start of the week for the given date
+    const startOfTheWeek = startOfWeek(date, { weekStartsOn: 1 }); // Assuming the week starts on Monday
+
+    return startOfTheWeek.toISOString();
+  });
+
+  const sortByDate = orderBy(toPairs(groupedByWeek), ([key]) => key);
+  return fromPairs(sortByDate);
 };

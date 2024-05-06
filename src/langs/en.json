@@ -108,5 +108,6 @@
   "Last Week": "Last Week",
   "This Month": "This Month",
   "Last Month": "Last Month",
-  "RANGE_DATE_PICKER_INPUT_LABEL": "Start date - End date"
+  "RANGE_DATE_PICKER_INPUT_LABEL": "Start date - End date",
+  "GENERAL_STATISTICS_ACTIVITY_CHART": "Activity chart"
 }

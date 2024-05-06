@@ -1354,7 +1354,7 @@ __metadata:
 
 "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#745-get-user-actions":
   version: 3.6.0
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=907e224f023eac0e792f5d5ae16967a4211e09b7"
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=36c1cfe96710baad09e9bea50c631e04be508220"
   dependencies:
     "@tanstack/react-query": "npm:4.36.1"
     "@tanstack/react-query-devtools": "npm:4.36.1"
@@ -1365,7 +1365,7 @@ __metadata:
     "@graasp/sdk": ^4.0.0
     "@graasp/translations": ^1.23.0
     react: ^18.0.0
-  checksum: 10/f23bf566589b51b23f37e6c3ce2f99b1b536f3610e11509f8460c7605a8a1437463e92de3987b0d3ad3a22a93fa60dee907abde5600d356af38f0a784f2b7c66
+  checksum: 10/7f311214408a905c0372416b7d5ac0595ecdbcc46463c0f0d34139051d22f2c55a5fe57db9e09e2930329c8830c27395a1f2a7f0da3b7dca929a470c72bc3676
   languageName: node
   linkType: hard
 

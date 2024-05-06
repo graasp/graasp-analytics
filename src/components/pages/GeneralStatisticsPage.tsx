@@ -8,11 +8,12 @@ import { addDays, formatISO } from 'date-fns';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 import { hooks } from '@/config/queryClient';
+import { groupActionsByWeeks } from '@/utils/utils';
 
 import DateRange from '../common/DateRange';
 import SectionTitle from '../common/SectionTitle';
+import MemberActionsChart from '../space/charts/MemberActionsChart';
 
-// theme css file
 const GeneralStatisticsPage = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
 
@@ -26,9 +27,10 @@ const GeneralStatisticsPage = (): JSX.Element => {
     startDate: formatISO(dateRange.startDate),
     endDate: formatISO(dateRange.endDate),
   });
-  // console.log(data, 'data');
 
   if (data) {
+    const actionsGroupedByWeekStart = groupActionsByWeeks(data);
+
     return (
       <Box p={2}>
         <Container>
@@ -36,6 +38,9 @@ const GeneralStatisticsPage = (): JSX.Element => {
             <SectionTitle title={t('GENERAL_STATISTICS_TITLE')} />
             <DateRange dateRange={dateRange} setDateRange={setDateRange} />
           </Stack>
+          <MemberActionsChart
+            actionsGroupedByWeekStart={actionsGroupedByWeekStart}
+          />
         </Container>
       </Box>
     );
