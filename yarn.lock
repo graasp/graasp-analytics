@@ -1013,20 +1013,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@npm:2.8.0":
-  version: 2.8.0
-  resolution: "@graasp/query-client@npm:2.8.0"
+"@graasp/query-client@https://github.com/graasp/graasp-query-client.git#745-get-user-actions":
+  version: 3.6.0
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=907e224f023eac0e792f5d5ae16967a4211e09b7"
   dependencies:
     "@tanstack/react-query": "npm:4.36.1"
     "@tanstack/react-query-devtools": "npm:4.36.1"
-    axios: "npm:1.6.7"
+    axios: "npm:1.6.8"
     http-status-codes: "npm:2.3.0"
-    qs: "npm:6.11.2"
+    qs: "npm:6.12.1"
   peerDependencies:
     "@graasp/sdk": ^4.0.0
     "@graasp/translations": ^1.23.0
     react: ^18.0.0
-  checksum: 10/45b85f125668c5824c26fc866a89d71ee38d886bf1172c0176bbd8b4f64eda88c47ea9668c9705ec5ef4c2dd1204464ae7d62befd72c82ac2963b1f2bee5f050
+  checksum: 10/f23bf566589b51b23f37e6c3ce2f99b1b536f3610e11509f8460c7605a8a1437463e92de3987b0d3ad3a22a93fa60dee907abde5600d356af38f0a784f2b7c66
   languageName: node
   linkType: hard
 
@@ -2556,6 +2556,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-date-range@npm:1.4.9":
+  version: 1.4.9
+  resolution: "@types/react-date-range@npm:1.4.9"
+  dependencies:
+    "@types/react": "npm:*"
+    date-fns: "npm:^2.16.1"
+  checksum: 10/3fd8f552228276850b6d973c123eb6075c5f63e56064470cc31bc6b193a2f3fb13124277f55005398d5ee92a9077ed77e5246c283524bd1e24a1887775155044
+  languageName: node
+  linkType: hard
+
 "@types/react-dom@npm:^18.0.0":
   version: 18.2.22
   resolution: "@types/react-dom@npm:18.2.22"
@@ -3302,14 +3312,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.6.7":
-  version: 1.6.7
-  resolution: "axios@npm:1.6.7"
+"axios@npm:1.6.8":
+  version: 1.6.8
+  resolution: "axios@npm:1.6.8"
   dependencies:
-    follow-redirects: "npm:^1.15.4"
+    follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10/a1932b089ece759cd261f175d9ebf4d41c8994cf0c0767cda86055c7a19bcfdade8ae3464bf4cec4c8b142f4a657dc664fb77a41855e8376cf38b86d7a86518f
+  checksum: 10/3f9a79eaf1d159544fca9576261ff867cbbff64ed30017848e4210e49f3b01e97cf416390150e6fdf6633f336cd43dc1151f890bbd09c3c01ad60bb0891eee63
   languageName: node
   linkType: hard
 
@@ -3656,6 +3666,13 @@ __metadata:
   version: 3.9.0
   resolution: "ci-info@npm:3.9.0"
   checksum: 10/75bc67902b4d1c7b435497adeb91598f6d52a3389398e44294f6601b20cfef32cf2176f7be0eb961d9e085bb333a8a5cae121cb22f81cf238ae7f58eb80e9397
+  languageName: node
+  linkType: hard
+
+"classnames@npm:^2.2.6":
+  version: 2.5.1
+  resolution: "classnames@npm:2.5.1"
+  checksum: 10/58eb394e8817021b153bb6e7d782cfb667e4ab390cb2e9dac2fc7c6b979d1cc2b2a733093955fc5c94aa79ef5c8c89f11ab77780894509be6afbb91dddd79d15
   languageName: node
   linkType: hard
 
@@ -4169,7 +4186,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.30.0":
+"date-fns@npm:3.6.0":
+  version: 3.6.0
+  resolution: "date-fns@npm:3.6.0"
+  checksum: 10/cac35c58926a3b5d577082ff2b253612ec1c79eb6754fddef46b6a8e826501ea2cb346ecbd211205f1ba382ddd1f9d8c3f00bf433ad63cc3063454d294e3a6b8
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^2.16.1, date-fns@npm:^2.30.0":
   version: 2.30.0
   resolution: "date-fns@npm:2.30.0"
   dependencies:
@@ -5552,7 +5576,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.15.4":
+"follow-redirects@npm:^1.15.6":
   version: 1.15.6
   resolution: "follow-redirects@npm:1.15.6"
   peerDependenciesMeta:
@@ -5978,7 +6002,7 @@ __metadata:
     "@emotion/cache": "npm:11.11.0"
     "@emotion/react": "npm:11.11.3"
     "@emotion/styled": "npm:11.11.0"
-    "@graasp/query-client": "npm:2.8.0"
+    "@graasp/query-client": "https://github.com/graasp/graasp-query-client.git#745-get-user-actions"
     "@graasp/sdk": "npm:4.5.0"
     "@graasp/translations": "npm:1.27.0"
     "@graasp/ui": "npm:4.14.2"
@@ -5996,12 +6020,14 @@ __metadata:
     "@types/lodash.groupby": "npm:4.6.9"
     "@types/lodash.truncate": "npm:4.4.9"
     "@types/node": "npm:20.11.20"
+    "@types/react-date-range": "npm:1.4.9"
     "@typescript-eslint/eslint-plugin": "npm:7.1.0"
     "@typescript-eslint/parser": "npm:7.1.0"
     "@vitejs/plugin-react": "npm:4.2.1"
     concurrently: "npm:8.2.2"
     cross-env: "npm:7.0.3"
     cypress: "npm:13.6.6"
+    date-fns: "npm:3.6.0"
     env-cmd: "npm:10.1.0"
     eslint: "npm:8.57.0"
     eslint-config-airbnb: "npm:19.0.4"
@@ -6024,6 +6050,7 @@ __metadata:
     nyc: "npm:15.1.0"
     prettier: "npm:3.2.5"
     react: "npm:18.2.0"
+    react-date-range: "npm:2.0.1"
     react-dom: "npm:18.2.0"
     react-ga4: "npm:2.1.0"
     react-i18next: "npm:14.0.5"
@@ -8328,7 +8355,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.5.6, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:15, prop-types@npm:^15.5.6, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -8405,12 +8432,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:6.11.2":
-  version: 6.11.2
-  resolution: "qs@npm:6.11.2"
+"qs@npm:6.12.1":
+  version: 6.12.1
+  resolution: "qs@npm:6.12.1"
   dependencies:
-    side-channel: "npm:^1.0.4"
-  checksum: 10/f2321d0796664d0f94e92447ccd3bdfd6b6f3a50b6b762aa79d7f5b1ea3a7a9f94063ba896b82bc2a877ed6a7426d4081e4f16568fdb04f0ee188cca9d8505b4
+    side-channel: "npm:^1.0.6"
+  checksum: 10/035bcad2a1ab0175bac7a74c904c15913bdac252834149ccff988c93a51de02642fe7be10e43058ba4dc4094bb28ce9b59d12b9e91d40997f445cfde3ecc1c29
   languageName: node
   linkType: hard
 
@@ -8508,6 +8535,21 @@ __metadata:
   peerDependencies:
     react: ">=16"
   checksum: 10/74398466bd984314f07ebcf5fffb270e0c37508b93189effdbda0517d3f516a99b811f3f9bac4d46286eff863104a2c20fe91236ad0b3cff70edc499d8ef185a
+  languageName: node
+  linkType: hard
+
+"react-date-range@npm:2.0.1":
+  version: 2.0.1
+  resolution: "react-date-range@npm:2.0.1"
+  dependencies:
+    classnames: "npm:^2.2.6"
+    prop-types: "npm:^15.7.2"
+    react-list: "npm:^0.8.13"
+    shallow-equal: "npm:^1.2.1"
+  peerDependencies:
+    date-fns: 3.0.6 || >=3.0.0
+    react: ^0.14 || ^15.0.0-rc || >=15.0
+  checksum: 10/f5ca9d64eb8dfb557dd04b84ce5270229dbc8532ae14a2a7fd254c61340561c0281bc39482c5d71a59e12caa6258fc436eb27d684ca9b5a3360c19c8b98d14da
   languageName: node
   linkType: hard
 
@@ -8627,6 +8669,17 @@ __metadata:
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
   checksum: 10/200cd65bf2e0be7ba6055f647091b725a45dd2a6abef03bf2380ce701fd5edccee40b49b9d15edab7ac08a762bf83cb4081e31ec2673a5bfb549a36ba21570df
+  languageName: node
+  linkType: hard
+
+"react-list@npm:^0.8.13":
+  version: 0.8.17
+  resolution: "react-list@npm:0.8.17"
+  dependencies:
+    prop-types: "npm:15"
+  peerDependencies:
+    react: 0.14 || 15 - 18
+  checksum: 10/a1421f280851f6ea0f47bb2aa9bef7fb7f2aa8d7f67759016f221412eb51bc388b75b6197a1fe119f61fb7a26689fa6358765a891616ebc2f51277e68e48c494
   languageName: node
   linkType: hard
 
@@ -9208,6 +9261,13 @@ __metadata:
   version: 1.2.0
   resolution: "setprototypeof@npm:1.2.0"
   checksum: 10/fde1630422502fbbc19e6844346778f99d449986b2f9cdcceb8326730d2f3d9964dbcb03c02aaadaefffecd0f2c063315ebea8b3ad895914bf1afc1747fc172e
+  languageName: node
+  linkType: hard
+
+"shallow-equal@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "shallow-equal@npm:1.2.1"
+  checksum: 10/4f1645cc516e7754c4438db687e1da439a5f29a7dba2ba90c5f88e5708aeb17bc4355ba45cad805b0e95dc898e37d8bf6d77d854919c7512f89939986cff8cd1
   languageName: node
   linkType: hard
 

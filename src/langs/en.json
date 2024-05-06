@@ -29,6 +29,7 @@
   "OTHER_ACTION_TYPE": "Other",
   "SAMPLE_ACTIONS_CHARTS_MESSAGE": "Displaying '{{view}} view' actions from a maximum requested sample size of {{requestedSampleSize}} actions.",
   "SAMPLE_ACTIONS_MESSAGE": "By default, a sample of maximum {{requestedSampleSize}} actions is requested and displayed in the charts below, in order to provide a general overview of activity in this item.",
+  "TAB_GENERAL_STATISTIC": "General statistic",
   "TAB_GENERAL": "General",
   "TAB_ITEMS": "Items",
   "TAB_USERS": "Users",
@@ -99,5 +100,13 @@
   "EXPORT_LIST_ITEM_CHATS_DESCRIPTION": "Conversations or discussions related to this item will be captured in the export.",
   "EXPORT_LIST_ITEM_ACTIONS_TITLE": "Tracked Actions",
   "EXPORT_LIST_ITEM_ACTIONS_DESCRIPTION": "Actions or activities that have been recorded for this item within different view including Builder, Library, and Player.",
-  "WHAT_TO_EXPORT_TITLE": "What actions does the archive include?"
+  "WHAT_TO_EXPORT_TITLE": "What actions does the archive include?",
+  "GENERAL_STATISTICS_TITLE": "General Statistics",
+  "Today": "Today",
+  "Yesterday": "Yesterday",
+  "This Week": "This Week",
+  "Last Week": "Last Week",
+  "This Month": "This Month",
+  "Last Month": "Last Month",
+  "RANGE_DATE_PICKER_INPUT_LABEL": "Start date - End date"
 }

@@ -13,12 +13,14 @@ import {
   APPS_ANALYTICS_PATH,
   EMBEDDED_ITEM_PATH,
   EXPORT_ANALYTICS_PATH,
+  GENERAL_STATISTICS_PATH,
   HOME_PATH,
   ITEMS_ANALYTICS_PATH,
   USERS_ANALYTICS_PATH,
   buildItemPath,
 } from '../config/paths';
 import PageWrapper from './layout/PageWrapper';
+import GeneralStatisticsPage from './pages/GeneralStatisticsPage';
 import HomePageWrapper from './pages/HomePage';
 import AppsAnalyticPage from './pages/Item/AppsAnalyticPage';
 import ExportAnalyticsPage from './pages/Item/ExportAnalyticsPage';
@@ -34,7 +36,7 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     if (currentMember?.extra?.lang !== i18n.language) {
-      i18n.changeLanguage(currentMember?.extra?.lang ?? 'en');
+      i18n.changeLanguage('fr' ?? 'en');
     }
   }, [currentMember]);
 
@@ -67,6 +69,10 @@ const App = (): JSX.Element => {
         }
       >
         <Route path={HOME_PATH} element={<HomePageWrapper />} />
+        <Route
+          path={GENERAL_STATISTICS_PATH}
+          element={<GeneralStatisticsPage />}
+        />
         <Route path={buildItemPath()} element={<ItemPage />}>
           <Route index element={<GeneralAnalyticsPage />} />
           <Route path={USERS_ANALYTICS_PATH} element={<UsersAnalyticPage />} />

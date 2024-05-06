@@ -11,6 +11,7 @@ import { MainMenu as GraaspMainMenu } from '@graasp/ui';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 import {
+  GENERAL_STATISTICS_PATH,
   HOME_PATH,
   buildAppsAnalyticsPath,
   buildExportAnalyticsPath,
@@ -33,6 +34,11 @@ const Sidebar: FC = () => {
 
   return (
     <GraaspMainMenu>
+      <LinkMenuItem
+        icon={<BarChartIcon />}
+        text={t('TAB_GENERAL_STATISTIC')}
+        to={GENERAL_STATISTICS_PATH}
+      />
       <LinkMenuItem
         icon={<BarChartIcon />}
         text={t('TAB_GENERAL')}
