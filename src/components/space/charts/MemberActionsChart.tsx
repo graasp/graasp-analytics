@@ -60,7 +60,7 @@ const MemberActionsChart = ({
 
   return (
     <>
-      <Typography variant="h3" align="center" fontWeight={900} color="#8C8C8C">
+      <Typography variant="h5" fontWeight={700}>
         {t('GENERAL_STATISTICS_ACTIVITY_CHART')}
       </Typography>
       <ChartContainer>
@@ -75,6 +75,7 @@ const MemberActionsChart = ({
             formatter={(value) => translateAction(value)}
             align="right"
             layout="vertical"
+            wrapperStyle={{ right: '-8px', top: 0 }}
           />
 
           {[...typesSet].map((type) => (

@@ -1,0 +1,56 @@
+import React from 'react';
+
+import { Box, Grid, Typography } from '@mui/material';
+
+import { Action, ActionTriggers } from '@graasp/sdk';
+
+import { useAnalyticsTranslation } from '@/config/i18n';
+
+import MyStatisticCard from '../common/MyStatisticCard';
+
+type Props = {
+  actionsGroupedByTypes: { [key: string]: Action[] };
+};
+const MemberGeneralStatisticsCards = ({
+  actionsGroupedByTypes,
+}: Props): JSX.Element => {
+  const { t } = useAnalyticsTranslation();
+
+  return (
+    <Box>
+      <Typography variant="h5" fontWeight={700}>
+        {t('MY_STATISTICS')}
+      </Typography>
+      <Grid container spacing={2} p={2}>
+        <Grid item xs={2}>
+          <MyStatisticCard
+            title={t('GENERAL_STATISTIC_ITEMS_CREATED')}
+            stat={actionsGroupedByTypes[ActionTriggers.Create]?.length ?? 0}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <MyStatisticCard
+            title={t('GENERAL_STATISTIC_LIKED_ITEMS')}
+            stat={actionsGroupedByTypes[ActionTriggers.ItemLike]?.length ?? 0}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <MyStatisticCard
+            title={t('GENERAL_STATISTIC_DOWNLOADED_ITEMS')}
+            stat={
+              actionsGroupedByTypes[ActionTriggers.ItemDownload]?.length ?? 0
+            }
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <MyStatisticCard
+            title={t('GENERAL_STATISTIC_CHAT_CREATED')}
+            stat={actionsGroupedByTypes[ActionTriggers.ChatCreate]?.length ?? 0}
+          />
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
+
+export default MemberGeneralStatisticsCards;

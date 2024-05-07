@@ -19,7 +19,7 @@ import {
 const ItemPage = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
   const { view } = useContext(ViewDataContext);
-  const { error, isLoading } = useContext(DataContext);
+  const { error, isLoading, actions } = useContext(DataContext);
   const { pathname } = useLocation();
   const { itemId } = useParams();
 
@@ -27,6 +27,8 @@ const ItemPage = (): JSX.Element => {
   const isExportAnalytics = pathname === buildExportAnalyticsPath(itemId);
 
   if (!error && !isLoading) {
+    const types = [...new Set(actions.map((a) => a.type))];
+
     return (
       <>
         {!isAppAnalytics && !isExportAnalytics && (
@@ -36,7 +38,7 @@ const ItemPage = (): JSX.Element => {
           </>
         )}
         <Outlet />
-        <ActionsLegend />
+        <ActionsLegend actionsTypes={types} />
       </>
     );
   }

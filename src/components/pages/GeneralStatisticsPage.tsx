@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
-import { Alert, Box, Container, Stack } from '@mui/material';
+import { Alert, Box, Container, Stack, Typography } from '@mui/material';
 
 import { Loader } from '@graasp/ui';
 
 import { addDays, formatISO } from 'date-fns';
+import { groupBy } from 'lodash';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 import { hooks } from '@/config/queryClient';
@@ -12,6 +13,8 @@ import { groupActionsByWeeks } from '@/utils/utils';
 
 import DateRange from '../common/DateRange';
 import SectionTitle from '../common/SectionTitle';
+import MemberGeneralStatisticsCards from '../custom/MemberGeneralStatisticsCards';
+import ActionsLegend from '../space/charts-layout/ActionsLegend';
 import MemberActionsChart from '../space/charts/MemberActionsChart';
 
 const GeneralStatisticsPage = (): JSX.Element => {
@@ -30,18 +33,30 @@ const GeneralStatisticsPage = (): JSX.Element => {
 
   if (data) {
     const actionsGroupedByWeekStart = groupActionsByWeeks(data);
-
+    const actionsGroupedByTypes = groupBy(data, 'type');
     return (
       <Box p={2}>
         <Container>
-          <Stack direction="row" justifyContent="space-between">
-            <SectionTitle title={t('GENERAL_STATISTICS_TITLE')} />
-            <DateRange dateRange={dateRange} setDateRange={setDateRange} />
+          <Stack spacing={2}>
+            <Stack direction="row" justifyContent="space-between">
+              <SectionTitle title={t('GENERAL_STATISTICS_TITLE')} />
+              <DateRange dateRange={dateRange} setDateRange={setDateRange} />
+            </Stack>
+            {data.length ? (
+              <>
+                <MemberGeneralStatisticsCards
+                  actionsGroupedByTypes={actionsGroupedByTypes}
+                />
+                <MemberActionsChart
+                  actionsGroupedByWeekStart={actionsGroupedByWeekStart}
+                />
+              </>
+            ) : (
+              <Typography>{t('NO_RESULTS_FOUND')}</Typography>
+            )}
           </Stack>
-          <MemberActionsChart
-            actionsGroupedByWeekStart={actionsGroupedByWeekStart}
-          />
         </Container>
+        <ActionsLegend actionsTypes={Object.keys(actionsGroupedByTypes)} />
       </Box>
     );
   }

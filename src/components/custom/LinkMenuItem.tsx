@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { MenuItem } from '@graasp/ui';
 
+import { MENU_ITEM_ID } from '@/config/selectors';
+
 interface Props {
   disabled?: boolean;
   to: string;
@@ -28,6 +30,7 @@ const LinkMenuItem = ({ disabled, to, text, icon, id }: Props): JSX.Element => {
         text={text}
         selected={pathname === to}
         disabled={disabled}
+        id={MENU_ITEM_ID}
       />
     </Link>
   );

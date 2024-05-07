@@ -57,7 +57,6 @@ const DateRange = ({ dateRange, setDateRange }: Props): JSX.Element => {
         onClick={(event) => {
           setAnchorEl(event.currentTarget);
         }}
-        size="small"
       />
       <Popover
         onClose={handleClose}

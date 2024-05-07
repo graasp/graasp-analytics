@@ -109,5 +109,11 @@
   "This Month": "This Month",
   "Last Month": "Last Month",
   "RANGE_DATE_PICKER_INPUT_LABEL": "Start date - End date",
-  "GENERAL_STATISTICS_ACTIVITY_CHART": "Activity chart"
+  "GENERAL_STATISTICS_ACTIVITY_CHART": "Activity chart",
+  "MY_STATISTICS": "My statistics",
+  "GENERAL_STATISTIC_ITEMS_CREATED": "Items created",
+  "GENERAL_STATISTIC_LIKED_ITEMS": "Liked items",
+  "GENERAL_STATISTIC_DOWNLOADED_ITEMS": "Downloaded items",
+  "GENERAL_STATISTIC_CHAT_CREATED": "Chat created",
+  "NO_RESULTS_FOUND": "Sorry, No results found!"
 }
