@@ -50,5 +50,3 @@ export const APP_ITEM_CLASS_NAME = 'appItemContainer';
 
 export const buildAppItemSelector = (appID: string): string =>
   `appItem-${appID}`;
-
-export const MENU_ITEM_ID = 'menuItemID';

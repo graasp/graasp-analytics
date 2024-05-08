@@ -17,7 +17,7 @@ import MemberGeneralStatisticsCards from '../custom/MemberGeneralStatisticsCards
 import ActionsLegend from '../space/charts-layout/ActionsLegend';
 import MemberActionsChart from '../space/charts/MemberActionsChart';
 
-const GeneralStatisticsPage = (): JSX.Element => {
+const MyStatisticsPage = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
 
   const [dateRange, setDateRange] = useState({
@@ -37,9 +37,9 @@ const GeneralStatisticsPage = (): JSX.Element => {
     return (
       <Box p={2}>
         <Container>
-          <Stack spacing={2}>
+          <Stack spacing={1}>
             <Stack direction="row" justifyContent="space-between">
-              <SectionTitle title={t('GENERAL_STATISTICS_TITLE')} />
+              <SectionTitle title={t('MY_STATISTICS')} />
               <DateRange dateRange={dateRange} setDateRange={setDateRange} />
             </Stack>
             {data.length ? (
@@ -68,4 +68,4 @@ const GeneralStatisticsPage = (): JSX.Element => {
   return <Alert severity="error">{t('ERROR_FETCHING_DATA')}</Alert>;
 };
 
-export default GeneralStatisticsPage;
+export default MyStatisticsPage;

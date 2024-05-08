@@ -13,14 +13,13 @@ import {
   APPS_ANALYTICS_PATH,
   EMBEDDED_ITEM_PATH,
   EXPORT_ANALYTICS_PATH,
-  GENERAL_STATISTICS_PATH,
   HOME_PATH,
   ITEMS_ANALYTICS_PATH,
+  MY_STATISTICS_PATH,
   USERS_ANALYTICS_PATH,
   buildItemPath,
 } from '../config/paths';
 import PageWrapper from './layout/PageWrapper';
-import GeneralStatisticsPage from './pages/GeneralStatisticsPage';
 import HomePageWrapper from './pages/HomePage';
 import AppsAnalyticPage from './pages/Item/AppsAnalyticPage';
 import ExportAnalyticsPage from './pages/Item/ExportAnalyticsPage';
@@ -28,6 +27,7 @@ import GeneralAnalyticsPage from './pages/Item/GeneralAnalyticsPage';
 import ItemAnalyticPage from './pages/Item/ItemAnalyticPage';
 import ItemPage from './pages/Item/ItemPage';
 import UsersAnalyticPage from './pages/Item/UsersAnalyticPage';
+import MyStatisticsPage from './pages/MyStatisticsPage';
 
 const App = (): JSX.Element => {
   const { data: currentMember, isLoading } = hooks.useCurrentMember();
@@ -69,10 +69,7 @@ const App = (): JSX.Element => {
         }
       >
         <Route path={HOME_PATH} element={<HomePageWrapper />} />
-        <Route
-          path={GENERAL_STATISTICS_PATH}
-          element={<GeneralStatisticsPage />}
-        />
+        <Route path={MY_STATISTICS_PATH} element={<MyStatisticsPage />} />
         <Route path={buildItemPath()} element={<ItemPage />}>
           <Route index element={<GeneralAnalyticsPage />} />
           <Route path={USERS_ANALYTICS_PATH} element={<UsersAnalyticPage />} />
