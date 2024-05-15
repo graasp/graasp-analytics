@@ -65,10 +65,7 @@ const ExportData = (): JSX.Element => {
               name="exportFormat"
               value={format}
               onChange={(event) => {
-                setFormat(
-                  (event.target as HTMLInputElement)
-                    .value as ExportActionsFormatting,
-                );
+                setFormat(event.target.value as ExportActionsFormatting);
               }}
             >
               <FormControlLabel
