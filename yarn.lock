@@ -1352,9 +1352,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@npm:3.6.0":
-  version: 3.6.0
-  resolution: "@graasp/query-client@npm:3.6.0"
+"@graasp/query-client@https://github.com/graasp/graasp-query-client.git#759-format-export-as-qs":
+  version: 3.8.0
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=6c550a91166ab7c2dd39a2091aed833b2f85a8f0"
   dependencies:
     "@tanstack/react-query": "npm:4.36.1"
     "@tanstack/react-query-devtools": "npm:4.36.1"
@@ -1365,13 +1365,13 @@ __metadata:
     "@graasp/sdk": ^4.0.0
     "@graasp/translations": ^1.23.0
     react: ^18.0.0
-  checksum: 10/4447476af6910728742b279d67b3ca8a818566ef7221f47c384ebd81e69f4b193e9376f27ab064cd98da61db868f623a856c788bc29f67b22962757fa2cbea2d
+  checksum: 10/ca6da98c15225f5e5af86315b35e1d3825b89641a499eb68574152920a0dbdb71b300c6b9d1d16604a6f96a8215143806696f23bfcea3d515628ac635bd5a7c0
   languageName: node
   linkType: hard
 
-"@graasp/sdk@npm:4.9.0":
-  version: 4.9.0
-  resolution: "@graasp/sdk@npm:4.9.0"
+"@graasp/sdk@npm:4.10.0":
+  version: 4.10.0
+  resolution: "@graasp/sdk@npm:4.10.0"
   dependencies:
     "@faker-js/faker": "npm:8.4.1"
     filesize: "npm:10.1.1"
@@ -1380,7 +1380,7 @@ __metadata:
   peerDependencies:
     date-fns: ^3
     uuid: ^9
-  checksum: 10/921439fcfcc67e18c5e93ee1c405b82e1da9600cf33769a029efa4bacbaab78d30c357a0c19f98687e53101e4de19c924be78fad55eb4c9451ef734596d26b3c
+  checksum: 10/a9105fbc0c4b8ff449f174444d3463f11671a4b647507c82bc75395ecf4c82b0c62e00fe999062df6b215620d5f14921de8145921fc9730fcb8a3e8075a16717
   languageName: node
   linkType: hard
 
@@ -6597,8 +6597,8 @@ __metadata:
     "@emotion/cache": "npm:11.11.0"
     "@emotion/react": "npm:11.11.4"
     "@emotion/styled": "npm:11.11.5"
-    "@graasp/query-client": "npm:3.6.0"
-    "@graasp/sdk": "npm:4.9.0"
+    "@graasp/query-client": "https://github.com/graasp/graasp-query-client.git#759-format-export-as-qs"
+    "@graasp/sdk": "npm:4.10.0"
     "@graasp/translations": "npm:1.28.0"
     "@graasp/ui": "npm:4.17.1"
     "@mui/icons-material": "npm:5.15.16"

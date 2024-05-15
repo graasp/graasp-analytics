@@ -2,9 +2,22 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
-import DoneIcon from '@mui/icons-material/Done';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Tooltip } from '@mui/material';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  Tooltip,
+} from '@mui/material';
+
+import { ExportActionsFormatting } from '@graasp/sdk';
+import { Button } from '@graasp/ui';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 
@@ -12,34 +25,81 @@ import { mutations } from '../../../config/queryClient';
 
 const ExportData = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
-  const [clicked, setClicked] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [format, setFormat] = useState(ExportActionsFormatting.JSON);
+
   const { mutate: exportActions, isLoading } = mutations.useExportActions();
   const { itemId } = useParams();
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const onClick = () => {
+    handleClose();
     if (itemId) {
-      setClicked(true);
-      exportActions(itemId);
+      exportActions({ itemId, format });
     }
   };
 
   return (
-    <Tooltip
-      title={clicked ? t('EXPORT_SUCCESS_MESSAGE') : t('EXPORT_TOOLTIP')}
-      placement="right"
-      arrow
-    >
-      <LoadingButton
-        onClick={onClick}
-        variant="contained"
-        endIcon={clicked ? <DoneIcon /> : <CloudDownloadIcon />}
-        disabled={clicked}
-        loading={isLoading}
-        size="large"
-      >
-        {t('EXPORT_ITEM_DATASET')}
-      </LoadingButton>
-    </Tooltip>
+    <>
+      <Tooltip title={t('EXPORT_TOOLTIP')} placement="right" arrow>
+        <Button onClick={handleClickOpen} variant="contained" size="large">
+          {t('EXPORT_ITEM')}
+        </Button>
+      </Tooltip>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>{t('SELECT_FORMAT_DIALOG_TITLE')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t('SELECT_FORMAT_DIALOG_DESCRIPTION')}
+          </DialogContentText>
+
+          <FormControl>
+            <RadioGroup
+              name="exportFormat"
+              value={format}
+              onChange={(event) => {
+                setFormat(
+                  (event.target as HTMLInputElement)
+                    .value as ExportActionsFormatting,
+                );
+              }}
+            >
+              <FormControlLabel
+                value={ExportActionsFormatting.JSON}
+                control={<Radio />}
+                label={ExportActionsFormatting.JSON}
+              />
+              <FormControlLabel
+                value={ExportActionsFormatting.CSV}
+                control={<Radio />}
+                label={ExportActionsFormatting.CSV}
+              />
+            </RadioGroup>
+          </FormControl>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleClose}>
+            {t('CANCEL_SELECT_FORMAT_DIALOG')}
+          </Button>
+          <LoadingButton
+            onClick={onClick}
+            variant="contained"
+            endIcon={<CloudDownloadIcon />}
+            loading={isLoading}
+          >
+            {t('EXPORT_ITEM_DATASET')}
+          </LoadingButton>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
 
