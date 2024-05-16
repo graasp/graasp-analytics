@@ -103,6 +103,10 @@
   "WHAT_TO_EXPORT_TITLE": "What actions does the archive include?",
   "CANCEL_SELECT_FORMAT_DIALOG": "Cancel",
   "SELECT_FORMAT_DIALOG_TITLE": "Select Archive file formats",
-  "SELECT_FORMAT_DIALOG_DESCRIPTION": "Data you are about to export are available in two formats: CSV or JSON. Please choose the appropriate format for the files you wish to import",
-  "SELECT_FORMAT_LABEL": "Files format"
+  "SELECT_FORMAT_DIALOG_DESCRIPTION": "Data you are about to export are available in two formats:",
+  "SELECT_FORMAT_DIALOG_DESCRIPTION1": "Data you are about to export are available in two formats: CSV or JSON. Please choose the appropriate format for the files you wish to import",
+  "SELECT_FORMAT_LABEL": "Files format",
+  "JSON_DESCRIPTION": "key-value pairs, more a technical format.",
+  "CSV_DESCRIPTION": "like a table view, similar to what you see in spreadsheets like Excel.",
+  "START_EXPORTING": "Start exporting with {{format}}"
 }

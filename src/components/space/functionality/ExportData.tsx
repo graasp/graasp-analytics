@@ -1,101 +1,160 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
-import LoadingButton from '@mui/lab/LoadingButton';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  Tooltip,
+  Box,
+  Button,
+  ButtonGroup,
+  ClickAwayListener,
+  Grow,
+  List,
+  ListItem,
+  ListItemText,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
+  Typography,
+  styled,
 } from '@mui/material';
 
 import { ExportActionsFormatting } from '@graasp/sdk';
-import { Button } from '@graasp/ui';
+
+import { Braces, Grid3X3 } from 'lucide-react';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 
 import { mutations } from '../../../config/queryClient';
 
+const CustomListItem = styled(ListItem)(({ theme }) => ({
+  paddingTop: 0,
+  '&:before': {
+    content: '"•"',
+    paddingRight: theme.spacing(1),
+    fontSize: theme.typography.body1.fontSize,
+  },
+}));
+
 const ExportData = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
+  const [format, setFormat] = useState(ExportActionsFormatting.CSV);
   const [open, setOpen] = useState(false);
-  const [format, setFormat] = useState(ExportActionsFormatting.JSON);
+  const anchorRef = useRef<HTMLDivElement>(null);
 
-  const { mutate: exportActions, isLoading } = mutations.useExportActions();
+  const [isFormatExported, setIsFormatExported] = useState({
+    [ExportActionsFormatting.CSV]: false,
+    [ExportActionsFormatting.JSON]: false,
+  });
+
+  const { mutate: exportActions } = mutations.useExportActions();
   const { itemId } = useParams();
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const icons = {
+    [ExportActionsFormatting.CSV]: <Grid3X3 size={16} />,
+    [ExportActionsFormatting.JSON]: <Braces size={16} />,
   };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const onClick = () => {
-    handleClose();
     if (itemId) {
       exportActions({ itemId, format });
+      setIsFormatExported({ ...isFormatExported, [format]: true });
     }
   };
 
+  const handleMenuItemClick = (option: ExportActionsFormatting) => {
+    setFormat(option);
+    setOpen(false);
+  };
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event: Event) => {
+    if (
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as HTMLElement)
+    ) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const formats = Object.values(ExportActionsFormatting).slice().reverse();
   return (
     <>
-      <Tooltip title={t('EXPORT_TOOLTIP')} placement="right" arrow>
-        <Button onClick={handleClickOpen} variant="contained" size="large">
-          {t('EXPORT_ITEM')}
+      <Typography variant="h6">{t('SELECT_FORMAT_DIALOG_TITLE')}</Typography>
+      <Typography variant="body1">
+        {t('SELECT_FORMAT_DIALOG_DESCRIPTION')}
+      </Typography>
+      <List dense sx={{ paddingTop: 0 }}>
+        {formats.map((ele) => (
+          <CustomListItem key={ele}>
+            <ListItemText
+              primary={ele}
+              secondary={
+                <Box display="flex" alignItems="center" gap={0.5}>
+                  {icons[ele]}
+                  {t(`${ele.toLocaleUpperCase()}_DESCRIPTION`)}
+                </Box>
+              }
+            />
+          </CustomListItem>
+        ))}
+      </List>
+
+      <ButtonGroup variant="contained" ref={anchorRef}>
+        <Button onClick={onClick} disabled={isFormatExported[format]}>
+          {t('START_EXPORTING', { format: format.toUpperCase() })}
         </Button>
-      </Tooltip>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{t('SELECT_FORMAT_DIALOG_TITLE')}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {t('SELECT_FORMAT_DIALOG_DESCRIPTION')}
-          </DialogContentText>
+        <Button
+          size="small"
+          onClick={handleToggle}
+          disabled={Object.values(isFormatExported).every(Boolean)}
+        >
+          <ArrowDropDownIcon />
+        </Button>
+      </ButtonGroup>
 
-          <FormControl>
-            <RadioGroup
-              name="exportFormat"
-              value={format}
-              onChange={(event) => {
-                setFormat(event.target.value as ExportActionsFormatting);
-              }}
-            >
-              <FormControlLabel
-                value={ExportActionsFormatting.JSON}
-                control={<Radio />}
-                label={ExportActionsFormatting.JSON}
-              />
-              <FormControlLabel
-                value={ExportActionsFormatting.CSV}
-                control={<Radio />}
-                label={ExportActionsFormatting.CSV}
-              />
-            </RadioGroup>
-          </FormControl>
-        </DialogContent>
-
-        <DialogActions>
-          <Button onClick={handleClose}>
-            {t('CANCEL_SELECT_FORMAT_DIALOG')}
-          </Button>
-          <LoadingButton
-            onClick={onClick}
-            variant="contained"
-            endIcon={<CloudDownloadIcon />}
-            loading={isLoading}
+      <Popper
+        sx={{
+          zIndex: 1,
+        }}
+        open={open}
+        anchorEl={anchorRef.current}
+        role={undefined}
+        transition
+        disablePortal
+      >
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            style={{
+              transformOrigin:
+                placement === 'bottom' ? 'center top' : 'center bottom',
+            }}
           >
-            {t('EXPORT_ITEM_DATASET')}
-          </LoadingButton>
-        </DialogActions>
-      </Dialog>
+            <Paper>
+              <ClickAwayListener onClickAway={handleClose}>
+                <MenuList autoFocusItem>
+                  {formats.map((actionFormat) => (
+                    <MenuItem
+                      key={actionFormat}
+                      onClick={() => handleMenuItemClick(actionFormat)}
+                      sx={{ display: 'flex', gap: 1 }}
+                      disabled={isFormatExported[actionFormat]}
+                      selected={actionFormat === format}
+                    >
+                      {icons[actionFormat]} {actionFormat}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
     </>
   );
 };
