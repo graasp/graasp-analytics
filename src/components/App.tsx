@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { saveUrlForRedirection } from '@graasp/sdk';
 import { Loader, withAuthorization } from '@graasp/ui';
@@ -64,33 +64,31 @@ const App = (): JSX.Element => {
   return (
     <Routes>
       <Route path={EMBEDDED_ITEM_PATH} element={<ItemPage />} />
+
       <Route
-        // This is a shared route that allows us to re-use the same layout for both pages
+        path={HOME_PATH}
         element={
           <PageWrapper>
-            <Outlet />
+            <HomeWrapperWithAuth />
           </PageWrapper>
         }
-      >
-        <Route path={HOME_PATH} element={<HomeWrapperWithAuth />} />
+      />
 
-        <Route
-          path={buildItemPath()}
-          element={
-            <ContextsWrapper>
+      <Route
+        path={buildItemPath()}
+        element={
+          <ContextsWrapper>
+            <PageWrapper>
               <ItemWrapperWithAuth />
-            </ContextsWrapper>
-          }
-        >
-          <Route index element={<GeneralAnalyticsPage />} />
-          <Route path={USERS_ANALYTICS_PATH} element={<UsersAnalyticPage />} />
-          <Route path={ITEMS_ANALYTICS_PATH} element={<ItemAnalyticPage />} />
-          <Route path={APPS_ANALYTICS_PATH} element={<AppsAnalyticPage />} />
-          <Route
-            path={EXPORT_ANALYTICS_PATH}
-            element={<ExportAnalyticsPage />}
-          />
-        </Route>
+            </PageWrapper>
+          </ContextsWrapper>
+        }
+      >
+        <Route index element={<GeneralAnalyticsPage />} />
+        <Route path={USERS_ANALYTICS_PATH} element={<UsersAnalyticPage />} />
+        <Route path={ITEMS_ANALYTICS_PATH} element={<ItemAnalyticPage />} />
+        <Route path={APPS_ANALYTICS_PATH} element={<AppsAnalyticPage />} />
+        <Route path={EXPORT_ANALYTICS_PATH} element={<ExportAnalyticsPage />} />
       </Route>
     </Routes>
   );

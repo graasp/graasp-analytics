@@ -40,7 +40,7 @@ const Sidebar: FC = () => {
   const { data: item, isLoading } = hooks.useItem(itemId);
   const disableMenuItem = pathname === HOME_PATH;
 
-  if (isLoading) {
+  if (isLoading && !disableMenuItem) {
     return <Loader />;
   }
 
