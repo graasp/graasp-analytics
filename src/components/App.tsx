@@ -51,8 +51,13 @@ const App = (): JSX.Element => {
       saveUrlForRedirection(pathname, DOMAIN);
     },
   };
-  const PageWrapperWithAuth = withAuthorization(
-    PageWrapper,
+
+  const HomeWrapperWithAuth = withAuthorization(
+    HomePageWrapper,
+    withAuthorizationProps,
+  );
+  const ItemWrapperWithAuth = withAuthorization(
+    ItemPage,
     withAuthorizationProps,
   );
 
@@ -62,15 +67,21 @@ const App = (): JSX.Element => {
       <Route
         // This is a shared route that allows us to re-use the same layout for both pages
         element={
-          <ContextsWrapper>
-            <PageWrapperWithAuth>
-              <Outlet />
-            </PageWrapperWithAuth>
-          </ContextsWrapper>
+          <PageWrapper>
+            <Outlet />
+          </PageWrapper>
         }
       >
-        <Route path={HOME_PATH} element={<HomePageWrapper />} />
-        <Route path={buildItemPath()} element={<ItemPage />}>
+        <Route path={HOME_PATH} element={<HomeWrapperWithAuth />} />
+
+        <Route
+          path={buildItemPath()}
+          element={
+            <ContextsWrapper>
+              <ItemWrapperWithAuth />
+            </ContextsWrapper>
+          }
+        >
           <Route index element={<GeneralAnalyticsPage />} />
           <Route path={USERS_ANALYTICS_PATH} element={<UsersAnalyticPage />} />
           <Route path={ITEMS_ANALYTICS_PATH} element={<ItemAnalyticPage />} />
