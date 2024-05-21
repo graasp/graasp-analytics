@@ -26,33 +26,29 @@ const ItemPage = (): JSX.Element => {
 
   if (isLoading) {
     return (
-      <>
-        <Grid container spacing={2} p={2}>
-          <Grid item xs={6}>
-            <Skeleton variant="rectangular" height={CONTAINER_HEIGHT} />
-          </Grid>
-          <Grid item xs={6}>
-            <Skeleton variant="rectangular" height={CONTAINER_HEIGHT} />
-          </Grid>
-          <Grid item xs={6}>
-            <Skeleton variant="rectangular" height={CONTAINER_HEIGHT} />
-          </Grid>
-          <Grid item xs={6}>
-            <Skeleton variant="rectangular" height={CONTAINER_HEIGHT} />
-          </Grid>
+      <Grid container spacing={2} p={2}>
+        <Grid item xs={6}>
+          <Skeleton variant="rectangular" height={CONTAINER_HEIGHT} />
         </Grid>
-      </>
+        <Grid item xs={6}>
+          <Skeleton variant="rectangular" height={CONTAINER_HEIGHT} />
+        </Grid>
+        <Grid item xs={6}>
+          <Skeleton variant="rectangular" height={CONTAINER_HEIGHT} />
+        </Grid>
+        <Grid item xs={6}>
+          <Skeleton variant="rectangular" height={CONTAINER_HEIGHT} />
+        </Grid>
+      </Grid>
     );
   }
 
   return (
-    <>
-      <Box pl={2} pr={2} mb={2} flexGrow={1}>
-        <StyledAlert severity="error">
-          {t('GET_ITEM_ERROR', { view })}
-        </StyledAlert>
-      </Box>
-    </>
+    <Box pl={2} pr={2} mb={2} flexGrow={1}>
+      <StyledAlert severity="error">
+        {t('GET_ITEM_ERROR', { view })}
+      </StyledAlert>
+    </Box>
   );
 };
 
