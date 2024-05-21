@@ -18,6 +18,7 @@ import {
   USERS_ANALYTICS_PATH,
   buildItemPath,
 } from '../config/paths';
+import ContextsWrapper from './context/ContextsWrapper';
 import PageWrapper from './layout/PageWrapper';
 import HomePageWrapper from './pages/HomePage';
 import AppsAnalyticPage from './pages/Item/AppsAnalyticPage';
@@ -61,9 +62,11 @@ const App = (): JSX.Element => {
       <Route
         // This is a shared route that allows us to re-use the same layout for both pages
         element={
-          <PageWrapperWithAuth>
-            <Outlet />
-          </PageWrapperWithAuth>
+          <ContextsWrapper>
+            <PageWrapperWithAuth>
+              <Outlet />
+            </PageWrapperWithAuth>
+          </ContextsWrapper>
         }
       >
         <Route path={HOME_PATH} element={<HomePageWrapper />} />
