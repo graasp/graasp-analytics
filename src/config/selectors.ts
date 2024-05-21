@@ -44,6 +44,10 @@ export const buildSelectViewId = (view: string): string => `selectView-${view}`;
 export const buildSidebarListItemId = (listName: string): string =>
   `listItem-${listName}`;
 
+export const TAB_GENERAL = 'tab-general';
+export const TAB_USERS = 'tab-users';
+export const TAB_ITEMS = 'tab-items';
+
 export const APP_ITEM = 'app';
 export const APPS_ID = 'apps';
 export const APP_ITEM_CLASS_NAME = 'appItemContainer';

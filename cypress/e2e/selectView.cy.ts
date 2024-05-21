@@ -3,7 +3,9 @@ import { Context } from '@graasp/sdk';
 import {
   SELECT_VIEW_ID,
   SELECT_VIEW_RENDERED_TEXT_ID,
+  TAB_USERS,
   buildSelectViewId,
+  buildSidebarListItemId,
 } from '@/config/selectors';
 
 import { buildItemPath } from '../../src/config/paths';
@@ -37,5 +39,18 @@ describe('Select platform view ', () => {
       'contain.text',
       Context.Player,
     );
+  });
+
+  it('values of view select should be maintained when navigating within different routes', () => {
+    visitItemPage(MOCK_ITEMS[0]);
+    cy.get(`#${SELECT_VIEW_ID}`).click();
+    cy.get(`#${buildSelectViewId(Context.Player)}`).click();
+    cy.get(`#${SELECT_VIEW_RENDERED_TEXT_ID}`).should(
+      'contain.text',
+      Context.Player,
+    );
+    cy.get(`#${buildSidebarListItemId(TAB_USERS)}`).click();
+
+    cy.get(`#${SELECT_VIEW_ID}`).should('contain.text', Context.Player);
   });
 });
