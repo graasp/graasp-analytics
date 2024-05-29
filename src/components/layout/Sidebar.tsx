@@ -22,7 +22,13 @@ import {
   buildUsersAnalyticsPath,
 } from '@/config/paths';
 import { hooks } from '@/config/queryClient';
-import { APP_ITEM, buildSidebarListItemId } from '@/config/selectors';
+import {
+  APP_ITEM,
+  TAB_GENERAL,
+  TAB_ITEMS,
+  TAB_USERS,
+  buildSidebarListItemId,
+} from '@/config/selectors';
 
 import { DataContext } from '../context/DataProvider';
 import LinkMenuItem from '../custom/LinkMenuItem';
@@ -43,18 +49,21 @@ const Sidebar: FC = () => {
         text={t('TAB_GENERAL')}
         to={buildItemPath(itemId)}
         key={'TAB_GENERAL'}
+        id={buildSidebarListItemId(TAB_GENERAL)}
       />,
       <LinkMenuItem
         to={buildUsersAnalyticsPath(itemId)}
         icon={<PersonIcon />}
         text={t('TAB_USERS')}
         key={'TAB_USERS'}
+        id={buildSidebarListItemId(TAB_USERS)}
       />,
       <LinkMenuItem
         to={buildItemsAnalyticsPath(itemId)}
         icon={<FolderIcon />}
         text={t('TAB_ITEMS')}
         key={'TAB_ITEMS'}
+        id={buildSidebarListItemId(TAB_ITEMS)}
       />,
     );
     if (descendantApps.length) {
