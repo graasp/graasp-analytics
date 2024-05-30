@@ -1,22 +1,14 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import {
   Box,
   Button,
-  ButtonGroup,
-  ClickAwayListener,
-  Grow,
-  List,
-  ListItem,
-  ListItemText,
-  MenuItem,
-  MenuList,
-  Paper,
-  Popper,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
   Typography,
-  styled,
 } from '@mui/material';
 
 import { ExportActionsFormatting } from '@graasp/sdk';
@@ -24,23 +16,28 @@ import { ExportActionsFormatting } from '@graasp/sdk';
 import { Braces, Grid3X3 } from 'lucide-react';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
+import { ANALYTICS } from '@/langs/constants';
 
 import { mutations } from '../../../config/queryClient';
 
-const CustomListItem = styled(ListItem)(({ theme }) => ({
-  paddingTop: 0,
-  '&:before': {
-    content: '"•"',
-    paddingRight: theme.spacing(1),
-    fontSize: theme.typography.body1.fontSize,
-  },
-}));
+const CustomFormatRadio = ({ icon, title, description }: any) => (
+  <FormControlLabel
+    control={<Radio value={title} />}
+    label={
+      <>
+        <Box display="flex" alignItems="center" gap={0.5}>
+          {icon}
+          {title}
+        </Box>
+        <Typography variant="caption">{description}</Typography>
+      </>
+    }
+  />
+);
 
 const ExportData = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
   const [format, setFormat] = useState(ExportActionsFormatting.CSV);
-  const [open, setOpen] = useState(false);
-  const anchorRef = useRef<HTMLDivElement>(null);
 
   const [isFormatExported, setIsFormatExported] = useState({
     [ExportActionsFormatting.CSV]: false,
@@ -61,100 +58,43 @@ const ExportData = (): JSX.Element => {
     }
   };
 
-  const handleMenuItemClick = (option: ExportActionsFormatting) => {
-    setFormat(option);
-    setOpen(false);
-  };
-
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
-
-  const handleClose = (event: Event) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return;
-    }
-
-    setOpen(false);
-  };
-
   const formats = Object.values(ExportActionsFormatting).slice().reverse();
+
   return (
     <>
-      <Typography variant="h6">{t('SELECT_FORMAT_DIALOG_TITLE')}</Typography>
-      <Typography variant="body1">
-        {t('SELECT_FORMAT_DIALOG_DESCRIPTION')}
-      </Typography>
-      <List dense sx={{ paddingTop: 0 }}>
-        {formats.map((ele) => (
-          <CustomListItem key={ele}>
-            <ListItemText
-              primary={ele}
-              secondary={
-                <Box display="flex" alignItems="center" gap={0.5}>
-                  {icons[ele]}
-                  {t(`${ele.toLocaleUpperCase()}_DESCRIPTION`)}
-                </Box>
-              }
-            />
-          </CustomListItem>
-        ))}
-      </List>
-
-      <ButtonGroup variant="contained" ref={anchorRef}>
-        <Button onClick={onClick} disabled={isFormatExported[format]}>
-          {t('START_EXPORTING', { format: format.toUpperCase() })}
-        </Button>
-        <Button
-          size="small"
-          onClick={handleToggle}
-          disabled={Object.values(isFormatExported).every(Boolean)}
+      <FormControl sx={{ display: 'block' }}>
+        <Typography variant="h6">{t(ANALYTICS.SELECT_FORMAT_TITLE)}</Typography>
+        <Typography variant="body1">
+          {t(ANALYTICS.SELECT_FORMAT_DIALOG_DESCRIPTION)}
+        </Typography>
+        <RadioGroup
+          name="export-format"
+          value={format}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setFormat(
+              (event.target as HTMLInputElement)
+                .value as ExportActionsFormatting,
+            );
+          }}
         >
-          <ArrowDropDownIcon />
-        </Button>
-      </ButtonGroup>
+          {formats.map((ele) => (
+            <CustomFormatRadio
+              icon={icons[ele]}
+              title={ele}
+              description={t(`${ele.toLocaleUpperCase()}_DESCRIPTION`)}
+              key={ele}
+            />
+          ))}
+        </RadioGroup>
+      </FormControl>
 
-      <Popper
-        sx={{
-          zIndex: 1,
-        }}
-        open={open}
-        anchorEl={anchorRef.current}
-        role={undefined}
-        transition
-        disablePortal
+      <Button
+        onClick={onClick}
+        variant="contained"
+        disabled={isFormatExported[format]}
       >
-        {({ TransitionProps, placement }) => (
-          <Grow
-            {...TransitionProps}
-            style={{
-              transformOrigin:
-                placement === 'bottom' ? 'center top' : 'center bottom',
-            }}
-          >
-            <Paper>
-              <ClickAwayListener onClickAway={handleClose}>
-                <MenuList autoFocusItem>
-                  {formats.map((actionFormat) => (
-                    <MenuItem
-                      key={actionFormat}
-                      onClick={() => handleMenuItemClick(actionFormat)}
-                      sx={{ display: 'flex', gap: 1 }}
-                      disabled={isFormatExported[actionFormat]}
-                      selected={actionFormat === format}
-                    >
-                      {icons[actionFormat]} {actionFormat}
-                    </MenuItem>
-                  ))}
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </Grow>
-        )}
-      </Popper>
+        {t(ANALYTICS.START_EXPORTING, { format: format.toUpperCase() })}
+      </Button>
     </>
   );
 };

@@ -1352,20 +1352,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/query-client@https://github.com/graasp/graasp-query-client.git#759-format-export-as-qs":
-  version: 3.8.0
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=6c550a91166ab7c2dd39a2091aed833b2f85a8f0"
+"@graasp/query-client@npm:3.10.0":
+  version: 3.10.0
+  resolution: "@graasp/query-client@npm:3.10.0"
   dependencies:
     "@tanstack/react-query": "npm:4.36.1"
     "@tanstack/react-query-devtools": "npm:4.36.1"
-    axios: "npm:1.6.8"
+    axios: "npm:1.7.2"
     http-status-codes: "npm:2.3.0"
     qs: "npm:6.12.1"
   peerDependencies:
     "@graasp/sdk": ^4.0.0
     "@graasp/translations": ^1.23.0
     react: ^18.0.0
-  checksum: 10/ca6da98c15225f5e5af86315b35e1d3825b89641a499eb68574152920a0dbdb71b300c6b9d1d16604a6f96a8215143806696f23bfcea3d515628ac635bd5a7c0
+  checksum: 10/4006a7ba4829fdfca8716ab22b992cf7695593584d7456b00abfc80a154fe7462b141c2124f186360224f96e13f476a54265a53bb928619e74d9eafa898f196c
   languageName: node
   linkType: hard
 
@@ -3859,14 +3859,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.6.8":
-  version: 1.6.8
-  resolution: "axios@npm:1.6.8"
+"axios@npm:1.7.2":
+  version: 1.7.2
+  resolution: "axios@npm:1.7.2"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10/3f9a79eaf1d159544fca9576261ff867cbbff64ed30017848e4210e49f3b01e97cf416390150e6fdf6633f336cd43dc1151f890bbd09c3c01ad60bb0891eee63
+  checksum: 10/6ae80dda9736bb4762ce717f1a26ff997d94672d3a5799ad9941c24d4fb019c1dff45be8272f08d1975d7950bac281f3ba24aff5ecd49ef5a04d872ec428782f
   languageName: node
   linkType: hard
 
@@ -6597,7 +6597,7 @@ __metadata:
     "@emotion/cache": "npm:11.11.0"
     "@emotion/react": "npm:11.11.4"
     "@emotion/styled": "npm:11.11.5"
-    "@graasp/query-client": "https://github.com/graasp/graasp-query-client.git#759-format-export-as-qs"
+    "@graasp/query-client": "npm:3.10.0"
     "@graasp/sdk": "npm:4.12.0"
     "@graasp/translations": "npm:1.28.0"
     "@graasp/ui": "npm:4.17.1"
