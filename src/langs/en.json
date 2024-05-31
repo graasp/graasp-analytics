@@ -101,10 +101,8 @@
   "EXPORT_LIST_ITEM_ACTIONS_TITLE": "Tracked Actions",
   "EXPORT_LIST_ITEM_ACTIONS_DESCRIPTION": "Actions or activities that have been recorded for this item within different view including Builder, Library, and Player.",
   "WHAT_TO_EXPORT_TITLE": "What actions does the archive include?",
-  "CANCEL_SELECT_FORMAT_DIALOG": "Cancel",
   "SELECT_FORMAT_TITLE": "Select Archive file formats",
   "SELECT_FORMAT_DIALOG_DESCRIPTION": "Data you are about to export are available in two formats:",
-  "SELECT_FORMAT_LABEL": "Files format",
   "JSON_DESCRIPTION": "key-value pairs, more a technical format.",
   "CSV_DESCRIPTION": "like a table view, similar to what you see in spreadsheets like Excel.",
   "START_EXPORTING": "Start exporting with {{format}}"
