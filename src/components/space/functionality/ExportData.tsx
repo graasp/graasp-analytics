@@ -16,13 +16,26 @@ import { ExportActionsFormatting } from '@graasp/sdk';
 import { Braces, Grid3X3 } from 'lucide-react';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
+import {
+  EXPORT_ACTIONS_BUTTON_ID,
+  buildSelectExportFormatID,
+} from '@/config/selectors';
 import { ANALYTICS } from '@/langs/constants';
 
 import { mutations } from '../../../config/queryClient';
 
-const CustomFormatRadio = ({ icon, title, description }: any) => (
+const SelectFormatRadio = ({
+  icon,
+  title,
+  description,
+}: {
+  icon: JSX.Element;
+  title: ExportActionsFormatting;
+  description: string;
+}) => (
   <FormControlLabel
     control={<Radio value={title} />}
+    id={buildSelectExportFormatID(title)}
     label={
       <>
         <Box display="flex" alignItems="center" gap={0.5}>
@@ -78,11 +91,11 @@ const ExportData = (): JSX.Element => {
           }}
         >
           {formats.map((ele) => (
-            <CustomFormatRadio
+            <SelectFormatRadio
+              key={ele}
               icon={icons[ele]}
               title={ele}
               description={t(`${ele.toLocaleUpperCase()}_DESCRIPTION`)}
-              key={ele}
             />
           ))}
         </RadioGroup>
@@ -92,6 +105,7 @@ const ExportData = (): JSX.Element => {
         onClick={onClick}
         variant="contained"
         disabled={isFormatExported[format]}
+        id={EXPORT_ACTIONS_BUTTON_ID}
       >
         {t(ANALYTICS.START_EXPORTING, { format: format.toUpperCase() })}
       </Button>
