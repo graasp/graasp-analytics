@@ -106,6 +106,7 @@ const ExportData = (): JSX.Element => {
         variant="contained"
         disabled={isFormatExported[format]}
         id={EXPORT_ACTIONS_BUTTON_ID}
+        sx={{ marginTop: 1 }}
       >
         {t(ANALYTICS.START_EXPORTING, { format: format.toUpperCase() })}
       </Button>
