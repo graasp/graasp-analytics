@@ -108,7 +108,9 @@ const ExportData = (): JSX.Element => {
         id={EXPORT_ACTIONS_BUTTON_ID}
         sx={{ marginTop: 1 }}
       >
-        {t(ANALYTICS.START_EXPORTING, { format: format.toUpperCase() })}
+        {isFormatExported[format]
+          ? t(ANALYTICS.EXPORTING_DONE, { format: format.toUpperCase() })
+          : t(ANALYTICS.START_EXPORTING, { format: format.toUpperCase() })}
       </Button>
     </>
   );

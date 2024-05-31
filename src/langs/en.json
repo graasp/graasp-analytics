@@ -105,5 +105,6 @@
   "SELECT_FORMAT_DIALOG_DESCRIPTION": "Data you are about to export are available in two formats:",
   "JSON_DESCRIPTION": "key-value pairs, more a technical format.",
   "CSV_DESCRIPTION": "like a table view, similar to what you see in spreadsheets like Excel.",
-  "START_EXPORTING": "Start exporting with {{format}}"
+  "START_EXPORTING": "Start exporting with {{format}}",
+  "EXPORTING_DONE": "{{format}} request sent"
 }
