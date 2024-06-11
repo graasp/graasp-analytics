@@ -1,6 +1,6 @@
 {
   "name": "graasp-analytics",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "private": true,
   "author": "Graasp",
   "engines": {
@@ -18,8 +18,8 @@
     "@emotion/cache": "11.11.0",
     "@emotion/react": "11.11.4",
     "@emotion/styled": "11.11.5",
-    "@graasp/query-client": "https://github.com/graasp/graasp-query-client.git#745-get-user-actions",
-    "@graasp/sdk": "4.9.0",
+    "@graasp/query-client": "3.13.0",
+    "@graasp/sdk": "4.12.0",
     "@graasp/translations": "1.28.0",
     "@graasp/ui": "4.17.1",
     "@mui/icons-material": "5.15.16",
@@ -35,6 +35,7 @@
     "lodash.groupby": "4.6.0",
     "lodash.sortby": "4.7.0",
     "lodash.truncate": "4.4.2",
+    "lucide-react": "0.378.0",
     "miragejs": "0.1.48",
     "react": "18.3.1",
     "react-date-range": "2.0.1",
