@@ -17,7 +17,7 @@ import MemberGeneralStatisticsCards from '../custom/MemberGeneralStatisticsCards
 import ActionsLegend from '../space/charts-layout/ActionsLegend';
 import MemberActionsChart from '../space/charts/MemberActionsChart';
 
-const MyStatisticsPage = (): JSX.Element => {
+const MyAnalyticsPage = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
 
   const [dateRange, setDateRange] = useState({
@@ -88,4 +88,4 @@ const MyStatisticsPage = (): JSX.Element => {
   return <Alert severity="error">{t('ERROR_FETCHING_DATA')}</Alert>;
 };
 
-export default MyStatisticsPage;
+export default MyAnalyticsPage;

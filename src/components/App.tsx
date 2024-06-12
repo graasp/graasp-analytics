@@ -28,7 +28,7 @@ import GeneralAnalyticsPage from './pages/Item/GeneralAnalyticsPage';
 import ItemAnalyticPage from './pages/Item/ItemAnalyticPage';
 import ItemPage from './pages/Item/ItemPage';
 import UsersAnalyticPage from './pages/Item/UsersAnalyticPage';
-import MyStatisticsPage from './pages/MyStatisticsPage';
+import MyStatisticsPage from './pages/MyAnalyticsPage';
 
 const App = (): JSX.Element => {
   const { data: currentMember, isLoading } = hooks.useCurrentMember();
