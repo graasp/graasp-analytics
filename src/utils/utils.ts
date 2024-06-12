@@ -1,10 +1,12 @@
 import { Action, DiscriminatedItem, Member } from '@graasp/sdk';
 
-import { parseISO, startOfWeek } from 'date-fns';
+import { parseISO, startOfDay, startOfMonth, startOfWeek } from 'date-fns';
 import { fromPairs, orderBy, toPairs } from 'lodash';
 import countBy from 'lodash.countby';
 import groupBy from 'lodash.groupby';
 import truncate from 'lodash.truncate';
+
+import { GroupByInterval } from '@/config/type';
 
 import {
   ITEM_NAME_MAX_LENGTH,
@@ -285,19 +287,38 @@ export const groupByFirstLevelItems = (
   return d;
 };
 
-export const groupActionsByWeeks = (
+const getStartDateFunction = (interval: GroupByInterval) => {
+  switch (interval) {
+    case GroupByInterval.Month:
+      return startOfMonth;
+    case GroupByInterval.Day:
+      return startOfDay;
+    case GroupByInterval.Week:
+    default:
+      return (date: Date) => startOfWeek(date, { weekStartsOn: 1 });
+  }
+};
+
+const groupActionsByInterval = (
   actions: Action[],
+  interval: GroupByInterval,
 ): { [key: string]: Action[] } => {
-  const groupedByWeek = groupBy(actions, (item) => {
-    // Parse the date string to a Date object
+  const getStartDate = getStartDateFunction(interval);
+
+  const groupedByInterval = groupBy(actions, (item) => {
     const date = parseISO(item.createdAt);
-
-    // Get the start of the week for the given date
-    const startOfTheWeek = startOfWeek(date, { weekStartsOn: 1 }); // Assuming the week starts on Monday
-
-    return startOfTheWeek.toISOString();
+    const startDate = getStartDate(date);
+    return startDate.toISOString();
   });
 
-  const sortByDate = orderBy(toPairs(groupedByWeek), ([key]) => key);
-  return fromPairs(sortByDate);
+  return groupedByInterval;
+};
+
+export const groupActions = (
+  actions: Action[],
+  groupBy: GroupByInterval,
+): { [key: string]: Action[] } => {
+  const groupedActions = groupActionsByInterval(actions, groupBy);
+  const sortedGroupedActions = orderBy(toPairs(groupedActions), ([key]) => key);
+  return fromPairs(sortedGroupedActions);
 };

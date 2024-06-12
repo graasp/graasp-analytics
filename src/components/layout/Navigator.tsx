@@ -11,7 +11,7 @@ import { useAnalyticsTranslation } from '@/config/i18n';
 import { NAVIGATOR_BACKGROUND_COLOR } from '../../config/constants';
 import {
   HOME_PATH,
-  MY_STATISTICS_PATH,
+  MY_ANALYTICS_PATH,
   buildItemPath,
 } from '../../config/paths';
 import { hooks } from '../../config/queryClient';
@@ -61,16 +61,16 @@ const Navigator = (): JSX.Element | null => {
           <HomeOutlinedIcon />
         </IconButton>
         <ArrowForwardIosIcon sx={{ m: 2 }} fontSize="inherit" />
-        {pathname === MY_STATISTICS_PATH && (
-          <NavigationLink to={MY_STATISTICS_PATH}>
-            <Typography>{t('TAB_MY_STATISTIC')}</Typography>
+        {pathname === MY_ANALYTICS_PATH && (
+          <NavigationLink to={MY_ANALYTICS_PATH}>
+            <Typography>{t('TAB_MY_ANALYTICS')}</Typography>
           </NavigationLink>
         )}
       </>
     );
   };
 
-  if (!item && pathname !== MY_STATISTICS_PATH && pathname !== HOME_PATH) {
+  if (!item && pathname !== MY_ANALYTICS_PATH && pathname !== HOME_PATH) {
     return null;
   }
 

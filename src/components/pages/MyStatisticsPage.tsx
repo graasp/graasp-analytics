@@ -4,12 +4,12 @@ import { Alert, Box, Container, Stack, Typography } from '@mui/material';
 
 import { Loader } from '@graasp/ui';
 
-import { addDays, formatISO } from 'date-fns';
+import { addDays, format, formatISO, intervalToDuration } from 'date-fns';
 import { groupBy } from 'lodash';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 import { hooks } from '@/config/queryClient';
-import { groupActionsByWeeks } from '@/utils/utils';
+import { GroupByInterval } from '@/config/type';
 
 import DateRange from '../common/DateRange';
 import SectionTitle from '../common/SectionTitle';
@@ -31,15 +31,32 @@ const MyStatisticsPage = (): JSX.Element => {
     endDate: formatISO(dateRange.endDate),
   });
 
+  const formattedStartDate = format(dateRange.startDate, 'MMMM d, yyyy');
+  const formattedEndDate = format(dateRange.endDate, 'MMMM d, yyyy');
+
+  const inputValue = `${formattedStartDate} - ${formattedEndDate}`;
+
   if (data) {
-    const actionsGroupedByWeekStart = groupActionsByWeeks(data);
     const actionsGroupedByTypes = groupBy(data, 'type');
+
+    const { months, days } = intervalToDuration({
+      start: dateRange.startDate,
+      end: dateRange.endDate,
+    });
+
+    const groupInterval =
+      months && months > 3
+        ? GroupByInterval.Month
+        : days && days < 8
+          ? GroupByInterval.Day
+          : GroupByInterval.Week;
+
     return (
       <Box p={2}>
         <Container>
           <Stack spacing={1}>
             <Stack direction="row" justifyContent="space-between">
-              <SectionTitle title={t('MY_STATISTICS')} />
+              <SectionTitle title={t('MY_ANALYTICS')} />
               <DateRange dateRange={dateRange} setDateRange={setDateRange} />
             </Stack>
             {data.length ? (
@@ -48,11 +65,14 @@ const MyStatisticsPage = (): JSX.Element => {
                   actionsGroupedByTypes={actionsGroupedByTypes}
                 />
                 <MemberActionsChart
-                  actionsGroupedByWeekStart={actionsGroupedByWeekStart}
+                  actions={data}
+                  groupInterval={groupInterval}
                 />
               </>
             ) : (
-              <Typography>{t('NO_RESULTS_FOUND')}</Typography>
+              <Typography>
+                {t('NO_RESULTS_FOUND', { period: inputValue })}
+              </Typography>
             )}
           </Stack>
         </Container>

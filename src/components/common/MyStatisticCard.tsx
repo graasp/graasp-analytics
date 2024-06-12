@@ -12,6 +12,7 @@ const StyledCardBox = styled(Box)(({ theme }) => ({
   backgroundColor: 'rgba(228, 224, 228, 0.61)',
   borderRadius: theme.spacing(2),
   color: '#808080',
+  flex: 1,
 }));
 
 const MyStatisticCard = ({ title, stat }: Props): JSX.Element => {

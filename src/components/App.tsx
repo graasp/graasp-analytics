@@ -15,7 +15,7 @@ import {
   EXPORT_ANALYTICS_PATH,
   HOME_PATH,
   ITEMS_ANALYTICS_PATH,
-  MY_STATISTICS_PATH,
+  MY_ANALYTICS_PATH,
   USERS_ANALYTICS_PATH,
   buildItemPath,
 } from '../config/paths';
@@ -80,7 +80,7 @@ const App = (): JSX.Element => {
         }
       />
       <Route
-        path={MY_STATISTICS_PATH}
+        path={MY_ANALYTICS_PATH}
         element={
           <PageWrapper>
             <MyStatisticsWithAuth />

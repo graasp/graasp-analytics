@@ -6,22 +6,8 @@ import 'react-date-range/dist/theme/default.css';
 import { Box, Popover, TextField } from '@mui/material';
 
 import { format } from 'date-fns';
-import de from 'date-fns/locale/de';
-import enUS from 'date-fns/locale/en-US';
-import es from 'date-fns/locale/es';
-import fr from 'date-fns/locale/fr';
 
-import i18n, { useAnalyticsTranslation } from '@/config/i18n';
-
-// Mapping locales
-const locales: {
-  [key: string]: Locale;
-} = {
-  en: enUS,
-  fr: fr,
-  es: es,
-  de: de,
-};
+import i18n, { locales, useAnalyticsTranslation } from '@/config/i18n';
 
 type DateRange = { startDate: Date; endDate: Date; key: string };
 type Props = {
@@ -39,8 +25,8 @@ const DateRange = ({ dateRange, setDateRange }: Props): JSX.Element => {
     setAnchorEl(null);
   };
 
-  const formattedStartDate = format(dateRange.startDate, 'yyyy-MM-dd');
-  const formattedEndDate = format(dateRange.endDate, 'yyyy-MM-dd');
+  const formattedStartDate = format(dateRange.startDate, 'MMM d, yyyy');
+  const formattedEndDate = format(dateRange.endDate, 'MMM d, yyyy');
   const inputValue = `${formattedStartDate} - ${formattedEndDate}`;
 
   const defaultStaticRangesTranslatedLabels = defaultStaticRanges.map((r) => ({
@@ -57,6 +43,7 @@ const DateRange = ({ dateRange, setDateRange }: Props): JSX.Element => {
         onClick={(event) => {
           setAnchorEl(event.currentTarget);
         }}
+        sx={{ width: '240px' }}
       />
       <Popover
         onClose={handleClose}
