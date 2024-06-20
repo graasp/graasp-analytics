@@ -78,6 +78,7 @@
   "CHAT_UPDATE_ACTION_DESCRIPTION": "Number of times item chat updated",
   "CHAT_DELETE_ACTION_DESCRIPTION": "Number of times item chat deleted",
   "CHAT_CREATE_ACTION_DESCRIPTION": "Number of times item chat created",
+  "MEMBER_LOGIN_ACTION_DESCRIPTION": "Number of times logged in",
   "ERROR_FETCHING_DATA": "An error occurred while fetching data, Please try again later",
   "ITEM_SEARCH_PLACEHOLDER": "Search by item name",
   "RECENT_ITEMS_TITLE": "Recent Items",

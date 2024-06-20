@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { Typography } from '@mui/material';
 
 import { Action } from '@graasp/sdk';
 
-import { endOfWeek, format } from 'date-fns';
+import { endOfWeek, format, isAfter, isBefore, startOfWeek } from 'date-fns';
 import { countBy, groupBy } from 'lodash';
 import {
   Bar,
@@ -17,6 +17,7 @@ import {
 } from 'recharts';
 
 import ChartContainer from '@/components/common/ChartContainer';
+import { MyAnalyticsDateRangeDataContext } from '@/components/context/MyAnalyticsDateRangeContext';
 import { getColorForActionTriggerType } from '@/config/constants';
 import { useActionsTranslation, useAnalyticsTranslation } from '@/config/i18n';
 import { GroupByInterval } from '@/config/type';
@@ -24,15 +25,22 @@ import { groupActions } from '@/utils/utils';
 
 type Props = {
   actions: Action[];
-  groupInterval: GroupByInterval;
 };
-const MemberActionsChart = ({ actions, groupInterval }: Props): JSX.Element => {
+const MemberActionsChart = ({ actions }: Props): JSX.Element => {
   const { t } = useAnalyticsTranslation();
   const { t: translateAction } = useActionsTranslation();
-
   const types: string[] = Object.keys(groupBy(actions, 'type'));
 
-  const groupedActionsByInterval = groupActions(actions, groupInterval);
+  const { groupInterval, dateRange } = useContext(
+    MyAnalyticsDateRangeDataContext,
+  );
+
+  const groupedActionsByInterval = groupActions(
+    actions,
+    groupInterval,
+    dateRange.startDate,
+    dateRange.endDate,
+  );
 
   const noOfActionTypesOverInterval = Object.entries(
     groupedActionsByInterval,
@@ -54,7 +62,20 @@ const MemberActionsChart = ({ actions, groupInterval }: Props): JSX.Element => {
         const endOfTheWeek = endOfWeek(date, {
           weekStartsOn: 1,
         }); // Assuming the week starts on Monday
-        title = `${format(date, 'MMM dd')} - ${format(endOfTheWeek, 'MMM dd')}`;
+
+        const startOfTheWeek = startOfWeek(date, {
+          weekStartsOn: 1,
+        }); // Assuming the week starts on Monday
+
+        const endDate = isAfter(dateRange.endDate, endOfTheWeek)
+          ? endOfTheWeek
+          : dateRange.endDate;
+
+        const startDate = isBefore(dateRange.startDate, startOfTheWeek)
+          ? startOfTheWeek
+          : dateRange.startDate;
+
+        title = `${format(startDate, 'MMM dd')} - ${format(endDate, 'MMM dd')}`;
       }
     }
 
@@ -80,8 +101,7 @@ const MemberActionsChart = ({ actions, groupInterval }: Props): JSX.Element => {
           <Legend
             formatter={(value) => translateAction(value)}
             align="right"
-            layout="vertical"
-            wrapperStyle={{ right: '-8px', top: 0 }}
+            layout="horizontal"
           />
 
           {types.map((type) => (

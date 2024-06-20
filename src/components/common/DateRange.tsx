@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { DateRangePicker, defaultStaticRanges } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
@@ -9,15 +9,13 @@ import { format } from 'date-fns';
 
 import i18n, { locales, useAnalyticsTranslation } from '@/config/i18n';
 
-type DateRange = { startDate: Date; endDate: Date; key: string };
-type Props = {
-  dateRange: DateRange;
-  setDateRange: (v: DateRange) => void;
-};
+import { MyAnalyticsDateRangeDataContext } from '../context/MyAnalyticsDateRangeContext';
 
-const DateRange = ({ dateRange, setDateRange }: Props): JSX.Element => {
+const DateRange = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
-
+  const { dateRange, setDateRange } = useContext(
+    MyAnalyticsDateRangeDataContext,
+  );
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
 
@@ -35,7 +33,7 @@ const DateRange = ({ dateRange, setDateRange }: Props): JSX.Element => {
   }));
 
   return (
-    <Box>
+    <Box margin={{ sm: 'auto', md: 'unset' }}>
       <TextField
         required
         label={t('RANGE_DATE_PICKER_INPUT_LABEL')}
@@ -43,7 +41,7 @@ const DateRange = ({ dateRange, setDateRange }: Props): JSX.Element => {
         onClick={(event) => {
           setAnchorEl(event.currentTarget);
         }}
-        sx={{ width: '240px' }}
+        sx={{ minWidth: '240px' }}
       />
       <Popover
         onClose={handleClose}

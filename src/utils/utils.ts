@@ -1,6 +1,15 @@
 import { Action, DiscriminatedItem, Member } from '@graasp/sdk';
 
-import { parseISO, startOfDay, startOfMonth, startOfWeek } from 'date-fns';
+import {
+  addDays,
+  addMonths,
+  addWeeks,
+  isBefore,
+  parseISO,
+  startOfDay,
+  startOfMonth,
+  startOfWeek,
+} from 'date-fns';
 import { fromPairs, orderBy, toPairs } from 'lodash';
 import countBy from 'lodash.countby';
 import groupBy from 'lodash.groupby';
@@ -299,6 +308,34 @@ const getStartDateFunction = (interval: GroupByInterval) => {
   }
 };
 
+const fillDateGaps = (
+  data: { [key: string]: Action[] },
+  freq: GroupByInterval,
+  start: Date,
+  stop: Date,
+): { [key: string]: Action[] } => {
+  const copy = { ...data };
+  const nextFunc = {
+    [GroupByInterval.Day]: addDays,
+    [GroupByInterval.Month]: addMonths,
+    [GroupByInterval.Week]: addWeeks,
+  };
+  const getStartDate = getStartDateFunction(freq);
+
+  let currentDate = getStartDate(start);
+
+  while (isBefore(currentDate, stop)) {
+    if (!copy[currentDate.toISOString()]) {
+      copy[currentDate.toISOString()] = [];
+    }
+
+    const getNextInterval = nextFunc[freq];
+    currentDate = getNextInterval(currentDate, 1);
+  }
+
+  return copy;
+};
+
 const groupActionsByInterval = (
   actions: Action[],
   interval: GroupByInterval,
@@ -317,8 +354,20 @@ const groupActionsByInterval = (
 export const groupActions = (
   actions: Action[],
   groupBy: GroupByInterval,
+  start: Date,
+  stop: Date,
 ): { [key: string]: Action[] } => {
   const groupedActions = groupActionsByInterval(actions, groupBy);
-  const sortedGroupedActions = orderBy(toPairs(groupedActions), ([key]) => key);
+  const filledGroupedActions = fillDateGaps(
+    groupedActions,
+    groupBy,
+    start,
+    stop,
+  );
+  const sortedGroupedActions = orderBy(
+    toPairs(filledGroupedActions),
+    ([key]) => key,
+  );
+
   return fromPairs(sortedGroupedActions);
 };

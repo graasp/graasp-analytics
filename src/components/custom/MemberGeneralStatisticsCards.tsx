@@ -6,7 +6,7 @@ import { Action, ActionTriggers } from '@graasp/sdk';
 
 import { useAnalyticsTranslation } from '@/config/i18n';
 
-import MyStatisticCard from '../common/MyStatisticCard';
+import MyAnalyticsCard from '../common/MyAnalyticCard';
 
 type Props = {
   actionsGroupedByTypes: { [key: string]: Action[] };
@@ -19,25 +19,25 @@ const MemberGeneralStatisticsCards = ({
   return (
     <Grid container spacing={2} p={2}>
       <Grid item md={3} lg={2} sx={{ display: 'flex' }}>
-        <MyStatisticCard
+        <MyAnalyticsCard
           title={t('GENERAL_STATISTIC_ITEMS_CREATED')}
           stat={actionsGroupedByTypes[ActionTriggers.Create]?.length ?? 0}
         />
       </Grid>
       <Grid item md={3} lg={2} sx={{ display: 'flex' }}>
-        <MyStatisticCard
+        <MyAnalyticsCard
           title={t('GENERAL_STATISTIC_LIKED_ITEMS')}
           stat={actionsGroupedByTypes[ActionTriggers.ItemLike]?.length ?? 0}
         />
       </Grid>
       <Grid item md={3} lg={2} sx={{ display: 'flex' }}>
-        <MyStatisticCard
+        <MyAnalyticsCard
           title={t('GENERAL_STATISTIC_DOWNLOADED_ITEMS')}
           stat={actionsGroupedByTypes[ActionTriggers.ItemDownload]?.length ?? 0}
         />
       </Grid>
       <Grid item md={3} lg={2} sx={{ display: 'flex' }}>
-        <MyStatisticCard
+        <MyAnalyticsCard
           title={t('GENERAL_STATISTIC_CHAT_CREATED')}
           stat={actionsGroupedByTypes[ActionTriggers.ChatCreate]?.length ?? 0}
         />

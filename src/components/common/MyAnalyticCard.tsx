@@ -15,7 +15,7 @@ const StyledCardBox = styled(Box)(({ theme }) => ({
   flex: 1,
 }));
 
-const MyStatisticCard = ({ title, stat }: Props): JSX.Element => {
+const MyAnalyticsCard = ({ title, stat }: Props): JSX.Element => {
   return (
     <StyledCardBox>
       <Typography fontWeight={700}>{title}</Typography>
@@ -34,4 +34,4 @@ const MyStatisticCard = ({ title, stat }: Props): JSX.Element => {
   );
 };
 
-export default MyStatisticCard;
+export default MyAnalyticsCard;

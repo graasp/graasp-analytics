@@ -3,3 +3,5 @@ export enum GroupByInterval {
   Day = 'day',
   Month = 'month',
 }
+
+export type DateRange = { startDate: Date; endDate: Date; key: string };

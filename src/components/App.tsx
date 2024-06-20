@@ -28,7 +28,7 @@ import GeneralAnalyticsPage from './pages/Item/GeneralAnalyticsPage';
 import ItemAnalyticPage from './pages/Item/ItemAnalyticPage';
 import ItemPage from './pages/Item/ItemPage';
 import UsersAnalyticPage from './pages/Item/UsersAnalyticPage';
-import MyStatisticsPage from './pages/MyAnalyticsPage';
+import MyAnalyticsPage from './pages/MyAnalyticsPage';
 
 const App = (): JSX.Element => {
   const { data: currentMember, isLoading } = hooks.useCurrentMember();
@@ -62,8 +62,8 @@ const App = (): JSX.Element => {
     ItemPage,
     withAuthorizationProps,
   );
-  const MyStatisticsWithAuth = withAuthorization(
-    MyStatisticsPage,
+  const MyAnalyticsWithAuth = withAuthorization(
+    MyAnalyticsPage,
     withAuthorizationProps,
   );
 
@@ -83,7 +83,7 @@ const App = (): JSX.Element => {
         path={MY_ANALYTICS_PATH}
         element={
           <PageWrapper>
-            <MyStatisticsWithAuth />
+            <MyAnalyticsWithAuth />
           </PageWrapper>
         }
       />
