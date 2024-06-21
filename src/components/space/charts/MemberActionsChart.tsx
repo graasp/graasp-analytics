@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 
-import { Typography } from '@mui/material';
+import { Typography, useMediaQuery, useTheme } from '@mui/material';
 
 import { Action } from '@graasp/sdk';
 
-import { endOfWeek, format, isAfter, isBefore, startOfWeek } from 'date-fns';
+import { format, intervalToDuration } from 'date-fns';
 import { countBy, groupBy } from 'lodash';
 import {
   Bar,
@@ -18,7 +18,11 @@ import {
 
 import ChartContainer from '@/components/common/ChartContainer';
 import { MyAnalyticsDateRangeDataContext } from '@/components/context/MyAnalyticsDateRangeContext';
-import { getColorForActionTriggerType } from '@/config/constants';
+import {
+  MAX_BARS_LARGE_SCREEN,
+  MAX_BARS_SMALL_SCREEN,
+  getColorForActionTriggerType,
+} from '@/config/constants';
 import { useActionsTranslation, useAnalyticsTranslation } from '@/config/i18n';
 import { GroupByInterval } from '@/config/type';
 import { groupActions } from '@/utils/utils';
@@ -31,6 +35,10 @@ const MemberActionsChart = ({ actions }: Props): JSX.Element => {
   const { t: translateAction } = useActionsTranslation();
   const types: string[] = Object.keys(groupBy(actions, 'type'));
 
+  const theme = useTheme();
+
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('sm'));
+
   const { groupInterval, dateRange } = useContext(
     MyAnalyticsDateRangeDataContext,
   );
@@ -40,50 +48,58 @@ const MemberActionsChart = ({ actions }: Props): JSX.Element => {
     groupInterval,
     dateRange.startDate,
     dateRange.endDate,
+    isLargeScreen ? MAX_BARS_LARGE_SCREEN : MAX_BARS_SMALL_SCREEN,
   );
 
-  const noOfActionTypesOverInterval = Object.entries(
-    groupedActionsByInterval,
-  ).map(([dateString, actions]) => {
-    const actionsOverIntervalTypeCounts = countBy(actions, 'type');
+  const actionsEntires = Object.entries(groupedActionsByInterval);
 
-    // getting chart x-axis title for specified interval
-    let title = '';
-    const date = new Date(dateString);
-
-    switch (groupInterval) {
-      case GroupByInterval.Day:
-        title = format(date, 'MMM dd');
-        break;
-      case GroupByInterval.Month:
-        title = format(date, 'MMM yyyy');
-        break;
-      case GroupByInterval.Week: {
-        const endOfTheWeek = endOfWeek(date, {
-          weekStartsOn: 1,
-        }); // Assuming the week starts on Monday
-
-        const startOfTheWeek = startOfWeek(date, {
-          weekStartsOn: 1,
-        }); // Assuming the week starts on Monday
-
-        const endDate = isAfter(dateRange.endDate, endOfTheWeek)
-          ? endOfTheWeek
-          : dateRange.endDate;
-
-        const startDate = isBefore(dateRange.startDate, startOfTheWeek)
-          ? startOfTheWeek
-          : dateRange.startDate;
-
-        title = `${format(startDate, 'MMM dd')} - ${format(endDate, 'MMM dd')}`;
-      }
-    }
-
-    return {
-      date: title,
-      ...actionsOverIntervalTypeCounts,
-    };
+  const { months, days, years } = intervalToDuration({
+    start: new Date(actionsEntires[0]?.[0]),
+    end: new Date(actionsEntires[1]?.[0]),
   });
+
+  // get bar interval
+  const freq =
+    years && years >= 1
+      ? GroupByInterval.Year
+      : days === 1
+        ? GroupByInterval.Day
+        : months === 1 && days === 0
+          ? GroupByInterval.Month
+          : 'other';
+
+  const noOfActionTypesOverInterval = actionsEntires.map(
+    ([dateString, actions], index) => {
+      const actionsOverIntervalTypeCounts = countBy(actions, 'type');
+
+      // getting chart x-axis title for specified interval
+      let title = '';
+      const date = new Date(dateString);
+      const nextDate = new Date(
+        actionsEntires[index + 1]?.[0] || dateRange.endDate,
+      );
+
+      switch (freq) {
+        case GroupByInterval.Day:
+          title = format(date, 'MMM dd');
+          break;
+        case GroupByInterval.Month:
+          title = format(date, 'MMM yyyy');
+          break;
+        case GroupByInterval.Year:
+          title = format(date, 'yyyy');
+          break;
+        default: {
+          title = `${format(date, 'MMM dd')} - ${format(nextDate, 'MMM dd')}`;
+        }
+      }
+
+      return {
+        date: title,
+        ...actionsOverIntervalTypeCounts,
+      };
+    },
+  );
 
   return (
     <>

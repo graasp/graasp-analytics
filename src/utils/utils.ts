@@ -4,11 +4,13 @@ import {
   addDays,
   addMonths,
   addWeeks,
+  addYears,
   isBefore,
   parseISO,
   startOfDay,
   startOfMonth,
   startOfWeek,
+  startOfYear,
 } from 'date-fns';
 import { fromPairs, orderBy, toPairs } from 'lodash';
 import countBy from 'lodash.countby';
@@ -298,6 +300,8 @@ export const groupByFirstLevelItems = (
 
 const getStartDateFunction = (interval: GroupByInterval) => {
   switch (interval) {
+    case GroupByInterval.Year:
+      return startOfYear;
     case GroupByInterval.Month:
       return startOfMonth;
     case GroupByInterval.Day:
@@ -319,6 +323,7 @@ const fillDateGaps = (
     [GroupByInterval.Day]: addDays,
     [GroupByInterval.Month]: addMonths,
     [GroupByInterval.Week]: addWeeks,
+    [GroupByInterval.Year]: addYears,
   };
   const getStartDate = getStartDateFunction(freq);
 
@@ -351,11 +356,44 @@ const groupActionsByInterval = (
   return groupedByInterval;
 };
 
+const groupActionsBasedOnMaxIntervals = (
+  actions: {
+    [key: string]: Action[];
+  },
+  maxNoOfIntervals: number,
+): { [key: string]: Action[] } => {
+  const keys = Object.keys(actions);
+  const totalActions = Object.values(actions);
+
+  const len = keys.length;
+
+  const maxKeysPerGroup = Math.ceil(len / maxNoOfIntervals);
+
+  if (len > maxNoOfIntervals) {
+    const obj: { [key: string]: Action[] } = {};
+    for (let index = 0; index < len; index += maxKeysPerGroup) {
+      const actionsOverInterval = totalActions.slice(
+        index,
+        index + maxKeysPerGroup,
+      );
+
+      const totals = actionsOverInterval.reduce((acc, curr) => {
+        return [...acc, ...curr];
+      }, []);
+
+      obj[keys[index]] = totals;
+    }
+    return obj;
+  }
+  return actions;
+};
+
 export const groupActions = (
   actions: Action[],
   groupBy: GroupByInterval,
   start: Date,
   stop: Date,
+  maxIntervals: number,
 ): { [key: string]: Action[] } => {
   const groupedActions = groupActionsByInterval(actions, groupBy);
   const filledGroupedActions = fillDateGaps(
@@ -369,5 +407,12 @@ export const groupActions = (
     ([key]) => key,
   );
 
-  return fromPairs(sortedGroupedActions);
+  const pairsActions = fromPairs(sortedGroupedActions);
+
+  const groupedActionsMatchingMax = groupActionsBasedOnMaxIntervals(
+    pairsActions,
+    maxIntervals,
+  );
+
+  return groupedActionsMatchingMax;
 };

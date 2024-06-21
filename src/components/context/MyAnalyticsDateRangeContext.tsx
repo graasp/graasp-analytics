@@ -33,17 +33,19 @@ const MyAnalyticsDateRangeProvider = ({
     key: 'selection',
   });
 
-  const { months, days } = intervalToDuration({
+  const { months, days, years } = intervalToDuration({
     start: dateRange.startDate,
     end: dateRange.endDate,
   });
 
   const groupInterval =
-    months && months > 2
-      ? GroupByInterval.Month
-      : days && days < 8
-        ? GroupByInterval.Day
-        : GroupByInterval.Week;
+    years && years >= 1
+      ? GroupByInterval.Year
+      : months && months > 2
+        ? GroupByInterval.Month
+        : days && days < 8
+          ? GroupByInterval.Day
+          : GroupByInterval.Week;
 
   const value = useMemo(
     () => ({
