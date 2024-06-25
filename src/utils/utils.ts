@@ -370,19 +370,25 @@ const groupActionsBasedOnMaxIntervals = (
   const maxKeysPerGroup = Math.ceil(len / maxNoOfIntervals);
 
   if (len > maxNoOfIntervals) {
-    const obj: { [key: string]: Action[] } = {};
-    for (let index = 0; index < len; index += maxKeysPerGroup) {
-      const actionsOverInterval = totalActions.slice(
-        index,
-        index + maxKeysPerGroup,
-      );
+    const obj = totalActions.reduce(
+      (acc: { [key: string]: Action[] }, curr, index) => {
+        const base = Math.floor(index / maxKeysPerGroup);
+        if (index % maxKeysPerGroup === 0) {
+          acc[keys[index]] = curr;
+        } else {
+          /*
+          index stepped by maxKeysPerGroup, so if index = 1 and maxKeysPerGroup = 2, acc[1*2]
+          index stepped by maxKeysPerGroup, so if index = 9 and maxKeysPerGroup = 2, acc[4*2]
+          */
+          acc[keys[base * maxKeysPerGroup]] = acc[
+            keys[base * maxKeysPerGroup]
+          ]?.concat(...curr);
+        }
+        return acc;
+      },
+      {},
+    );
 
-      const totals = actionsOverInterval.reduce((acc, curr) => {
-        return [...acc, ...curr];
-      }, []);
-
-      obj[keys[index]] = totals;
-    }
     return obj;
   }
   return actions;

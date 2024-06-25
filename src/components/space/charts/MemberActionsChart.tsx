@@ -64,7 +64,7 @@ const MemberActionsChart = ({ actions }: Props): JSX.Element => {
       ? GroupByInterval.Year
       : days === 1
         ? GroupByInterval.Day
-        : months === 1 && days === 0
+        : months === 1 && !days
           ? GroupByInterval.Month
           : 'other';
 

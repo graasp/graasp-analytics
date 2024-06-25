@@ -1,18 +1,19 @@
 import React from 'react';
 
-import { Box, Typography, styled } from '@mui/material';
+import { Box, Stack, Typography, styled } from '@mui/material';
 
 type Props = {
   title: string;
   stat: number;
 };
 
-const StyledCardBox = styled(Box)(({ theme }) => ({
+const StyledCardBox = styled(Stack)(({ theme }) => ({
   padding: theme.spacing(2),
   backgroundColor: 'rgba(228, 224, 228, 0.61)',
   borderRadius: theme.spacing(2),
   color: '#808080',
   flex: 1,
+  justifyContent: 'space-between',
 }));
 
 const MyAnalyticsCard = ({ title, stat }: Props): JSX.Element => {
