@@ -18,6 +18,11 @@ import { ANALYTICS } from '@/langs/constants';
 
 import { MyAnalyticsDateRangeDataContext } from '../context/MyAnalyticsDateRangeContext';
 
+const threeMonthsRange = {
+  startDate: subMonths(new Date(), 3),
+  endDate: endOfDay(new Date()),
+};
+
 const DateRange = (): JSX.Element => {
   const { t } = useAnalyticsTranslation();
   const { dateRange, setDateRange } = useContext(
@@ -41,15 +46,11 @@ const DateRange = (): JSX.Element => {
 
   const lastThreeMoths: StaticRange = {
     label: t(ANALYTICS.LAST_THREE_MONTHS_LABEL),
-    range: () => ({
-      startDate: subMonths(new Date(), 3),
-      endDate: endOfDay(new Date()),
-    }),
+    range: () => threeMonthsRange,
     isSelected(range: Range) {
-      const definedRange = this.range();
       return (
-        isSameDay(range.startDate as Date, definedRange.startDate as Date) &&
-        isSameDay(range.endDate as Date, definedRange.endDate as Date)
+        isSameDay(range.startDate as Date, threeMonthsRange.startDate) &&
+        isSameDay(range.endDate as Date, threeMonthsRange.endDate)
       );
     },
   };
