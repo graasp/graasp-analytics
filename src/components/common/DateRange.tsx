@@ -1,13 +1,20 @@
 import React, { useContext, useState } from 'react';
-import { DateRangePicker, defaultStaticRanges } from 'react-date-range';
+import {
+  DateRangePicker,
+  Range,
+  StaticRange,
+  defaultInputRanges,
+  defaultStaticRanges,
+} from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 
 import { Box, Popover, TextField } from '@mui/material';
 
-import { format } from 'date-fns';
+import { endOfDay, format, isSameDay, subMonths } from 'date-fns';
 
 import i18n, { locales, useAnalyticsTranslation } from '@/config/i18n';
+import { ANALYTICS } from '@/langs/constants';
 
 import { MyAnalyticsDateRangeDataContext } from '../context/MyAnalyticsDateRangeContext';
 
@@ -31,6 +38,21 @@ const DateRange = (): JSX.Element => {
     ...r,
     label: t(r.label as string),
   }));
+
+  const lastThreeMoths: StaticRange = {
+    label: t(ANALYTICS.LAST_THREE_MONTHS_LABEL),
+    range: () => ({
+      startDate: subMonths(new Date(), 3),
+      endDate: endOfDay(new Date()),
+    }),
+    isSelected(range: Range) {
+      const definedRange = this.range();
+      return (
+        isSameDay(range.startDate as Date, definedRange.startDate as Date) &&
+        isSameDay(range.endDate as Date, definedRange.endDate as Date)
+      );
+    },
+  };
 
   return (
     <Box margin={{ sm: 'auto', md: 'unset' }}>
@@ -57,7 +79,11 @@ const DateRange = (): JSX.Element => {
           maxDate={new Date()}
           ranges={[dateRange]}
           locale={locales[i18n.language]}
-          staticRanges={defaultStaticRangesTranslatedLabels}
+          staticRanges={[
+            ...defaultStaticRangesTranslatedLabels,
+            lastThreeMoths,
+          ]}
+          inputRanges={[defaultInputRanges[0]]}
         />
       </Popover>
     </Box>
