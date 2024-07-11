@@ -44,7 +44,7 @@ const DateRange = (): JSX.Element => {
     label: t(r.label as string),
   }));
 
-  const lastThreeMoths: StaticRange = {
+  const lastThreeMonths: StaticRange = {
     label: t(ANALYTICS.LAST_THREE_MONTHS_LABEL),
     range: () => threeMonthsRange,
     isSelected(range: Range) {
@@ -82,7 +82,7 @@ const DateRange = (): JSX.Element => {
           locale={locales[i18n.language]}
           staticRanges={[
             ...defaultStaticRangesTranslatedLabels,
-            lastThreeMoths,
+            lastThreeMonths,
           ]}
           inputRanges={[defaultInputRanges[0]]}
         />
