@@ -8,7 +8,7 @@ import { CssBaseline } from '@mui/material';
 
 import { hasAcceptedCookies } from '@graasp/sdk';
 import { langs } from '@graasp/translations';
-import { Loader, ThemeProvider } from '@graasp/ui';
+import { ThemeProvider } from '@graasp/ui';
 
 import { GA_MEASUREMENT_ID } from '../config/env';
 import i18nConfig, { useCommonTranslation } from '../config/i18n';
@@ -27,11 +27,7 @@ if (GA_MEASUREMENT_ID && hasAcceptedCookies() && import.meta.env.PROD) {
 
 const ThemeWrapper = () => {
   const { i18n } = useCommonTranslation();
-  const { data: currentMember, isLoading } = hooks.useCurrentMember();
-
-  if (isLoading) {
-    return <Loader />;
-  }
+  const { data: currentMember } = hooks.useCurrentMember();
 
   return (
     <ThemeProvider
