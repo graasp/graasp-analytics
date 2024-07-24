@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import {
   DateRangePicker,
   Range,
@@ -14,20 +14,21 @@ import { Box, Popover, TextField } from '@mui/material';
 import { endOfDay, format, isSameDay, subMonths } from 'date-fns';
 
 import i18n, { locales, useAnalyticsTranslation } from '@/config/i18n';
+import { DateRange } from '@/config/type';
 import { ANALYTICS } from '@/langs/constants';
-
-import { MyAnalyticsDateRangeDataContext } from '../context/MyAnalyticsDateRangeContext';
 
 const threeMonthsRange = {
   startDate: subMonths(new Date(), 3),
   endDate: endOfDay(new Date()),
 };
 
-const DateRange = (): JSX.Element => {
+type Props = {
+  dateRange: DateRange;
+  setDateRange: (d: DateRange) => void;
+};
+
+const DateRangeInput = ({ dateRange, setDateRange }: Props): JSX.Element => {
   const { t } = useAnalyticsTranslation();
-  const { dateRange, setDateRange } = useContext(
-    MyAnalyticsDateRangeDataContext,
-  );
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
 
@@ -91,4 +92,4 @@ const DateRange = (): JSX.Element => {
   );
 };
 
-export default DateRange;
+export default DateRangeInput;

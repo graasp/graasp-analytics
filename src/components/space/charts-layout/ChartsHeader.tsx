@@ -5,6 +5,8 @@ import { Stack, styled, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
+import DateRange from '@/components/common/DateRange';
+
 import { DataContext } from '../../context/DataProvider';
 import ActionsSelect from '../functionality/ActionsSelect';
 import ExportData from '../functionality/ExportData';
@@ -21,23 +23,26 @@ const CustomRoot = styled('div')(({ theme }) => ({
 
 const ChartsHeader = (): JSX.Element => {
   const theme = useTheme();
-  const { itemData } = useContext(DataContext);
+  const { itemData, dateRange, setDateRange } = useContext(DataContext);
   const { pathname } = useLocation();
   const match = useMatch(pathname);
 
   if (match) {
     return (
-      <Stack
-        direction={{ xs: 'column', sm: 'row' }}
-        justifyContent="space-between"
-        alignItems="center"
-        spacing={{ xs: 2, sm: 3, lg: 4 }}
-        p={2}
-      >
-        <ViewSelect />
-        <UsersSelect />
-        <ActionsSelect />
-      </Stack>
+      <>
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={{ xs: 2, sm: 3, lg: 4 }}
+          p={2}
+        >
+          <ViewSelect />
+          <UsersSelect />
+          <ActionsSelect />
+        </Stack>
+        <DateRange dateRange={dateRange} setDateRange={setDateRange} />
+      </>
     );
   }
 

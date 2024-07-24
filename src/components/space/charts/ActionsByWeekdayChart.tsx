@@ -8,6 +8,7 @@ import {
   CountGroupBy,
 } from '@graasp/sdk';
 
+import { endOfDay, formatISO } from 'date-fns';
 import {
   Bar,
   BarChart,
@@ -39,7 +40,7 @@ import EmptyChart from './EmptyChart';
 
 const ActionsByWeekdayChart = (): JSX.Element | null => {
   const { t } = useAnalyticsTranslation();
-  const { actions, selectedUsers, selectedActionTypes } =
+  const { actions, selectedUsers, selectedActionTypes, dateRange } =
     useContext(DataContext);
 
   const { view } = useContext(ViewDataContext);
@@ -57,6 +58,8 @@ const ActionsByWeekdayChart = (): JSX.Element | null => {
     aggregateFunction: AggregateFunction.Avg,
     aggregateMetric: AggregateMetric.ActionCount,
     aggregateBy: [AggregateBy.CreatedDayOfWeek],
+    startDate: formatISO(dateRange.startDate),
+    endDate: formatISO(endOfDay(dateRange.endDate)),
   });
 
   if (isLoading || isError) {
