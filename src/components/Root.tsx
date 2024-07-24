@@ -10,6 +10,8 @@ import { hasAcceptedCookies } from '@graasp/sdk';
 import { langs } from '@graasp/translations';
 import { ThemeProvider } from '@graasp/ui';
 
+import i18next from 'i18next';
+
 import { GA_MEASUREMENT_ID } from '../config/env';
 import i18nConfig, { useCommonTranslation } from '../config/i18n';
 import {
@@ -34,7 +36,7 @@ const ThemeWrapper = () => {
       langs={langs}
       languageSelectSx={{ mb: 2, mr: 2 }}
       i18n={i18n}
-      defaultDirection={currentMember?.extra?.lang === 'ar' ? 'rtl' : 'ltr'}
+      defaultDirection={i18next.dir(currentMember?.extra?.lang)}
     >
       <CssBaseline />
       <I18nextProvider i18n={i18nConfig}>

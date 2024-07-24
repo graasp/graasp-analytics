@@ -1061,9 +1061,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@github:graasp/graasp-ui#955-set-theme-direction":
-  version: 4.21.0
-  resolution: "@graasp/ui@https://github.com/graasp/graasp-ui.git#commit=b8849a85e15e4ac1e455173f6f37f64663dacc81"
+"@graasp/ui@npm:4.23.0":
+  version: 4.23.0
+  resolution: "@graasp/ui@npm:4.23.0"
   dependencies:
     "@ag-grid-community/client-side-row-model": "npm:31.3.2"
     "@ag-grid-community/react": "npm:^31.3.2"
@@ -1097,7 +1097,7 @@ __metadata:
     react-router-dom: ^6.11.0
     stylis: ^4.1.3
     stylis-plugin-rtl: ^2.1.1
-  checksum: 10/d242a58bfb6a4163cce8e002d56e080165acb294037331c206c476692c7415056d0e6d108b71d737a3fd09bbc02e5c7cf550c6bc4fc19e92dba0d2eca7a87d81
+  checksum: 10/26d99acd179daee8315b632b28590c10b13e991ef6c66fcda916937e6fff6ce6d8f424fdd2499beba6ef0c3f91d705181b73ec6fe0e551d4b50f1615d1fadb64
   languageName: node
   linkType: hard
 
@@ -6083,7 +6083,7 @@ __metadata:
     "@graasp/query-client": "npm:3.15.0"
     "@graasp/sdk": "npm:4.15.1"
     "@graasp/translations": "npm:1.31.1"
-    "@graasp/ui": "github:graasp/graasp-ui#955-set-theme-direction"
+    "@graasp/ui": "npm:4.23.0"
     "@mui/icons-material": "npm:5.16.1"
     "@mui/lab": "npm:5.0.0-alpha.141"
     "@mui/material": "npm:5.16.1"
