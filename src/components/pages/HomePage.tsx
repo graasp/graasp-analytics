@@ -31,7 +31,7 @@ const HomePage = (): JSX.Element => {
     isLoading,
     error,
   } = hooks.useAccessibleItems(
-    { name: searchQuery },
+    { keywords: searchQuery },
     // get items cumulative
     { pageSize: ITEM_PAGE_SIZE, page },
   );
