@@ -57,7 +57,10 @@ const DateRangeInput = ({ dateRange, setDateRange }: Props): JSX.Element => {
   };
 
   return (
-    <Box margin={{ sm: 'auto', md: 'unset' }}>
+    <Box
+      margin={{ sm: 'auto', md: 'unset' }}
+      maxWidth={{ xs: '100%', sm: '300px' }}
+    >
       <TextField
         required
         label={t('RANGE_DATE_PICKER_INPUT_LABEL')}
@@ -65,7 +68,7 @@ const DateRangeInput = ({ dateRange, setDateRange }: Props): JSX.Element => {
         onClick={(event) => {
           setAnchorEl(event.currentTarget);
         }}
-        sx={{ minWidth: '240px' }}
+        sx={{ width: '100%' }}
       />
       <Popover
         onClose={handleClose}

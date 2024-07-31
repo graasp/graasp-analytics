@@ -1514,8 +1514,8 @@ __metadata:
   linkType: hard
 
 "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#modify-useAggeregateActions-accept-dateRange":
-  version: 3.16.0
-  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=255945daf2115612f4264bd1db8bb87ab7619a72"
+  version: 3.20.0
+  resolution: "@graasp/query-client@https://github.com/graasp/graasp-query-client.git#commit=10d01796884a762ac634c7a2e7257b6fb5d4fb0e"
   dependencies:
     "@tanstack/react-query": "npm:4.36.1"
     "@tanstack/react-query-devtools": "npm:4.36.1"
@@ -1525,7 +1525,7 @@ __metadata:
     "@graasp/sdk": ^4.0.0
     "@graasp/translations": "*"
     react: ^18.0.0
-  checksum: 10/006e6ffdf940cbb256ea2c4391d2ed79a04661b0e9addc7efbfbb442d487c224169c89f526251dcf60549f675ebdb06da4cd1f3874873fcd949f2cee09f634a2
+  checksum: 10/c8399dff40aa465f243aff8948b448e83834979d6d1ffaf87cc3618b922f636fec1df4669d252c498754ceb15339ab106b7dffa1d859083dbacf63ba3e6faad6
   languageName: node
   linkType: hard
 
