@@ -15,6 +15,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import DateRange from '@/components/common/DateRange';
+import { TOGGLE_FILTERS_DRAWER_BUTTON_ID } from '@/config/selectors';
 
 import { DataContext } from '../../context/DataProvider';
 import ActionsSelect from '../functionality/ActionsSelect';
@@ -63,7 +64,11 @@ const ChartsHeader = (): JSX.Element => {
 
   if (match) {
     const filterButton = (
-      <IconButton aria-label="delete" onClick={toggleDrawer}>
+      <IconButton
+        aria-label="open-filter"
+        onClick={toggleDrawer}
+        id={TOGGLE_FILTERS_DRAWER_BUTTON_ID}
+      >
         <Badge color="primary" badgeContent={filtersSelected}>
           <FilterAltIcon />
         </Badge>
