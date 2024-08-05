@@ -31,7 +31,7 @@ const HomePage = (): JSX.Element => {
     isLoading,
     error,
   } = hooks.useAccessibleItems(
-    {},
+    { keywords: searchQuery },
     // get items cumulative
     { pageSize: ITEM_PAGE_SIZE, page },
   );
@@ -51,10 +51,6 @@ const HomePage = (): JSX.Element => {
     }
   }, [accessibleItems?.data, page]);
 
-  const filteredItems = items?.filter((d) =>
-    d.name.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
-
   if (!isLoading && !error) {
     return (
       <Stack direction="column" spacing={2}>
@@ -71,15 +67,16 @@ const HomePage = (): JSX.Element => {
             size="small"
             onChange={(e) => {
               setSearchQuery(e.target.value);
+              setPage(1);
             }}
             value={searchQuery}
             placeholder={t('ITEM_SEARCH_PLACEHOLDER')}
           />
         </Stack>
-        {filteredItems.length ? (
+        {items.length ? (
           <Stack spacing={1}>
             <Box>
-              {filteredItems.map((item) => (
+              {items.map((item) => (
                 <ItemLink key={item.id} item={item} />
               ))}
             </Box>

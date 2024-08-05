@@ -74,12 +74,6 @@ type Props = {
   children: JSX.Element | JSX.Element[];
 };
 
-const defaultDateRange = {
-  startDate: addDays(new Date(), -30),
-  endDate: new Date(),
-  key: 'selection',
-};
-
 const DataProvider = ({ children }: Props): JSX.Element => {
   const [enabledArray, setEnabledArray] = useState({
     [Context.Builder]: false,
@@ -95,7 +89,7 @@ const DataProvider = ({ children }: Props): JSX.Element => {
   const { view } = useContext(ViewDataContext);
   const { itemId } = useParams();
 
-  const [dateRange, setDateRange] = useState(defaultDateRange);
+  const [dateRange, setDateRange] = useState(defaultValue.dateRange);
 
   // todo: have a dynamic value
   const requestedSampleSize = DEFAULT_REQUEST_SAMPLE_SIZE;

@@ -47,6 +47,7 @@ const ChartsHeader = (): JSX.Element => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const toggleDrawer = (event: React.KeyboardEvent | React.MouseEvent) => {
+    // Keep the drawer open when using the Tab key to navigate between filter inputs
     if (
       event &&
       event.type === 'keydown' &&
