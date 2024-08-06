@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Stack } from '@mui/material';
+import { Stack, useTheme } from '@mui/material';
 
 import {
   AggregateBy,
@@ -39,6 +39,7 @@ const ActiveUsersChart = (): JSX.Element | null => {
   const { view } = useContext(ViewDataContext);
   const { selectedActionTypes, dateRange } = useContext(DataContext);
   const { itemId } = useParams();
+  const { direction } = useTheme();
 
   // get aggregate actions
   const {
@@ -105,7 +106,11 @@ const ActiveUsersChart = (): JSX.Element | null => {
         <LineChart data={formattedAggregateData}>
           <CartesianGrid strokeDasharray="2" />
           <XAxis dataKey="date" tick={{ fontSize: 14 }} />
-          <YAxis tick={{ fontSize: 14 }} domain={[0, yAxisMax]} />
+          <YAxis
+            tick={{ fontSize: 14 }}
+            domain={[0, yAxisMax]}
+            orientation={direction === 'rtl' ? 'right' : 'left'}
+          />
           <Tooltip />
           <Legend />
           <Line
