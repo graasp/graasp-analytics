@@ -96,7 +96,6 @@ const DataProvider = ({ children }: Props): JSX.Element => {
   const { data: appDescendants = [] } = hooks.useDescendants({
     id: itemId || '',
     types: [ItemType.APP],
-    // should we show hidden elements ??
     showHidden: false,
   });
 
