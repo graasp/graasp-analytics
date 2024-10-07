@@ -20,6 +20,7 @@
     "@emotion/styled": "11.13.0",
     "@graasp/query-client": "4.0.1",
     "@graasp/sdk": "github:graasp/graasp-sdk#add-member-util",
+    "@graasp/stylis-plugin-rtl": "2.2.0",
     "@graasp/translations": "1.39.0",
     "@graasp/ui": "5.2.1",
     "@mui/icons-material": "5.16.7",
@@ -46,7 +47,6 @@
     "react-toastify": "10.0.5",
     "recharts": "2.12.7",
     "stylis": "4.3.4",
-    "stylis-plugin-rtl": "2.1.1",
     "supercluster": "8.0.1",
     "use-supercluster": "0.4.0",
     "uuid": "10.0.0"
