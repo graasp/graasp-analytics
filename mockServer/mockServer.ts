@@ -170,17 +170,11 @@ const mockServer = ({
         if (!itemId) {
           throw new Error('item id does not exist');
         }
-
-        return (
-          schema
-            .all('item')
-            // TODO: remove any after figuring out the type
-            .filter(({ id, path }: any) =>
-              path.includes(
-                `${buildPathFromId(itemId)}.${buildPathFromId(id)}`,
-              ),
-            )
+        const allItems = schema.all('item');
+        const descendantsOfItem = allItems.filter(({ id, path }: any) =>
+          path.includes(`${buildPathFromId(itemId)}.${buildPathFromId(id)}`),
         );
+        return descendantsOfItem;
       });
 
       // get parents

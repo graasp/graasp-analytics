@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Outlet, Route, Routes } from 'react-router-dom';
 
+import { Box } from '@mui/material';
+
 import { AccountType, buildSignInPath } from '@graasp/sdk';
 import { DEFAULT_LANG } from '@graasp/translations';
 import { Loader, SignedInWrapper } from '@graasp/ui';
@@ -19,7 +21,9 @@ import {
   USERS_ANALYTICS_PATH,
   buildItemPath,
 } from '../config/paths';
-import ContextsWrapper from './context/ContextsWrapper';
+import DataProvider from './context/DataProvider';
+import ViewDataProvider from './context/ViewDataProvider';
+import Navigator from './layout/Navigator';
 import PageWrapper from './layout/PageWrapper';
 import HomePageWrapper from './pages/HomePage';
 import AppsAnalyticPage from './pages/Item/AppsAnalyticPage';
@@ -61,9 +65,11 @@ const App = (): JSX.Element => {
               redirectionUrl: window.location.toString(),
             })}
           >
-            <PageWrapper>
-              <Outlet />
-            </PageWrapper>
+            <DataProvider>
+              <PageWrapper>
+                <Outlet />
+              </PageWrapper>
+            </DataProvider>
           </SignedInWrapper>
         }
       >
@@ -73,9 +79,12 @@ const App = (): JSX.Element => {
         <Route
           path={buildItemPath()}
           element={
-            <ContextsWrapper>
-              <ItemPage />
-            </ContextsWrapper>
+            <Box id="navigatorContainer" width="100%">
+              <Navigator />
+              <ViewDataProvider>
+                <ItemPage />
+              </ViewDataProvider>
+            </Box>
           }
         >
           <Route index element={<GeneralAnalyticsPage />} />
