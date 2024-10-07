@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 
-import { saveUrlForRedirection } from '@graasp/sdk';
-import { Loader, withAuthorization } from '@graasp/ui';
+import { AccountType, buildSignInPath } from '@graasp/sdk';
+import { DEFAULT_LANG } from '@graasp/translations';
+import { Loader, SignedInWrapper } from '@graasp/ui';
 
-import { DOMAIN } from '@/config/env';
-import { SIGN_IN_PATH } from '@/config/externalPaths';
+import { GRAASP_AUTH_HOST } from '@/config/env';
 import { hooks } from '@/config/queryClient';
 
 import {
@@ -31,78 +31,62 @@ import UsersAnalyticPage from './pages/Item/UsersAnalyticPage';
 import MyAnalyticsPage from './pages/MyAnalyticsPage';
 
 const App = (): JSX.Element => {
-  const { data: currentMember, isLoading } = hooks.useCurrentMember();
+  const { data: currentAccount, isLoading } = hooks.useCurrentMember();
   const { i18n } = useTranslation();
-  const { pathname } = useLocation();
 
   useEffect(() => {
-    if (currentMember?.extra?.lang !== i18n.language) {
-      i18n.changeLanguage(currentMember?.extra?.lang ?? 'en');
+    const lang =
+      currentAccount?.type === AccountType.Individual
+        ? currentAccount?.extra?.lang || DEFAULT_LANG
+        : DEFAULT_LANG;
+    if (lang) {
+      i18n.changeLanguage(lang);
     }
-  }, [currentMember]);
+  }, [currentAccount]);
 
   if (isLoading) {
     return <Loader />;
   }
-
-  const withAuthorizationProps = {
-    currentMember,
-    redirectionLink: SIGN_IN_PATH,
-    onRedirect: () => {
-      // save current url for later redirection after sign in
-      saveUrlForRedirection(pathname, DOMAIN);
-    },
-  };
-
-  const HomeWrapperWithAuth = withAuthorization(
-    HomePageWrapper,
-    withAuthorizationProps,
-  );
-  const ItemWrapperWithAuth = withAuthorization(
-    ItemPage,
-    withAuthorizationProps,
-  );
-  const MyAnalyticsWithAuth = withAuthorization(
-    MyAnalyticsPage,
-    withAuthorizationProps,
-  );
 
   return (
     <Routes>
       <Route path={EMBEDDED_ITEM_PATH} element={<ItemPage />} />
 
       <Route
-        path={HOME_PATH}
         element={
-          <PageWrapper>
-            <HomeWrapperWithAuth />
-          </PageWrapper>
-        }
-      />
-      <Route
-        path={MY_ANALYTICS_PATH}
-        element={
-          <PageWrapper>
-            <MyAnalyticsWithAuth />
-          </PageWrapper>
-        }
-      />
-
-      <Route
-        path={buildItemPath()}
-        element={
-          <ContextsWrapper>
+          <SignedInWrapper
+            currentAccount={currentAccount}
+            redirectionLink={buildSignInPath({
+              host: GRAASP_AUTH_HOST,
+              redirectionUrl: window.location.toString(),
+            })}
+          >
             <PageWrapper>
-              <ItemWrapperWithAuth />
+              <Outlet />
             </PageWrapper>
-          </ContextsWrapper>
+          </SignedInWrapper>
         }
       >
-        <Route index element={<GeneralAnalyticsPage />} />
-        <Route path={USERS_ANALYTICS_PATH} element={<UsersAnalyticPage />} />
-        <Route path={ITEMS_ANALYTICS_PATH} element={<ItemAnalyticPage />} />
-        <Route path={APPS_ANALYTICS_PATH} element={<AppsAnalyticPage />} />
-        <Route path={EXPORT_ANALYTICS_PATH} element={<ExportAnalyticsPage />} />
+        <Route path={HOME_PATH} element={<HomePageWrapper />} />
+        <Route path={MY_ANALYTICS_PATH} element={<MyAnalyticsPage />} />
+
+        <Route
+          path={buildItemPath()}
+          element={
+            <ContextsWrapper>
+              <ItemPage />
+            </ContextsWrapper>
+          }
+        >
+          <Route index element={<GeneralAnalyticsPage />} />
+          <Route path={USERS_ANALYTICS_PATH} element={<UsersAnalyticPage />} />
+          <Route path={ITEMS_ANALYTICS_PATH} element={<ItemAnalyticPage />} />
+          <Route path={APPS_ANALYTICS_PATH} element={<AppsAnalyticPage />} />
+          <Route
+            path={EXPORT_ANALYTICS_PATH}
+            element={<ExportAnalyticsPage />}
+          />
+        </Route>
       </Route>
     </Routes>
   );

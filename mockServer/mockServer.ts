@@ -24,12 +24,7 @@ import {
 } from '../cypress/fixtures/aggregateActions';
 import { buildDatabase } from './database';
 
-const {
-  buildGetItemRoute,
-  buildGetCurrentMemberRoute,
-  GET_OWN_ITEMS_ROUTE,
-  SHARED_ITEM_WITH_ROUTE,
-} = API_ROUTES;
+const { buildGetItemRoute, buildGetCurrentMemberRoute } = API_ROUTES;
 
 const ApplicationSerializer = RestSerializer.extend({
   root: false,
@@ -207,34 +202,6 @@ const mockServer = ({
             )
         );
       });
-
-      // get own item
-      this.get(`/${GET_OWN_ITEMS_ROUTE}`, (schema) =>
-        schema
-          .all('item')
-          // TODO: remove any after figuring out the type
-          .filter(
-            ({ id, creator, path }: any) =>
-              creator.id === currentMember?.id && buildPathFromId(id) === path,
-          ),
-      );
-
-      // get shared item
-      this.get(
-        `/${SHARED_ITEM_WITH_ROUTE}`,
-        (schema) =>
-          schema
-            .all('membership')
-            // TODO: remove any after figuring out the type
-            .filter(({ member }: any) => member.id === currentMember?.id)
-            .models.map((i: any) => i.item),
-        // return (
-        //   schema
-        //     .all('item')
-        //     // TODO: remove any after figuring out the type
-        //     .filter(({ path }: any) => sharedItem.includes(path))
-        // );
-      );
 
       // get actions
       this.get(`/items/:id/actions`, () => MOCK_ACTION_DATA);
