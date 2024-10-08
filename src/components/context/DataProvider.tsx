@@ -256,7 +256,7 @@ const DataProvider = ({ children }: Props): JSX.Element => {
     ],
   );
 
-  return <DataContext.Provider value={value}> {children}</DataContext.Provider>;
+  return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };
 
 export default DataProvider;
