@@ -23,7 +23,7 @@ const checkContainAppAnalytics = () => {
   cy.get(`#${APPS_ID}`).should('exist');
 };
 
-describe.only('Check An App Item has an app analytics ', () => {
+describe('Check An App Item has an app analytics ', () => {
   beforeEach(() => {
     cy.setUpApi({ items: [CALC_APP_ITEM] });
   });
