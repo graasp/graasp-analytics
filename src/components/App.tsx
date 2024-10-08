@@ -4,7 +4,7 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 
 import { Box } from '@mui/material';
 
-import { AccountType, buildSignInPath } from '@graasp/sdk';
+import { buildSignInPath, getCurrentAccountLang } from '@graasp/sdk';
 import { DEFAULT_LANG } from '@graasp/translations';
 import { Loader, SignedInWrapper } from '@graasp/ui';
 
@@ -39,10 +39,7 @@ const App = (): JSX.Element => {
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    const lang =
-      currentAccount?.type === AccountType.Individual
-        ? currentAccount?.extra?.lang || DEFAULT_LANG
-        : DEFAULT_LANG;
+    const lang = getCurrentAccountLang(currentAccount, DEFAULT_LANG);
     if (lang) {
       i18n.changeLanguage(lang);
     }
