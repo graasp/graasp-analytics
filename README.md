@@ -1,3 +1,8 @@
+> [!WARNING]
+> This Project has been archived. You can find all the up-to-date code in https://github.com/graasp/client
+> 
+> This was archived on Dec 17 2024.
+
 # Graasp Analytics
 
 [![gitlocalized ](https://gitlocalize.com/repo/8871/whole_project/badge.svg)](https://gitlocalize.com/repo/8871?utm_source=badge)
